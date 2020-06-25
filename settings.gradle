@@ -1,0 +1,2 @@
+rootProject.name='Homiez'
+include ':app'
