@@ -1,4 +1,4 @@
-package objects;
+package com.example.homiez.objects;
 
 
 //only for testing 4 classes in objects
@@ -6,33 +6,39 @@ public class Main {
 
      public static void main(String []args){
 
-            User a=new User("myd0",23,"male");
-            Post p1=new Post("title",a,500,"myd", "house", "we are renting now");
-            a.addPost(p1);
-            System.out.println(a);
-            User b=new User("myd1",23,"female");
-            Post p2=new Post("title2",a,1000,"pambina","condo","we are so good here");
-            a.addPost(p2);
-            Post p3=new Post("title3", a,1300,"downtown","apartment","we are in downtonw" );
-            a.addPost(p3);
-            a.printPosts();
+            User myd0=new User("myd0",23,"male");
+            Posting p1=new Posting("p1",myd0,500,"myd", "house", "we are renting now");
+            //once build a posting object it will add to its coressponded user.
+            System.out.println(myd0);
+            System.out.println(); //now myd0 contains p1.
 
-            a.deletePost(p2);
+            User myd1=new User("myd1",23,"female");
+
+            Posting p2=new Posting("p2",myd0,1000,"pambina","condo","we are so good here");
+            //now myd0 contains p1,p2
+
+            Posting p3=new Posting("p3", myd0,1300,"downtown","apartment","we are in downtonw" );
+
+            myd0.printPosts();
+
+
             System.out.println();
-            a.printPosts();
+            myd0.deletePost(p3);
+            myd0.printPosts();
 
             //method for user arraylist test sucessful
 
 
-
+            System.out.println();
             //test post.arraylist
-            User c=new User("myd2",24,"male");
-            User e=new User("myd3",25,"female");
-            p1.addAttached(b);
-            p1.addAttached(c);
-            p1.addAttached(e);
+            User myd2=new User("myd2",24,"male");
+            User myd3=new User("myd3",25,"female");
+            p1.addAttached(myd1);
+            p1.addAttached(myd2);
+            p1.addAttached(myd3);
             p1.printAttachedUsers();
-            p1.deleteAttached(c);
+            System.out.println();
+            p1.deleteAttached(myd2);
             p1.printAttachedUsers();
             //all worked well whatever delete which one.
 

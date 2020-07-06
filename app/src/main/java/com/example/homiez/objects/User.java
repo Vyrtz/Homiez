@@ -1,6 +1,7 @@
-package objects;
+package com.example.homiez.objects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class User {
 
@@ -10,14 +11,14 @@ public class User {
     private String gender;
     private int budget;
     private String description;
-    private ArrayList<Post> posts;
+    private ArrayList<Posting> posting;
 
 
     public User(String name,int age, String gender){
         this.name=name;
         this.age=age;
         this.gender=gender;
-        this.posts=new ArrayList<Post>();
+        this.posting=new ArrayList<Posting>();
     }
 
 
@@ -49,25 +50,22 @@ public class User {
 
 
     public boolean equals(User a){
-        if(this.name.equals(a.getName())){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return this.name.equals(a.getName());
+
     }
 
-    public void addPost(Post a){
-        this.posts.add(a);
+    public void addPosting(Posting posting){
+        this.posting.add(posting);
     }
 
-    public void deletePost(Post a){
-        if(this.posts.size()>0){
+    public void deletePost(Posting posting){
+        Iterator it=this.posting.iterator();
+        if(this.posting.size()>0){
 
-            for(int i=0;i<this.posts.size();i++){
-                if(this.posts.get(i).equals(a)){
+            while(it.hasNext()){
+                if(it.next().equals(posting)){
                     //found it
-                    posts.remove(i);
+                    it.remove();
 
                 }
             }
@@ -76,15 +74,15 @@ public class User {
         }
     }
 
-    public ArrayList<Post> getPosts(){
-        return this.posts;
+    public ArrayList<Posting> getPosts(){
+        return this.posting;
     }
 
     public void printPosts(){
-        for(int i=0;i<posts.size();i++){
-            System.out.println(posts.get(i));
+        Iterator it=this.posting.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
         }
-
 
 
     }
@@ -92,9 +90,6 @@ public class User {
     public String toString(){
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
-
-
-
 
 
 }

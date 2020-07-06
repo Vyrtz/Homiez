@@ -1,8 +1,9 @@
-package objects;
+package com.example.homiez.objects;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Post {
+public class Posting {
     private String title;  //post id.
     private User user;
     private int price;  //we could set a price, and the budget is around that price, for instamce around 500$
@@ -12,7 +13,7 @@ public class Post {
     private ArrayList<User>attachedUsers;
 
 
-    public Post(String title,User user, int price, String location, String type, String description){
+    public Posting(String title,User user, int price, String location, String type, String description){
         this.title=title;
         this.user=user;
         this.price=price;
@@ -20,69 +21,65 @@ public class Post {
         this.type=type;
         this.description=description;
         this.attachedUsers=new ArrayList<User>();
-
+        user.addPosting(this);
     }
 
-    public void setTitle(String a){
-        this.title=a;
+    public void setTitle(String tile){
+        this.title=title;
     }
     public String getTitle(){
         return this.title;
     }
 
-    public void setPrice(int a){
-        this.price=a;
+    public void setPrice(int price){
+        this.price=price;
     }
     public int getPrice(){
         return this.price;
     }
 
 
-    public void setLocation(String a){
-        this.location=a;
+    public void setLocation(String location){
+        this.location=location;
     }
     public String getLocation(){
         return this.location;
     }
 
 
-    public void setType(String a){
-        this.type=a;
+    public void setType(String type){
+        this.type=type;
     }
     public String getType(){
         return this.type;
     }
 
 
-    public void setDescription(String a){
-        this.description=a;
+    public void setDescription(String description){
+        this.description=description;
     }
     public String getDescription(){
         return this.description;
     }
 
 
-    public void addAttached(User a){
-        this.attachedUsers.add(a);
+    public void addAttached(User user){
+        this.attachedUsers.add(user);
     }
 
-    public boolean equals(Post a){
-        if (this.title.equals(a.getTitle())) {
-            return true;
-        }
-        else{
+    public boolean equals(Posting user){
+        return this.title.equals(user.getTitle());
 
-            return false;
-        }
     }
 
-    public void deleteAttached(User a){
+    public void deleteAttached(User user){
+        Iterator it=this.attachedUsers.iterator();
         if(this.attachedUsers.size()>0){
 
-            for(int i=0;i<attachedUsers.size();i++){
-                if(attachedUsers.get(i).equals(a)){
+            while(it.hasNext()){
+                if(it.next().equals(user)){
                     //found it
-                    attachedUsers.remove(i);
+                    it.remove();
 
                 }
             }
@@ -92,10 +89,10 @@ public class Post {
     }
 
     public void printAttachedUsers(){
-        for(int i=0;i<attachedUsers.size();i++){
-            System.out.println(attachedUsers.get(i));
+        Iterator it=this.attachedUsers.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
         }
-
 
 
     }

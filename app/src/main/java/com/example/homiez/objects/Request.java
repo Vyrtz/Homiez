@@ -1,5 +1,4 @@
-package objects;
-
+package com.example.homiez.objects;
 public class Request {
 
     private Match match;

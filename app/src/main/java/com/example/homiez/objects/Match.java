@@ -1,25 +1,25 @@
-package objects;
+package com.example.homiez.objects;
 
 public class Match {
 
     private User user;
-    private Post post;
+    private Posting posting;
 
-    public Match(User user, Post post){
+    public Match(User user, Posting posting){
         this.user=user;
-        this.post=post;
+        this.posting=posting;
     }
 
     //when need to change user or post just make a new match object.
     public User getUser(){
         return this.user;
     }
-    public Post getPost(){
-        return this.post;
+    public Posting getPost(){
+        return this.posting;
     }
 
     public String toString(){
-        return "user: "+this.user+" post: "+this.post;
+        return "user: "+this.user+" post: "+this.posting;
     }
 
 
