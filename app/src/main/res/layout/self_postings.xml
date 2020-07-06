@@ -5,38 +5,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Your Postings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="629dp">
+        android:layout_height="582dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="TESTING"
-                        android:textSize="36sp" />
-
-                    <Button
-                        android:id="@+id/button13"
-                        android:layout_width="200dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:text="Button" />
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -46,18 +33,42 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/textTest1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="TESTING"
                         android:textSize="36sp" />
 
                     <Button
-                        android:id="@+id/button134"
+                        android:id="@+id/button_view_posting1"
                         android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
-                        android:text="Button" />
+                        android:text="View Posting" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textTest2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TESTING"
+                        android:textSize="36sp" />
+
+                    <Button
+                        android:id="@+id/button_view_posting2"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:text="View Posting" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -66,7 +77,7 @@
     <Button
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
-        android:layout_height="102dp"
+        android:layout_height="100dp"
         android:text="Matches" />
 
 </LinearLayout>
