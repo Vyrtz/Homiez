@@ -6,24 +6,30 @@ import java.util.Iterator;
 public class User {
 
     //some of them may be used later
+    private String userId;
     private String name;
     private int age;
     private String gender;
     private int budget;
     private String description;
-    private ArrayList<Posting> posting;
+    private ArrayList<Posting> postingList;
 
 
-    public User(String name,int age, String gender){
+    public User(String userId,String name,int age, String gender){
+        this.userId=userId;
         this.name=name;
         this.age=age;
         this.gender=gender;
-        this.posting=new ArrayList<Posting>();
+        this.postingList=new ArrayList<Posting>();
     }
 
+    //once u set up an userid then you cannot change it anymore.
+    public String getUserId(){
+        return this.userId;
+    }
 
-    public void setName(String a){
-        this.name=a;
+    public void setName(String name){
+        this.name=name;
     }
     public String getName(){
         return this.name;
@@ -31,8 +37,8 @@ public class User {
 
 
 
-    public void setBudget(int a){
-        this.budget=a;
+    public void setBudget(int budget){
+        this.budget=budget;
     }
     public int getBudget(){
         return this.budget;
@@ -40,8 +46,8 @@ public class User {
 
 
 
-    public void setDescription(String a){
-        this.description=a;
+    public void setDescription(String description){
+        this.description=description;
     }
 
     public String getDescription(){
@@ -49,18 +55,18 @@ public class User {
     }
 
 
-    public boolean equals(User a){
-        return this.name.equals(a.getName());
+    public boolean equals(User user){
+        return this.userId.equals(user.getUserId());
 
     }
 
     public void addPosting(Posting posting){
-        this.posting.add(posting);
+        this.postingList.add(posting);
     }
 
     public void deletePost(Posting posting){
-        Iterator it=this.posting.iterator();
-        if(this.posting.size()>0){
+        Iterator it=this.postingList.iterator();
+        if(this.postingList.size()>0){
 
             while(it.hasNext()){
                 if(it.next().equals(posting)){
@@ -75,13 +81,13 @@ public class User {
     }
 
     public ArrayList<Posting> getPosts(){
-        return this.posting;
+        return this.postingList;
     }
 
     public void printPosts(){
-        Iterator it=this.posting.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
+
+        for( Posting i : this.postingList){
+            System.out.println(i);
         }
 
 

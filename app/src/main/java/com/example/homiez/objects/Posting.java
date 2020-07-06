@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Posting {
+    private String postingId;
     private String title;  //post id.
     private User user;
     private int price;  //we could set a price, and the budget is around that price, for instamce around 500$
@@ -13,7 +14,8 @@ public class Posting {
     private ArrayList<User>attachedUsers;
 
 
-    public Posting(String title,User user, int price, String location, String type, String description){
+    public Posting(String postingId,String title,User user, int price, String location, String type, String description){
+        this.postingId=postingId;
         this.title=title;
         this.user=user;
         this.price=price;
@@ -22,6 +24,10 @@ public class Posting {
         this.description=description;
         this.attachedUsers=new ArrayList<User>();
         user.addPosting(this);
+    }
+
+    public String getUserId(){
+        return this.postingId;
     }
 
     public void setTitle(String tile){
@@ -67,8 +73,8 @@ public class Posting {
         this.attachedUsers.add(user);
     }
 
-    public boolean equals(Posting user){
-        return this.title.equals(user.getTitle());
+    public boolean equals(Posting posting){
+        return this.postingId.equals(posting.getUserId());
 
     }
 
@@ -89,9 +95,9 @@ public class Posting {
     }
 
     public void printAttachedUsers(){
-        Iterator it=this.attachedUsers.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
+
+        for(User i: this.attachedUsers){
+            System.out.println(i);
         }
 
 

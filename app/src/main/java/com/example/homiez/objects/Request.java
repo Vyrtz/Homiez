@@ -14,8 +14,8 @@ public class Request {
     }
 
 
-    public void setAccept(boolean a){
-        this.accept=a;
+    public void setAccept(boolean accept){
+        this.accept=accept;
     }
     public boolean getAccept(){
         return this.accept;
