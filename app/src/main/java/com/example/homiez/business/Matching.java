@@ -9,16 +9,19 @@ public class Matching {
     {
         //validate User and Posting
         //Create match and request database connection
+        //update those databases
     }
     private static void DeclineRequest( String userId, String postingId)
     {
         //validate User and Posting
         //Create match and request database connection
+        //update those databases
     }
     private static void SendRequest( String userId, String postingId)
     {
         //validate User and Posting
         //Create match and request database connection
+        //update those databases
     }
 
 }
