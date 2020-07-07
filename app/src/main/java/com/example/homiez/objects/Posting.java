@@ -25,8 +25,15 @@ public class Posting {
         this.attachedUsers=new ArrayList<User>();
         user.addPosting(this);
     }
+    public Posting(String postingId){
+        this.postingId = postingId;
+    }
 
-    public String getUserId(){
+    public User getUser() {
+        return user;
+    }
+
+    public String getPostingId(){
         return this.postingId;
     }
 
@@ -74,7 +81,7 @@ public class Posting {
     }
 
     public boolean equals(Posting posting){
-        return this.postingId.equals(posting.getUserId());
+        return this.postingId.equals(posting.getPostingId());
 
     }
 
@@ -89,8 +96,6 @@ public class Posting {
 
                 }
             }
-
-
         }
     }
 
@@ -107,8 +112,9 @@ public class Posting {
         return "Post: "+this.title+" price"+this.price
                 +" location"+this.location+" type"+this.type;
     }
-
-
-
+    @Override
+    public boolean equals(Object post){
+        return (post instanceof Posting) ? this.postingId.equals(((Posting)post).getPostingId()) : false;
+    }
 
 }

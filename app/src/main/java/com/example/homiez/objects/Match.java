@@ -14,13 +14,11 @@ public class Match {
     public User getUser(){
         return this.user;
     }
-    public Posting getPost(){
+    public Posting getPosting(){
         return this.posting;
     }
 
     public String toString(){
         return "user: "+this.user+" post: "+this.posting;
     }
-
-
 }

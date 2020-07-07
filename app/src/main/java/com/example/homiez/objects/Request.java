@@ -1,28 +1,27 @@
 package com.example.homiez.objects;
 public class Request {
 
-    private Match match;
-    private boolean accept;
+    private String userId;
+    private String postingId;
+    private boolean accepted;
 
-    public Request(Match match){
-        this.match=match;
-        this.accept=false;
+    public Request(String userId, String postingId){
+        this.userId = userId;
+        this.postingId = postingId;
+        this.accepted=false;
     }
 
-    public Match getmatch(){
-        return this.match;
+    public void setAccepted(boolean accept){this.accepted = accepted;}
+
+    public String getPostingId() {
+        return postingId;
     }
 
-
-    public void setAccept(boolean accept){
-        this.accept=accept;
-    }
-    public boolean getAccept(){
-        return this.accept;
+    public String getUserId() {
+        return userId;
     }
 
-    public String toString(){
-        return "Match: "+this.match+" Accept?: "+this.accept;
+    public boolean isAccepted() {
+        return accepted;
     }
-
 }
