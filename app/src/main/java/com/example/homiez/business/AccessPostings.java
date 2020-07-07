@@ -21,14 +21,14 @@ public class AccessPostings {
     {
         User user = new User(userId);
         postings.clear();
-        postings =  dataAccess.getAllPostings(postings);
+        String ret = dataAccess.getAllPostings(postings);
         Iterator<Posting> it= postings.iterator();
         while(it.hasNext()){
                 if(it.next().getUser().equals(user)){
                     it.remove();
                 }
         }
-        return null;
+        return ret;
     }
 
     public Posting getPostingById(String postingId)

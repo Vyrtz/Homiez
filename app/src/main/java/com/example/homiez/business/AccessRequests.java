@@ -20,8 +20,7 @@ public class AccessRequests {
     //provides postings, except the ones made by the user
     public String getRequestsForPosting(List<Request> requests, String postingId)
     {
-        Posting p = new Posting(postingId);
-        return dataAccess.getRequests(requests, p);
+        return dataAccess.getRequests(requests, postingId);
     }
 
     public String insertRequest(Request currentRequest)

@@ -72,58 +72,209 @@ public class DataAccessStub {
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
-    public String getMatches(List<Match> matches, User u) {
-        return null;
+    public String getMatchesForUser(List<Match> matches, String u) {
+        for (Match m : this.matches) {
+            if(m.getUserId().equals(u))
+                matches.add(m);
+        }
+        return "Success";
     }
 
-    public String getMatches(List<Match> matches, Posting p) {
-        return null;
+    public String getMatchesForPosting(List<Match> matches, String p) {
+        for (Match m : this.matches) {
+            if(m.getPostingId().equals(p))
+                matches.add(m);
+        }
+        return "Success";
     }
 
 
     public String insertMatch(Match m){
-        return null;
+        boolean exist = false;
+        for(Match match : matches)
+        {
+            if (match.equals(m))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            matches.add(m);
+            return "Success";
+        }
+        return "Failure";
     }
 
     public String deleteMatch(Match m){
-        return null;
+        boolean exist = false;
+        for(Match match : matches)
+        {
+            if (match.equals(m))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            return "Failure";
+        }
+        matches.remove(m);
+        return "Success";
     }
 
-    public List<Posting> getAllPostings(List<Posting> postings){
-        return null;
+    public String getAllPostings(List<Posting> postings){
+        postings.addAll(this.postings);
+        return "Success";
     }
     public Posting getPosting(Posting posting){
+        for(Posting p : postings)
+        {
+            if (posting.equals(p))
+            {
+                return p;
+            }
+        }
         return null;
     }
     public String getPostingsByUser(List<Posting> postings, User user){
-        return null;
+        for(Posting p : postings)
+        {
+            if (p.getUser().equals(user))
+            {
+               postings.add(p);
+            }
+        }
+        return "Success";
     }
-    public String insertPosting(Posting p){
-        return null;
+    public String insertPosting(Posting posting){
+        boolean exist = false;
+        for(Posting p : postings)
+        {
+            if (p.equals(posting))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            postings.add(posting);
+            return "Success";
+        }
+        return "Failure";
     }
 
-    public String deletePosting(Posting p){
-        return null;
+    public String deletePosting(Posting posting){
+        boolean exist = false;
+        for(Posting p : postings)
+        {
+            if (posting.equals(p))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            return "Failure";
+        }
+        matches.remove(posting);
+        return "Success";
     }
-    public String updatePosting(Posting p){
-        return null;
+    public String updatePosting(Posting posting){
+        Posting exist = null;
+        for(Posting p : postings)
+        {
+            if (p.equals(posting))
+            {
+                exist = p;
+            }
+        }
+        if (exist != null)
+        {
+            postings.remove(exist);
+            postings.add(posting); //replace with new posting object
+            return "Success";
+        }
+        return "Failure";
     }
-    public String getRequests(List<Request> requests, Posting p){
-        return null;
+    public String getRequests(List<Request> requests, String pId){
+        for (Request r : this.matchRequests) {
+            if(r.getPostingId().equals(pId))
+                requests.add(r);
+        }
+        return "Success";
     }
-    public String insertRequest(Request p){
-        return null;
+    public String insertRequest(Request req){
+        boolean exist = false;
+        for(Request r : matchRequests)
+        {
+            if (r.equals(req))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            matchRequests.add(req);
+            return "Success";
+        }
+        return "Failure";
     }
-    public String deleteRequest(Request p){
-        return null;
+    public String deleteRequest(Request req){
+        boolean exist = false;
+        for(Request r : matchRequests)
+        {
+            if (r.equals(req))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            return "Failure";
+        }
+        matchRequests.remove(req);
+        return "Success";
     }
-    public User getUser(User u){
-        return null;
+    public User getUser(User toFind){
+        User found = null;
+        for(User u : users)
+        {
+            if (u.equals(toFind))
+            {
+                found = u;
+            }
+        }
+        return found;
     }
-    public String insertUser(User u){
-        return null;
+    public String insertUser(User insert){
+        boolean exist = false;
+        for(User u : users)
+        {
+            if (u.equals(insert))
+            {
+                exist = true;
+            }
+        }
+        if (!exist)
+        {
+            users.add(insert);
+            return "Success";
+        }
+        return "Failure";
     }
-    public String updateUser(User u){
-        return null;
+    public String updateUser(User update) {
+        User exist = null;
+        for (User u : users) {
+            if (u.equals(update)) {
+                exist = u;
+            }
+        }
+        if (exist != null) {
+            users.remove(exist);
+            users.add(update); //replace with new posting object
+            return "Success";
+        }
+        return "Failure";
     }
 }
