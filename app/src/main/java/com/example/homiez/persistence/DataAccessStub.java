@@ -22,6 +22,50 @@ public class DataAccessStub {
     }
     public void open(String dbName)
     {
+        User user;
+        Posting post;
+        Request request;
+        Match match;
+
+        users = new ArrayList<User>();
+        user = new User ("0","Abhi", 20, "m");
+        users.add(user);
+        user = new User ("1","Jordan", 20, "m");
+        users.add(user);
+        user = new User ("2","Matt", 20, "m");
+        users.add(user);
+        user = new User ("3","Vinh", 18, "m");
+        users.add(user);
+        user = new User ("4","Ma", 18, "m");
+        users.add(user);
+
+        postings = new ArrayList<Posting>();
+        post = new Posting("0", "New condo 1", users.get(0), 1200,  "Pembina", "Condo", "new condo here 1!");
+        postings.add(post);
+        post = new Posting("1", "New condo 2", users.get(0), 1200,  "Pembina", "Condo", "new condo here 2!");
+        postings.add(post);
+        post = new Posting("2", "New condo 3", users.get(0), 1200,  "Pembina", "Condo", "new condo here 3!");
+        postings.add(post);
+        post = new Posting("3", "New house", users.get(1), 2000,  "Pembina", "house", "new house here!");
+        postings.add(post);
+        post = new Posting("4", "New house", users.get(2), 2200,  "Pembina", "house", "new house here!");
+        postings.add(post);
+
+        matches = new ArrayList<Match>();
+        match = new Match("3", "0");
+        matches.add(match);
+        match = new Match("3", "1");
+        matches.add(match);
+        match = new Match("4", "3");
+        matches.add(match);
+
+        matchRequests = new ArrayList<Request>();
+        request = new Request("4", "0");
+        matchRequests.add(request);
+        request = new Request("4", "1");
+        matchRequests.add(request);
+        request = new Request("4", "2");
+        matchRequests.add(request);
     }
     public void close()
     {
