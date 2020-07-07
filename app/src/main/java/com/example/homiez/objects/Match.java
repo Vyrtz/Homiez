@@ -2,23 +2,33 @@ package com.example.homiez.objects;
 
 public class Match {
 
-    private User user;
-    private Posting posting;
+    private String userId;
+    private String postingId;
 
-    public Match(User user, Posting posting){
-        this.user=user;
-        this.posting=posting;
+    public Match(String userId, String postingId){
+        this.userId=userId;
+        this.postingId=postingId;
     }
 
-    //when need to change user or post just make a new match object.
-    public User getUser(){
-        return this.user;
+    public String getUserId(){
+        return this.userId;
     }
-    public Posting getPosting(){
-        return this.posting;
+    public String getPostingId(){
+        return this.postingId;
     }
 
     public String toString(){
-        return "user: "+this.user+" post: "+this.posting;
+        return "user: "+this.userId+" post: "+this.postingId;
+    }
+
+    @Override
+    public boolean equals (Object o ){
+        if (o instanceof  Match){
+            if(((Match) o).getPostingId().equals(this.postingId) && ((Match) o).getUserId().equals(this.userId))
+            {
+                return true;
+            }
+        }
+        return  false;
     }
 }

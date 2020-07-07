@@ -3,15 +3,11 @@ public class Request {
 
     private String userId;
     private String postingId;
-    private boolean accepted;
 
     public Request(String userId, String postingId){
         this.userId = userId;
         this.postingId = postingId;
-        this.accepted=false;
     }
-
-    public void setAccepted(boolean accept){this.accepted = accepted;}
 
     public String getPostingId() {
         return postingId;
@@ -21,7 +17,13 @@ public class Request {
         return userId;
     }
 
-    public boolean isAccepted() {
-        return accepted;
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Request){
+            if (((Request) o).getUserId().equals(userId) && ((Request) o).getPostingId().equals(postingId)){
+                return true;
+            }
+        }
+        return false;
     }
 }

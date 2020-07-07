@@ -20,7 +20,8 @@ public class DataAccessStub {
     public DataAccessStub(String dbName){
         this.dbName = dbName;
     }
-    public void open(String dbName) {
+    public void open(String dbName)
+    {
     }
     public void close()
     {
