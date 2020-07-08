@@ -23,6 +23,10 @@ public class User {
         this.postingList=new ArrayList<Posting>();
     }
 
+    public User(String userId){
+        this.userId=userId;
+    }
+
     //once u set up an userid then you cannot change it anymore.
     public String getUserId(){
         return this.userId;
@@ -54,10 +58,9 @@ public class User {
         return this.description;
     }
 
-
-    public boolean equals(User user){
-        return this.userId.equals(user.getUserId());
-
+    @Override
+    public boolean equals(Object user){
+        return (user instanceof User) ? this.userId.equals(((User)user).getUserId()) : false;
     }
 
     public void addPosting(Posting posting){
@@ -96,6 +99,4 @@ public class User {
     public String toString(){
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
-
-
 }

@@ -7,14 +7,14 @@ public class Posting {
     private String postingId;
     private String title;  //post id.
     private User user;
-    private int price;  //we could set a price, and the budget is around that price, for instamce around 500$
+    private double price;  //we could set a price, and the budget is around that price, for instamce around 500$
     private String location;
     private String type;
     private String description;
     private ArrayList<User>attachedUsers;
 
 
-    public Posting(String postingId,String title,User user, int price, String location, String type, String description){
+    public Posting(String postingId,String title,User user, double price, String location, String type, String description){
         this.postingId=postingId;
         this.title=title;
         this.user=user;
@@ -25,8 +25,15 @@ public class Posting {
         this.attachedUsers=new ArrayList<User>();
         user.addPosting(this);
     }
+    public Posting(String postingId){
+        this.postingId = postingId;
+    }
 
-    public String getUserId(){
+    public User getUser() {
+        return user;
+    }
+
+    public String getPostingId(){
         return this.postingId;
     }
 
@@ -40,7 +47,7 @@ public class Posting {
     public void setPrice(int price){
         this.price=price;
     }
-    public int getPrice(){
+    public double getPrice(){
         return this.price;
     }
 
@@ -74,7 +81,7 @@ public class Posting {
     }
 
     public boolean equals(Posting posting){
-        return this.postingId.equals(posting.getUserId());
+        return this.postingId.equals(posting.getPostingId());
 
     }
 
@@ -89,8 +96,6 @@ public class Posting {
 
                 }
             }
-
-
         }
     }
 
@@ -107,8 +112,9 @@ public class Posting {
         return "Post: "+this.title+" price"+this.price
                 +" location"+this.location+" type"+this.type;
     }
-
-
-
+    @Override
+    public boolean equals(Object post){
+        return (post instanceof Posting) ? this.postingId.equals(((Posting)post).getPostingId()) : false;
+    }
 
 }
