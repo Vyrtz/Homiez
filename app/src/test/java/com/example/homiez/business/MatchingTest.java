@@ -11,11 +11,15 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 public class MatchingTest extends TestCase {
+    public void setUp()
+    {
+        Main.startUp();
+    }
     public void testSendRequest()
     {
         System.out.println("\nStarting testSendRequest");
 
-        Main.startUp();
+
         User u = new User("0", "Abhi", 20, "m");
         AccessRequests accessRequests = new AccessRequests();
         AccessPostings accessPostings = new AccessPostings();
@@ -36,7 +40,6 @@ public class MatchingTest extends TestCase {
     {
         System.out.println("\nStarting testAcceptRequest");
 
-        Main.startUp();
         User u = new User("0", "Abhi", 20, "m");
         AccessUser aUser = new AccessUser();
         AccessRequests accessRequests = new AccessRequests();
@@ -63,7 +66,6 @@ public class MatchingTest extends TestCase {
     {
         System.out.println("\nStarting testDeclineRequest");
 
-        Main.startUp();
         User u = new User("0", "Abhi", 20, "m");
         AccessUser aUser = new AccessUser();
         AccessRequests accessRequests = new AccessRequests();
@@ -85,5 +87,9 @@ public class MatchingTest extends TestCase {
         assertEquals(1, matches.size());
         matches.clear();
         System.out.println("Finished testAcceptRequest");
+    }
+    public void tearDown()
+    {
+        Main.shutDown();
     }
 }
