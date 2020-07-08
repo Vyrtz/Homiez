@@ -3,13 +3,12 @@ package com.example.homiez.business;
 import com.example.homiez.objects.Match;
 import com.example.homiez.objects.Posting;
 import com.example.homiez.objects.Request;
-import com.example.homiez.objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Matching {
-    private static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId)
+    public static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId)
     {
         //validate User and Posting
         //Create match and request database connection
@@ -35,7 +34,7 @@ public class Matching {
         }
         return  null;
     }
-    private static String DeclineRequest(AccessRequests requests, String userId, String postingId)
+    public static String DeclineRequest(AccessRequests requests, String userId, String postingId)
     {
         //validate User and Posting
         //Create match and request database connection
@@ -59,7 +58,7 @@ public class Matching {
         }
         return  null;
     }
-    private static String SendRequest(AccessRequests requests,AccessPostings postings, String userId, String postingId)
+    public static String SendRequest(AccessRequests requests,AccessPostings postings, String userId, String postingId)
     {
         //validate User and Posting
         //Create match and request database connection

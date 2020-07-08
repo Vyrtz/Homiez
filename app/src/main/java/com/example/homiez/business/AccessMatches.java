@@ -3,8 +3,6 @@ package com.example.homiez.business;
 import com.example.homiez.application.Main;
 import com.example.homiez.application.Services;
 import com.example.homiez.objects.Match;
-import com.example.homiez.objects.Posting;
-import com.example.homiez.objects.User;
 import com.example.homiez.persistence.DataAccessStub;
 
 import java.util.ArrayList;

@@ -5,7 +5,6 @@ import com.example.homiez.application.Main;
 import com.example.homiez.objects.User;
 import com.example.homiez.persistence.DataAccessStub;
 
-import java.util.ArrayList;
 
 public class AccessUser {
 

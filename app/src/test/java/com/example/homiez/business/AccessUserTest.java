@@ -29,5 +29,4 @@ public class AccessUserTest extends TestCase {
 
         System.out.println("Finished testAccessUser1");
     }
-
 }
