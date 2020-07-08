@@ -5,5 +5,7 @@
     <string name="type">Type</string>
     <string name="description">Description</string>
     <string name="price">Price</string>
-
+    <string name="login">Login</string>
+    <string name="user_id_prompt">Enter User ID:</string>
+    <string name="matches">Your Matches</string>
 </resources>
