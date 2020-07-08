@@ -137,12 +137,12 @@ public class DataAccessStub {
         }
         return null;
     }
-    public String getPostingsByUser(List<Posting> postings, User user){
+    public String getPostingsByUser(List<Posting> postingsList, User user){
         for(Posting p : postings)
         {
             if (p.getUser().equals(user))
             {
-               postings.add(p);
+               postingsList.add(p);
             }
         }
         return "Success";
@@ -177,7 +177,7 @@ public class DataAccessStub {
         {
             return "Failure";
         }
-        matches.remove(posting);
+        postings.remove(posting);
         return "Success";
     }
     public String updatePosting(Posting posting){

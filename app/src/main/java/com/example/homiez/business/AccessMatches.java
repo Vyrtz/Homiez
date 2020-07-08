@@ -19,12 +19,12 @@ public class AccessMatches {
     }
 
     //provides postings, except the ones made by the user
-    public String getMatchesForPosting(List<Match> matches, String userId)
+    public String getMatchesForUser(List<Match> matches, String userId)
     {
         return dataAccess.getMatchesForUser(matches, userId);
     }
 
-    public String getMatchesForUser(List<Match> matches, String postingId)
+    public String getMatchesForPosting(List<Match> matches, String postingId)
     {
         return dataAccess.getMatchesForPosting(matches, postingId);
     }
