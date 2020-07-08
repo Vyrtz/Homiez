@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Homiez</string>
+    <string name="looking_for_room">Looking For Room</string>
+    <string name="posting_room">Posting Room</string>
+    <string name="homiez_logo">homiez_logo</string>
     <string name="match">Match</string>
     <string name="location">Location</string>
     <string name="type">Type</string>
