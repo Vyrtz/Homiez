@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Homiez</string>
+    <string name="login">Login</string>
+    <string name="user_id_prompt">Enter User ID:</string>
 </resources>
