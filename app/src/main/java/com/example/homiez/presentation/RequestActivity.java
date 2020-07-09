@@ -53,8 +53,7 @@ public class RequestActivity extends Activity {
         if(result == null){
             //fail
         }
-        Intent back = new Intent(RequestActivity.this, RequestsActivity.class);
-        RequestActivity.this.startActivity(back);
+        goBack();
     }
     public void declineRequest (View view)
     {
@@ -62,6 +61,9 @@ public class RequestActivity extends Activity {
         if(result == null){
             //fail
         }
+        goBack();
+    }
+    public void goBack(){
         Intent back = new Intent(RequestActivity.this, RequestsActivity.class);
         RequestActivity.this.startActivity(back);
     }
