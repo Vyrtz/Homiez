@@ -68,7 +68,7 @@ public class SelfPostings extends Activity {
                 bundle.putString("postingId", postings.get(p).getPostingId());
 
                 selfIntent.putExtras(bundle);
-                SelfPostings.this.PostingActivity(selfIntent);
+                SelfPostings.this.startActivity(selfIntent);
             }
         });
     }
