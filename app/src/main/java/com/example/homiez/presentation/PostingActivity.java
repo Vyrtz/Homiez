@@ -16,11 +16,17 @@ public class PostingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.posting);
+        Bundle b = getIntent().getExtras();
 
-        //Uncomment when linked
-        //Bundle b = getIntent().getExtras();
-        //String postingID = b.getString("postingId");
+        if(b.getBoolean("is_posting")){
+            setContentView(R.layout.self_posting);
+        }else{
+            setContentView(R.layout.posting);
+        }
+
+        accessPostings = new AccessPostings();
+
+        String postingID = b.getString("postingId");
 
         Posting post = accessPostings.getPostingById("0");
 
