@@ -41,7 +41,7 @@ public class RequestsActivity extends Activity {
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
         Bundle b = getIntent().getExtras();
-        String tempUser = b.getString("userId");
+        String tempUser = b.getString("userID");
         ArrayList<Posting> allposts = new ArrayList<>();
         accessPostings.getPostingsByUserId(allposts, tempUser);
         requests = new ArrayList<>();
@@ -90,7 +90,10 @@ public class RequestsActivity extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent singleReq = new Intent(RequestsActivity.this, RequestActivity.class);
                     Request selected = requestArrayAdapter.getItem(position);
+                    Bundle prev = getIntent().getExtras();
+                    String tempUser = prev.getString("userID");
                     Bundle b = new Bundle();
+                    b.putString("userID",tempUser);
                     b.putString("userId", selected.getUserId());
                     b.putString("postingId", selected.getPostingId());
                     singleReq.putExtras(b);

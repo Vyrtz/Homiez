@@ -20,7 +20,7 @@ import com.example.homiez.business.AccessPostings;
 import com.example.homiez.objects.Request;
 
 public class SelfPostings extends Activity {
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
