@@ -1,9 +1,10 @@
-package com.example.homiez;
+package com.example.homiez.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.homiez.R;
 import com.example.homiez.application.Main;
 import com.example.homiez.business.AccessPostings;
 

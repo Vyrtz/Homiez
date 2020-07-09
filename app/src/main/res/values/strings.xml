@@ -16,4 +16,6 @@
     <string name="accept">Accept</string>
     <string name="deny">Deny</string>
     <string name="requests">Requests</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
 </resources>
