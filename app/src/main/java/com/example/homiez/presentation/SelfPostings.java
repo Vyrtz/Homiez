@@ -20,21 +20,23 @@ import com.example.homiez.business.AccessPostings;
 import com.example.homiez.objects.Request;
 
 public class SelfPostings extends Activity {
-
-    private String userId;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(layout.self_postings);
 
+        // Uncomment this once it is connected from the previous page
         Bundle b = getIntent().getExtras();
-        userId = b.getString("userID");
+        String userID = b.getString("userID");
+
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        //
-        accessPostings.getPostingsByUserId(postings, "0");
+        accessPostings.getPostingsByUserId(postings, userID);
 
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings)
         {

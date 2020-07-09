@@ -1,6 +1,7 @@
 package com.example.homiez.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,7 +24,12 @@ public class StartActivity extends Activity {
 
     //Called when posting room is pressed
     public void postingPressed(View v){
+        Intent selfIntent = new Intent(StartActivity.this, SelfPostings.class);
 
+        Bundle b = getIntent().getExtras();
+        selfIntent.putExtras(b);
+
+        StartActivity.this.startActivity(selfIntent);
     }
 
 }

@@ -25,6 +25,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.homiez.presentation.RequestsActivity" />
         </activity>
+        <activity android:name=".presentation.SelfPostings"></activity>
 
     </application>
 
