@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">Homiez</string>
+    <string name="looking_for_room">Looking For Room</string>
+    <string name="posting_room">Posting Room</string>
+    <string name="homiez_logo">homiez_logo</string>
+    <string name="match">Match</string>
+    <string name="location">Location</string>
+    <string name="type">Type</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
     <string name="login">Login</string>
     <string name="user_id_prompt">Enter User ID:</string>
+    <string name="matches">Your Matches</string>
+    <string name="postings">Postings</string>
+    <string name="your_postings">Your Postings</string>
+    <string name="request">Request</string>
+    <string name="accept">Accept</string>
+    <string name="deny">Deny</string>
+    <string name="requests">Requests</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
 </resources>

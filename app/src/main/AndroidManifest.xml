@@ -9,13 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.StartActivity">
+        </activity>
+        <activity android:name=".presentation.ViewPostingsActivity"></activity>
+        <activity android:name=".presentation.RequestsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.homiez.presentation.ViewPostingsActivity" />
+        </activity>
+        <activity android:name=".presentation.RequestActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.homiez.presentation.RequestsActivity" />
+        </activity>
+
+        <activity android:name=".presentation.PostingActivity"></activity>
     </application>
 
 </manifest>

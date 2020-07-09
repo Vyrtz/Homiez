@@ -48,7 +48,9 @@ public class User {
         return this.budget;
     }
 
-
+    public int getAge(){
+        return age;
+    }
 
     public void setDescription(String description){
         this.description=description;

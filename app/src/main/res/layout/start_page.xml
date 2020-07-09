@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="510dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/homiez_logo"
+        android:src="@drawable/homiez_logo" />
+
+    <Button
+        android:id="@+id/buttonLooking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/looking_for_room"
+        android:onClick="lookingPressed"/>
+    <Button
+        android:id="@+id/buttonPosting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/posting_room"
+        android:onClick="postingPressed"/>
+
+</LinearLayout>
