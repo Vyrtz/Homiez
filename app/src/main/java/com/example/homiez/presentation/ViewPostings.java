@@ -26,13 +26,13 @@ public class ViewPostings extends Activity {
 
         Bundle b = getIntent().getExtras();
         final String userID = b.getString("userID");
-        final String is_posting = b.getString("is_posting");
+        final boolean self_posting = b.getBoolean("self_posting");
 
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        if (is_posting.equals("true")) {
+        if (self_posting) {
             accessPostings.getPostingsByUserId(postings, userID);
             setContentView(layout.your_postings);
         } else {
@@ -67,7 +67,7 @@ public class ViewPostings extends Activity {
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("userID", userID);
                 bundle.putString("postingId", postings.get(p).getPostingId());
-                bundle.putString("is_posting", is_posting);
+                bundle.putBoolean("self_posting", self_posting);
 
                 selfIntent.putExtras(bundle);
                 ViewPostings.this.startActivity(selfIntent);

@@ -22,7 +22,7 @@ public class StartActivity extends Activity {
         Intent selfIntent = new Intent(StartActivity.this, ViewPostings.class);
 
         Bundle b = getIntent().getExtras();
-        b.putString("is_posting", "false");
+        b.putBoolean("self_posting", false);
         selfIntent.putExtras(b);
 
         StartActivity.this.startActivity(selfIntent);
@@ -33,7 +33,7 @@ public class StartActivity extends Activity {
         Intent selfIntent = new Intent(StartActivity.this, ViewPostings.class);
 
         Bundle b = getIntent().getExtras();
-        b.putString("is_posting", "true");
+        b.putBoolean("self_posting", true);
         selfIntent.putExtras(b);
 
         StartActivity.this.startActivity(selfIntent);
