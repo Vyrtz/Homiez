@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.homiez.R;
 import com.example.homiez.application.Main;
+import com.example.homiez.business.AccessPostings;
 
 public class MainActivity extends AppCompatActivity {
 
