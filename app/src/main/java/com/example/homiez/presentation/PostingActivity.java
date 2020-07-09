@@ -18,11 +18,11 @@ public class PostingActivity extends Activity {
 
         setContentView(R.layout.posting);
 
-        //Uncomment when linked
-        //Bundle b = getIntent().getExtras();
-        //String postingID = b.getString("postingId");
+        Bundle b = getIntent().getExtras();
+        String postingID = b.getString("postingId");
 
-        Posting post = accessPostings.getPostingById("0");
+        accessPostings = new AccessPostings();
+        Posting post = accessPostings.getPostingById(postingID);
 
         TextView locationText = findViewById(R.id.locationText);
         TextView typeText = findViewById(R.id.typeText);
@@ -33,9 +33,5 @@ public class PostingActivity extends Activity {
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
-
-
-
-
     }
 }
