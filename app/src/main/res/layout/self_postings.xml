@@ -8,23 +8,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Your Postings"
+        android:text="@string/your_postings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         android:textStyle="bold"
         android:layout_marginBottom="20dp"/>
 
     <ListView
+        android:id="@+id/postingsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/postingsList"
-        android:layout_weight="1"
         android:layout_gravity="top"
-        android:choiceMode="none" />
+        android:layout_weight="1"
+        android:choiceMode="none">
+
+    </ListView>
 
     <Button
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Matches" />
+        android:text="@string/matches" />
+
+    <Button
+        android:id="@+id/button_requests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests" />
 </LinearLayout>

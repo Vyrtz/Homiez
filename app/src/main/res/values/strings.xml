@@ -11,4 +11,6 @@
     <string name="login">Login</string>
     <string name="user_id_prompt">Enter User ID:</string>
     <string name="matches">Your Matches</string>
+    <string name="requests">Your Requests</string>
+    <string name="your_postings">Your Postings</string>
 </resources>

@@ -3,7 +3,6 @@ package com.example.homiez.presentation;
 import android.app.Activity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import android.os.Bundle;
 import android.view.View;
@@ -27,13 +26,15 @@ public class SelfPostings extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(layout.self_postings);
 
+        // Uncomment this once it is connected from the previous page
 //        Bundle b = getIntent().getExtras();
 //        String userID = b.getString("userID");
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        accessPostings.getPostingsByUserId(postings, "1");
+        //
+        accessPostings.getPostingsByUserId(postings, "0");
 
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings)
         {
