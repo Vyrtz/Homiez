@@ -19,14 +19,21 @@ public class StartActivity extends Activity {
 
     //Called when looking for a room gets pressed
     public void lookingPressed(View v){
+        Intent selfIntent = new Intent(StartActivity.this, ViewPostings.class);
 
+        Bundle b = getIntent().getExtras();
+        b.putBoolean("self_posting", false);
+        selfIntent.putExtras(b);
+
+        StartActivity.this.startActivity(selfIntent);
     }
 
     //Called when posting room is pressed
     public void postingPressed(View v){
-        Intent selfIntent = new Intent(StartActivity.this, SelfPostings.class);
+        Intent selfIntent = new Intent(StartActivity.this, ViewPostings.class);
 
         Bundle b = getIntent().getExtras();
+        b.putBoolean("self_posting", true);
         selfIntent.putExtras(b);
 
         StartActivity.this.startActivity(selfIntent);
