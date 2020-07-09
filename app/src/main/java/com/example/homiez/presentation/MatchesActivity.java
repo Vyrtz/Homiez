@@ -79,7 +79,7 @@ public class MatchesActivity extends Activity {
         }
         Messages.warning(this,matchList.toString());
 
-        SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.matches, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
+        SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.match, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
         listMatches.setAdapter(adapter);
 
     }
