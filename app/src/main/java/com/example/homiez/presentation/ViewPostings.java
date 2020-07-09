@@ -15,29 +15,30 @@ import android.widget.TextView;
 
 import com.example.homiez.R.layout;
 import com.example.homiez.R.id;
-import com.example.homiez.application.Main;
 import com.example.homiez.objects.Posting;
 import com.example.homiez.business.AccessPostings;
-import com.example.homiez.objects.Request;
 
-public class SelfPostings extends Activity {
+public class ViewPostings extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
-        setContentView(layout.self_postings);
 
-        // Uncomment this once it is connected from the previous page
         Bundle b = getIntent().getExtras();
         final String userID = b.getString("userID");
+        final String is_posting = b.getString("is_posting");
 
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        accessPostings.getPostingsByUserId(postings, userID);
+        if (is_posting.equals("true")) {
+            accessPostings.getPostingsByUserId(postings, userID);
+            setContentView(layout.your_postings);
+        } else {
+            accessPostings.getPostings(postings, userID);
+            setContentView(layout.public_postings);
+        }
 
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings)
         {
@@ -61,22 +62,22 @@ public class SelfPostings extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int p, long id) {
-                Intent selfIntent = new Intent( SelfPostings.this, PostingActivity.class);
+                Intent selfIntent = new Intent( ViewPostings.this, PostingActivity.class);
 
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("userID", userID);
                 bundle.putString("postingId", postings.get(p).getPostingId());
 
                 selfIntent.putExtras(bundle);
-                SelfPostings.this.startActivity(selfIntent);
+                ViewPostings.this.startActivity(selfIntent);
             }
         });
     }
     public void seeRequests(View view)
     {
-        Intent singleReq = new Intent(SelfPostings.this, RequestsActivity.class);
+        Intent singleReq = new Intent(ViewPostings.this, RequestsActivity.class);
         Bundle b = getIntent().getExtras();
         singleReq.putExtras(b);
-        SelfPostings.this.startActivity(singleReq);
+        ViewPostings.this.startActivity(singleReq);
     }
 }
