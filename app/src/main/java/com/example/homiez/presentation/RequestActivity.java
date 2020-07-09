@@ -21,7 +21,7 @@ import com.example.homiez.objects.User;
 public class RequestActivity extends Activity {
     private AccessRequests accessRequests ;
     private AccessMatches accessMatches ;
-    private String userId;
+    private String requestUserId;
     private String mainUser;
     private String postingId;
     private AccessPostings accessPostings;
@@ -39,32 +39,34 @@ public class RequestActivity extends Activity {
         setContentView(R.layout.request);
 
         Bundle b = getIntent().getExtras();
-        userId = b.getString("userId");
-        User u = accessUser.getUser(userId);
+        requestUserId = b.getString("requestUserId");
+        User u = accessUser.getUser(requestUserId);
         postingId = b.getString("postingId");
         mainUser = b.getString("userID");
         Posting p = accessPostings.getPostingById(postingId);
         TextView editID = (TextView)findViewById(R.id.userInfoText);
-        editID.setText("   " + u.getName() +" " + u.getAge());
+        editID.setText("   " + u.getName() +" " + u.getAge() );
         editID = (TextView) findViewById(R.id.PostingInfoText);
-        editID.setText("   " + p.getTitle());
+        editID.setText(" Sent a Match Request for:  " + p.getTitle());
     }
     public void acceptRequest (View view)
     {
-        String result = Matching.AcceptRequest(accessRequests,accessMatches,userId,postingId);
+        String result = Matching.AcceptRequest(accessRequests,accessMatches,requestUserId,postingId);
         if(result == null){
            Messages.fatalError(this, "Failure while accepting requests " );
         }
-        goBack();
+        //goBack();
+        finish();
     }
     public void declineRequest (View view)
     {
-        String result = Matching.DeclineRequest(accessRequests,userId,postingId);
+        String result = Matching.DeclineRequest(accessRequests,requestUserId,postingId);
         if(result == null){
             Messages.fatalError(this, "Failure while declining requests ");
         }
         else{
-            goBack();
+            //goBack();
+            finish();
         }
     }
     public void goBack(){

@@ -7,13 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.example.homiez.R;
-import com.example.homiez.application.Main;
 import com.example.homiez.business.AccessPostings;
 import com.example.homiez.business.AccessRequests;
 import com.example.homiez.business.AccessUser;
@@ -94,12 +92,19 @@ public class RequestsActivity extends Activity {
                     String tempUser = prev.getString("userID");
                     Bundle b = new Bundle();
                     b.putString("userID",tempUser);
-                    b.putString("userId", selected.getUserId());
+                    b.putString("requestUserId", selected.getUserId());
                     b.putString("postingId", selected.getPostingId());
                     singleReq.putExtras(b);
                     RequestsActivity.this.startActivity(singleReq);
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle b = getIntent().getExtras();
+        onCreate(b);
     }
 }
