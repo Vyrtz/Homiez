@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +17,18 @@ import com.example.homiez.R.id;
 import com.example.homiez.application.Main;
 import com.example.homiez.objects.Posting;
 import com.example.homiez.business.AccessPostings;
+import com.example.homiez.objects.Request;
 
 public class SelfPostings extends Activity {
 
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Main.startUp();
-
         super.onCreate(savedInstanceState);
         setContentView(layout.self_postings);
 
-        // Uncomment this once it is connected from the previous page
-//        Bundle b = getIntent().getExtras();
-//        String userID = b.getString("userID");
+        Bundle b = getIntent().getExtras();
+        userId = b.getString("userID");
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
@@ -54,5 +54,12 @@ public class SelfPostings extends Activity {
 
         ListView listView = (ListView)findViewById(id.postingsList);
         listView.setAdapter(adapter);
+    }
+    public void seeRequests(View view)
+    {
+        Intent singleReq = new Intent(SelfPostings.this, RequestsActivity.class);
+        Bundle b = getIntent().getExtras();
+        singleReq.putExtras(b);
+        SelfPostings.this.startActivity(singleReq);
     }
 }

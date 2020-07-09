@@ -29,26 +29,38 @@ public class RequestsActivity extends Activity {
     private ArrayAdapter<Request> requestArrayAdapter;
     private AccessPostings accessPostings;
     private AccessUser accessUser;
-    private String tempPost = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Main.startUp();
 
         setContentView(R.layout.requests);
 
         accessRequests = new AccessRequests();
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
-
+        Bundle b = getIntent().getExtras();
+        String tempUser = b.getString("userId");
+        ArrayList<Posting> allposts = new ArrayList<>();
+        accessPostings.getPostingsByUserId(allposts, tempUser);
         requests = new ArrayList<>();
-        String result = accessRequests.getRequestsForPosting(requests, tempPost);
-
-        if(result == null)
+        for (Posting post: allposts)
         {
-            Messages.fatalError(this, "Failure while getting requests for posting id: " + tempPost);
+            ArrayList<Request> req = new ArrayList<>();
+            String result = accessRequests.getRequestsForPosting(req, post.getPostingId());
+            if(result == null)
+            {
+                Messages.fatalError(this, "Failure while getting requests for user id");
+            }
+            else
+            {
+                requests.addAll(req);
+            }
+        }
+        if(requests == null)
+        {
+            Messages.fatalError(this, "Failure while getting requests for user id");
         }
         else
         {
