@@ -17,6 +17,9 @@ public class LoginActivity extends Activity {
 
         Main.startUp();
 
+        accessUser = new AccessUser();
+
+
         setContentView(R.layout.login_page);
     }
 
