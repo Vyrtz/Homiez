@@ -45,9 +45,9 @@ public class RequestActivity extends Activity {
         mainUser = b.getString("userID");
         Posting p = accessPostings.getPostingById(postingId);
         TextView editID = (TextView)findViewById(R.id.userInfoText);
-        editID.setText("   " + u.getName() +" " + u.getAge());
+        editID.setText("   " + u.getName() +" " + u.getAge() );
         editID = (TextView) findViewById(R.id.PostingInfoText);
-        editID.setText("   " + p.getTitle());
+        editID.setText(" Sent a Match Request for:  " + p.getTitle());
     }
     public void acceptRequest (View view)
     {

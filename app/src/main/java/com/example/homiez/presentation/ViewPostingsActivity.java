@@ -18,7 +18,7 @@ import com.example.homiez.R.id;
 import com.example.homiez.objects.Posting;
 import com.example.homiez.business.AccessPostings;
 
-public class ViewPostings extends Activity {
+public class ViewPostingsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class ViewPostings extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int p, long id) {
-                Intent selfIntent = new Intent( ViewPostings.this, PostingActivity.class);
+                Intent selfIntent = new Intent( ViewPostingsActivity.this, PostingActivity.class);
 
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("userID", userID);
@@ -70,15 +70,15 @@ public class ViewPostings extends Activity {
                 bundle.putBoolean("self_posting", self_posting);
 
                 selfIntent.putExtras(bundle);
-                ViewPostings.this.startActivity(selfIntent);
+                ViewPostingsActivity.this.startActivity(selfIntent);
             }
         });
     }
     public void seeRequests(View view)
     {
-        Intent singleReq = new Intent(ViewPostings.this, RequestsActivity.class);
+        Intent singleReq = new Intent(ViewPostingsActivity.this, RequestsActivity.class);
         Bundle b = getIntent().getExtras();
         singleReq.putExtras(b);
-        ViewPostings.this.startActivity(singleReq);
+        ViewPostingsActivity.this.startActivity(singleReq);
     }
 }
