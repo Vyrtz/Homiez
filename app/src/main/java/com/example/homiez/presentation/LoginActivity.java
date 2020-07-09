@@ -39,6 +39,9 @@ public class LoginActivity extends Activity {
 
         if(accessUser.getUser(userID) != null){
             Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
+            Bundle b = new Bundle();
+            b.putString("userID", userID);
+            startIntent.putExtras(b);
             LoginActivity.this.startActivity(startIntent);
 
         }else{
