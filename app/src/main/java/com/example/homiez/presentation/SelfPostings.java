@@ -21,20 +21,18 @@ public class SelfPostings extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Main.startUp();
 
         super.onCreate(savedInstanceState);
         setContentView(layout.self_postings);
 
         // Uncomment this once it is connected from the previous page
-//        Bundle b = getIntent().getExtras();
-//        String userID = b.getString("userID");
+        Bundle b = getIntent().getExtras();
+        String userID = b.getString("userID");
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        //
-        accessPostings.getPostingsByUserId(postings, "0");
+        accessPostings.getPostingsByUserId(postings, userID);
 
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings)
         {
