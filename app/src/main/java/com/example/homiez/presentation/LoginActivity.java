@@ -1,7 +1,10 @@
 package com.example.homiez.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 
 import com.example.homiez.R;
 import com.example.homiez.application.Main;
@@ -19,8 +22,8 @@ public class LoginActivity extends Activity {
 
         accessUser = new AccessUser();
 
-
         setContentView(R.layout.login_page);
+
     }
 
     @Override
@@ -29,4 +32,19 @@ public class LoginActivity extends Activity {
 
         Main.shutDown();
     }
+
+    public void loginPressed(View v){
+        EditText IDField = findViewById(R.id.editUserID);
+        String userID = IDField.getText().toString();
+
+        if(accessUser.getUser(userID) != null){
+            Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
+            LoginActivity.this.startActivity(startIntent);
+
+        }else{
+            //TODO: Error message if the user isnt found
+        }
+
+    }
+
 }
