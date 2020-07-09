@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class MatchesActivity extends Activity {
 
+    //business stuff
     private AccessMatches accessMatches;
     private AccessPostings accessPostings;
     private AccessUser accessUser;
