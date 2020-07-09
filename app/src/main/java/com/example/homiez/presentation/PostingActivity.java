@@ -19,19 +19,31 @@ public class PostingActivity extends Activity {
         setContentView(R.layout.posting);
 
         Bundle b = getIntent().getExtras();
-        String postingID = b.getString("postingId");
+        final String postingID = b.getString("postingId");
+
+        if(b.getBoolean("self_posting")){
+            setContentView(R.layout.self_posting);
+        }else{
+            setContentView(R.layout.posting);
+        }
 
         accessPostings = new AccessPostings();
         Posting post = accessPostings.getPostingById(postingID);
 
+        TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
         TextView typeText = findViewById(R.id.typeText);
         TextView priceText = findViewById(R.id.priceText);
         TextView descriptionText = findViewById(R.id.descriptionText);
 
+        titleText.setText(post.getTitle());
         locationText.setText(post.getLocation());
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
+
+
+
+
     }
 }
