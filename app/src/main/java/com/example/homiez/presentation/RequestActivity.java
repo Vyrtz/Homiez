@@ -51,7 +51,7 @@ public class RequestActivity extends Activity {
     {
         String result = Matching.AcceptRequest(accessRequests,accessMatches,userId,postingId);
         if(result == null){
-            //fail
+           Messages.fatalError(this, "Failure while accepting requests " );
         }
         goBack();
     }
@@ -59,7 +59,7 @@ public class RequestActivity extends Activity {
     {
         String result = Matching.DeclineRequest(accessRequests,userId,postingId);
         if(result == null){
-            //fail
+            Messages.fatalError(this, "Failure while declining requests ");
         }
         goBack();
     }
