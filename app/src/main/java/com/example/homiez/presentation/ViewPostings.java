@@ -67,6 +67,7 @@ public class ViewPostings extends Activity {
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("userID", userID);
                 bundle.putString("postingId", postings.get(p).getPostingId());
+                bundle.putString("is_posting", is_posting);
 
                 selfIntent.putExtras(bundle);
                 ViewPostings.this.startActivity(selfIntent);
