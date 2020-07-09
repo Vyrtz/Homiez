@@ -11,5 +11,8 @@
     <string name="login">Login</string>
     <string name="user_id_prompt">Enter User ID:</string>
     <string name="matches">Your Matches</string>
+    <string name="request">Request</string>
+    <string name="accept">Accept</string>
+    <string name="deny">Deny</string>
     <string name="requests">Requests</string>
 </resources>
