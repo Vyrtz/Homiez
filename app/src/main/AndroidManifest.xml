@@ -17,8 +17,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.StartActivity">
-
         </activity>
+        <activity android:name=".presentation.RequestsActivity">
+        </activity>
+        <activity android:name=".presentation.RequestActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.homiez.presentation.RequestsActivity" />
+        </activity>
+
     </application>
 
 </manifest>
