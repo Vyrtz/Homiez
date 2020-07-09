@@ -22,6 +22,7 @@ public class RequestActivity extends Activity {
     private AccessRequests accessRequests ;
     private AccessMatches accessMatches ;
     private String userId;
+    private String mainUser;
     private String postingId;
     private AccessPostings accessPostings;
     private AccessUser accessUser;
@@ -41,6 +42,7 @@ public class RequestActivity extends Activity {
         userId = b.getString("userId");
         User u = accessUser.getUser(userId);
         postingId = b.getString("postingId");
+        mainUser = b.getString("userID");
         Posting p = accessPostings.getPostingById(postingId);
         TextView editID = (TextView)findViewById(R.id.userInfoText);
         editID.setText("   " + u.getName() +" " + u.getAge());
@@ -61,10 +63,15 @@ public class RequestActivity extends Activity {
         if(result == null){
             Messages.fatalError(this, "Failure while declining requests ");
         }
-        goBack();
+        else{
+            goBack();
+        }
     }
     public void goBack(){
-        Intent back = new Intent(RequestActivity.this, RequestsActivity.class);
-        RequestActivity.this.startActivity(back);
+        Intent singleReq = new Intent(RequestActivity.this, RequestsActivity.class);
+        Bundle newb = new Bundle();
+        newb.putString("userID", mainUser);
+        singleReq.putExtras(newb);
+        RequestActivity.this.startActivity(singleReq);
     }
 }

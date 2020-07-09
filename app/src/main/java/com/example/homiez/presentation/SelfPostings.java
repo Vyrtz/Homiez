@@ -18,11 +18,13 @@ import com.example.homiez.R.id;
 import com.example.homiez.application.Main;
 import com.example.homiez.objects.Posting;
 import com.example.homiez.business.AccessPostings;
+import com.example.homiez.objects.Request;
 
 public class SelfPostings extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(layout.self_postings);
@@ -30,6 +32,7 @@ public class SelfPostings extends Activity {
         // Uncomment this once it is connected from the previous page
         Bundle b = getIntent().getExtras();
         final String userID = b.getString("userID");
+
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
@@ -68,5 +71,12 @@ public class SelfPostings extends Activity {
                 SelfPostings.this.PostingActivity(selfIntent);
             }
         });
+    }
+    public void seeRequests(View view)
+    {
+        Intent singleReq = new Intent(SelfPostings.this, RequestsActivity.class);
+        Bundle b = getIntent().getExtras();
+        singleReq.putExtras(b);
+        SelfPostings.this.startActivity(singleReq);
     }
 }
