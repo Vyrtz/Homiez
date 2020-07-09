@@ -31,9 +31,13 @@ public class MatchesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.matches);
-        //Bundle b = getIntent.getExtras();
-        String id = "3";//b.getString("id");                    //The id of the user or posting, depending on where the user is coming from
-        String direction = "user";//b.getString("direction");   //Where the user is coming from. user= matches from their requests, post= matches for their post
+        accessMatches = new AccessMatches();
+        accessPostings = new AccessPostings();
+        accessUser = new AccessUser();
+
+        Bundle b = getIntent().getExtras();
+        String id = b.getString("userID");                    //The id of the user or posting, depending on where the user is coming from
+        String direction = b.getString("direction");   //Where the user is coming from. user= matches from their requests, post= matches for their post
 
         ArrayList<Match> matches = new ArrayList<Match>();//the list of matches
         User u;//the user
@@ -42,31 +46,40 @@ public class MatchesActivity extends Activity {
         ListView listMatches = (ListView) findViewById(R.id.listMatches);
         HashMap<String, String> pairs = new HashMap<>(); //user/posting pairs or posting/user pairs
         List<HashMap<String, String>> matchList = new ArrayList<>();
-        SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.matches, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
 
 
         if(direction.equals("user")){//posting on top, user on bottom
             u = accessUser.getUser(id);
             accessMatches.getMatchesForUser(matches, id);
             for(Match m : matches)
-                pairs.put(accessPostings.getPostingById(m.getPostingId()).getTitle(), u.getName());
-
-        } else{//user on top, posting on bottom
-            p = accessPostings.getPostingById(id);
-            accessMatches.getMatchesForPosting(matches, id);
-            for(Match m : matches)
-                pairs.put(accessUser.getUser(m.getUserId()).getName(), p.getTitle());
+            {
+                HashMap<String, String> map = new HashMap<>();
+                Posting post = accessPostings.getPostingById(m.getPostingId());
+                map.put("Top", post.getTitle());
+                map.put("Bottom",post.getUser().getName());
+                matchList.add(map);
+            }
+        } else{ //user on top, posting on bottom
+            ArrayList<Posting> allpostings = new ArrayList<>();
+            ArrayList<Match> allMacthes = new ArrayList<>();
+            accessPostings.getPostingsByUserId(allpostings, id);
+            for (Posting posting : allpostings)
+            {
+                accessMatches.getMatchesForPosting(matches, posting.getPostingId());
+                allMacthes.addAll(matches);
+                matches.clear();
+            }
+            for(Match m : allMacthes)
+            {
+                HashMap<String, String> map = new HashMap<>();
+                map.put("Top", accessUser.getUser(m.getUserId()).getName());
+                map.put("Bottom",accessPostings.getPostingById(m.getPostingId()).getTitle());
+                matchList.add(map);
+            }
         }
+        Messages.warning(this,matchList.toString());
 
-        Iterator it = pairs.entrySet().iterator();
-        while(it.hasNext()){
-            HashMap<String, String> map = new HashMap<>();
-            Map.Entry pair = (Map.Entry)it.next();
-            map.put("Top", pair.getKey().toString());
-            map.put("Bottom", pair.getValue().toString());
-            matchList.add(map);
-        }
-
+        SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.matches, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
         listMatches.setAdapter(adapter);
 
     }

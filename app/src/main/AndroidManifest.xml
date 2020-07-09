@@ -31,6 +31,7 @@
         </activity>
 
         <activity android:name=".presentation.PostingActivity"></activity>
+        <activity android:name=".presentation.MatchesActivity"></activity>
     </application>
 
 </manifest>
