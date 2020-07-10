@@ -18,7 +18,7 @@ import com.example.homiez.objects.Posting;
 import com.example.homiez.objects.Request;
 import com.example.homiez.objects.User;
 
-public class RequestActivity extends Activity {
+public class AnswerRequestActivity extends Activity {
     private AccessRequests accessRequests ;
     private AccessMatches accessMatches ;
     private String requestUserId;
