@@ -52,6 +52,7 @@ public class CreatePostingActivity extends Activity {
         }
         else{
             //posting created?
+            finish();
         }
     }
 }
