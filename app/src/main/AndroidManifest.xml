@@ -24,7 +24,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.homiez.presentation.ViewPostingsActivity" />
         </activity>
-        <activity android:name=".presentation.RequestActivity">
+        <activity android:name=".presentation.AnswerRequestActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.homiez.presentation.RequestsActivity" />

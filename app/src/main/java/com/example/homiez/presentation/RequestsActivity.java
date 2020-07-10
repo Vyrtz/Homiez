@@ -86,7 +86,7 @@ public class RequestsActivity extends Activity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent singleReq = new Intent(RequestsActivity.this, RequestActivity.class);
+                    Intent singleReq = new Intent(RequestsActivity.this, AnswerRequestActivity.class);
                     Request selected = requestArrayAdapter.getItem(position);
                     Bundle prev = getIntent().getExtras();
                     String tempUser = prev.getString("userID");
