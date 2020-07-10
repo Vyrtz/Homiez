@@ -13,6 +13,7 @@ import com.example.homiez.business.AccessUser;
 public class LoginActivity extends Activity {
 
     private AccessUser accessUser;
+    final private String NOT_FOUND = "User not found";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -45,7 +46,7 @@ public class LoginActivity extends Activity {
             LoginActivity.this.startActivity(startIntent);
 
         }else{
-            //TODO: Error message if the user isnt found
+            Messages.warning(this, NOT_FOUND);
         }
 
     }
