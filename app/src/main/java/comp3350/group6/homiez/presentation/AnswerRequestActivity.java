@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.example.homiez.R;
+import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.example.homiez.R;
+import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;

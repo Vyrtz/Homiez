@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.homiez.R;
+import comp3350.group6.homiez.R;
 
 public class StartActivity extends Activity {
 

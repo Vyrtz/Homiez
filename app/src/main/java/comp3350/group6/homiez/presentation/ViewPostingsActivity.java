@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.homiez.R.layout;
-import com.example.homiez.R.id;
+import comp3350.group6.homiez.R.layout;
+import comp3350.group6.homiez.R.id;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.business.AccessPostings;
 
