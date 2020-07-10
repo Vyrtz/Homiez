@@ -27,4 +27,13 @@ public class Messages {
 
         alertDialog.show();
     }
+
+    public static void popup(Activity owner, String message, String title) {
+        AlertDialog alertDialog = new AlertDialog.Builder(owner).create();
+
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+
+        alertDialog.show();
+    }
 }

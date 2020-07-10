@@ -2,6 +2,7 @@ package com.example.homiez.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,22 +21,24 @@ public class PostingActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.posting);
 
         Bundle b = getIntent().getExtras();
         final String postingID = b.getString("postingId");
 
-        if(b.getBoolean("self_posting")){
-            setContentView(R.layout.self_posting);
-        }else{
-            setContentView(R.layout.posting);
-        }
-
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
 
         Posting post = accessPostings.getPostingById(postingID);
+
+        if(b.getBoolean("self_posting")){
+            setContentView(R.layout.self_posting);
+        }else{
+            setContentView(R.layout.posting);
+
+            TextView userText = findViewById(R.id.userText);
+            userText.setText(post.getUser().getName());
+        }
 
         TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
@@ -55,5 +58,6 @@ public class PostingActivity extends Activity {
         String u = b.getString("userID");
         String p = b.getString("postingId");
         Matching.SendRequest(accessRequests,accessPostings,u,p);
+        Messages.popup(this, "You have sent a match request!", "Match request sent");
     }
 }
