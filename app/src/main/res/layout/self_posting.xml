@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,12 +31,15 @@
                 android:text="@string/location"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/locationText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/type"
@@ -44,12 +48,15 @@
                 android:text="@string/type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/typeText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/price"
@@ -58,12 +65,15 @@
                 android:text="@string/price"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/priceText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"/>
 
             <TextView
                 android:id="@+id/description"
@@ -72,12 +82,14 @@
                 android:text="@string/description"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
 
             <TextView
                 android:id="@+id/descriptionText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"/>
 
         </LinearLayout>
     </ScrollView>
