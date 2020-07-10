@@ -73,39 +73,6 @@ public class DataAccessStubTest extends TestCase {
 
 
     //Check contents of postings list
-    public void testPostingsContents(){
-        System.out.println("\nStarting testPostingsContents");
-
-
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
-        ArrayList<Posting> postings = new ArrayList<Posting>();
-        ArrayList<Posting> userPost = new ArrayList<Posting>();
-        stub.getAllPostings(postings);
-        User u = new User("2", "Matt", 20, "m");
-        stub.getPostingsByUser(userPost, u);
-        Posting p = new Posting("2", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
-
-
-        assertNotNull(stub.getPosting(p));
-        assertTrue(p.equals(postings.get(2)));
-        assertEquals(5, postings.size());
-        assertNull(stub.getPosting(new Posting("5", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1")));
-
-        assertTrue("New condo 2".equals(postings.get(1).getTitle()));
-        assertTrue(u.equals(postings.get(4).getUser()));
-        assertEquals(2000, postings.get(3).getPrice(), 0.01);
-        assertTrue("Pembina".equals(postings.get(4).getLocation()));
-        assertTrue("Condo".equals(postings.get(0).getType()));
-        assertTrue("new house here!".equals(postings.get(3).getDescription()));
-
-        assertEquals(1, userPost.size());
-        assertTrue("4".equals(userPost.get(0).getPostingId()));
-        //System.out.println(userPost);
-
-        System.out.println("Finished testPostingsContents");
-    }
-
 
     //check posting updates, insertions and deletions
     public void testPostingChanges(){

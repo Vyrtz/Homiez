@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-import com.example.homiez.R;
+import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
 import comp3350.group6.homiez.business.AccessUser;
