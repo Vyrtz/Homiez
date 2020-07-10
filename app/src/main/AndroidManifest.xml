@@ -9,30 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.LoginActivity">
+        <activity android:name="comp3350.group6.homiez.presentation.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.StartActivity">
+        <activity android:name="comp3350.group6.homiez.presentation.StartActivity">
         </activity>
-        <activity android:name=".presentation.ViewPostingsActivity"></activity>
-        <activity android:name=".presentation.RequestsActivity">
+        <activity android:name="comp3350.group6.homiez.presentation.ViewPostingsActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.RequestsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.homiez.presentation.ViewPostingsActivity" />
-        </activity>
-        <activity android:name=".presentation.AnswerRequestActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.homiez.presentation.RequestsActivity" />
+                android:value="comp3350.group6.homiez.presentation.ViewPostingsActivity" />
         </activity>
 
-        <activity android:name=".presentation.PostingActivity"></activity>
-        <activity android:name=".presentation.MatchesActivity"></activity>
-        <activity android:name=".presentation.CreatePostingActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.AnswerRequestActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="comp3350.group6.homiez.presentation.RequestsActivity" />
+        </activity>
+
+        <activity android:name="comp3350.group6.homiez.presentation.PostingActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.MatchesActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.CreatePostingActivity"></activity>
     </application>
 
 </manifest>
