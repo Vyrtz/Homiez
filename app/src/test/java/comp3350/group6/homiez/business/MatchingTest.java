@@ -10,18 +10,67 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 public class MatchingTest extends TestCase {
+    private Matching m;
+    private User u;
+    private AccessRequests accessRequests;
+    private AccessPostings accessPostings;
+    private AccessUser aUser;
+    private AccessMatches accessMatches;
+
     public void setUp()
     {
         Main.startUp();
+        m = new Matching();
+        u = new User("0", "Abhi", 20, "m");
+        accessRequests = new AccessRequests();
+        aUser = new AccessUser();
+        accessPostings = new AccessPostings();
+        AccessMatches accessMatches = new AccessMatches();
     }
+
+
+    //test operations when null parameters are passed
+    public void testNullCases(){
+        System.out.println("\nStarting testNullCases");
+        setUp();
+
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, null, "3"));
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), null));
+
+        assertNull(Matching.DeclineRequest(accessRequests, null, "3"));
+        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), null));
+
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, u.getUserId(), null));
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, null, "3"));
+
+        Main.shutDown();
+        System.out.println("Finished testNullCases");
+    }
+
+    //test operations when no result will be found
+    public void testBadValues(){
+        System.out.println("\nStarting testBadValues");
+        setUp();
+
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, "5", "3"));
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), "9"));
+
+        assertNull(Matching.DeclineRequest(accessRequests, "5", "3"));
+        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), "9"));
+
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, u.getUserId(), "9"));
+
+        Main.shutDown();
+        System.out.println("Finished testBadValues");
+    }
+
+
     public void testSendRequest()
     {
         System.out.println("\nStarting testSendRequest");
+        setUp();
 
 
-        User u = new User("0", "Abhi", 20, "m");
-        AccessRequests accessRequests = new AccessRequests();
-        AccessPostings accessPostings = new AccessPostings();
         assertNotNull(Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3"));
 
         //cannot send request to your own posting
@@ -32,18 +81,25 @@ public class MatchingTest extends TestCase {
         accessRequests.getRequestsForPosting(requests, "3");
         assertEquals(1, requests.size());
         requests.clear();
+
+        Main.shutDown();
         System.out.println("Finished testSendRequest");
     }
+
+
 
     public void testAcceptRequest()
     {
         System.out.println("\nStarting testAcceptRequest");
+        setUp();
 
-        User u = new User("0", "Abhi", 20, "m");
-        AccessUser aUser = new AccessUser();
-        AccessRequests accessRequests = new AccessRequests();
+        //User u = new User("0", "Abhi", 20, "m");
+        //AccessUser aUser = new AccessUser();
+        //AccessRequests accessRequests = new AccessRequests();
         aUser.login(u);
-        AccessPostings accessPostings = new AccessPostings();
+        //AccessPostings accessPostings = new AccessPostings();
+
+
         Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3");
 
         AccessMatches accessMatches = new AccessMatches();
@@ -59,6 +115,8 @@ public class MatchingTest extends TestCase {
         accessMatches.getMatchesForPosting(matches, "3");
         assertEquals(2, matches.size());
         matches.clear();
+
+        Main.shutDown();
         System.out.println("Finished testAcceptRequest");
     }
     public void testDeclineRequest()
