@@ -55,7 +55,6 @@ public class RequestActivity extends Activity {
         if(result == null){
            Messages.fatalError(this, "Failure while accepting requests " );
         }
-        //goBack();
         finish();
     }
     public void declineRequest (View view)
@@ -65,15 +64,7 @@ public class RequestActivity extends Activity {
             Messages.fatalError(this, "Failure while declining requests ");
         }
         else{
-            //goBack();
             finish();
         }
-    }
-    public void goBack(){
-        Intent singleReq = new Intent(RequestActivity.this, RequestsActivity.class);
-        Bundle newb = new Bundle();
-        newb.putString("userID", mainUser);
-        singleReq.putExtras(newb);
-        RequestActivity.this.startActivity(singleReq);
     }
 }

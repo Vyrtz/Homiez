@@ -20,13 +20,15 @@ import com.example.homiez.business.AccessPostings;
 
 public class ViewPostingsActivity extends Activity {
 
+    private boolean self_posting = false;
+    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle b = getIntent().getExtras();
-        final String userID = b.getString("userID");
-        final boolean self_posting = b.getBoolean("self_posting");
+        userID = b.getString("userID");
+        self_posting = b.getBoolean("self_posting");
 
 
         final ArrayList<Posting> postings = new ArrayList<>();
@@ -78,6 +80,23 @@ public class ViewPostingsActivity extends Activity {
     {
         Intent singleReq = new Intent(ViewPostingsActivity.this, RequestsActivity.class);
         Bundle b = getIntent().getExtras();
+        singleReq.putExtras(b);
+        ViewPostingsActivity.this.startActivity(singleReq);
+    }
+
+    public void seeMatches(View view)
+    {
+        Intent singleReq = new Intent(ViewPostingsActivity.this, MatchesActivity.class);
+        Bundle b = getIntent().getExtras();
+        if(self_posting)
+        {
+            b.putString("direction","postings");
+        }
+        else
+        {
+            b.putString("direction","user");
+        }
+        b.putString("userID", userID);
         singleReq.putExtras(b);
         ViewPostingsActivity.this.startActivity(singleReq);
     }

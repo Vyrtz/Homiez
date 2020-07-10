@@ -41,9 +41,5 @@ public class PostingActivity extends Activity {
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
-
-
-
-
     }
 }
