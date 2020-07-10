@@ -77,7 +77,7 @@ public class MatchesActivity extends Activity {
                 matchList.add(map);
             }
         }
-        Messages.warning(this,matchList.toString());
+        //Messages.warning(this,matchList.toString());
 
         SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.match, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
         listMatches.setAdapter(adapter);
