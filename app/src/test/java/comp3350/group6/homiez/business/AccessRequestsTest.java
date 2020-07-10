@@ -19,20 +19,20 @@ public class AccessRequestsTest extends TestCase {
         Request r = new Request("0", "3");
 
         aRequest.getRequestsForPosting(requests, "0");
-        assertEquals(1, requests.size(), 0.01);
+        assertEquals(1, requests.size());
         assertTrue("4".equals(requests.get(0).getUserId()));
         requests.removeAll(requests);
 
         aRequest.getRequestsForPosting(requests,"3");
-        assertEquals(0, requests.size(), 0.01);
+        assertEquals(0, requests.size());
         aRequest.insertRequest(r);
         aRequest.getRequestsForPosting(requests,"3");
-        assertEquals(1, requests.size(), 0.01);
+        assertEquals(1, requests.size());
         requests.removeAll(requests);
 
         aRequest.deleteRequest(r);
         aRequest.getRequestsForPosting(requests,"3");
-        assertEquals(0, requests.size(), 0.01);
+        assertEquals(0, requests.size());
 
 
         System.out.println("Finished testAccessRequests1");
