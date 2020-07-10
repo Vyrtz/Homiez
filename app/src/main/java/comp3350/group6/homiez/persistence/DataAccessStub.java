@@ -40,15 +40,15 @@ public class DataAccessStub {
         users.add(user);
 
         postings = new ArrayList<Posting>();
-        post = new Posting("0", "New condo 1", users.get(0), 1200,  "Pembina", "Condo", "new condo here 1!");
+        post = new Posting("0", "Room at Pembina Riverside Condo", users.get(0), 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
         postings.add(post);
-        post = new Posting("1", "New condo 2", users.get(0), 1200,  "Pembina", "Condo", "new condo here 2!");
+        post = new Posting("1", "Room at Windsor Park House", users.get(0), 800,  "Windsor Park", "House", "The Windsor Park community is known for its ample green space, Windsor Park Golf course and easy access to schools and recreational facilities. On-site Resident Managers, security entrance, two elevators, fitness facility, laundry facilities, common room, as well as indoor and outdoor parking. This stunning and renovated high-rise complex offers clean and spacious suites with plenty of sunlight, fully renovated kitchens that feature stainless-steel appliances with dishwashers, granite countertops for the penthouse suites, modernized bathroom with designer finishes, beautifully refinished hardwood floors throughout and large covered balconies with beautiful views. Each suite also has independent forced air heating & cooling. There is also an underground parkade with a car wash and a shuttle bus service to the local grocery stores weekly. This apartment building is a cat and a small dog-friendly building.");
         postings.add(post);
-        post = new Posting("2", "New condo 3", users.get(0), 1200,  "Pembina", "Condo", "new condo here 3!");
+        post = new Posting("2", "Room at North Kildonan Condo", users.get(0), 600,  "North Kildonan", "Condo", "This great condo comes with 2 bedroom and 5 bath. All utilities included.");
         postings.add(post);
-        post = new Posting("3", "New house", users.get(1), 2000,  "Pembina", "house", "new house here!");
+        post = new Posting("3", "Room at East St. Paul House", users.get(1), 200,  "East St. Paul", "House", "3000 square ft. home with incredible view of the surrounding fields.");
         postings.add(post);
-        post = new Posting("4", "New house", users.get(2), 2200,  "Pembina", "house", "new house here!");
+        post = new Posting("4", "Room at Bridgewater Apartment", users.get(2), 700,  "Bridgewater", "Apartment", "Close to University of Manitoba, making this apartment great for any students wanting a quick commute to school (once covid stops).");
         postings.add(post);
 
         matches = new ArrayList<Match>();
