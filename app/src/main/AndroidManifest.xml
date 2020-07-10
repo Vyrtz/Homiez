@@ -22,12 +22,13 @@
         <activity android:name="comp3350.group6.homiez.presentation.RequestsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.homiez.comp3350.example.homiez.presentation.ViewPostingsActivity" />
+                android:value="comp3350.group6.homiez.presentation.ViewPostingsActivity" />
         </activity>
-        <activity android:name="comp3350.group6.homiez.presentation.RequestActivity">
+
+        <activity android:name="comp3350.group6.homiez.presentation.AnswerRequestActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.homiez.comp3350.example.homiez.presentation.RequestsActivity" />
+                android:value="comp3350.group6.homiez.presentation.RequestsActivity" />
         </activity>
 
         <activity android:name="comp3350.group6.homiez.presentation.PostingActivity"></activity>

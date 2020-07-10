@@ -16,7 +16,7 @@ import comp3350.group6.homiez.business.Matching;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
-public class RequestActivity extends Activity {
+public class AnswerRequestActivity extends Activity {
     private AccessRequests accessRequests ;
     private AccessMatches accessMatches ;
     private String requestUserId;
