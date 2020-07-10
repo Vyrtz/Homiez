@@ -22,6 +22,7 @@ public class ViewPostingsActivity extends Activity {
 
     private boolean self_posting = false;
     private String userID;
+    private static int currentPosting = 6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,5 +100,24 @@ public class ViewPostingsActivity extends Activity {
         b.putString("userID", userID);
         singleReq.putExtras(b);
         ViewPostingsActivity.this.startActivity(singleReq);
+    }
+    public void createPosting (View view)
+    {
+        Intent singleReq = new Intent(ViewPostingsActivity.this, CreatePostingActivity.class);
+        Bundle b = getIntent().getExtras();
+        b.putString("userID", userID);
+        b.putInt("createPostingId", currentPosting);
+        currentPosting++;
+        singleReq.putExtras(b);
+        ViewPostingsActivity.this.startActivity(singleReq);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("userID", userID);
+        bundle.putBoolean("self_posting", self_posting);
+        onCreate(bundle);
     }
 }

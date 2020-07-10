@@ -2,16 +2,21 @@ package com.example.homiez.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.homiez.R;
+import com.example.homiez.business.AccessMatches;
 import com.example.homiez.business.AccessPostings;
+import com.example.homiez.business.AccessRequests;
+import com.example.homiez.business.AccessUser;
+import com.example.homiez.business.Matching;
 import com.example.homiez.objects.Posting;
 
 public class PostingActivity extends Activity {
 
     private AccessPostings accessPostings;
-
+    private AccessRequests accessRequests;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,6 +33,8 @@ public class PostingActivity extends Activity {
         }
 
         accessPostings = new AccessPostings();
+        accessRequests = new AccessRequests();
+
         Posting post = accessPostings.getPostingById(postingID);
 
         TextView titleText = findViewById(R.id.titleText);
@@ -41,5 +48,12 @@ public class PostingActivity extends Activity {
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
+    }
+    public void sendMatch(View v)
+    {
+        Bundle b =getIntent().getExtras();
+        String u = b.getString("userID");
+        String p = b.getString("postingId");
+        Matching.SendRequest(accessRequests,accessPostings,u,p);
     }
 }

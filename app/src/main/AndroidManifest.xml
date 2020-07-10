@@ -32,6 +32,7 @@
 
         <activity android:name=".presentation.PostingActivity"></activity>
         <activity android:name=".presentation.MatchesActivity"></activity>
+        <activity android:name=".presentation.CreatePostingActivity"></activity>
     </application>
 
 </manifest>

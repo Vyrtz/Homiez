@@ -1,5 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createPosting"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -7,12 +9,12 @@
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:text="@string/your_postings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/postingsList"
@@ -23,6 +25,13 @@
         android:choiceMode="none">
 
     </ListView>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="createPosting"
+        android:text="Create Posting" />
 
     <Button
         android:id="@+id/button_matches"
@@ -37,4 +46,5 @@
         android:layout_height="wrap_content"
         android:onClick="seeRequests"
         android:text="@string/requests" />
+
 </LinearLayout>
