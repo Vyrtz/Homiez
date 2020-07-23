@@ -4,13 +4,20 @@ import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataAccessStub {
     private String dbName;
     private String dbType = "stub";
+    private static String connectionString = "jdbc:hsqldb:file:db/HomiezDB";
+    private Connection con;
 
     private ArrayList<User> users;
     private ArrayList<Posting> postings;
@@ -20,53 +27,68 @@ public class DataAccessStub {
     public DataAccessStub(String dbName){
         this.dbName = dbName;
     }
-    public void open(String dbName)
-    {
-        User user;
-        Posting post;
-        Request request;
-        Match match;
 
-        users = new ArrayList<User>();
-        user = new User ("0","Abhi", 20, "m");
-        users.add(user);
-        user = new User ("1","Jordan", 20, "m");
-        users.add(user);
-        user = new User ("2","Matt", 20, "m");
-        users.add(user);
-        user = new User ("3","Vinh", 18, "m");
-        users.add(user);
-        user = new User ("4","Ma", 18, "m");
-        users.add(user);
+    public void open(String dbName){
+            String creation;
+        try {
+            Class.forName("org.hsqldb.jdbc.JDBCDriver");
+            con = DriverManager.getConnection(connectionString, "SA", "");
+            if(con != null)
+                System.out.println("Connection successful");
+            else
+                System.out.println("Connection failed");
 
-        postings = new ArrayList<Posting>();
-        post = new Posting("0", "Room at Pembina Riverside Condo", users.get(0), 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
-        postings.add(post);
-        post = new Posting("1", "Room at Windsor Park House", users.get(0), 800,  "Windsor Park", "House", "The Windsor Park community is known for its ample green space, Windsor Park Golf course and easy access to schools and recreational facilities. On-site Resident Managers, security entrance, two elevators, fitness facility, laundry facilities, common room, as well as indoor and outdoor parking. This stunning and renovated high-rise complex offers clean and spacious suites with plenty of sunlight, fully renovated kitchens that feature stainless-steel appliances with dishwashers, granite countertops for the penthouse suites, modernized bathroom with designer finishes, beautifully refinished hardwood floors throughout and large covered balconies with beautiful views. Each suite also has independent forced air heating & cooling. There is also an underground parkade with a car wash and a shuttle bus service to the local grocery stores weekly. This apartment building is a cat and a small dog-friendly building.");
-        postings.add(post);
-        post = new Posting("2", "Room at North Kildonan Condo", users.get(0), 600,  "North Kildonan", "Condo", "This great condo comes with 2 bedroom and 5 bath. All utilities included.");
-        postings.add(post);
-        post = new Posting("3", "Room at East St. Paul House", users.get(1), 200,  "East St. Paul", "House", "3000 square ft. home with incredible view of the surrounding fields.");
-        postings.add(post);
-        post = new Posting("4", "Room at Bridgewater Apartment", users.get(2), 700,  "Bridgewater", "Apartment", "Close to University of Manitoba, making this apartment great for any students wanting a quick commute to school (once covid stops).");
-        postings.add(post);
-
-        matches = new ArrayList<Match>();
-        match = new Match("3", "0");
-        matches.add(match);
-        match = new Match("3", "1");
-        matches.add(match);
-        match = new Match("4", "3");
-        matches.add(match);
-
-        matchRequests = new ArrayList<Request>();
-        request = new Request("4", "0");
-        matchRequests.add(request);
-        request = new Request("4", "1");
-        matchRequests.add(request);
-        request = new Request("4", "2");
-        matchRequests.add(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+//    public void open(String dbName)
+//    {
+//        User user;
+//        Posting post;
+//        Request request;
+//        Match match;
+//
+//        users = new ArrayList<User>();
+//        user = new User ("0","Abhi", 20, "m");
+//        users.add(user);
+//        user = new User ("1","Jordan", 20, "m");
+//        users.add(user);
+//        user = new User ("2","Matt", 20, "m");
+//        users.add(user);
+//        user = new User ("3","Vinh", 18, "m");
+//        users.add(user);
+//        user = new User ("4","Ma", 18, "m");
+//        users.add(user);
+//
+//        postings = new ArrayList<Posting>();
+//        post = new Posting("0", "Room at Pembina Riverside Condo", users.get(0), 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
+//        postings.add(post);
+//        post = new Posting("1", "Room at Windsor Park House", users.get(0), 800,  "Windsor Park", "House", "The Windsor Park community is known for its ample green space, Windsor Park Golf course and easy access to schools and recreational facilities. On-site Resident Managers, security entrance, two elevators, fitness facility, laundry facilities, common room, as well as indoor and outdoor parking. This stunning and renovated high-rise complex offers clean and spacious suites with plenty of sunlight, fully renovated kitchens that feature stainless-steel appliances with dishwashers, granite countertops for the penthouse suites, modernized bathroom with designer finishes, beautifully refinished hardwood floors throughout and large covered balconies with beautiful views. Each suite also has independent forced air heating & cooling. There is also an underground parkade with a car wash and a shuttle bus service to the local grocery stores weekly. This apartment building is a cat and a small dog-friendly building.");
+//        postings.add(post);
+//        post = new Posting("2", "Room at North Kildonan Condo", users.get(0), 600,  "North Kildonan", "Condo", "This great condo comes with 2 bedroom and 5 bath. All utilities included.");
+//        postings.add(post);
+//        post = new Posting("3", "Room at East St. Paul House", users.get(1), 200,  "East St. Paul", "House", "3000 square ft. home with incredible view of the surrounding fields.");
+//        postings.add(post);
+//        post = new Posting("4", "Room at Bridgewater Apartment", users.get(2), 700,  "Bridgewater", "Apartment", "Close to University of Manitoba, making this apartment great for any students wanting a quick commute to school (once covid stops).");
+//        postings.add(post);
+//
+//        matches = new ArrayList<Match>();
+//        match = new Match("3", "0");
+//        matches.add(match);
+//        match = new Match("3", "1");
+//        matches.add(match);
+//        match = new Match("4", "3");
+//        matches.add(match);
+//
+//        matchRequests = new ArrayList<Request>();
+//        request = new Request("4", "0");
+//        matchRequests.add(request);
+//        request = new Request("4", "1");
+//        matchRequests.add(request);
+//        request = new Request("4", "2");
+//        matchRequests.add(request);
+//    }
     public void close()
     {
         System.out.println("Closed " +dbType +" database " +dbName);
