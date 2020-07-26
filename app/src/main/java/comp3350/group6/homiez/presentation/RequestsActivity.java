@@ -43,25 +43,20 @@ public class RequestsActivity extends Activity {
         ArrayList<Posting> allposts = new ArrayList<>();
         accessPostings.getPostingsByUserId(allposts, tempUser);
         requests = new ArrayList<>();
-        for (Posting post: allposts)
-        {
+        for (Posting post: allposts) {
             ArrayList<Request> req = new ArrayList<>();
             String result = accessRequests.getRequestsForPosting(req, post.getPostingId());
-            if(result == null)
-            {
+            if(result == null) {
                 Messages.fatalError(this, "Failure while getting requests for user id");
             }
-            else
-            {
+            else {
                 requests.addAll(req);
             }
         }
-        if(requests == null)
-        {
+        if(requests == null) {
             Messages.fatalError(this, "Failure while getting requests for user id");
         }
-        else
-        {
+        else {
             requestArrayAdapter = new ArrayAdapter<Request>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, requests)
             {
                 @Override

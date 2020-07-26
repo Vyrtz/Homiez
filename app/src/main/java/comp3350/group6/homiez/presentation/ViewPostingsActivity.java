@@ -43,8 +43,7 @@ public class ViewPostingsActivity extends Activity {
             setContentView(layout.public_postings);
         }
 
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings)
-        {
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -77,32 +76,27 @@ public class ViewPostingsActivity extends Activity {
             }
         });
     }
-    public void seeRequests(View view)
-    {
+    public void seeRequests(View view) {
         Intent singleReq = new Intent(ViewPostingsActivity.this, RequestsActivity.class);
         Bundle b = getIntent().getExtras();
         singleReq.putExtras(b);
         ViewPostingsActivity.this.startActivity(singleReq);
     }
 
-    public void seeMatches(View view)
-    {
+    public void seeMatches(View view) {
         Intent singleReq = new Intent(ViewPostingsActivity.this, MatchesActivity.class);
         Bundle b = getIntent().getExtras();
-        if(self_posting)
-        {
+        if(self_posting) {
             b.putString("direction","postings");
         }
-        else
-        {
+        else {
             b.putString("direction","user");
         }
         b.putString("userID", userID);
         singleReq.putExtras(b);
         ViewPostingsActivity.this.startActivity(singleReq);
     }
-    public void createPosting (View view)
-    {
+    public void createPosting (View view) {
         Intent singleReq = new Intent(ViewPostingsActivity.this, CreatePostingActivity.class);
         Bundle b = getIntent().getExtras();
         b.putString("userID", userID);

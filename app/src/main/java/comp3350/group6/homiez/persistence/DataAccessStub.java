@@ -20,8 +20,7 @@ public class DataAccessStub {
     public DataAccessStub(String dbName){
         this.dbName = dbName;
     }
-    public void open(String dbName)
-    {
+    public void open(String dbName) {
         User user;
         Posting post;
         Request request;
@@ -89,175 +88,146 @@ public class DataAccessStub {
     }
 
 
-    public String insertMatch(Match m){
+    public String insertMatch(Match m) {
         boolean exist = false;
-        for(Match match : matches)
-        {
-            if (match.equals(m))
-            {
+        for(Match match : matches) {
+            if (match.equals(m)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             matches.add(m);
             return "Success";
         }
         return "Failure";
     }
 
-    public String deleteMatch(Match m){
+    public String deleteMatch(Match m) {
         boolean exist = false;
-        for(Match match : matches)
-        {
-            if (match.equals(m))
-            {
+        for(Match match : matches) {
+            if (match.equals(m)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             return "Failure";
         }
         matches.remove(m);
         return "Success";
     }
 
-    public String getAllPostings(List<Posting> postings){
+    public String getAllPostings(List<Posting> postings) {
         postings.addAll(this.postings);
         return "Success";
     }
-    public Posting getPosting(Posting posting){
-        for(Posting p : postings)
-        {
-            if (posting.equals(p))
-            {
+
+    public Posting getPosting(Posting posting) {
+        for(Posting p : postings) {
+            if (posting.equals(p)) {
                 return p;
             }
         }
         return null;
     }
-    public String getPostingsByUser(List<Posting> postingsList, User user){
-        for(Posting p : postings)
-        {
-            if (p.getUser().equals(user))
-            {
+    public String getPostingsByUser(List<Posting> postingsList, User user) {
+        for(Posting p : postings) {
+            if (p.getUser().equals(user)) {
                postingsList.add(p);
             }
         }
         return "Success";
     }
-    public String insertPosting(Posting posting){
+    public String insertPosting(Posting posting) {
         boolean exist = false;
-        for(Posting p : postings)
-        {
-            if (p.equals(posting))
-            {
+        for(Posting p : postings) {
+            if (p.equals(posting)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             postings.add(posting);
             return "Success";
         }
         return "Failure";
     }
 
-    public String deletePosting(Posting posting){
+    public String deletePosting(Posting posting) {
         boolean exist = false;
-        for(Posting p : postings)
-        {
-            if (posting.equals(p))
-            {
+        for(Posting p : postings) {
+            if (posting.equals(p)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             return "Failure";
         }
         postings.remove(posting);
         return "Success";
     }
-    public String updatePosting(Posting posting){
+    public String updatePosting(Posting posting) {
         Posting exist = null;
-        for(Posting p : postings)
-        {
-            if (p.equals(posting))
-            {
+        for(Posting p : postings) {
+            if (p.equals(posting)) {
                 exist = p;
             }
         }
-        if (exist != null)
-        {
+        if (exist != null) {
             postings.remove(exist);
             postings.add(posting); //replace with new posting object
             return "Success";
         }
         return "Failure";
     }
-    public String getRequests(List<Request> requests, String pId){
+    public String getRequests(List<Request> requests, String pId) {
         for (Request r : this.matchRequests) {
             if(r.getPostingId().equals(pId))
                 requests.add(r);
         }
         return "Success";
     }
-    public String insertRequest(Request req){
+    public String insertRequest(Request req) {
         boolean exist = false;
-        for(Request r : matchRequests)
-        {
-            if (r.equals(req))
-            {
+        for(Request r : matchRequests) {
+            if (r.equals(req)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             matchRequests.add(req);
             return "Success";
         }
         return "Failure";
     }
-    public String deleteRequest(Request req){
+    public String deleteRequest(Request req) {
         boolean exist = false;
-        for(Request r : matchRequests)
-        {
-            if (r.equals(req))
-            {
+        for(Request r : matchRequests) {
+            if (r.equals(req)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             return "Failure";
         }
         matchRequests.remove(req);
         return "Success";
     }
-    public User getUser(User toFind){
+    public User getUser(User toFind) {
         User found = null;
-        for(User u : users)
-        {
-            if (u.equals(toFind))
-            {
+        for(User u : users) {
+            if (u.equals(toFind)) {
                 found = u;
             }
         }
         return found;
     }
-    public String insertUser(User insert){
+    public String insertUser(User insert) {
         boolean exist = false;
-        for(User u : users)
-        {
-            if (u.equals(insert))
-            {
+        for(User u : users) {
+            if (u.equals(insert)) {
                 exist = true;
             }
         }
-        if (!exist)
-        {
+        if (!exist) {
             users.add(insert);
             return "Success";
         }

@@ -17,20 +17,18 @@ public class MatchingTest extends TestCase {
     private AccessUser aUser;
     private AccessMatches accessMatches;
 
-    public void setUp()
-    {
+    public void setUp() {
         Main.startUp();
         m = new Matching();
         u = new User("0", "Abhi", 20, "m");
         accessRequests = new AccessRequests();
         aUser = new AccessUser();
         accessPostings = new AccessPostings();
-        AccessMatches accessMatches = new AccessMatches();
     }
 
 
     //test operations when null parameters are passed
-    public void testNullCases(){
+    public void testNullCases() {
         System.out.println("\nStarting testNullCases");
         setUp();
 
@@ -48,7 +46,7 @@ public class MatchingTest extends TestCase {
     }
 
     //test operations when no result will be found
-    public void testBadValues(){
+    public void testBadValues() {
         System.out.println("\nStarting testBadValues");
         setUp();
 
@@ -65,8 +63,7 @@ public class MatchingTest extends TestCase {
     }
 
 
-    public void testSendRequest()
-    {
+    public void testSendRequest() {
         System.out.println("\nStarting testSendRequest");
         setUp();
 
@@ -88,17 +85,11 @@ public class MatchingTest extends TestCase {
 
 
 
-    public void testAcceptRequest()
-    {
+    public void testAcceptRequest() {
         System.out.println("\nStarting testAcceptRequest");
         setUp();
 
-        //User u = new User("0", "Abhi", 20, "m");
-        //AccessUser aUser = new AccessUser();
-        //AccessRequests accessRequests = new AccessRequests();
         aUser.login(u);
-        //AccessPostings accessPostings = new AccessPostings();
-
 
         Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3");
 
@@ -119,8 +110,7 @@ public class MatchingTest extends TestCase {
         Main.shutDown();
         System.out.println("Finished testAcceptRequest");
     }
-    public void testDeclineRequest()
-    {
+    public void testDeclineRequest() {
         System.out.println("\nStarting testDeclineRequest");
 
         User u = new User("0", "Abhi", 20, "m");

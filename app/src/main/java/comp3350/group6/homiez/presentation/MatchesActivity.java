@@ -45,29 +45,27 @@ public class MatchesActivity extends Activity {
         List<HashMap<String, String>> matchList = new ArrayList<>();
 
 
-        if(direction.equals("user")){//posting on top, user on bottom
+        if(direction.equals("user")) {//posting on top, user on bottom
             u = accessUser.getUser(id);
             accessMatches.getMatchesForUser(matches, id);
-            for(Match m : matches)
-            {
+            for(Match m : matches) {
                 HashMap<String, String> map = new HashMap<>();
                 Posting post = accessPostings.getPostingById(m.getPostingId());
                 map.put("Top", post.getTitle());
                 map.put("Bottom",post.getUser().getName());
                 matchList.add(map);
             }
-        } else{ //user on top, posting on bottom
+        }
+        else { //user on top, posting on bottom
             ArrayList<Posting> allpostings = new ArrayList<>();
             ArrayList<Match> allMacthes = new ArrayList<>();
             accessPostings.getPostingsByUserId(allpostings, id);
-            for (Posting posting : allpostings)
-            {
+            for (Posting posting : allpostings) {
                 accessMatches.getMatchesForPosting(matches, posting.getPostingId());
                 allMacthes.addAll(matches);
                 matches.clear();
             }
-            for(Match m : allMacthes)
-            {
+            for(Match m : allMacthes) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("Top", accessUser.getUser(m.getUserId()).getName());
                 map.put("Bottom",accessPostings.getPostingById(m.getPostingId()).getTitle());
@@ -78,6 +76,5 @@ public class MatchesActivity extends Activity {
 
         SimpleAdapter adapter = new SimpleAdapter(this, matchList, R.layout.match, new String[]{"Top", "Bottom"}, new int[]{R.id.matchTop, R.id.matchBottom});
         listMatches.setAdapter(adapter);
-
     }
 }
