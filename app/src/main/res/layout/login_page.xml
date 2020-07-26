@@ -70,17 +70,16 @@
                 android:textSize="30sp" />
 
             <EditText
-                android:id="@+id/editUserID2"
+                android:id="@+id/editPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="start|top"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:password="true"
                 android:singleLine="true" />
         </LinearLayout>
 
