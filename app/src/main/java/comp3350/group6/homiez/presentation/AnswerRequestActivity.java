@@ -26,8 +26,7 @@ public class AnswerRequestActivity extends Activity {
     private AccessUser accessUser;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         accessRequests = new AccessRequests();
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
@@ -47,21 +46,19 @@ public class AnswerRequestActivity extends Activity {
         editID = (TextView) findViewById(R.id.PostingInfoText);
         editID.setText(" Sent a Match Request for:  " + p.getTitle());
     }
-    public void acceptRequest (View view)
-    {
+    public void acceptRequest (View view) {
         String result = Matching.AcceptRequest(accessRequests,accessMatches,requestUserId,postingId);
-        if(result == null){
+        if(result == null) {
            Messages.fatalError(this, "Failure while accepting requests " );
         }
         finish();
     }
-    public void declineRequest (View view)
-    {
+    public void declineRequest (View view) {
         String result = Matching.DeclineRequest(accessRequests,requestUserId,postingId);
-        if(result == null){
+        if(result == null) {
             Messages.fatalError(this, "Failure while declining requests ");
         }
-        else{
+        else {
             finish();
         }
     }

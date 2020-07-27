@@ -10,15 +10,14 @@ import comp3350.group6.homiez.R;
 public class StartActivity extends Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.start_page);
-
     }
 
     //Called when looking for a room gets pressed
-    public void lookingPressed(View v){
+    public void lookingPressed(View v) {
         Intent selfIntent = new Intent(StartActivity.this, ViewPostingsActivity.class);
 
         Bundle b = getIntent().getExtras();
@@ -29,7 +28,7 @@ public class StartActivity extends Activity {
     }
 
     //Called when posting room is pressed
-    public void postingPressed(View v){
+    public void postingPressed(View v) {
         Intent selfIntent = new Intent(StartActivity.this, ViewPostingsActivity.class);
 
         Bundle b = getIntent().getExtras();

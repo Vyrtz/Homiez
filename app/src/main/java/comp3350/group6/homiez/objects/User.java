@@ -15,7 +15,7 @@ public class User {
     private ArrayList<Posting> postingList;
 
 
-    public User(String userId,String name,int age, String gender){
+    public User(String userId,String name,int age, String gender) {
         this.userId=userId;
         this.name=name;
         this.age=age;
@@ -61,7 +61,7 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object user){
+    public boolean equals(Object user) {
         return (user instanceof User) ? this.userId.equals(((User)user).getUserId()) : false;
     }
 
@@ -69,33 +69,8 @@ public class User {
         this.postingList.add(posting);
     }
 
-    public void deletePost(Posting posting){
-        Iterator it=this.postingList.iterator();
-        if(this.postingList.size()>0){
-
-            while(it.hasNext()){
-                if(it.next().equals(posting)){
-                    //found it
-                    it.remove();
-
-                }
-            }
-
-
-        }
-    }
-
     public ArrayList<Posting> getPosts(){
         return this.postingList;
-    }
-
-    public void printPosts(){
-
-        for( Posting i : this.postingList){
-            System.out.println(i);
-        }
-
-
     }
 
     public String toString(){

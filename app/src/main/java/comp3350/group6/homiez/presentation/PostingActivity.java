@@ -17,7 +17,7 @@ public class PostingActivity extends Activity {
     private AccessPostings accessPostings;
     private AccessRequests accessRequests;
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.posting);
 
@@ -29,9 +29,10 @@ public class PostingActivity extends Activity {
 
         Posting post = accessPostings.getPostingById(postingID);
 
-        if(b.getBoolean("self_posting")){
+        if(b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
-        }else{
+        }
+        else {
             setContentView(R.layout.posting);
 
             TextView userText = findViewById(R.id.userText);
@@ -50,8 +51,7 @@ public class PostingActivity extends Activity {
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
     }
-    public void sendMatch(View v)
-    {
+    public void sendMatch(View v) {
         Bundle b =getIntent().getExtras();
         String u = b.getString("userID");
         String p = b.getString("postingId");

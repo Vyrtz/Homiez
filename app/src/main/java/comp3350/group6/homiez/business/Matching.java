@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Matching {
-    public static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId)
-    {
+    public static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId) {
         //validate User and Posting
         //Create match and request database connection
         //update those databases
@@ -17,14 +16,8 @@ public class Matching {
             List<Request> reqs = new ArrayList<Request>();
             String success = requests.getRequestsForPosting(reqs, postingId);
             if (success != null) {
-                boolean found = false;
                 Request toMatch = new Request(userId, postingId);
-                for (Request r : reqs) {
-                    if (toMatch.equals(r)) {
-                        found = true;
-                    }
-                }
-                if (found) {
+                if (reqs.contains(toMatch)) {
                     requests.deleteRequest(toMatch);
                     Match newMatch = new Match(userId, postingId);
                     matches.insertMatch(newMatch);
@@ -32,10 +25,10 @@ public class Matching {
                 }
             }
         }
-        return  null;
+        return null;
     }
-    public static String DeclineRequest(AccessRequests requests, String userId, String postingId)
-    {
+
+    public static String DeclineRequest(AccessRequests requests, String userId, String postingId) {
         //validate User and Posting
         //Create match and request database connection
         //update those databases
@@ -43,20 +36,14 @@ public class Matching {
             List<Request> reqs = new ArrayList<Request>();
             String success = requests.getRequestsForPosting(reqs, postingId);
             if (success != null) {
-                boolean found = false;
                 Request toMatch = new Request(userId, postingId);
-                for (Request r : reqs) {
-                    if (toMatch.equals(r)) {
-                        found = true;
-                    }
-                }
-                if (found) {
+                if (reqs.contains(toMatch)) {
                     requests.deleteRequest(toMatch);
                     return "Success";
                 }
             }
         }
-        return  null;
+        return null;
     }
     public static String SendRequest(AccessRequests requests,AccessPostings postings, String userId, String postingId)
     {
@@ -69,20 +56,13 @@ public class Matching {
             String success = postings.getPostings(posts, userId);
             //this would mean a posting is found and not made by the user
             if (success != null) {
-                boolean found = false;
                 Posting posting = new Posting( postingId);
-                for (Posting p : posts) {
-                    if (posting.equals(p)) {
-                        found = true;
-                    }
-                }
-                if (found) {
+                if (posts.contains(posting)) {
                     requests.insertRequest(newReq);
                     return "Success";
                 }
             }
         }
-        return  null;
+        return null;
     }
-
 }

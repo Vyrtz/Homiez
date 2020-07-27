@@ -15,18 +15,15 @@ public class AccessRequests {
     }
 
     //provides postings, except the ones made by the user
-    public String getRequestsForPosting(List<Request> requests, String postingId)
-    {
+    public String getRequestsForPosting(List<Request> requests, String postingId) {
         return dataAccess.getRequests(requests, postingId);
     }
 
-    public String insertRequest(Request currentRequest)
-    {
+    public String insertRequest(Request currentRequest) {
         return dataAccess.insertRequest(currentRequest);
     }
 
-    public String deleteRequest(Request currentRequest)
-    {
+    public String deleteRequest(Request currentRequest) {
         return dataAccess.deleteRequest(currentRequest);
     }
 }
