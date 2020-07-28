@@ -38,7 +38,7 @@ public class CompatibilityController implements Compatibility {
 
     private double totalCalc(double agePercent, double interestPercent) {
         if (Math.round(agePercent) != -1 && Math.round(interestPercent) != -1) {
-            return 0.3 * agePercent + 0.7 * interestPercent;
+            return 0.25 * agePercent + 0.75 * interestPercent;
         }
         return -1.0;
     }
