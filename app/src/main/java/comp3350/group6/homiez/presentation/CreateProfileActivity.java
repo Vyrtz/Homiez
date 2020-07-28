@@ -5,31 +5,64 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Main;
 
-import java.util.Calendar;
-
 
 public class CreateProfileActivity extends Activity {
 
-    //TODO: Change the manifest back once done testing
+    private String userID;
+    private String password;
+    private int age;
+    private String gender;
+    private String email;
+    private String phoneNum;
+    private String biography;
+    private String interests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Main.startUp();
-
         setContentView(R.layout.create_profile);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void createPressed(View v){
+        //Fetch userID
+        EditText fields = findViewById(R.id.editID);
+        userID = fields.getText().toString();
 
-        Main.shutDown();
+        //Fetch password
+        fields = findViewById(R.id.editPassword);
+        password = fields.getText().toString();
+
+        //Fetch the age - check if there was anything entered into the field
+        fields = findViewById(R.id.editAge);
+        if(!fields.getText().toString().equals("")) {
+            age = Integer.parseInt(fields.getText().toString());
+        }
+
+        //Fetch gender
+        fields = findViewById(R.id.editGender);
+        gender = fields.getText().toString();
+
+        //Fetch email
+        fields = findViewById(R.id.editEmail);
+        email = fields.getText().toString();
+
+        //Fetch phone number
+        fields = findViewById(R.id.editPhone);
+        phoneNum = fields.getText().toString();
+
+        //Fetch biography
+        fields = findViewById(R.id.editBiography);
+        biography = fields.getText().toString();
+
+        //Fetch interests
+        fields = findViewById(R.id.editInterest);
+        interests = fields.getText().toString();
+
     }
 
 }
