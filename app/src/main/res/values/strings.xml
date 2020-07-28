@@ -32,4 +32,5 @@
     <string name ="biography_prompt">Biography:</string>
     <string name ="interest_prompt">Interests:</string>
     <string name ="create">Create</string>
+    <string name="signup">Sign Up</string>
 </resources>

@@ -35,8 +35,14 @@ public class LoginActivity extends Activity {
     }
 
     public void loginPressed(View v){
+        //fetch the userID and password from UI fields
         EditText IDField = findViewById(R.id.editUserID);
+        EditText passField = findViewById(R.id.editPassword);
+
         String userID = IDField.getText().toString();
+        String password = IDField.getText().toString();
+
+        //TODO: Check for correct password associated with the user once done
 
         if(accessUser.getUser(userID) != null){
             Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
@@ -48,6 +54,13 @@ public class LoginActivity extends Activity {
         }else{
             Messages.warning(this, NOT_FOUND);
         }
+
+    }
+
+    //Called when signup is called
+    public void signupPressed(View v){
+        Intent startIntent = new Intent(LoginActivity.this, createProfileActivity.class);
+        LoginActivity.this.startActivity(startIntent);
 
     }
 
