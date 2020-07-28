@@ -1,14 +1,11 @@
 package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Main;
 
 
 public class CreateProfileActivity extends Activity {
