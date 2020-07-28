@@ -5,19 +5,33 @@ import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
 import java.io.File;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLWarning;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataAccessStub {
     private String dbName;
-    private String dbType = "stub";
-    private static String connectionString = "jdbc:hsqldb:file:db/HomiezDB";
+    private String dbType = "HSQL";
+    //private static String connectionString = "jdbc:hsqldb:file:db/HomiezDB";
+    private static String dbPathName = "database/Homiez";
     private Connection con;
+
+    private String cmdString;
+    private int updateCount;
+    private String result;
+    private static String EOF = "  ";
+
+
+    private Statement st1, st2, st3;
+    private Connection c1;
+    private ResultSet rs2, rs3, rs4, rs5;
 
     private ArrayList<User> users;
     private ArrayList<Posting> postings;
@@ -29,11 +43,16 @@ public class DataAccessStub {
     }
 
     public void open(String dbName){
-            String creation;
+        String url;
         try {
-            Class.forName("org.hsqldb.jdbc.JDBCDriver");
-            con = DriverManager.getConnection(connectionString, "SA", "");
-            if(con != null)
+            dbType = "HSQL";
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+            url = "jdbc:hsqldb:file:" + dbPathName;
+            c1 = DriverManager.getConnection(url, "SA", "");
+            st1 = c1.createStatement();
+            st2 = c1.createStatement();
+            st3 = c1.createStatement();
+            if(c1 != null)
                 System.out.println("Connection successful");
             else
                 System.out.println("Connection failed");
@@ -41,6 +60,42 @@ public class DataAccessStub {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public String getUserSequential(List<User> userResults){
+        User user;
+        String uId, name, gender, description;
+        Integer age, budget;
+        result = null;
+
+        uId = EOF;
+        name = EOF;
+        gender = EOF;
+        description = EOF;
+
+        try{
+            cmdString = "Select * from Users";
+            rs2 = st1.executeQuery(cmdString);
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+
+        try{
+            while(rs2.next()){
+                uId = Integer.toString(rs2.getInt("userid"));
+                name = rs2.getString("name");
+                age = rs2.getInt("age");
+                gender = rs2.getString("gender");
+                budget = rs2.getInt("budget");
+                description = rs2.getString("description");
+                user = new User(uId, name, age, gender, budget, description);
+                userResults.add(user);
+            }
+        } catch(Exception e){
+            result = "AA";
+        }
+        return result;
+
     }
 //    public void open(String dbName)
 //    {
