@@ -59,13 +59,13 @@ public class DataAccessStubTest extends TestCase {
         assertNull(stub.getUser(u));
         stub.insertUser(new User("5", "John", 18, "m"));
         assertNotNull(stub.getUser(u));
-        assertTrue("Failure".equals(stub.insertUser(uExists)));
+        assertNull(stub.insertUser(uExists));
 
 
         assertFalse("AAA".equals(stub.getUser(u).getName()));
         stub.updateUser(u);
         assertTrue("AAA".equals(stub.getUser(u).getName()));
-        assertTrue("Failure".equals(stub.updateUser(uDNE)));
+        assertNull(stub.updateUser(uDNE));
 
 
         System.out.println("Finished testUsersChanges");
@@ -87,9 +87,9 @@ public class DataAccessStubTest extends TestCase {
         Posting pDNE = new Posting("8", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         Posting pUpdate = new Posting("8", "nameChange", u, 1500, "Pembina", "Apartment", "TestDesc1");
 
-        assertTrue("Failure".equals(stub.insertPosting(pExists)));
-        assertTrue("Failure".equals(stub.deletePosting(pDNE)));
-        assertTrue("Failure".equals(stub.updatePosting(pDNE)));
+        assertNull(stub.insertPosting(pExists));
+        assertNull(stub.deletePosting(pDNE));
+        assertNull(stub.updatePosting(pDNE));
 
         assertNull(stub.getPosting(pDNE));
         stub.insertPosting(pDNE);
@@ -148,8 +148,8 @@ public class DataAccessStubTest extends TestCase {
         Request rDNE = new Request("0", "3");
 
 
-        assertTrue("Failure".equals(stub.insertRequest(rExists)));
-        assertTrue("Failure".equals(stub.deleteRequest(rDNE)));
+        assertNull(stub.insertRequest(rExists));
+        assertNull(stub.deleteRequest(rDNE));
 
         stub.insertRequest(rDNE);
         stub.getRequests(requests, "3");
@@ -216,8 +216,8 @@ public class DataAccessStubTest extends TestCase {
         Match mDNE = new Match("0", "0");
 
 
-        assertTrue("Failure".equals(stub.deleteMatch(mDNE)));
-        assertTrue("Failure".equals(stub.insertMatch(mExists)));
+        assertNull(stub.deleteMatch(mDNE));
+        assertNull(stub.insertMatch(mExists));
 
 
         stub.insertMatch(mDNE);
