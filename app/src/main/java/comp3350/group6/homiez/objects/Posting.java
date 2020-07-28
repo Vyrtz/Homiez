@@ -37,46 +37,25 @@ public class Posting {
         return this.postingId;
     }
 
-    public void setTitle(String tile){
-        this.title=title;
-    }
     public String getTitle(){
         return this.title;
     }
 
-    public void setPrice(int price){
-        this.price=price;
-    }
     public double getPrice(){
         return this.price;
     }
 
 
-    public void setLocation(String location){
-        this.location=location;
-    }
     public String getLocation(){
         return this.location;
     }
 
-
-    public void setType(String type){
-        this.type=type;
-    }
     public String getType(){
         return this.type;
     }
 
-
-    public void setDescription(String description){
-        this.description=description;
-    }
     public String getDescription(){
         return this.description;
-    }
-
-    public boolean equals(Posting posting) {
-        return this.postingId.equals(posting.getPostingId());
     }
 
     public String toString() {

@@ -13,7 +13,7 @@ public class User {
     private int budget;
     private String description;
     private ArrayList<Posting> postingList;
-
+    private ArrayList<Interest> interests;
 
     public User(String userId,String name,int age, String gender) {
         this.userId=userId;
@@ -21,10 +21,13 @@ public class User {
         this.age=age;
         this.gender=gender;
         this.postingList=new ArrayList<Posting>();
+        interests = new ArrayList<Interest>();
     }
 
     public User(String userId){
         this.userId=userId;
+        this.postingList=new ArrayList<Posting>();
+        this.interests = new ArrayList<Interest>();
     }
 
     //once u set up an userid then you cannot change it anymore.
@@ -32,32 +35,12 @@ public class User {
         return this.userId;
     }
 
-    public void setName(String name){
-        this.name=name;
-    }
     public String getName(){
         return this.name;
     }
 
-
-
-    public void setBudget(int budget){
-        this.budget=budget;
-    }
-    public int getBudget(){
-        return this.budget;
-    }
-
     public int getAge(){
         return age;
-    }
-
-    public void setDescription(String description){
-        this.description=description;
-    }
-
-    public String getDescription(){
-        return this.description;
     }
 
     @Override
@@ -75,5 +58,25 @@ public class User {
 
     public String toString(){
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setInterests(ArrayList<Interest> interests) {
+        this.interests = interests;
+    }
+
+    public ArrayList<Interest> getInterests() {
+        return interests;
+    }
+
+    public boolean addUniqueInterest (Interest i) {
+        if (!interests.contains(i)) {
+            interests.add(i);
+            return true;
+        }
+        return false;
     }
 }
