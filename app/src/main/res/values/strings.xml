@@ -21,5 +21,15 @@
     <string name="warning">Warning</string>
     <string name="Title">Title</string>
     <string name="user">User</string>
-    <string name="new_profile">New Profile</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="user_prompt">UserID:</string>
+    <string name="password_prompt">Password:</string>
+    <string name="age_prompt">Age:</string>
+    <string name="date_prompt">Pick a date</string>
+    <string name="gender_prompt">Gender:</string>
+    <string name ="email_prompt">Email:</string>
+    <string name ="phone_prompt">Phone Number:</string>
+    <string name ="biography_prompt">Biography:</string>
+    <string name ="interest_prompt">Interests:</string>
+    <string name ="create">Create</string>
 </resources>
