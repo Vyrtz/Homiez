@@ -6,12 +6,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.objects.User;
 
 
 public class CreateProfileActivity extends Activity {
 
     private String userID;
     private String password;
+    private String name;
     private int age;
     private String gender;
     private String email;
@@ -33,6 +35,9 @@ public class CreateProfileActivity extends Activity {
         //Fetch password
         fields = findViewById(R.id.editPassword);
         password = fields.getText().toString();
+
+        fields = findViewById(R.id.editName);
+        name = fields.getText().toString();
 
         //Fetch the age - check if there was anything entered into the field
         fields = findViewById(R.id.editAge);
