@@ -28,6 +28,8 @@ public class CreateProfileActivity extends Activity {
     }
 
     public void createPressed(View v){
+        //TODO: Input validation
+
         //Fetch userID
         EditText fields = findViewById(R.id.editID);
         userID = fields.getText().toString();
@@ -65,6 +67,8 @@ public class CreateProfileActivity extends Activity {
         fields = findViewById(R.id.editInterest);
         interests = fields.getText().toString();
 
+        //TODO: Flesh out the user we create then insert it into the database
+        User newUser = new User(userID, name, age, gender);
     }
 
 }
