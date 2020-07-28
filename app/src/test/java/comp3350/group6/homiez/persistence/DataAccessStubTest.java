@@ -25,9 +25,12 @@ public class DataAccessStubTest extends TestCase {
 
         ArrayList<User> users = new ArrayList<User>();
         stub.getUserSequential(users);
-//
-       assertTrue("Matt".equals(users.get(1)));
 
+
+
+        User u = users.get(0);
+       System.out.println(u.getUserId() + ", " + u.getName() + ", " + u.getAge());
+       System.out.println(users.size());
 
         System.out.println("Finished testDataAccessStubExists");
     }
