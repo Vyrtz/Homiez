@@ -19,6 +19,8 @@ public class Request {
 
     @Override
     public boolean equals(Object o) {
-        return (o instanceof Request) ? ((Request) o).getUserId().equals(userId) && ((Request) o).getPostingId().equals(postingId) : false;
+        return (o instanceof Request)
+                ? ((Request) o).getUserId().equals(userId) && ((Request) o).getPostingId().equals(postingId)
+                : false;
     }
 }

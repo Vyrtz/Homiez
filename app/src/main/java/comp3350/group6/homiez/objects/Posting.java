@@ -23,6 +23,7 @@ public class Posting {
         this.type=type;
         this.description=description;
         this.attachedUsers=new ArrayList<User>();
+        this.addAttachedUser(user);
         user.addPosting(this);
     }
     public Posting(String postingId){
@@ -64,7 +65,16 @@ public class Posting {
     }
     @Override
     public boolean equals(Object post) {
-        return (post instanceof Posting) ? this.postingId.equals(((Posting)post).getPostingId()) : false;
+        return (post instanceof Posting)
+                ? this.postingId.equals(((Posting)post).getPostingId())
+                : false;
     }
 
+    public ArrayList<User> getAttachedUsers() {
+        return attachedUsers;
+    }
+
+    public void addAttachedUser(User u) {
+        this.attachedUsers.add(u) ;
+    }
 }
