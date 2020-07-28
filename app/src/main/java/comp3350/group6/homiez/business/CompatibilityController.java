@@ -7,10 +7,21 @@ public class CompatibilityController implements Compatibility {
 
     private Compatibility age;
     private Compatibility interests;
+    private double ageCompatibilityWeight = 0.25;
+    private double interestsCompatibilityWeight = 0.75;
 
     public CompatibilityController() {
         age = new AgeCompatibility();
         interests = new InterestCompatibility();
+    }
+
+    public CompatibilityController(double ageCompatibilityWeight, double interestsCompatibilityWeight) {
+        age = new AgeCompatibility();
+        interests = new InterestCompatibility();
+        if(ageCompatibilityWeight + interestsCompatibilityWeight <= 1) {
+            this.ageCompatibilityWeight = ageCompatibilityWeight;
+            this.interestsCompatibilityWeight = interestsCompatibilityWeight;
+        }
     }
 
     public double calculateCompatibility(User user, Posting posting) {
@@ -38,8 +49,16 @@ public class CompatibilityController implements Compatibility {
 
     private double totalCalc(double agePercent, double interestPercent) {
         if (Math.round(agePercent) != -1 && Math.round(interestPercent) != -1) {
-            return 0.25 * agePercent + 0.75 * interestPercent;
+            return ageCompatibilityWeight * agePercent + interestsCompatibilityWeight * interestPercent;
         }
         return -1.0;
+    }
+
+    public double getAgeCompatibilityWeight() {
+        return ageCompatibilityWeight;
+    }
+
+    public double getInterestsCompatibilityWeight() {
+        return interestsCompatibilityWeight;
     }
 }
