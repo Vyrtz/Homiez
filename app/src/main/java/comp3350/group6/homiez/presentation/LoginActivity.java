@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
 
     //Called when signup is called
     public void signupPressed(View v){
-        Intent startIntent = new Intent(LoginActivity.this, createProfileActivity.class);
+        Intent startIntent = new Intent(LoginActivity.this, CreateProfileActivity.class);
         LoginActivity.this.startActivity(startIntent);
 
     }
