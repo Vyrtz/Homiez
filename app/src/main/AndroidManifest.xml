@@ -8,7 +8,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="comp3350.group6.homiez.MainActivity">
+        <activity android:name="comp3350.group6.homiez.presentation.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +33,7 @@
         <activity android:name="comp3350.group6.homiez.presentation.PostingActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.MatchesActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.CreatePostingActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.MainActivity"></activity>
     </application>
 
 </manifest>

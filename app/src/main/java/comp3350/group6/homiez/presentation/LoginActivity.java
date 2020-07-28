@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350.group6.homiez.MainActivity;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.business.AccessUser;
@@ -39,7 +40,7 @@ public class LoginActivity extends Activity {
         String userID = IDField.getText().toString();
 
         if(accessUser.getUser(userID) != null) {
-            Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
+            Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             startIntent.putExtras(b);

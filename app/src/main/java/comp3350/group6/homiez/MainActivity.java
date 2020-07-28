@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import comp3350.group6.homiez.presentation.PostingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,25 +22,28 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new Test1Fragment()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment fragment = null;
+            Intent selfIntent = null;
+            Bundle b = getIntent().getExtras();
             switch(menuItem.getItemId()) {
                 case R.id.find_room:
-                    fragment = new Test1Fragment();
+                    selfIntent = new Intent(MainActivity.this, PostingActivity.class);
+                    b.putBoolean("self_posting", false);
                     break;
                 case R.id.your_rooms:
-                    fragment = new Test2Fragment();
+                    selfIntent = new Intent(MainActivity.this, PostingActivity.class);
+                    b.putBoolean("self_posting", true);
                     break;
                 case R.id.profile:
-                    fragment = new Test3Fragment();
+                    //selfIntent = new Test3Fragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+            selfIntent.putExtras(b);
+            MainActivity.this.startActivity(selfIntent);
             return true;
         }
     };

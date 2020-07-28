@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
-
 import comp3350.group6.homiez.R;
 
 import comp3350.group6.homiez.business.AccessPostings;
