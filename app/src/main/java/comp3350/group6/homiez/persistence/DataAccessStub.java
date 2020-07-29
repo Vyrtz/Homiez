@@ -122,7 +122,7 @@ public class DataAccessStub {
     public String getPostingsByUser(List<Posting> postingsList, User user) {
         for(Posting p : postings) {
             if (p.getUser().equals(user)) {
-               postingsList.add(p);
+                postingsList.add(p);
             }
         }
         return null;
