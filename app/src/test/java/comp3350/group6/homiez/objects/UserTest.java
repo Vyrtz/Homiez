@@ -4,13 +4,49 @@ import junit.framework.TestCase;
 
 public class UserTest extends TestCase {
 
-//    public void testUser(){
-//        System.out.println("\nStarting testUser");
-//        User u = new User("0", "John McNamara", 23, "M");
-//
-//        assertNotNull(u);
-//
-//        System.out.println("Finished testUser");
-//    }
+    User u;
+    User matchEqual;
+    public void setUp() {
+        u = new User("1", "John McNamara", 23, "M");
+        matchEqual = new User("1");
 
+    }
+    public void testUserCreation() {
+        System.out.println("\nStarting testUserCreation");
+        assertNotNull(u);
+        assertEquals("1", u.getUserId());
+        assertEquals("John McNamara", u.getName());
+        assertEquals(23, u.getAge());
+        assertEquals("M" , u.getGender());
+        assertEquals(0, u.getInterests().size());
+
+        u.addUniqueInterest(new Interest("boxing"));
+        assertEquals(1, u.getInterests().size());
+        System.out.println("Finished testUserCreation");
+    }
+
+    public void testUserEquals() {
+        System.out.println("\nStarting testUserEquals");
+
+        assertNotSame(u, matchEqual);
+        assertTrue(u.equals(matchEqual));
+
+        System.out.println("Finished testUserEquals");
+    }
+
+    public void testUserNotEquals() {
+        System.out.println("\nStarting testUserNotEquals");
+
+        assertFalse(u.equals(new User("2")));
+
+        System.out.println("Finished testUserNotEquals");
+    }
+
+    public void testPostingEqualsNull() {
+        System.out.println("\nStarting testUserEqualsNull");
+
+        assertFalse(u.equals(null));
+
+        System.out.println("Finished testUserEqualsNull");
+    }
 }

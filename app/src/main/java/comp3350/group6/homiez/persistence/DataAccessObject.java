@@ -39,6 +39,29 @@ public class DataAccessObject {
     public void open(String dbPath) {
         String url;
 
+        try {
+            dbType = "HSQL";
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+            url = "jdbc:hsqldb:file:" + dbPath;
+            connection = DriverManager.getConnection(url, "SA", "");
+            statement1 = connection.createStatement();
+            statement2 = connection.createStatement();
+            statement3 = connection.createStatement();
 
-    }
-}
+        } catch(Exception e) {
+            System.out.println("Connection failed");
+            e.printStackTrace();
+        }//try-catch
+        System.out.println("Opened" + dbType + " database " + dbPath);
+    }//open
+
+    public void close() {
+        try {
+            commandString = "shutdown compact";
+            rs2 = statement1.executeQuery(commandString);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }//try-catch
+    }//close
+
+}//CLASS

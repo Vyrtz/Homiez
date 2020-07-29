@@ -28,29 +28,26 @@ public class CreatePostingActivity extends Activity {
         accessUser = new AccessUser();
         currentPostingId = b.getInt("createPostingId");
     }
-    public void clickCreatePosting(View view){
+    public void clickCreatePosting(View view) {
         EditText title  = (EditText) findViewById(R.id.editTextTitle);
         EditText type  = (EditText) findViewById(R.id.editTextType);
         EditText location  = (EditText) findViewById(R.id.editTextLocation);
         EditText description  = (EditText) findViewById(R.id.editTextDescription);
         EditText price  = (EditText) findViewById(R.id.editTextPrice);
         boolean failed = false;
-        try
-        {
+        try {
             double priceD = Double.parseDouble(price.getText().toString());
             User u = accessUser.getUser(userId);
             Posting p = new Posting(""+currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
             accessPostings.insertPosting(p);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             failed = true;
         }
-        if(failed)
-        {
+        if(failed) {
             Messages.fatalError(this, "failed to create the posting, check the values Note: price should be a double " + title.toString() + type.toString() + price.toString());
         }
-        else{
+        else {
             //posting created?
             finish();
         }

@@ -30,15 +30,15 @@ public class DataAccessStub {
         Match match;
 
         users = new ArrayList<User>();
-        user = new User ("0","Abhi", 20, "m", 2000, "desc Abhi");
+        user = new User ("0","Abhi", 20, "m");
         users.add(user);
-        user = new User ("1","Jordan", 20, "m", 2500, "desc Jordan");
+        user = new User ("1","Jordan", 20, "m");
         users.add(user);
-        user = new User ("2","Matt", 20, "m", 2000, "desc Matt");
+        user = new User ("2","Matt", 20, "m");
         users.add(user);
-        user = new User ("3","Vinh", 18, "m", 1880, "desc Vinh");
+        user = new User ("3","Vinh", 18, "m");
         users.add(user);
-        user = new User ("4","Ma", 18, "m", 1500, "desc Ma");
+        user = new User ("4","Ma", 18, "m");
         users.add(user);
 
         postings = new ArrayList<Posting>();
