@@ -4,13 +4,14 @@ import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.persistence.DataAccess;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class AccessPostings {
-    private DataAccessStub dataAccess;
+    private DataAccess dataAccess;
 
     public AccessPostings(){
         dataAccess = Services.getDataAccess(Main.dbName);

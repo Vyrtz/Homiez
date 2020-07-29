@@ -10,7 +10,7 @@ public class User {
     private String name;
     private int age;
     private String gender;
-    private int budget;
+    private double budget;
     private String description;
     private ArrayList<Posting> postingList;
     private ArrayList<Interest> interests;
@@ -82,5 +82,13 @@ public class User {
             }
         }
         return false;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 }

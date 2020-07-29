@@ -8,7 +8,7 @@ import comp3350.group6.homiez.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataAccessStub {
+public class DataAccessStub implements DataAccess{
     private String dbName;
     private String dbType = "stub";
 

@@ -13,29 +13,21 @@ public interface DataAccess {
     void close();
 
     //USER STUFF
-    String getUser(User user);
-
-    String getAllUsers(List<User> userList);
-
-    String getUserById(User user, String userId);
-
-    String getUsersByAge(List<User> userList, int minAge, int maxAge);
+    User getUser(User user);
 
     String insertUser(User user);
 
     String updateUser(User user);
 
-    String deleteUser();
+    //String deleteUser();
 
 
     //POSTING STUFF
     String getAllPostings(List<Posting> postingList);
 
-    String getPostingById(String postingId);
+    Posting getPosting(Posting posting);
 
-    String getPosting(Posting posting);
-
-    String getPostingBysByUser(List<Posting> postingsList, User user);
+    String getPostingsByUser(List<Posting> postingsList, User user);
 
     String insertPosting(Posting posting);
 
