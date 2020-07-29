@@ -35,7 +35,6 @@ public class LoginActivity extends Activity {
     }
 
     public void loginPressed(View v) {
-    public void loginPressed(View v){
         //fetch the userID and password from UI fields
         EditText IDField = findViewById(R.id.editUserID);
         EditText passField = findViewById(R.id.editPassword);
