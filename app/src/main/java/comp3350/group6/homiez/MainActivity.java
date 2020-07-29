@@ -22,28 +22,30 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
+
+        Fragment public_postings = new Test1Fragment();
+        Bundle b = getIntent().getExtras();
+        b.putBoolean("self_posting", true);
+        public_postings.setArguments(b);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Intent selfIntent = null;
-            Bundle b = getIntent().getExtras();
+            Fragment fragment = null;
             switch(menuItem.getItemId()) {
                 case R.id.find_room:
-                    selfIntent = new Intent(MainActivity.this, PostingActivity.class);
-                    b.putBoolean("self_posting", false);
+                    fragment = new Test1Fragment();
                     break;
                 case R.id.your_rooms:
-                    selfIntent = new Intent(MainActivity.this, PostingActivity.class);
-                    b.putBoolean("self_posting", true);
+                    fragment = new Test2Fragment();
                     break;
                 case R.id.profile:
-                    //selfIntent = new Test3Fragment();
+                    fragment = new Test3Fragment();
                     break;
             }
-            selfIntent.putExtras(b);
-            MainActivity.this.startActivity(selfIntent);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             return true;
         }
     };
