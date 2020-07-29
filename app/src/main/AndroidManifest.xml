@@ -33,7 +33,7 @@
         <activity android:name="comp3350.group6.homiez.presentation.PostingActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.MatchesActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.CreatePostingActivity"></activity>
-        <activity android:name="comp3350.group6.homiez.MainActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.MainActivity"></activity>
     </application>
 
 </manifest>

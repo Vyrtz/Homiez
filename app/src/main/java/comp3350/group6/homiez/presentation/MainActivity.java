@@ -1,16 +1,16 @@
-package comp3350.group6.homiez;
+package comp3350.group6.homiez.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import comp3350.group6.homiez.presentation.PostingActivity;
+import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.Test3Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment public_postings = new Test1Fragment();
         Bundle b = getIntent().getExtras();
-        b.putBoolean("self_posting", true);
+        b.putBoolean("self_posting", false);
         public_postings.setArguments(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
     }
@@ -37,9 +37,15 @@ public class MainActivity extends AppCompatActivity {
             switch(menuItem.getItemId()) {
                 case R.id.find_room:
                     fragment = new Test1Fragment();
+                    Bundle b = getIntent().getExtras();
+                    b.putBoolean("self_posting", false);
+                    fragment.setArguments(b);
                     break;
                 case R.id.your_rooms:
-                    fragment = new Test2Fragment();
+                    fragment = new Test1Fragment();
+                    Bundle b1 = getIntent().getExtras();
+                    b1.putBoolean("self_posting", true);
+                    fragment.setArguments(b1);
                     break;
                 case R.id.profile:
                     fragment = new Test3Fragment();

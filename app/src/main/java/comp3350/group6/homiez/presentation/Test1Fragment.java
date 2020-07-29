@@ -1,4 +1,4 @@
-package comp3350.group6.homiez;
+package comp3350.group6.homiez.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.objects.Posting;
-import comp3350.group6.homiez.presentation.ViewPostingsActivity;
 
 public class Test1Fragment extends Fragment {
 
@@ -49,7 +50,7 @@ public class Test1Fragment extends Fragment {
             v = inflater.inflate(R.layout.public_postings, container, false);
         }
 
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.layout.text1, postings) {
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -67,20 +68,19 @@ public class Test1Fragment extends Fragment {
         ListView listView = (ListView)v.findViewById(R.id.postingsList);
         listView.setAdapter(adapter);
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> a, View v, int p, long id) {
-//                Intent selfIntent = new Intent( ViewPostingsActivity.this, PostingActivity.class);
-//
-//                Bundle bundle = getIntent().getExtras();
-//                bundle.putString("userID", userID);
-//                bundle.putString("postingId", postings.get(p).getPostingId());
-//                bundle.putBoolean("self_posting", self_posting);
-//
-//                selfIntent.putExtras(bundle);
-//                ViewPostingsActivity.this.startActivity(selfIntent);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int p, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), PostingActivity.class);
+                Bundle bundle = getActivity().getIntent().getExtras();
+                bundle.putString("userID", userID);
+                bundle.putString("postingId", postings.get(p).getPostingId());
+                bundle.putBoolean("self_posting", self_posting);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            }
+        });
         return v;
     }
 }
