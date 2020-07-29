@@ -20,13 +20,13 @@ import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.objects.Posting;
 
-public class Test1Fragment extends Fragment implements View.OnClickListener {
+public class ViewPostingsFragment extends Fragment implements View.OnClickListener {
 
     private boolean self_posting = false;
     private String userID;
     private static int currentPosting = 6;
 
-    public Test1Fragment() {
+    public ViewPostingsFragment() {
         // Required empty public constructor
     }
 

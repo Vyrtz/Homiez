@@ -14,6 +14,8 @@ import comp3350.group6.homiez.R;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private boolean self_posting;
+    private String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
 
-        Fragment public_postings = new Test1Fragment();
+        Fragment public_postings = new ViewPostingsFragment();
         Bundle b = getIntent().getExtras();
         b.putBoolean("self_posting", false);
         public_postings.setArguments(b);
@@ -35,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = null;
             switch(menuItem.getItemId()) {
                 case R.id.find_room:
-                    fragment = new Test1Fragment();
+                    fragment = new ViewPostingsFragment();
                     Bundle b = getIntent().getExtras();
                     b.putBoolean("self_posting", false);
                     fragment.setArguments(b);
                     break;
                 case R.id.your_rooms:
-                    fragment = new Test1Fragment();
+                    fragment = new ViewPostingsFragment();
                     Bundle b1 = getIntent().getExtras();
                     b1.putBoolean("self_posting", true);
                     fragment.setArguments(b1);
@@ -54,4 +56,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("userID", userID);
+        bundle.putBoolean("self_posting", self_posting);
+        onCreate(bundle);
+    }
 }
