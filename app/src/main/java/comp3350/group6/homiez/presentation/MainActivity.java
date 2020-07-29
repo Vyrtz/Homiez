@@ -11,11 +11,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import comp3350.group6.homiez.R;
 
+/*
+    This Activity is used to display the bottom navigation bar and all the fragments that need to use it
+ */
 public class MainActivity extends AppCompatActivity {
-
+    // Variables
     private BottomNavigationView bottomNavigationView;
-    private boolean self_posting;
-    private String userID;
     private Fragment public_postings;
     private boolean onSelfPostings = false;
 
@@ -23,10 +24,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigationbar);
-
+        // Get the bottom navigation bar and add a listener to it for when one is clicked
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
 
+        // By default show the public postings page
         public_postings = new ViewPostingsFragment();
         Bundle b = getIntent().getExtras();
         b.putBoolean("self_posting", false);
@@ -36,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
+        // When an option on the navigation bar is selected
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             Fragment fragment = null;
+            // Find what item was selected and display a different page based on which it was
             switch(menuItem.getItemId()) {
                 case R.id.find_room:
                     fragment = new ViewPostingsFragment();
@@ -57,11 +61,13 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
             }
+            // Display the page
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             return true;
         }
     };
 
+    // Used to ensure that when you create a new posting that it appears on screen without another refresh
     public void onResume() {
         super.onResume();
         if (onSelfPostings) {

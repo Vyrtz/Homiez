@@ -21,7 +21,7 @@ import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.objects.Posting;
 
 public class ViewPostingsFragment extends Fragment implements View.OnClickListener {
-
+    // Variables
     private boolean self_posting = false;
     private String userID;
     private static int currentPosting = 6;
@@ -33,6 +33,7 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Get bundle variables
         Bundle b = this.getArguments();
         userID = b.getString("userID");
         self_posting = b.getBoolean("self_posting");
@@ -42,11 +43,13 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
 
         View v = null;
 
+        // Check which page we want to display
         // Inflate the layout for this fragment
         if (self_posting) {
             accessPostings.getPostingsByUserId(postings, userID);
             v = inflater.inflate(R.layout.your_postings, container, false);
 
+            // Set up button listeners for the self postings page
             Button button1 = (Button) v.findViewById(R.id.button_requests);
             button1.setOnClickListener(this);
             Button button3 = (Button) v.findViewById(R.id.button_create_posting);
@@ -59,6 +62,7 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         Button button = (Button) v.findViewById(R.id.button_matches);
         button.setOnClickListener(this);
 
+        // Set up the Visuals for each posting in the list
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -77,8 +81,10 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         ListView listView = (ListView)v.findViewById(R.id.postingsList);
         listView.setAdapter(adapter);
 
+        // Add onclick listenters to each item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            // Go to the posting based on which posting was clicked
             public void onItemClick(AdapterView<?> a, View v, int p, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), PostingActivity.class);
@@ -99,6 +105,7 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
     {
         Intent singleReq = new Intent();
         Bundle bundle = getActivity().getIntent().getExtras();
+        // Handle the button presses on screen
         switch (view.getId())
         {
             case R.id.button_requests:
