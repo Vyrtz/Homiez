@@ -36,12 +36,6 @@ public class CreateProfileActivity extends Activity {
         EditText fields = findViewById(R.id.editID);
         userID = fields.getText().toString(); //
 
-        //Fetch budget
-        fields = findViewById(R.id.editBudget);
-        if(!fields.getText().toString().equals("")) {
-            budget = Integer.parseInt(fields.getText().toString());
-        }
-
         //Fetch name
         fields = findViewById(R.id.editName);
         name = fields.getText().toString(); //
@@ -50,11 +44,17 @@ public class CreateProfileActivity extends Activity {
         fields = findViewById(R.id.editAge);
         if(!fields.getText().toString().equals("")) {
             age = Integer.parseInt(fields.getText().toString());
-        } //
+        }
 
         //Fetch gender
         fields = findViewById(R.id.editGender);
-        gender = fields.getText().toString(); //
+        gender = fields.getText().toString();
+
+        //Fetch budget
+        fields = findViewById(R.id.editBudget);
+        if(!fields.getText().toString().equals("")) {
+            budget = Integer.parseInt(fields.getText().toString());
+        }
 
         //Fetch biography
         fields = findViewById(R.id.editBiography);
@@ -65,7 +65,9 @@ public class CreateProfileActivity extends Activity {
         interests = fields.getText().toString();
 
         //TODO: Flesh out the user we create then insert it into the database
-        User newUser = new User(userID, name, age, gender);
+        User newUser = new User(userID, name, age, gender, budget, biography);
+
+
     }
 
 }

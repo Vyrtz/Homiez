@@ -11,15 +11,17 @@ public class User {
     private int age;
     private String gender;
     private int budget;
-    private String description;
+    private String biography;
     private ArrayList<Posting> postingList;
     private ArrayList<Interest> interests;
 
-    public User(String userId,String name,int age, String gender) {
+    public User(String userId,String name,int age, String gender, int budget, String biography) {
         this.userId=userId;
         this.name=name;
         this.age=age;
         this.gender=gender;
+        this.budget=budget;
+        this.biography = biography;
         this.postingList=new ArrayList<Posting>();
         interests = new ArrayList<Interest>();
     }
