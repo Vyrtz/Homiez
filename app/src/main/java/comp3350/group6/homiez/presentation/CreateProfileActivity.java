@@ -14,12 +14,13 @@ public class CreateProfileActivity extends Activity {
     private String userID;
     private String password;
     private String name;
-    private int age;
     private String gender;
     private String email;
     private String phoneNum;
     private String biography;
     private String interests;
+    private int age;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
