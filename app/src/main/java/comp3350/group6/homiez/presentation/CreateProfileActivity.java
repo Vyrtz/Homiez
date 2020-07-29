@@ -34,7 +34,7 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch userID
         EditText fields = findViewById(R.id.editID);
-        userID = fields.getText().toString();
+        userID = fields.getText().toString(); //
 
         //Fetch budget
         fields = findViewById(R.id.editBudget);
@@ -44,25 +44,17 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch name
         fields = findViewById(R.id.editName);
-        name = fields.getText().toString();
+        name = fields.getText().toString(); //
 
         //Fetch the age - check if there was anything entered into the field
         fields = findViewById(R.id.editAge);
         if(!fields.getText().toString().equals("")) {
             age = Integer.parseInt(fields.getText().toString());
-        }
+        } //
 
         //Fetch gender
         fields = findViewById(R.id.editGender);
-        gender = fields.getText().toString();
-
-        //Fetch email
-        fields = findViewById(R.id.editEmail);
-        email = fields.getText().toString();
-
-        //Fetch phone number
-        fields = findViewById(R.id.editPhone);
-        phoneNum = fields.getText().toString();
+        gender = fields.getText().toString(); //
 
         //Fetch biography
         fields = findViewById(R.id.editBiography);

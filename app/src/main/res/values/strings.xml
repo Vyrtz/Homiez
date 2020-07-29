@@ -34,4 +34,5 @@
     <string name ="create">Create</string>
     <string name="signup">Sign Up</string>
     <string name ="name_prompt">Name:</string>
+    <string name="interest_hint">Separate by commas</string>
 </resources>
