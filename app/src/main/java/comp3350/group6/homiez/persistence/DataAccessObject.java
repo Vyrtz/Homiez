@@ -108,14 +108,110 @@ public class DataAccessObject implements DataAccess {
 
 
     //POSTING STUFF
-    public String getAllPostings(List<Posting> postingList) {
+    public String getAllPostings(List<Posting> postingsList) {
+        Posting p = null;
+        User u = null;
+        String pid;
+        String uid;
+        String title;
+        double price;
+        String location;
+        String type;
+        String description;
+        result = null;
+        try {
+            commandString = "Select * from POSTINGS";
+            rs2 = statement1.executeQuery(commandString);
+
+            while(rs2.next()) {
+                title = rs2.getString("TITLE");
+                price = rs2.getDouble("PRICE");
+                location = rs2.getString("LOCATION");
+                type = rs2.getString("TYPE");
+                description =  rs2.getString("DESCRIPTION");
+                uid = rs2.getString("USERID");
+                pid = rs2.getString("POSTINGID");
+
+                u = new User(uid);
+                p = new Posting(pid,title,u,price,location,type,description);
+                postingsList.add(p);
+            }
+            rs2.close();
+            return "Success";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     public Posting getPosting(Posting posting) {
+        Posting p = null;
+        User u = null;
+        String pid;
+        String uid;
+        String title;
+        double price;
+        String location;
+        String type;
+        String description;
+        result = null;
+        try {
+            commandString = "Select * from POSTINGS where POSTINGID='"+posting.getPostingId()+"'";
+            rs2 = statement1.executeQuery(commandString);
+
+            while(rs2.next()) {
+                title = rs2.getString("TITLE");
+                price = rs2.getDouble("PRICE");
+                location = rs2.getString("LOCATION");
+                type = rs2.getString("TYPE");
+                description =  rs2.getString("DESCRIPTION");
+                pid = rs2.getString("POSTINGID");
+                uid = rs2.getString("USERID");
+                pid = rs2.getString("POSTINGID");
+
+                u = new User(uid);
+                p = new Posting(pid,title,u,price,location,type,description);
+            }
+            rs2.close();
+            return p;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
     public String getPostingsByUser(List<Posting> postingsList, User user) {
+        Posting p = null;
+        String pid;
+        String uid;
+        String title;
+        double price;
+        String location;
+        String type;
+        String description;
+        result = null;
+        try {
+            commandString = "Select * from POSTINGS where USERID='"+user.getUserId()+"'";
+            rs2 = statement1.executeQuery(commandString);
+
+            while(rs2.next()) {
+                title = rs2.getString("TITLE");
+                price = rs2.getDouble("PRICE");
+                location = rs2.getString("LOCATION");
+                type = rs2.getString("TYPE");
+                description =  rs2.getString("DESCRIPTION");
+                pid = rs2.getString("POSTINGID");
+
+                p = new Posting(pid,title,user,price,location,type,description);
+                postingsList.add(p);
+            }
+            rs2.close();
+            return "Success";
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
     public String insertPosting(Posting posting) {
