@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.Test3Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.navigationbar);
 
         bottomNavigationView=findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment.setArguments(b1);
                     break;
                 case R.id.profile:
-                    fragment = new Test3Fragment();
+
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
