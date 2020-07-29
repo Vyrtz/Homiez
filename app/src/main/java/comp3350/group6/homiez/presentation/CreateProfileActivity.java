@@ -12,14 +12,15 @@ import comp3350.group6.homiez.objects.User;
 public class CreateProfileActivity extends Activity {
 
     private String userID;
-    private String password;
     private String name;
     private String gender;
     private String email;
     private String phoneNum;
     private String biography;
     private String interests;
+
     private int age;
+    private int budget;
 
 
     @Override
@@ -35,10 +36,13 @@ public class CreateProfileActivity extends Activity {
         EditText fields = findViewById(R.id.editID);
         userID = fields.getText().toString();
 
-        //Fetch password
-        fields = findViewById(R.id.editPassword);
-        password = fields.getText().toString();
+        //Fetch budget
+        fields = findViewById(R.id.editBudget);
+        if(!fields.getText().toString().equals("")) {
+            budget = Integer.parseInt(fields.getText().toString());
+        }
 
+        //Fetch name
         fields = findViewById(R.id.editName);
         name = fields.getText().toString();
 

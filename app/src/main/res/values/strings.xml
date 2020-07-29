@@ -23,7 +23,7 @@
     <string name="user">User</string>
     <string name="create_profile">Create Profile</string>
     <string name="user_prompt">UserID:</string>
-    <string name="password_prompt">Password:</string>
+    <string name="budget_prompt">Budget (Monthly):</string>
     <string name="age_prompt">Age:</string>
     <string name="date_prompt">Pick a date</string>
     <string name="gender_prompt">Gender:</string>
