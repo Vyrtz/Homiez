@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class AccessRequestsTest extends TestCase {
 
-    public void testAccessRequests1(){
+    public void testAccessRequests1() {
         System.out.println("\nStarting testAccessRequests1");
 
 

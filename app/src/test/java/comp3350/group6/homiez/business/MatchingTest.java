@@ -2,6 +2,7 @@ package comp3350.group6.homiez.business;
 
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.objects.Match;
+import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
 
@@ -10,143 +11,179 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 public class MatchingTest extends TestCase {
-    private Matching m;
     private User u;
     private AccessRequests accessRequests;
     private AccessPostings accessPostings;
     private AccessUser aUser;
     private AccessMatches accessMatches;
+    private Posting p;
 
-    public void setUp()
-    {
+    public void setUp() {
         Main.startUp();
-        m = new Matching();
         u = new User("0", "Abhi", 20, "m");
         accessRequests = new AccessRequests();
         aUser = new AccessUser();
         accessPostings = new AccessPostings();
-        AccessMatches accessMatches = new AccessMatches();
+        accessMatches = new AccessMatches();
+        p = new Posting("test", "test", new User("test"), 2, "test", "test", "test");
+        accessPostings.insertPosting(p);
     }
 
 
     //test operations when null parameters are passed
-    public void testNullCases(){
-        System.out.println("\nStarting testNullCases");
-        setUp();
+    public void testNullCasesOnSendRequest() {
+        System.out.println("\nStarting testNullCasesOnSendRequest");
+
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), null));
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, accessMatches, null, "3"));
+        assertNull(Matching.SendRequest(accessRequests, null, accessMatches, u.getUserId(), "3"));
+        assertNull(Matching.SendRequest(null, accessPostings, accessMatches, u.getUserId(), "3"));
+
+        System.out.println("Finished testNullCasesOnSendRequest");
+    }
+    //test operations when null parameters are passed
+    public void testNullCasesOnAcceptRequest() {
+        System.out.println("\nStarting testNullCasesOnAcceptRequest");
 
         assertNull(Matching.AcceptRequest(accessRequests, accessMatches, null, "3"));
         assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), null));
+        assertNull(Matching.AcceptRequest(null, accessMatches, u.getUserId(), "3"));
+        assertNull(Matching.AcceptRequest(accessRequests, null, u.getUserId(), "3"));
+
+        System.out.println("Finished testNullCasesOnAcceptRequest");
+    }
+
+    //test operations when null parameters are passed
+    public void testNullCasesOnDeclineRequest() {
+        System.out.println("\nStarting testNullCasesOnDeclineRequest");
 
         assertNull(Matching.DeclineRequest(accessRequests, null, "3"));
         assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), null));
+        assertNull(Matching.DeclineRequest(null, u.getUserId(), "3"));
 
-        assertNull(Matching.SendRequest(accessRequests, accessPostings, u.getUserId(), null));
-        assertNull(Matching.SendRequest(accessRequests, accessPostings, null, "3"));
-
-        Main.shutDown();
-        System.out.println("Finished testNullCases");
+        System.out.println("Finished testNullCasesOnDeclineRequest");
     }
+
 
     //test operations when no result will be found
-    public void testBadValues(){
-        System.out.println("\nStarting testBadValues");
-        setUp();
+    public void testBadValuesForSendRequest() {
+        System.out.println("\nStarting testBadValuesForSendRequest");
 
-        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, "5", "3"));
-        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), "9"));
+        assertNull(Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), "100000"));
 
-        assertNull(Matching.DeclineRequest(accessRequests, "5", "3"));
-        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), "9"));
+        System.out.println("Finished testBadValuesForSendRequest");
+    }
 
-        assertNull(Matching.SendRequest(accessRequests, accessPostings, u.getUserId(), "9"));
+    public void testBadValuesForAcceptRequest() {
+        System.out.println("\nStarting testBadValuesForAcceptRequest");
 
-        Main.shutDown();
-        System.out.println("Finished testBadValues");
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, "100000", "3"));
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), "100000"));
+
+        System.out.println("Finished testBadValuesForAcceptRequest");
+    }
+
+    public void testBadValuesForDeclineRequest() {
+        System.out.println("\nStarting testBadValuesForDeclineRequest");
+
+        assertNull(Matching.DeclineRequest(accessRequests, "10000", "-15"));
+        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), "1000000"));
+
+        System.out.println("Finished testBadValuesForDeclineRequest");
     }
 
 
-    public void testSendRequest()
-    {
-        System.out.println("\nStarting testSendRequest");
-        setUp();
+    public void testSendRequestOnOwnPosting() {
+        System.out.println("\nStarting testSendRequestOnOwnPosting");
 
+        Posting p2 = new Posting("test2", "test",u,2,"test","test","test");
+        accessPostings.insertPosting(p2);
 
-        assertNotNull(Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3"));
+        assertNull(Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p2.getPostingId()));
 
-        //cannot send request to your own posting
-        assertNull(Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "0"));
+        System.out.println("Finished testSendRequestOnOwnPosting");
+    }
 
-        //see if the request is sent
+    public void testSendRequestOnValidPosting() {
+        System.out.println("\nStarting testSendRequestOnValidPosting");
+
+        assertEquals("Success", Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p.getPostingId()));
+
         ArrayList<Request> requests = new ArrayList<>();
-        accessRequests.getRequestsForPosting(requests, "3");
+        accessRequests.getRequestsForPosting(requests, p.getPostingId());
         assertEquals(1, requests.size());
         requests.clear();
 
-        Main.shutDown();
-        System.out.println("Finished testSendRequest");
+        System.out.println("Finished testSendRequestOnValidPosting");
     }
 
+    public void testSendRequestOnMatchedPosting() {
+        System.out.println("\nStarting testSendRequestOnMatchedPosting");
 
+        assertEquals("Success", Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p.getPostingId()));
+        assertEquals("Success", Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), p.getPostingId()));
 
-    public void testAcceptRequest()
-    {
-        System.out.println("\nStarting testAcceptRequest");
-        setUp();
+        assertNull(Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p.getPostingId()));
 
-        //User u = new User("0", "Abhi", 20, "m");
-        //AccessUser aUser = new AccessUser();
-        //AccessRequests accessRequests = new AccessRequests();
-        aUser.login(u);
-        //AccessPostings accessPostings = new AccessPostings();
-
-
-        Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3");
-
-        AccessMatches accessMatches = new AccessMatches();
-        assertNotNull(Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), "3"));
-
-        //cannot accept again as the request should be deleted
-        assertNull(Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), "3"));
-
-        //already a match present in db
-        assertNull(Matching.AcceptRequest(accessRequests,accessMatches, "4", "3"));
-        //see if the match is sent
-        ArrayList<Match> matches = new ArrayList<>();
-        accessMatches.getMatchesForPosting(matches, "3");
-        assertEquals(2, matches.size());
-        matches.clear();
-
-        Main.shutDown();
-        System.out.println("Finished testAcceptRequest");
+        System.out.println("Finished testSendRequestOnValidPosting");
     }
-    public void testDeclineRequest()
-    {
-        System.out.println("\nStarting testDeclineRequest");
 
-        User u = new User("0", "Abhi", 20, "m");
-        AccessUser aUser = new AccessUser();
-        AccessRequests accessRequests = new AccessRequests();
-        aUser.login(u);
-        AccessPostings accessPostings = new AccessPostings();
-        Matching.SendRequest(accessRequests,accessPostings, u.getUserId(), "3");
+    public void testAcceptRequestValid() {
+        System.out.println("\nStarting testAcceptRequestValid");
+        Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p.getPostingId());
 
-        assertEquals("Success", Matching.DeclineRequest(accessRequests, u.getUserId(), "3"));
+        assertEquals("Success", Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), p.getPostingId()));
 
-        AccessMatches accessMatches = new AccessMatches();
-        //cannot accept again as the request should be deleted
-        assertNull(Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), "3"));
-        //cannot decline again as the request should be deleted
-        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), "3"));
-
-        //see if the match is not made
         ArrayList<Match> matches = new ArrayList<>();
-        accessMatches.getMatchesForPosting(matches, "3");
+        accessMatches.getMatchesForPosting(matches, p.getPostingId());
         assertEquals(1, matches.size());
         matches.clear();
-        System.out.println("Finished testAcceptRequest");
+
+        System.out.println("Finished testAcceptRequestValid");
     }
-    public void tearDown()
-    {
+
+    public void testAcceptRequestTwiceIsInvalid() {
+        System.out.println("\nStarting testAcceptRequestTwiceIsInvalid");
+
+        assertEquals("Success", Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p.getPostingId()));
+        assertEquals("Success", Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), p.getPostingId()));
+
+        assertNull(Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), p.getPostingId()));
+
+        //see if the match is sent
+        ArrayList<Match> matches = new ArrayList<>();
+        accessMatches.getMatchesForPosting(matches, p.getPostingId());
+        assertEquals(1, matches.size());
+        matches.clear();
+
+        System.out.println("Finished testAcceptRequestTwiceIsInvalid");
+    }
+
+    public void testDeclineRequestValid() {
+        System.out.println("\nStarting testDeclineRequestValid");
+
+        Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());
+
+        assertEquals("Success", Matching.DeclineRequest(accessRequests, u.getUserId(), p.getPostingId()));
+
+        ArrayList<Match> matches = new ArrayList<>();
+        accessMatches.getMatchesForPosting(matches, p.getPostingId());
+        assertEquals(0, matches.size());
+        matches.clear();
+
+        System.out.println("Finished testDeclineRequestValid");
+    }
+
+    public void testDeclineRequestInvalid() {
+
+        Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());
+
+        assertNotNull("Success", Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), p.getPostingId()));
+        //cannot decline again as the request should be deleted
+        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), p.getPostingId()));
+    }
+
+    public void tearDown() {
         Main.shutDown();
     }
 }

@@ -16,7 +16,7 @@ public class LoginActivity extends Activity {
     final private String NOT_FOUND = "User not found";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Main.startUp();
@@ -28,12 +28,13 @@ public class LoginActivity extends Activity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
 
         Main.shutDown();
     }
 
+    public void loginPressed(View v) {
     public void loginPressed(View v){
         //fetch the userID and password from UI fields
         EditText IDField = findViewById(R.id.editUserID);
@@ -44,14 +45,15 @@ public class LoginActivity extends Activity {
 
         //TODO: Check for correct password associated with the user once done
 
-        if(accessUser.getUser(userID) != null){
+        if(accessUser.getUser(userID) != null) {
             Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             startIntent.putExtras(b);
             LoginActivity.this.startActivity(startIntent);
 
-        }else{
+        }
+        else {
             Messages.warning(this, NOT_FOUND);
         }
 

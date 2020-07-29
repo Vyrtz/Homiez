@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class AccessMatchesTest extends TestCase {
 
-    public void testAccessMatches1(){
+    public void testAccessMatches1() {
         System.out.println("\nStarting testAccessMatches1");
 
         Main.startUp();

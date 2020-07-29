@@ -20,8 +20,7 @@ public class DataAccessStub {
     public DataAccessStub(String dbName){
         this.dbName = dbName;
     }
-    public void open(String dbName)
-    {
+    public void open(String dbName) {
         User user;
         Posting post;
         Request request;
@@ -89,192 +88,123 @@ public class DataAccessStub {
     }
 
 
-    public String insertMatch(Match m){
-        boolean exist = false;
-        for(Match match : matches)
-        {
-            if (match.equals(m))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
+    public String insertMatch(Match m) {
+        boolean exist = matches.contains(m);
+        if (!exist) {
             matches.add(m);
             return "Success";
         }
-        return "Failure";
+        return null;
     }
 
-    public String deleteMatch(Match m){
-        boolean exist = false;
-        for(Match match : matches)
-        {
-            if (match.equals(m))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
-            return "Failure";
+    public String deleteMatch(Match m) {
+        boolean exist = matches.contains(m);
+        if (!exist) {
+            return null;
         }
         matches.remove(m);
         return "Success";
     }
 
-    public String getAllPostings(List<Posting> postings){
+    public String getAllPostings(List<Posting> postings) {
         postings.addAll(this.postings);
         return "Success";
     }
-    public Posting getPosting(Posting posting){
-        for(Posting p : postings)
-        {
-            if (posting.equals(p))
-            {
+
+    public Posting getPosting(Posting posting) {
+        for(Posting p : postings) {
+            if (posting.equals(p)) {
                 return p;
             }
         }
         return null;
     }
-    public String getPostingsByUser(List<Posting> postingsList, User user){
-        for(Posting p : postings)
-        {
-            if (p.getUser().equals(user))
-            {
+    public String getPostingsByUser(List<Posting> postingsList, User user) {
+        for(Posting p : postings) {
+            if (p.getUser().equals(user)) {
                postingsList.add(p);
             }
         }
-        return "Success";
+        return null;
     }
-    public String insertPosting(Posting posting){
-        boolean exist = false;
-        for(Posting p : postings)
-        {
-            if (p.equals(posting))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
+    public String insertPosting(Posting posting) {
+        boolean exist = postings.contains(posting);
+        if (!exist) {
             postings.add(posting);
             return "Success";
         }
-        return "Failure";
+        return null;
     }
 
-    public String deletePosting(Posting posting){
-        boolean exist = false;
-        for(Posting p : postings)
-        {
-            if (posting.equals(p))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
-            return "Failure";
+    public String deletePosting(Posting posting) {
+        boolean exist = postings.contains(posting);
+        if (!exist) {
+            return null;
         }
         postings.remove(posting);
         return "Success";
     }
-    public String updatePosting(Posting posting){
-        Posting exist = null;
-        for(Posting p : postings)
-        {
-            if (p.equals(posting))
-            {
-                exist = p;
-            }
-        }
-        if (exist != null)
-        {
-            postings.remove(exist);
+
+    public String updatePosting(Posting posting) {
+        boolean exist = postings.contains(posting);
+        if (exist) {
+            postings.remove(posting);
             postings.add(posting); //replace with new posting object
             return "Success";
         }
-        return "Failure";
+        return null;
     }
-    public String getRequests(List<Request> requests, String pId){
+
+    public String getRequests(List<Request> requests, String pId) {
         for (Request r : this.matchRequests) {
             if(r.getPostingId().equals(pId))
                 requests.add(r);
         }
         return "Success";
     }
-    public String insertRequest(Request req){
-        boolean exist = false;
-        for(Request r : matchRequests)
-        {
-            if (r.equals(req))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
+
+    public String insertRequest(Request req) {
+        boolean exist = matchRequests.contains(req);
+        if (!exist) {
             matchRequests.add(req);
             return "Success";
         }
-        return "Failure";
+        return null;
     }
-    public String deleteRequest(Request req){
-        boolean exist = false;
-        for(Request r : matchRequests)
-        {
-            if (r.equals(req))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
-            return "Failure";
+    public String deleteRequest(Request req) {
+        boolean exist = matchRequests.contains(req);
+        if (!exist) {
+            return null;
         }
         matchRequests.remove(req);
         return "Success";
     }
-    public User getUser(User toFind){
+
+    public User getUser(User toFind) {
         User found = null;
-        for(User u : users)
-        {
-            if (u.equals(toFind))
-            {
+        for(User u : users) {
+            if (u.equals(toFind)) {
                 found = u;
             }
         }
         return found;
     }
-    public String insertUser(User insert){
-        boolean exist = false;
-        for(User u : users)
-        {
-            if (u.equals(insert))
-            {
-                exist = true;
-            }
-        }
-        if (!exist)
-        {
+    public String insertUser(User insert) {
+        boolean exist = users.contains(insert);
+        if (!exist) {
             users.add(insert);
             return "Success";
         }
-        return "Failure";
+        return null;
     }
+
     public String updateUser(User update) {
-        User exist = null;
-        for (User u : users) {
-            if (u.equals(update)) {
-                exist = u;
-            }
-        }
-        if (exist != null) {
-            users.remove(exist);
+        boolean exist = users.contains(update);
+        if (exist) {
+            users.remove(update);
             users.add(update); //replace with new posting object
             return "Success";
         }
-        return "Failure";
+        return null;
     }
 }

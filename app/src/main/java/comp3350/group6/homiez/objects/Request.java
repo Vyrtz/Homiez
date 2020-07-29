@@ -4,7 +4,7 @@ public class Request {
     private String userId;
     private String postingId;
 
-    public Request(String userId, String postingId){
+    public Request(String userId, String postingId) {
         this.userId = userId;
         this.postingId = postingId;
     }
@@ -18,12 +18,9 @@ public class Request {
     }
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof Request){
-            if (((Request) o).getUserId().equals(userId) && ((Request) o).getPostingId().equals(postingId)){
-                return true;
-            }
-        }
-        return false;
+    public boolean equals(Object o) {
+        return (o instanceof Request)
+                ? ((Request) o).getUserId().equals(userId) && ((Request) o).getPostingId().equals(postingId)
+                : false;
     }
 }

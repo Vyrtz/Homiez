@@ -6,9 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         startUp();
-
         shutDown();
-
     }
 
     public static void startUp(){

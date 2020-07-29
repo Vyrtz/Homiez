@@ -20,8 +20,7 @@ public class AccessUser {
         loggedInUser = u;
     }
 
-    public User getUser (String userId)
-    {
+    public User getUser (String userId) {
         User u = new User(userId);
         return dataAccess.getUser(u);
     }
