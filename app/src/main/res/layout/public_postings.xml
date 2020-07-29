@@ -31,7 +31,6 @@
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="seeMatches"
         android:text="@string/matches"
         android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"/>

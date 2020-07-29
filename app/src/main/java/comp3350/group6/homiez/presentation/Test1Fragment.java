@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.objects.Posting;
 
-public class Test1Fragment extends Fragment {
+public class Test1Fragment extends Fragment implements View.OnClickListener {
 
     private boolean self_posting = false;
     private String userID;
@@ -45,10 +46,18 @@ public class Test1Fragment extends Fragment {
         if (self_posting) {
             accessPostings.getPostingsByUserId(postings, userID);
             v = inflater.inflate(R.layout.your_postings, container, false);
+
+            Button button1 = (Button) v.findViewById(R.id.button_requests);
+            button1.setOnClickListener(this);
+            Button button3 = (Button) v.findViewById(R.id.button_create_posting);
+            button3.setOnClickListener(this);
         } else {
             accessPostings.getPostings(postings, userID);
             v = inflater.inflate(R.layout.public_postings, container, false);
         }
+
+        Button button = (Button) v.findViewById(R.id.button_matches);
+        button.setOnClickListener(this);
 
         final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
             @Override
@@ -81,6 +90,38 @@ public class Test1Fragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
+
         return v;
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        Intent singleReq = new Intent();
+        Bundle bundle = getActivity().getIntent().getExtras();
+        switch (view.getId())
+        {
+            case R.id.button_requests:
+                singleReq.setClass(getActivity(), RequestsActivity.class);
+                break;
+            case R.id.button_matches:
+                singleReq.setClass(getActivity(), MatchesActivity.class);
+                if(self_posting) {
+                    bundle.putString("direction","postings");
+                }
+                else {
+                    bundle.putString("direction","user");
+                }
+                bundle.putString("userID", userID);
+                break;
+            case R.id.button_create_posting:
+                singleReq.setClass(getActivity(), CreatePostingActivity.class);
+                bundle.putString("userID", userID);
+                bundle.putInt("createPostingId", currentPosting);
+                currentPosting++;
+                break;
+        }
+        singleReq.putExtras(bundle);
+        getActivity().startActivity(singleReq);
     }
 }

@@ -25,14 +25,13 @@
         android:layout_weight="1"
         android:choiceMode="none"
         android:layout_below="@id/textTitle"
-        android:layout_above="@id/button">
+        android:layout_above="@id/button_create_posting">
     </ListView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_create_posting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="createPosting"
         android:text="Create Posting"
         android:layout_above="@+id/button_matches"/>
 
@@ -40,7 +39,6 @@
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="seeMatches"
         android:text="@string/matches"
         android:layout_above="@+id/button_requests"/>
 
@@ -50,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:onClick="seeRequests"
         android:text="@string/requests" />
 
 </RelativeLayout>
