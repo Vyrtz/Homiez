@@ -45,7 +45,9 @@ public class User {
 
     @Override
     public boolean equals(Object user) {
-        return (user instanceof User) ? this.userId.equals(((User)user).getUserId()) : false;
+        return (user instanceof User)
+                ? this.userId.equals(((User)user).getUserId())
+                : false;
     }
 
     public void addPosting(Posting posting){
@@ -73,9 +75,11 @@ public class User {
     }
 
     public boolean addUniqueInterest (Interest i) {
-        if (!interests.contains(i)) {
-            interests.add(i);
-            return true;
+        if (i != null){
+            if (!interests.contains(i)) {
+                interests.add(i);
+                return true;
+            }
         }
         return false;
     }

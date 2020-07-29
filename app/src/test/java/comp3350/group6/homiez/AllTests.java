@@ -7,6 +7,10 @@ import comp3350.group6.homiez.business.AccessMatchesTest;
 import comp3350.group6.homiez.business.AccessPostingsTest;
 import comp3350.group6.homiez.business.AccessRequestsTest;
 import comp3350.group6.homiez.business.AccessUserTest;
+import comp3350.group6.homiez.business.AgeCompatibilityTest;
+import comp3350.group6.homiez.business.CompatibilityController;
+import comp3350.group6.homiez.business.CompatibilityControllerTest;
+import comp3350.group6.homiez.business.InterestCompatibilityTest;
 import comp3350.group6.homiez.business.MatchingTest;
 import comp3350.group6.homiez.objects.MatchTest;
 import comp3350.group6.homiez.objects.PostingTest;
@@ -41,6 +45,10 @@ public class AllTests {
         suite.addTestSuite(AccessRequestsTest.class);
         suite.addTestSuite(AccessMatchesTest.class);
         suite.addTestSuite(MatchingTest.class);
+        suite.addTestSuite(InterestCompatibilityTest.class);
+        suite.addTestSuite(AgeCompatibilityTest.class);
+        suite.addTestSuite(CompatibilityControllerTest.class);
+
     }
     private static void testPersistence()
     {
