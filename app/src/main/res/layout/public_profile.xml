@@ -122,6 +122,37 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/budgetLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/budgetPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/budget_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="bottom|left"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/bioLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

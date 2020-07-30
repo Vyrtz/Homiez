@@ -48,6 +48,7 @@ public class PublicProfileActivity extends Activity {
         TextView gender = findViewById(R.id.gender);
         TextView biography = findViewById(R.id.bio);
         TextView interests = findViewById(R.id.interests);
+        TextView budget = findViewById(R.id.budget);
 
         //Fill in the fields
         header.setText(user.getName() + HEADER_SUFFIX);
@@ -55,6 +56,7 @@ public class PublicProfileActivity extends Activity {
         age.setText("" + user.getAge());
         gender.setText(user.getGender());
         biography.setText(user.getBiography());
+        budget.setText("" + user.getBudget());
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();
