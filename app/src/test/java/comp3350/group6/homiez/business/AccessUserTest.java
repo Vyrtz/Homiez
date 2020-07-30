@@ -16,12 +16,12 @@ public class AccessUserTest extends TestCase {
 
 
 
-    public AccessUserTest(String arg0){
+    public AccessUserTest(String arg0) {
         super(arg0);
 
     }
 
-    public void init(){
+    public void setUp() {
         Main.startUp();
         aUser = new AccessUser();
         aUser.login(u);
@@ -32,13 +32,9 @@ public class AccessUserTest extends TestCase {
         uDNE = new User("100", "testName", 50, "f");
     }
 
-
-
-
     //Make sure the instance exists
-    public void testAccessUser1(){
+    public void testAccessUser1() {
         System.out.println("\nStarting testAccessUser1");
-        init();
 
         assertNotNull(aUser);
 
@@ -47,15 +43,14 @@ public class AccessUserTest extends TestCase {
 
 
     //test operations with a user that is already in the "database"
-    public void testAccessUserExistingUser(){
+    public void testAccessUserExistingUser() {
         System.out.println("\nStarting testAccessUserExistingUser");
-        init();
 
         //Retrieve user
-        assertNotNull(aUser.getUser("0"));
+        assertEquals(u, aUser.getUser("0"));
 
         //insert user
-        assertTrue("Failure".equals(aUser.insertUser(u)));
+        assertNull(aUser.insertUser(u));
 
         //updateUser
         aUser.updateUser(existingUpdated);
@@ -66,19 +61,18 @@ public class AccessUserTest extends TestCase {
 
 
     //test operations with a user that is not in the "database"
-    public void testAccessUserNotExisting(){
+    public void testAccessUserNotExisting() {
         System.out.println("\nStarting testAccessUserNotExisting");
-        init();
 
         //Retrieve user
         assertNull(aUser.getUser("99"));
 
         //insert user
         aUser.insertUser(newUser);
-        assertNotNull(aUser.getUser("99"));
+        assertEquals(newUser, aUser.getUser("99"));
 
         //update user
-        assertTrue("Failure".equals(aUser.updateUser(uDNE)));
+        assertNull(aUser.updateUser(uDNE));
 
         System.out.println("Finished testAccessUserNotExisting");
     }

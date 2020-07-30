@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import comp3350.group6.homiez.R;
 
+import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
 import comp3350.group6.homiez.business.Matching;
@@ -16,6 +17,8 @@ public class PostingActivity extends Activity {
 
     private AccessPostings accessPostings;
     private AccessRequests accessRequests;
+    private AccessMatches accessMatches;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,7 @@ public class PostingActivity extends Activity {
 
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
+        accessMatches = new AccessMatches();
 
         Posting post = accessPostings.getPostingById(postingID);
 
@@ -55,7 +59,7 @@ public class PostingActivity extends Activity {
         Bundle b =getIntent().getExtras();
         String u = b.getString("userID");
         String p = b.getString("postingId");
-        Matching.SendRequest(accessRequests,accessPostings,u,p);
+        Matching.SendRequest(accessRequests,accessPostings,accessMatches,u,p);
         Messages.popup(this, "You have sent a match request!", "Match request sent");
     }
 }

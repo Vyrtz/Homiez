@@ -22,7 +22,7 @@ public class AccessPostingsTest extends TestCase {
         super(arg0);
     }
 
-    public void init(){
+    public void setUp() {
         Main.startUp();
         u = new User ("3","Vinh", 18, "m");
         aPostings = new AccessPostings();
@@ -36,9 +36,8 @@ public class AccessPostingsTest extends TestCase {
 
 
     //Make sure the instance exists
-    public void testAccessPostings1(){
+    public void testAccessPostings1() {
         System.out.println("\nStarting testAccessPostings1");
-        init();
 
         assertNotNull(aPostings);
 
@@ -47,15 +46,14 @@ public class AccessPostingsTest extends TestCase {
 
 
     //test single-post operations with a post that is in the "database"
-    public void testAccessPostingsExisting(){
+    public void testAccessPostingsExisting() {
         System.out.println("\nStarting testAccessPostingsExisting");
-        init();
 
         //retrieve posting
-        assertNotNull(aPostings.getPostingById("0"));
+        assertEquals(postExists, aPostings.getPostingById("0"));
 
         //insert Posting
-        assertTrue("Failure".equals(aPostings.insertPosting(postExists)));
+        assertNull(aPostings.insertPosting(postExists));
 
         //update Posting
         aPostings.updatePosting(postExists);
@@ -70,18 +68,17 @@ public class AccessPostingsTest extends TestCase {
     }
 
     //test single-post operations with a post that is not in the "database"
-    public void testAccessPostingsNotExisting(){
+    public void testAccessPostingsNotExisting() {
         System.out.println("\nStarting testAccessPostingsNotExisting");
-        init();
 
         //retrieve posting
         assertNull(aPostings.getPostingById("10"));
 
         //update posting
-        assertTrue("Failure".equals(aPostings.updatePosting(newPost)));
+        assertNull(aPostings.updatePosting(newPost));
 
         //delete Posting
-        assertTrue("Failure".equals(aPostings.deletePosting(newPost)));
+        assertNull(aPostings.deletePosting(newPost));
 
         //insert Posting
         aPostings.insertPosting(newPost);
@@ -93,27 +90,26 @@ public class AccessPostingsTest extends TestCase {
 
 
     //test operations dependent on user id
-    public void testUserPostings(){
+    public void testUserPostings() {
         System.out.println("\nStarting testUserPostings");
-        init();
 
         aPostings.getPostings(postings, "0");
         assertEquals(2, postings.size());
-        postings.removeAll(postings);
+        postings.clear();
 
         aPostings.getPostings(postings, "1");
         assertEquals(4, postings.size());
-        postings.removeAll(postings);
+        postings.clear();
 
         aPostings.insertPosting(newPost);
         aPostings.getPostings(postings, "5");
         assertEquals(6, postings.size());
-        postings.removeAll(postings);
+        postings.clear();
 
 
         aPostings.getPostingsByUserId(postings, "0");
         assertEquals(3, postings.size());
-        postings.removeAll(postings);
+        postings.clear();
 
         aPostings.getPostingsByUserId(postings, "10");
         assertEquals(0, postings.size());
@@ -125,7 +121,5 @@ public class AccessPostingsTest extends TestCase {
         Main.shutDown();
         System.out.println("Finished testUserPostings");
     }
-
-
 
 }

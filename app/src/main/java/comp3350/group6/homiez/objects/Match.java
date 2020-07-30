@@ -23,6 +23,8 @@ public class Match {
 
     @Override
     public boolean equals (Object o ) {
-        return (o instanceof Match) ? ((Match) o).getPostingId().equals(this.postingId) && ((Match) o).getUserId().equals(this.userId) : false;
+        return (o instanceof Match)
+                ? ((Match) o).getPostingId().equals(this.postingId) && ((Match) o).getUserId().equals(this.userId)
+                : false;
     }
 }
