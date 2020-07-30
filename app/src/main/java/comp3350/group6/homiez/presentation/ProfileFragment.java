@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         TextView interests = v.findViewById(R.id.interests);
 
         //Set up button listener
-        Button customizeButt = v.findViewById(R.id.customizeButt);
+        Button customizeButt = v.findViewById(R.id.submitButt);
         customizeButt.setOnClickListener(this);
 
         //Filling default values for the profile

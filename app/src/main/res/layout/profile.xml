@@ -188,7 +188,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/customizeButt"
+            android:id="@+id/submitButt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
