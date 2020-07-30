@@ -11,7 +11,7 @@ import java.util.List;
 public class AccessMatches {
     private DataAccess dataAccess;
 
-    public AccessMatches(){
+    public AccessMatches() {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 

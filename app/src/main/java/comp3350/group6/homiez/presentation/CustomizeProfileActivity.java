@@ -68,10 +68,10 @@ public class CustomizeProfileActivity extends Activity {
         ArrayList<Interest> interestList = user.getInterests();
 
         String interestText = "";
-        for (int i = 0; i < interestList.size(); i++){
+        for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1){
+            if(i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -108,12 +108,12 @@ public class CustomizeProfileActivity extends Activity {
 
     }
 
-    public void submitClicked(View v){
+    public void submitClicked(View v) {
         //Modify the user object that we have
         user.setName(name.getText().toString());
 
         //Modify age if there is another integer in its place
-        if(!age.getText().toString().equals("")){
+        if(!age.getText().toString().equals("")) {
             user.setAge(Integer.parseInt(age.getText().toString()));
         }
 
@@ -129,15 +129,15 @@ public class CustomizeProfileActivity extends Activity {
 
         ArrayList<Interest> interestList = new ArrayList<>();
 
-        for(String currInterest : tempList){
-            if(!currInterest.equals("")){
+        for(String currInterest : tempList) {
+            if(!currInterest.equals("")) {
                 interestList.add(new Interest(currInterest));
             }
         }
 
         user.setInterests(interestList);
 
-        if(accessUser.updateUser(user)==null){
+        if(accessUser.updateUser(user)==null) {
             Messages.warning(this, ERROR);
         }
         else {

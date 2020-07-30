@@ -7,7 +7,7 @@ public class UserTest extends TestCase {
     User u;
     User matchEqual;
     public void setUp() {
-        u = new User("1", "John McNamara", 23, "M");
+        u = new User("1", "John McNamara", 23, "M", 100, "test");
         matchEqual = new User("1");
 
     }

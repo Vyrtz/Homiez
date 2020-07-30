@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     final private String HEADER_SUFFIX = "'s Profile";
 
-    public ProfileFragment(){
+    public ProfileFragment() {
         //Required empty constructor
     }
 
@@ -72,10 +72,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         ArrayList<Interest> interestList = user.getInterests();
 
         String interestText = "";
-        for (int i = 0; i < interestList.size(); i++){
+        for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1){
+            if(i != interestList.size()-1) {
                 interestText += ", ";
             }
         }

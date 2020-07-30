@@ -11,7 +11,7 @@ import java.util.List;
 public class AccessRequests {
     private DataAccess dataAccess;
 
-    public AccessRequests(){
+    public AccessRequests() {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 

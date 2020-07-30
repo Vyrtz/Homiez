@@ -37,7 +37,7 @@ public class CreateProfileActivity extends Activity {
         setContentView(R.layout.create_profile);
     }
 
-    public void createPressed(View v){
+    public void createPressed(View v) {
 
         //Fetch userID
         EditText fields = findViewById(R.id.editID);
@@ -77,14 +77,14 @@ public class CreateProfileActivity extends Activity {
         String[] interestList = interests.split(",");
 
         //Store the strings of interests into the arrayList
-        for(String interest: interestList){
-            if(!interest.equals("")){ //Check that the string we're storing isn't empty
+        for(String interest: interestList) {
+            if(!interest.equals("")) { //Check that the string we're storing isn't empty
                 newUser.addUniqueInterest(new Interest(interest));
             }
         }
 
         //Checks if the user was inserted into the DB correctly
-        if(accessUser.insertUser(newUser) == null){
+        if(accessUser.insertUser(newUser) == null) {
             Messages.warning(this, ERROR);
         }else{
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);

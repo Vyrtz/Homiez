@@ -26,18 +26,18 @@ public class User {
         interests = new ArrayList<Interest>();
     }
 
-    public User(String userId){
+    public User(String userId) {
         this.userId=userId;
         this.postingList=new ArrayList<Posting>();
         this.interests = new ArrayList<Interest>();
     }
 
     //once u set up an userid then you cannot change it anymore.
-    public String getUserId(){
+    public String getUserId() {
         return this.userId;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
     public void setName(String name) { this.name = name; }
@@ -56,15 +56,15 @@ public class User {
                 : false;
     }
 
-    public void addPosting(Posting posting){
+    public void addPosting(Posting posting) {
         this.postingList.add(posting);
     }
 
-    public ArrayList<Posting> getPosts(){
+    public ArrayList<Posting> getPosts() {
         return this.postingList;
     }
 
-    public String toString(){
+    public String toString() {
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
 
@@ -80,7 +80,7 @@ public class User {
     }
 
     public boolean addUniqueInterest (Interest i) {
-        if (i != null){
+        if (i != null) {
             if (!interests.contains(i)) {
                 interests.add(i);
                 return true;
