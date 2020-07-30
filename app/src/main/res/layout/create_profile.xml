@@ -2,17 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/textView10"
+        android:textColor="@color/colorYellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/create_profile"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,10 +37,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/user_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -66,10 +68,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/budget_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -98,11 +99,11 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/name_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
+
 
             <EditText
                 android:id="@+id/editName"
@@ -130,10 +131,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/age_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -163,10 +163,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/gender_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -196,10 +195,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/biography_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -229,10 +227,9 @@
                 android:gravity="bottom"
                 android:paddingStart="10dp"
                 android:paddingLeft="10dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
                 android:text="@string/interest_prompt"
                 android:textSize="20sp"
+                android:textColor="@color/colorYellow"
                 android:textStyle="bold" />
 
             <EditText
@@ -251,13 +248,19 @@
 
     </LinearLayout>
 
-
     <Button
-        android:id="@+id/createButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:id="@+id/loginButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/create"
+        android:textSize="30dp"
+        android:paddingLeft="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:gravity="center"
         android:onClick="createPressed"
-        android:text="@string/create" />
+        android:layout_marginBottom="20dp"/>
 
 </LinearLayout>
