@@ -3,19 +3,28 @@ package comp3350.group6.homiez.presentation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Interest;
+import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
 public class CustomizeProfileActivity extends Activity {
 
+    private ArrayList<Posting> postings;
+
     private AccessUser accessUser;
+
+    private AccessPostings accessPostings;
 
     private EditText name;
     private EditText age;
@@ -37,6 +46,7 @@ public class CustomizeProfileActivity extends Activity {
         setContentView(R.layout.customize_profile);
 
         accessUser = new AccessUser();
+        accessPostings = new AccessPostings();
 
         Bundle b = getIntent().getExtras();
         user = accessUser.getUser(b.getString("userID"));
@@ -69,6 +79,32 @@ public class CustomizeProfileActivity extends Activity {
         interests.setText(interestText);
 
         //TODO: Populate the postings list as well
+
+        //Initialize DB access and a postings list
+        postings = new ArrayList<>();
+        accessPostings = new AccessPostings();
+
+        //Populate postings
+        accessPostings.getPostingsByUserId(postings, user.getUserId());
+
+        // Set up the Visuals for each posting in the list
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                text1.setText(postings.get(position).getTitle());
+                text2.setText(postings.get(position).getLocation() + ", $" + postings.get(position).getPrice());
+
+                return view;
+            }
+        };
+
+        ListView postingsList = findViewById(R.id.postingList);
+        postingsList.setAdapter(adapter);
 
     }
 

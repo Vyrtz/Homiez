@@ -112,7 +112,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         customizeButt.setVisibility(View.VISIBLE);
 
 
-
         return v;
     }
 
