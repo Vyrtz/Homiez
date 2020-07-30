@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
@@ -88,7 +89,7 @@ public class DataAccessObject implements DataAccess {
                 u = new User(uid, name, age, gender);
                 u.setBudget(budget);
                 u.setDescription(description);
-
+                getInterests(u);
             }
             rs2.close();
         }
@@ -142,6 +143,8 @@ public class DataAccessObject implements DataAccess {
             user.setBudget(userOld.getBudget());
         if(user.getDescription() == null)
             user.setDescription(userOld.getDescription());
+        if(user.getInterests() == null)
+            user.setInterests(userOld.getInterests());
 
         try {
 
@@ -154,6 +157,7 @@ public class DataAccessObject implements DataAccess {
             where = "WHERE USERID=" + user.getUserId();
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
 
+            result = updateInterests( user);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -283,8 +287,7 @@ public class DataAccessObject implements DataAccess {
     public String getMatchesForUser(List<Match> matchList, String userId) {
         Match match;
         String postingId;
-        try
-        {
+        try {
             commandString = "Select * from MATCHES where USERID='" +userId +"'";
             rs5 = statement2.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
@@ -297,8 +300,7 @@ public class DataAccessObject implements DataAccess {
             rs5.close();
             return "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
         return null;
@@ -306,13 +308,11 @@ public class DataAccessObject implements DataAccess {
     public String getMatchesForPosting(List<Match> matchList, String postingId) {
         Match match;
         String userId;
-        try
-        {
+        try {
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
             rs5 = statement2.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 match = new Match(userId, postingId);
                 matchList.add(match);
@@ -320,8 +320,7 @@ public class DataAccessObject implements DataAccess {
             rs5.close();
             return "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
         return null;
@@ -338,8 +337,7 @@ public class DataAccessObject implements DataAccess {
     public String getRequests(List<Request> requests, String postingId) {
         Request request;
         String userId;
-        try
-        {
+        try {
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
             rs5 = statement2.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
@@ -352,8 +350,7 @@ public class DataAccessObject implements DataAccess {
             rs5.close();
             return "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
         return null;
@@ -363,6 +360,60 @@ public class DataAccessObject implements DataAccess {
     }
     public String deleteRequest(Request request) {
         return null;
+    }
+
+    private String getInterests( User u ) {
+        Interest i;
+        String s;
+        try
+        {
+            commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
+            rs5 = statement2.executeQuery(commandString);
+            // ResultSetMetaData md5 = rs5.getMetaData();
+            while (rs5.next())
+            {
+                s = rs5.getString("INTEREST");
+                i = new Interest(s);
+                u.addUniqueInterest(i);
+            }
+            rs5.close();
+            return "Success";
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    private String updateInterests( User u ) {
+        String result = null;
+        ArrayList<Interest> newInterests = u.getInterests();
+
+        String values;
+        try {
+
+            values = u.getUserId();
+            commandString = "Delete from INTERESTS where USERID='" +values +"'";
+
+            updateCount = statement1.executeUpdate(commandString);
+
+            result = checkWarnings(statement1, updateCount);
+
+            commandString = "";
+            for (Interest i : newInterests) {
+                values = "'" + i.getInterest()
+                        +"', '" + u.getUserId()
+                        +"'";
+                commandString += "Insert into INTERESTS " +" Values(" +values +")";
+            }
+            System.out.println(commandString);
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
     }
 
     public String checkWarnings(Statement currentStatement, int count) {
