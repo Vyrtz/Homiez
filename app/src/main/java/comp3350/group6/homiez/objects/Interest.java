@@ -10,6 +10,9 @@ public class Interest {
     public boolean equals(Object o ) {
 
         //foot ball == football
+        if (o == null) {
+            return false;
+        }
         String first = ((Interest) o).getInterest().toLowerCase().trim().replaceAll("\\s+","");
         String second = this.interest.toLowerCase().trim().replaceAll("\\s+","");
 
