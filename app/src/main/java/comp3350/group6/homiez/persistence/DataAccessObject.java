@@ -125,7 +125,6 @@ public class DataAccessObject implements DataAccess {
         result = null;
         String values;
         String where;
-
         User userOld = getUser(user);
 
         if(userOld == null)
@@ -154,9 +153,13 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getBiography() + "'";
             where = "WHERE USERID=" + user.getUserId();
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
-
             result = updateInterests( user);
-        } catch(Exception e) {
+            if (result != null) {
+                updateCount = statement1.executeUpdate(commandString);
+                result = checkWarnings(statement1, updateCount);
+            }
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -167,33 +170,16 @@ public class DataAccessObject implements DataAccess {
     //POSTING STUFF
     public String getAllDisplayPostings(List<Posting> postingsList, User user) {
         Posting p = null;
-        User u = null;
-        String pid;
-        String uid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
         result = null;
         try {
             commandString = "Select * from POSTINGS where USERID!='"+user.getUserId()+"'";
-            rs2 = statement1.executeQuery(commandString);
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                uid = rs2.getString("USERID");
-                pid = rs2.getString("POSTINGID");
-
-                u = new User(uid);
-                p = new Posting(pid,title,u,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
                 postingsList.add(p);
             }
-            rs2.close();
+            rs3.close();
             return "Success";
         }
         catch (Exception e) {
@@ -204,33 +190,15 @@ public class DataAccessObject implements DataAccess {
 
     public Posting getPosting(Posting posting) {
         Posting p = null;
-        User u = null;
-        String pid;
-        String uid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
         result = null;
         try {
             commandString = "Select * from POSTINGS where POSTINGID='"+posting.getPostingId()+"'";
-            rs2 = statement1.executeQuery(commandString);
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                pid = rs2.getString("POSTINGID");
-                uid = rs2.getString("USERID");
-                pid = rs2.getString("POSTINGID");
-
-                u = new User(uid);
-                p = new Posting(pid,title,u,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
             }
-            rs2.close();
+            rs3.close();
             return p;
         }
         catch (Exception e) {
@@ -240,29 +208,16 @@ public class DataAccessObject implements DataAccess {
     }
     public String getPostingsByUser(List<Posting> postingsList, User user) {
         Posting p = null;
-        String pid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
         result = null;
         try {
             commandString = "Select * from POSTINGS where USERID='"+user.getUserId()+"'";
-            rs2 = statement1.executeQuery(commandString);
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                pid = rs2.getString("POSTINGID");
-
-                p = new Posting(pid,title,user,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
                 postingsList.add(p);
             }
-            rs2.close();
+            rs3.close();
             return "Success";
         }
         catch (Exception e) {
@@ -270,6 +225,21 @@ public class DataAccessObject implements DataAccess {
         }
         return null;
     }
+
+    private Posting constructPosting(ResultSet rs) throws SQLException {
+        String title = rs.getString("TITLE");
+        double price = rs.getDouble("PRICE");
+        String location = rs.getString("LOCATION");
+        String type = rs.getString("TYPE");
+        String description = rs.getString("DESCRIPTION");
+        String uid = rs.getString("USERID");
+        String pid = rs.getString("POSTINGID");
+        User u = new User(uid);
+        u = getUser(u);
+        Posting p = new Posting(pid,title,u,price,location,type,description);
+        return p;
+    }
+
     public String insertPosting(Posting posting) {
         return null;
     }
@@ -286,7 +256,7 @@ public class DataAccessObject implements DataAccess {
         String postingId;
         try {
             commandString = "Select * from MATCHES where USERID='" +userId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
             while (rs5.next())
             {
@@ -307,7 +277,7 @@ public class DataAccessObject implements DataAccess {
         String userId;
         try {
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
             while (rs5.next()) {
                 userId = rs5.getString("USERID");
@@ -336,7 +306,7 @@ public class DataAccessObject implements DataAccess {
         String userId;
         try {
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
             while (rs5.next())
             {
@@ -365,7 +335,7 @@ public class DataAccessObject implements DataAccess {
         try
         {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
-            rs4 = statement2.executeQuery(commandString);
+            rs4 = statement3.executeQuery(commandString);
             while (rs4.next())
             {
                 s = rs4.getString("INTEREST");
@@ -391,7 +361,7 @@ public class DataAccessObject implements DataAccess {
             values = u.getUserId();
             commandString = "Delete from INTERESTS where USERID='" +values +"'";
 
-            updateCount = statement1.executeUpdate(commandString);
+            updateCount = statement3.executeUpdate(commandString);
 
             result = checkWarnings(statement1, updateCount);
 
@@ -403,7 +373,7 @@ public class DataAccessObject implements DataAccess {
                 commandString += "Insert into INTERESTS " +" Values(" +values +")";
             }
             System.out.println(commandString);
-            updateCount = statement1.executeUpdate(commandString);
+            updateCount = statement3.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
         catch (Exception e) {
