@@ -40,12 +40,13 @@ public class User {
     public String getName(){
         return this.name;
     }
+    public void setName(String name) { this.name = name; }
 
-    public int getAge(){
-        return age;
-    }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
     public String getBiography() { return this.biography; }
+    public void setBiography(String biography) { this.biography = biography; };
 
     @Override
     public boolean equals(Object user) {
@@ -66,9 +67,8 @@ public class User {
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
 
-    public String getGender() {
-        return gender;
-    }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public void setInterests(ArrayList<Interest> interests) {
         this.interests = interests;
