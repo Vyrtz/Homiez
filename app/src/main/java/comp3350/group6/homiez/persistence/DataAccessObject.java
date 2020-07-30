@@ -167,7 +167,7 @@ public class DataAccessObject implements DataAccess {
 
 
     //POSTING STUFF
-    public String getAllPostings(List<Posting> postingsList) {
+    public String getAllDisplayPostings(List<Posting> postingsList, User user) {
         Posting p = null;
         User u = null;
         String pid;
@@ -179,7 +179,7 @@ public class DataAccessObject implements DataAccess {
         String description;
         result = null;
         try {
-            commandString = "Select * from POSTINGS";
+            commandString = "Select * from POSTINGS where USERID!='"+user.getUserId()+"'";
             rs2 = statement1.executeQuery(commandString);
 
             while(rs2.next()) {
@@ -368,15 +368,14 @@ public class DataAccessObject implements DataAccess {
         try
         {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
-            rs3 = statement3.executeQuery(commandString);
-            // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs3.next())
+            rs4 = statement2.executeQuery(commandString);
+            while (rs4.next())
             {
-                s = rs3.getString("INTEREST");
+                s = rs4.getString("INTEREST");
                 i = new Interest(s);
                 u.addUniqueInterest(i);
             }
-            rs3.close();
+            rs4.close();
             return "Success";
         }
         catch (Exception e) {
@@ -434,4 +433,5 @@ public class DataAccessObject implements DataAccess {
 
         return res;
     }
+
 }//CLASS

@@ -23,7 +23,7 @@ public interface DataAccess {
 
 
     //POSTING STUFF
-    String getAllPostings(List<Posting> postingList);
+    String getAllDisplayPostings(List<Posting> postingList, User loggedin);
 
     Posting getPosting(Posting posting);
 

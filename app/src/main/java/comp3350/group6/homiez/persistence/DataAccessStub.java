@@ -106,8 +106,12 @@ public class DataAccessStub implements DataAccess{
         return "Success";
     }
 
-    public String getAllPostings(List<Posting> postings) {
-        postings.addAll(this.postings);
+    public String getAllDisplayPostings(List<Posting> postings, User user) {
+        for (Posting p : this.postings) {
+            if (!p.getUser().equals(user)) {
+                postings.add(p);
+            }
+        }
         return "Success";
     }
 
