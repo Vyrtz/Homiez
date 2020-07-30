@@ -14,17 +14,24 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
+import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.business.Compatibility;
+import comp3350.group6.homiez.business.CompatibilityController;
 import comp3350.group6.homiez.objects.Posting;
+import comp3350.group6.homiez.objects.User;
 
 public class ViewPostingsFragment extends Fragment implements View.OnClickListener {
     // Variables
     private boolean self_posting = false;
     private String userID;
     private static int currentPosting = 6;
+    private AccessUser accessUser;
+    private User user;
 
     public ViewPostingsFragment() {
         // Required empty public constructor
@@ -37,6 +44,8 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         Bundle b = this.getArguments();
         userID = b.getString("userID");
         self_posting = b.getBoolean("self_posting");
+        accessUser = new AccessUser();
+        user = accessUser.getUser(b.getString("userID"));
 
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
@@ -63,21 +72,44 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         button.setOnClickListener(this);
 
         // Set up the Visuals for each posting in the list
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_white, R.id.list_content, postings) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        ArrayAdapter<Posting> adapter = null;
+        if (self_posting) {
+            adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_white, R.id.list_content, postings) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(R.id.list_content);
-                TextView text2 = (TextView) view.findViewById(R.id.list_content2);
-                TextView text3 = (TextView) view.findViewById(R.id.list_content3);
+                    TextView text1 = (TextView) view.findViewById(R.id.list_content);
+                    TextView text2 = (TextView) view.findViewById(R.id.list_content2);
+                    TextView text3 = (TextView) view.findViewById(R.id.list_content3);
 
-                text1.setText(postings.get(position).getTitle());
-                text2.setText(postings.get(position).getLocation());
-                text3.setText("$" + postings.get(position).getPrice());
-                return view;
-            }
-        };
+                    text1.setText(postings.get(position).getTitle());
+                    text2.setText(postings.get(position).getLocation());
+                    text3.setText("$" + postings.get(position).getPrice());
+                    return view;
+                }
+            };
+        } else {
+            adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_matches, R.id.list_content, postings) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView text1 = (TextView) view.findViewById(R.id.list_content);
+                    TextView text2 = (TextView) view.findViewById(R.id.list_content2);
+                    TextView text3 = (TextView) view.findViewById(R.id.list_content3);
+                    TextView text4 = (TextView) view.findViewById(R.id.list_content4);
+                    Compatibility c = new CompatibilityController();
+
+                    text1.setText(postings.get(position).getTitle());
+                    text2.setText(postings.get(position).getLocation());
+                    text3.setText("$" + postings.get(position).getPrice());
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    text4.setText(df.format(c.calculateCompatibility(user, postings.get(position))) + "%");
+                    return view;
+                }
+            };
+        }
 
         ListView listView = (ListView)v.findViewById(R.id.postingsList);
         listView.setAdapter(adapter);

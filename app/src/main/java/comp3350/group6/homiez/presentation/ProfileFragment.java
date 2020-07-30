@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.business.AccessPostings;
+import comp3350.group6.homiez.business.Compatibility;
+import comp3350.group6.homiez.business.CompatibilityController;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
