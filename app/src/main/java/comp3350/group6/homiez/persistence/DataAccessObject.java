@@ -109,6 +109,7 @@ public class DataAccessObject implements DataAccess {
             if (result != null) {
                 insertInterests(user);
             }
+            
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -153,7 +154,7 @@ public class DataAccessObject implements DataAccess {
             result = checkWarnings(statement1, updateCount);
 
             if (result != null) {
-                result = updateInterests( user);
+                updateInterests( user);
             }
         }
         catch(Exception e) {
