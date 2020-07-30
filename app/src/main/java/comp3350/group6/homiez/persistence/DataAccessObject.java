@@ -30,11 +30,6 @@ public class DataAccessObject implements DataAccess {
     private Connection connection;
     private ResultSet rs2, rs3, rs4, rs5;
 
-    private ArrayList<User> users;
-    private ArrayList<Posting> postings;
-    private ArrayList<Match> matches;
-    private ArrayList<Request> requests;
-
     public DataAccessObject(String dbName) { this.dbName = dbName; }
 
     public void open(String dbPath) {
@@ -49,7 +44,8 @@ public class DataAccessObject implements DataAccess {
             statement2 = connection.createStatement();
             statement3 = connection.createStatement();
 
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
         }
@@ -60,7 +56,8 @@ public class DataAccessObject implements DataAccess {
         try {
             commandString = "shutdown compact";
             rs2 = statement1.executeQuery(commandString);
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -73,8 +70,6 @@ public class DataAccessObject implements DataAccess {
         double budget;
         String bio;
         String name;
-
-        result = null;
 
         try {
             commandString = "Select * from USERS where USERID='" + user.getUserId() +"'";
@@ -169,7 +164,7 @@ public class DataAccessObject implements DataAccess {
 
     //POSTING STUFF
     public String getAllDisplayPostings(List<Posting> postingsList, User user) {
-        Posting p = null;
+        Posting p;
         result = null;
         try {
             commandString = "Select * from POSTINGS where USERID!='"+user.getUserId()+"'";
@@ -180,17 +175,16 @@ public class DataAccessObject implements DataAccess {
                 postingsList.add(p);
             }
             rs3.close();
-            return "Success";
+            result = "Success";
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     public Posting getPosting(Posting posting) {
         Posting p = null;
-        result = null;
         try {
             commandString = "Select * from POSTINGS where POSTINGID='"+posting.getPostingId()+"'";
             rs3 = statement2.executeQuery(commandString);
@@ -199,15 +193,15 @@ public class DataAccessObject implements DataAccess {
                 p = constructPosting(rs3);
             }
             rs3.close();
-            return p;
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return p;
     }
+
     public String getPostingsByUser(List<Posting> postingsList, User user) {
-        Posting p = null;
+        Posting p;
         result = null;
         try {
             commandString = "Select * from POSTINGS where USERID='"+user.getUserId()+"'";
@@ -218,12 +212,12 @@ public class DataAccessObject implements DataAccess {
                 postingsList.add(p);
             }
             rs3.close();
-            return "Success";
+            result = "Success";
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     private Posting constructPosting(ResultSet rs) throws SQLException {
@@ -234,9 +228,11 @@ public class DataAccessObject implements DataAccess {
         String description = rs.getString("DESCRIPTION");
         String uid = rs.getString("USERID");
         String pid = rs.getString("POSTINGID");
+
         User u = new User(uid);
         u = getUser(u);
         Posting p = new Posting(pid,title,u,price,location,type,description);
+
         return p;
     }
 
@@ -254,27 +250,29 @@ public class DataAccessObject implements DataAccess {
     public String getMatchesForUser(List<Match> matchList, String userId) {
         Match match;
         String postingId;
+        result = null;
         try {
             commandString = "Select * from MATCHES where USERID='" +userId +"'";
             rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 postingId = rs5.getString("POSTINGID");
                 match = new Match(userId, postingId);
                 matchList.add(match);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
         catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
+
     public String getMatchesForPosting(List<Match> matchList, String postingId) {
         Match match;
         String userId;
+        result = null;
         try {
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
@@ -285,12 +283,12 @@ public class DataAccessObject implements DataAccess {
                 matchList.add(match);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
         catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
 
     public String insertMatch(Match m) {
@@ -304,23 +302,23 @@ public class DataAccessObject implements DataAccess {
     public String getRequests(List<Request> requests, String postingId) {
         Request request;
         String userId;
+        result = null;
         try {
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 request = new Request(userId, postingId);
                 requests.add(request);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
         catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
     public String insertRequest(Request request) {
         return null;
@@ -332,32 +330,31 @@ public class DataAccessObject implements DataAccess {
     private String getInterests( User u ) {
         Interest i;
         String s;
-        try
-        {
+        result = null;
+
+        try {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
             rs4 = statement3.executeQuery(commandString);
-            while (rs4.next())
-            {
+            while (rs4.next()) {
                 s = rs4.getString("INTEREST");
                 i = new Interest(s);
                 u.addUniqueInterest(i);
             }
             rs4.close();
-            return "Success";
+            result =  "Success";
         }
         catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
 
     private String updateInterests( User u ) {
-        String result = null;
+        result = null;
         ArrayList<Interest> newInterests = u.getInterests();
-
         String values;
-        try {
 
+        try {
             values = u.getUserId();
             commandString = "Delete from INTERESTS where USERID='" +values +"'";
 
@@ -387,17 +384,17 @@ public class DataAccessObject implements DataAccess {
         SQLWarning warning;
 
         try {
-
-            if((warning = currentStatement.getWarnings()) != null)
+            if((warning = currentStatement.getWarnings()) != null) {
                 res = warning.getMessage();
-
-        } catch (SQLException e) {
+            }
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if(count != 1)
+        if(count != 1) {
             res = "Row inserted incorrectly";
-
+        }
         return res;
     }
 }//CLASS
