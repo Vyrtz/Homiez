@@ -270,13 +270,67 @@ public class DataAccessObject implements DataAccess {
         return null;
     }
     public String insertPosting(Posting posting) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + posting.getPostingId()
+                    +"', '" + posting.getPostingId()
+                    +"', '" + posting.getTitle()
+                    +"', '" + posting.getPrice()
+                    +", '" + posting.getLocation()
+                    +", '" + posting.getType()
+                    +"', '" + posting.getDescription() + "'";
+
+            commandString = "INSERT INTO POSTINGS VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
     public String deletePosting(Posting posting) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = posting.getPostingId();
+            commandString = "DELETE FROM STUDENTS WHERE STUDENTID=" + values;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
+
     public String updatePosting(Posting p) {
-        return null;
+        String values;
+        String where;
+        result = null;
+
+        try {
+            values = "'" + p.getPostingId()
+                    +"', '" + p.getPostingId()
+                    +"', '" + p.getTitle()
+                    +"', '" + p.getPrice()
+                    +", '" + p.getLocation()
+                    +", '" + p.getType()
+                    +"', '" + p.getDescription() + "'";
+
+            where = "WHERE POSTINGID=" + p.getPostingId();
+
+            commandString = "UPDATE POSTINGS " + " SET " + values + " " + where;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     //MATCH STUFF
