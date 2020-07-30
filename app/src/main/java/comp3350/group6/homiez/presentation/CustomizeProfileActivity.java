@@ -78,8 +78,6 @@ public class CustomizeProfileActivity extends Activity {
 
         interests.setText(interestText);
 
-        //TODO: Populate the postings list as well
-
         //Initialize DB access and a postings list
         postings = new ArrayList<>();
         accessPostings = new AccessPostings();
