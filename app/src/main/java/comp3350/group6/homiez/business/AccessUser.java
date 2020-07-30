@@ -17,7 +17,7 @@ public class AccessUser {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public void login(User u){
+    public void login(User u) {
         loggedInUser = u;
     }
 

@@ -17,7 +17,7 @@ public class DataAccessStub implements DataAccess{
     private ArrayList<Match> matches;
     private ArrayList<Request> matchRequests;
 
-    public DataAccessStub(String dbName){
+    public DataAccessStub(String dbName) {
         this.dbName = dbName;
     }
     public void open(String dbName) {

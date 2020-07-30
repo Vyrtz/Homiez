@@ -17,7 +17,7 @@ public class Main {
         Services.createDataAccess(dbName);
     }
 
-    public static void shutDown(){
+    public static void shutDown() {
         Services.closeDataAccess();
     }
 

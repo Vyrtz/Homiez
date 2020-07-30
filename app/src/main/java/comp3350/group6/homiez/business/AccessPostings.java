@@ -13,7 +13,7 @@ import java.util.List;
 public class AccessPostings {
     private DataAccess dataAccess;
 
-    public AccessPostings(){
+    public AccessPostings() {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 

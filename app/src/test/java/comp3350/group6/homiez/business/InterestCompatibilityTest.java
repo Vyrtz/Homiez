@@ -18,7 +18,7 @@ public class InterestCompatibilityTest extends TestCase {
         Main.startUp();
 
         c = new InterestCompatibility();
-        u = new User("test", "test",1, "test");
+        u = new User("test", "test",1, "test", 100, "test");
         p = new Posting("test", "test", new User("test2"), 2, "test", "test", "test");
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);

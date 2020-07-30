@@ -102,7 +102,7 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getName()
                     +"', '" + user.getAge()
                     +"', '" + user.getGender()
-                    +", '" + user.getBudget()
+                    +"', '" + user.getBudget()
                     +"', '" + user.getBiography() + "'";
 
             commandString = "INSERT INTO USERS VALUES(" + values + ")";
@@ -380,7 +380,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String checkWarnings(Statement currentStatement, int count) {
-        String res = null;
+        String res = "Success";
         SQLWarning warning;
 
         try {
@@ -393,7 +393,7 @@ public class DataAccessObject implements DataAccess {
         }
 
         if(count != 1) {
-            res = "Row inserted incorrectly";
+            res = null;
         }
         return res;
     }

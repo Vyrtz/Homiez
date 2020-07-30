@@ -26,7 +26,7 @@ public class Posting {
         this.addAttachedUser(user);
         user.addPosting(this);
     }
-    public Posting(String postingId){
+    public Posting(String postingId) {
         this.postingId = postingId;
     }
 
@@ -34,28 +34,28 @@ public class Posting {
         return user;
     }
 
-    public String getPostingId(){
+    public String getPostingId() {
         return this.postingId;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return this.title;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 
 
-    public String getLocation(){
+    public String getLocation() {
         return this.location;
     }
 
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
