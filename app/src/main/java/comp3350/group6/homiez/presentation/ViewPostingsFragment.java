@@ -1,7 +1,6 @@
 package comp3350.group6.homiez.presentation;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -64,16 +63,18 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         button.setOnClickListener(this);
 
         // Set up the Visuals for each posting in the list
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_text, R.id.list_content, postings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
 
-                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                TextView text1 = (TextView) view.findViewById(R.id.list_content);
+                TextView text2 = (TextView) view.findViewById(R.id.list_content2);
+                TextView text3 = (TextView) view.findViewById(R.id.list_content3);
 
                 text1.setText(postings.get(position).getTitle());
-                text2.setText(postings.get(position).getLocation() + ", $" + postings.get(position).getPrice());
+                text2.setText(postings.get(position).getLocation());
+                text3.setText("$" + postings.get(position).getPrice());
                 return view;
             }
         };

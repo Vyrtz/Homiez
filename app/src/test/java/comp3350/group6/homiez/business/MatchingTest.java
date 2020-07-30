@@ -25,12 +25,12 @@ public class MatchingTest extends TestCase {
         aUser = new AccessUser();
         accessPostings = new AccessPostings();
         accessMatches = new AccessMatches();
-        p = new Posting("test", "test", new User("test"), 2, "test", "test", "test");
+        p = new Posting("postinglist_text", "postinglist_text", new User("postinglist_text"), 2, "postinglist_text", "postinglist_text", "postinglist_text");
         accessPostings.insertPosting(p);
     }
 
 
-    //test operations when null parameters are passed
+    //postinglist_text operations when null parameters are passed
     public void testNullCasesOnSendRequest() {
         System.out.println("\nStarting testNullCasesOnSendRequest");
 
@@ -41,7 +41,7 @@ public class MatchingTest extends TestCase {
 
         System.out.println("Finished testNullCasesOnSendRequest");
     }
-    //test operations when null parameters are passed
+    //postinglist_text operations when null parameters are passed
     public void testNullCasesOnAcceptRequest() {
         System.out.println("\nStarting testNullCasesOnAcceptRequest");
 
@@ -53,7 +53,7 @@ public class MatchingTest extends TestCase {
         System.out.println("Finished testNullCasesOnAcceptRequest");
     }
 
-    //test operations when null parameters are passed
+    //postinglist_text operations when null parameters are passed
     public void testNullCasesOnDeclineRequest() {
         System.out.println("\nStarting testNullCasesOnDeclineRequest");
 
@@ -65,7 +65,7 @@ public class MatchingTest extends TestCase {
     }
 
 
-    //test operations when no result will be found
+    //postinglist_text operations when no result will be found
     public void testBadValuesForSendRequest() {
         System.out.println("\nStarting testBadValuesForSendRequest");
 
@@ -96,7 +96,7 @@ public class MatchingTest extends TestCase {
     public void testSendRequestOnOwnPosting() {
         System.out.println("\nStarting testSendRequestOnOwnPosting");
 
-        Posting p2 = new Posting("test2", "test",u,2,"test","test","test");
+        Posting p2 = new Posting("test2", "postinglist_text",u,2,"postinglist_text","postinglist_text","postinglist_text");
         accessPostings.insertPosting(p2);
 
         assertNull(Matching.SendRequest(accessRequests,accessPostings, accessMatches, u.getUserId(), p2.getPostingId()));

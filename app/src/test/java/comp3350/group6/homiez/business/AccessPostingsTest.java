@@ -45,7 +45,7 @@ public class AccessPostingsTest extends TestCase {
     }
 
 
-    //test single-post operations with a post that is in the "database"
+    //postinglist_text single-post operations with a post that is in the "database"
     public void testAccessPostingsExisting() {
         System.out.println("\nStarting testAccessPostingsExisting");
 
@@ -67,7 +67,7 @@ public class AccessPostingsTest extends TestCase {
         System.out.println("Finished testAccessPostingsExisting");
     }
 
-    //test single-post operations with a post that is not in the "database"
+    //postinglist_text single-post operations with a post that is not in the "database"
     public void testAccessPostingsNotExisting() {
         System.out.println("\nStarting testAccessPostingsNotExisting");
 
@@ -89,7 +89,7 @@ public class AccessPostingsTest extends TestCase {
     }
 
 
-    //test operations dependent on user id
+    //postinglist_text operations dependent on user id
     public void testUserPostings() {
         System.out.println("\nStarting testUserPostings");
 
