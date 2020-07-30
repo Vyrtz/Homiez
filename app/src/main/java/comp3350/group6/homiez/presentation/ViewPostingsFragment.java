@@ -81,7 +81,7 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         ListView listView = (ListView)v.findViewById(R.id.postingsList);
         listView.setAdapter(adapter);
 
-        // Add onclick listenters to each item
+        // Add onclick listeners to each item
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             // Go to the posting based on which posting was clicked
