@@ -208,7 +208,7 @@
                 <ListView
                     android:id="@+id/postingList"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:layout_above="@id/loginButton"
                     android:layout_weight="1" />
 
