@@ -1,7 +1,6 @@
 package comp3350.group6.homiez.objects;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class User {
 
