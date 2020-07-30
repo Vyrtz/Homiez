@@ -18,13 +18,13 @@ public class AccessPostingsTest extends TestCase {
     Posting updatePost;
 
 
-    public AccessPostingsTest(String arg0){
+    public AccessPostingsTest(String arg0) {
         super(arg0);
     }
 
     public void setUp() {
         Main.startUp();
-        u = new User ("3","Vinh", 18, "m");
+        u = new User ("3","Vinh", 18, "m",200,"test");
         aPostings = new AccessPostings();
         postings = new ArrayList<Posting>();
         postings.removeAll(postings);

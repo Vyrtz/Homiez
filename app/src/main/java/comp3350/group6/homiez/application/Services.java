@@ -1,19 +1,33 @@
 package comp3350.group6.homiez.application;
 
+import comp3350.group6.homiez.persistence.DataAccess;
+import comp3350.group6.homiez.persistence.DataAccessObject;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 
 public class Services {
-    private static DataAccessStub dataAccessService;
+    private static DataAccess dataAccessService = null;
 
-    public static DataAccessStub createDataAccess( String dbName ) {
+    public static DataAccess createDataAccess( String dbName ) {
         if(dataAccessService == null) {
-            dataAccessService = new DataAccessStub(dbName);
-            dataAccessService.open(Main.dbName);
+
+            dataAccessService = new DataAccessObject(dbName);
+            dataAccessService.open(Main.getDBPathName());
+
         }
         return dataAccessService;
     }
 
-    public static DataAccessStub getDataAccess(String dbName) {
+    public static DataAccess createDataAccess(DataAccess alternateDataAccessService)
+    {
+        if (dataAccessService == null)
+        {
+            dataAccessService = alternateDataAccessService;
+            dataAccessService.open(Main.getDBPathName());
+        }
+        return dataAccessService;
+    }
+
+    public static DataAccess getDataAccess(String dbName) {
         if (dataAccessService == null) {
             System.out.println("Connection to data access has not been established.");
             System.exit(1);
@@ -27,5 +41,4 @@ public class Services {
         }
         dataAccessService = null;
     }
-
 }

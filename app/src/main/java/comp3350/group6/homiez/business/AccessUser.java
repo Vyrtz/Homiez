@@ -3,12 +3,13 @@ package comp3350.group6.homiez.business;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.persistence.DataAccess;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 
 
 public class AccessUser {
 
-    private DataAccessStub dataAccess;
+    private DataAccess dataAccess;
     private User loggedInUser;
 
     public AccessUser()
@@ -16,7 +17,7 @@ public class AccessUser {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public void login(User u){
+    public void login(User u) {
         loggedInUser = u;
     }
 

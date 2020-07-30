@@ -17,8 +17,9 @@ public class AgeCompatibilityTest extends TestCase {
         Main.startUp();
 
         c = new AgeCompatibility();
-        u = new User("postinglist_text", "postinglist_text",20, "postinglist_text");
-        p = new Posting("postinglist_text", "postinglist_text", new User("test2","postinglist_text",24, "postinglist_text"), 2, "postinglist_text", "postinglist_text", "postinglist_text");
+        u = new User("test", "test",20, "test", 100, "test");
+        p = new Posting("test", "test", new User("test2","test",24, "test", 100, "test"), 2, "test", "test", "test");
+
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);
     }
@@ -59,7 +60,7 @@ public class AgeCompatibilityTest extends TestCase {
     public void testValidInput() {
         System.out.println("\nStarting testValidInput");
 
-        User test = new User("test4", "test4",20, "test4");
+        User test = new User("test4", "test4",20, "test4", 100, "test");
         p.addAttachedUser(test);
 
         assertEquals(100.00, c.calculateCompatibility(u,p ));
@@ -72,13 +73,13 @@ public class AgeCompatibilityTest extends TestCase {
 
         System.out.println("\nStarting testMultipleValidInputs");
 
-        User test = new User("test4", "test4",20, "test4");
+        User test = new User("test4", "test4",20, "test4", 100, "test");
         p.addAttachedUser(test);
 
-        User test5 = new User("test5", "test4",10, "test4");
+        User test5 = new User("test5", "test4",10, "test4", 100, "test");
         p.addAttachedUser(test);
 
-        User test6 = new User("test6", "test4",13, "test4");
+        User test6 = new User("test6", "test4",13, "test4", 100, "test");
         p.addAttachedUser(test);
 
         assertEquals(100, Math.round(c.calculateCompatibility(u,p )));
@@ -92,13 +93,13 @@ public class AgeCompatibilityTest extends TestCase {
 
         System.out.println("\nStarting testEdgeCases");
 
-        User test = new User("test4", "test4",20, "test4");
+        User test = new User("test4", "test4",20, "test4", 100, "test");
         p.addAttachedUser(test);
 
-        User test5 = new User("test5", "test4",-99, "test4");
+        User test5 = new User("test5", "test4",-99, "test4", 100, "test");
         p.addAttachedUser(test);
 
-        User test6 = new User("test6", "test4",4, "test4");
+        User test6 = new User("test6", "test4",4, "test4", 100, "test");
         p.addAttachedUser(test);
 
         assertEquals(100, Math.round(c.calculateCompatibility(u,p )));

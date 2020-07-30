@@ -18,8 +18,9 @@ public class CompatibilityControllerTest extends TestCase {
         Main.startUp();
 
         c = new CompatibilityController();
-        u = new User("postinglist_text", "postinglist_text",1, "postinglist_text");
-        p = new Posting("postinglist_text", "postinglist_text", new User("postinglist_text", "postinglist_text",100, "postinglist_text"), 2, "postinglist_text", "postinglist_text", "postinglist_text");
+        u = new User("test", "test",1, "test", 100, "test");
+        p = new Posting("test", "test", new User("test", "test",100, "test", 100, "test"), 2, "test", "test", "test");
+
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);
     }
@@ -52,14 +53,14 @@ public class CompatibilityControllerTest extends TestCase {
     public void testUserWithNoInterest() {
         System.out.println("\nStarting testUserWithNoInterest");
         // attach one more user
-        p.addAttachedUser(new User("test3","postinglist_text",1, "postinglist_text"));
+        p.addAttachedUser(new User("test3","test",1, "test", 100, "test"));
         assertEquals(25, Math.round(c.calculateCompatibility(u, p)));
         System.out.println("Finished testUserWithNoInterest");
     }
     public void testUserWithBadValues() {
         System.out.println("\nStarting testUserWithBadValues");
         // posting already has the main user attached
-        User us = new User("test3","postinglist_text",-1, "postinglist_text");
+        User us = new User("test3","test",-1, "test", 100, "test");
         us.addUniqueInterest(null);
         p.addAttachedUser(us);
 
@@ -71,7 +72,7 @@ public class CompatibilityControllerTest extends TestCase {
     public void testUserWithMissingInterest() {
         System.out.println("\nStarting testUserWithMissingInterest");
 
-        User us = new User("test3","postinglist_text",16, "postinglist_text");
+        User us = new User("test3","test",16, "test", 100, "test");
         us.addUniqueInterest(new Interest(""));
         p.addAttachedUser(us);
 
@@ -83,7 +84,7 @@ public class CompatibilityControllerTest extends TestCase {
     public void testValidInput() {
         System.out.println("\nStarting testValidInput");
         p.getUser().addUniqueInterest(new Interest("Ice skating"));
-        User u2 = new User("test5", "postinglist_text",100, "postinglist_text");
+        User u2 = new User("test5", "test",100, "test", 100, "test");
         u2.addUniqueInterest(new Interest("iceskating"));
 
 
@@ -101,7 +102,7 @@ public class CompatibilityControllerTest extends TestCase {
         p.getUser().addUniqueInterest(null);
         p.getUser().addUniqueInterest(new Interest(""));
 
-        User u2 = new User("test5", "postinglist_text",92, "postinglist_text");
+        User u2 = new User("test5", "test",92, "test", 100, "test");
         u2.addUniqueInterest(new Interest("iceskating"));
         u2.addUniqueInterest(new Interest("CODING"));
 
@@ -118,11 +119,11 @@ public class CompatibilityControllerTest extends TestCase {
         p.getUser().addUniqueInterest(new Interest("Ice skating"));
         p.getUser().addUniqueInterest(new Interest("Anime"));
 
-        User two = new User("two", "two", 10, "two");
+        User two = new User("two", "two", 10, "two", 100, "test");
         two.addUniqueInterest(new Interest("coding"));
         two.addUniqueInterest(new Interest(""));
 
-        User three = new User("three", "three" , 2, "three");
+        User three = new User("three", "three" , 2, "three", 100, "test");
         three.addUniqueInterest(null);
         three.addUniqueInterest(new Interest("not coding"));
 

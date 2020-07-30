@@ -5,6 +5,7 @@ import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.persistence.DataAccess;
 
 import junit.framework.TestCase;
 
@@ -20,7 +21,7 @@ public class MatchingTest extends TestCase {
 
     public void setUp() {
         Main.startUp();
-        u = new User("0", "Abhi", 20, "m");
+        u = new User("0", "Abhi", 20, "m", 100, "test");
         accessRequests = new AccessRequests();
         aUser = new AccessUser();
         accessPostings = new AccessPostings();

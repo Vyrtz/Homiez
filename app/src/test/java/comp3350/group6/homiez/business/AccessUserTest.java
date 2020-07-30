@@ -25,11 +25,11 @@ public class AccessUserTest extends TestCase {
         Main.startUp();
         aUser = new AccessUser();
         aUser.login(u);
-        u = new User("0", "Abhi", 20, "m");
-        existingUpdated = new User("0", "John", 20, "m");
-        newUser = new User("99", "testU1", 30, "f");
-        updateUser = new User("99", "testChange", 30, "f");
-        uDNE = new User("100", "testName", 50, "f");
+        u = new User("0", "Abhi", 20, "m", 100, "test");
+        existingUpdated = new User("0", "John", 20, "m", 100, "test");
+        newUser = new User("99", "testU1", 30, "f", 100, "test");
+        updateUser = new User("99", "testChange", 30, "f", 100, "test");
+        uDNE = new User("100", "testName", 50, "f", 100, "test");
     }
 
     //Make sure the instance exists

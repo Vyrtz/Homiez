@@ -10,14 +10,14 @@ public class Match {
         this.postingId=postingId;
     }
 
-    public String getUserId(){
+    public String getUserId() {
         return this.userId;
     }
-    public String getPostingId(){
+    public String getPostingId() {
         return this.postingId;
     }
 
-    public String toString(){
+    public String toString() {
         return "user: "+this.userId+" post: "+this.postingId;
     }
 
