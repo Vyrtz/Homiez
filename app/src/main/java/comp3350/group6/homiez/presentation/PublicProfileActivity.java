@@ -39,7 +39,7 @@ public class PublicProfileActivity extends Activity {
 
         Bundle bundle = getIntent().getExtras();
 
-        User user = accessUser.getUser(bundle.getString("userID"));
+        User user = accessUser.getUser(bundle.getString("profileID"));
 
         //Initialize UI element variables
         TextView header = findViewById(R.id.header);

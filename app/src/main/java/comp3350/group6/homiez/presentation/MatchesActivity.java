@@ -61,6 +61,7 @@ public class MatchesActivity extends AppCompatActivity {
                 Posting post = accessPostings.getPostingById(m.getPostingId());
                 map.put("Top", post.getTitle());
                 map.put("Bottom",post.getUser().getName());
+                map.put("ID", post.getUser().getUserId());
                 matchList.add(map);
             }
         }
@@ -77,6 +78,7 @@ public class MatchesActivity extends AppCompatActivity {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("Top", accessUser.getUser(m.getUserId()).getName());
                 map.put("Bottom",accessPostings.getPostingById(m.getPostingId()).getTitle());
+                map.put("ID", accessUser.getUser(m.getUserId()).getUserId());
                 matchList.add(map);
             }
         }
@@ -88,10 +90,11 @@ public class MatchesActivity extends AppCompatActivity {
         listMatches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> a, View v, int p, long id){
+                Intent intent = new Intent(MatchesActivity.this, PublicProfileActivity.class);
                 Bundle bundle = getIntent().getExtras();
-                bundle.putBoolean("selfProfile", false);
-                bundle.putString("profileID", "0");
-                //System.out.println(matchList.get(p));
+                bundle.putString("profileID", matchList.get(p).get("ID"));
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
         });
