@@ -71,7 +71,7 @@ public class DataAccessObject implements DataAccess {
         int age;
         String gender;
         double budget;
-        String description;
+        String bio;
         String name;
 
         result = null;
@@ -84,11 +84,9 @@ public class DataAccessObject implements DataAccess {
                 budget = rs2.getDouble("BUDGET");
                 gender = rs2.getString("GENDER");
                 age = rs2.getInt("AGE");
-                description =  rs2.getString("DESCRIPTION");
+                bio =  rs2.getString("BIOGRAPHY");
                 uid = rs2.getString("USERID");
-                u = new User(uid, name, age, gender);
-                u.setBudget(budget);
-                u.setDescription(description);
+                u = new User(uid, name, age, gender,budget,bio);
                 getInterests(u);
             }
             rs2.close();
@@ -110,7 +108,7 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getAge()
                     +"', '" + user.getGender()
                     +", '" + user.getBudget()
-                    +"', '" + user.getDescription() + "'";
+                    +"', '" + user.getBiography() + "'";
 
             commandString = "INSERT INTO USERS VALUES(" + values + ")";
             updateCount = statement1.executeUpdate(commandString);
@@ -141,8 +139,8 @@ public class DataAccessObject implements DataAccess {
             user.setGender(userOld.getGender());
         if(user.getBudget() == 0)
             user.setBudget(userOld.getBudget());
-        if(user.getDescription() == null)
-            user.setDescription(userOld.getDescription());
+        if(user.getBiography() == null)
+            user.setBiography(userOld.getBiography());
         if(user.getInterests() == null)
             user.setInterests(userOld.getInterests());
 
@@ -153,7 +151,7 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getAge()
                     +"', '" + user.getGender()
                     +", '" + user.getBudget()
-                    +"', '" + user.getDescription() + "'";
+                    +"', '" + user.getBiography() + "'";
             where = "WHERE USERID=" + user.getUserId();
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
 
@@ -243,7 +241,6 @@ public class DataAccessObject implements DataAccess {
     public String getPostingsByUser(List<Posting> postingsList, User user) {
         Posting p = null;
         String pid;
-        String uid;
         String title;
         double price;
         String location;
@@ -433,5 +430,4 @@ public class DataAccessObject implements DataAccess {
 
         return res;
     }
-
 }//CLASS

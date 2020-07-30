@@ -95,11 +95,13 @@ public class LoginActivity extends Activity {
     }
 
     public void loginPressed(View v) {
+        //fetch the userID and password from UI fields
         EditText IDField = findViewById(R.id.editUserID);
+
         String userID = IDField.getText().toString();
 
         if(accessUser.getUser(userID) != null) {
-            Intent startIntent = new Intent(LoginActivity.this, StartActivity.class);
+            Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
             startIntent.putExtras(b);
@@ -109,6 +111,13 @@ public class LoginActivity extends Activity {
         else {
             Messages.warning(this, NOT_FOUND);
         }
+
+    }
+
+    //Called when signup is called
+    public void signupPressed(View v){
+        Intent startIntent = new Intent(LoginActivity.this, CreateProfileActivity.class);
+        LoginActivity.this.startActivity(startIntent);
 
     }
 

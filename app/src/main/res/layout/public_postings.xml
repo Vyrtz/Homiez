@@ -1,7 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textTitle"
@@ -12,7 +12,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentTop="true"/>
 
     <ListView
         android:id="@+id/postingsList"
@@ -20,7 +21,9 @@
         android:layout_height="0dp"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:choiceMode="none">
+        android:choiceMode="none"
+        android:layout_below="@+id/textTitle"
+        android:layout_above="@+id/button_matches">
 
     </ListView>
 
@@ -28,6 +31,7 @@
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="seeMatches"
-        android:text="@string/matches" />
-</LinearLayout>
+        android:text="@string/posting_matches"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

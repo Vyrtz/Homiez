@@ -25,7 +25,7 @@ public class PostingActivity extends Activity {
         setContentView(R.layout.posting);
 
         Bundle b = getIntent().getExtras();
-        final String postingID = b.getString("postingId");
+         final String postingID = b.getString("postingId");
 
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
