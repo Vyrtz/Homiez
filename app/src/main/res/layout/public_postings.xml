@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textColor="@color/colorGrey"
+        android:textColor="@color/colorYellow"
         android:text="@string/postings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"

@@ -144,8 +144,10 @@ public class DataAccessObject implements DataAccess {
                     +"', BUDGET='" + user.getBudget()
                     +"', BIOGRAPHY='" + user.getBiography() + "'";
             where = "WHERE USERID='" + user.getUserId()+"'";
-            commandString = "UPDATE USERS " + " SET " + values + " " + where;
+
             updateInterests( user);
+
+            commandString = "UPDATE USERS " + " SET " + values + " " + where;
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
 
@@ -464,33 +466,28 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
-    private String updateInterests( User u ) {
+    private String updateInterests( User u ) throws SQLException{
         result = null;
         ArrayList<Interest> newInterests = u.getInterests();
-        String values;
+        String values = u.getUserId();
+        
+        commandString = "Delete from INTERESTS where USERID='" +values +"'";
 
-        try {
-            values = u.getUserId();
-            commandString = "Delete from INTERESTS where USERID='" +values +"'";
+        updateCount = statement3.executeUpdate(commandString);
 
-            updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
 
-            result = checkWarnings(statement1, updateCount);
-
-            commandString = "";
-            for (Interest i : newInterests) {
-                values = "'" + i.getInterest()
-                        +"', '" + u.getUserId()
-                        +"'";
-                commandString += "Insert into INTERESTS " +" Values(" +values +")";
-            }
-            System.out.println(commandString);
-            updateCount = statement3.executeUpdate(commandString);
-            result = checkWarnings(statement1, updateCount);
+        commandString = "";
+        for (Interest i : newInterests) {
+            values = "'" + u.getUserId()
+                    +"', '" + i.getInterest()
+                    +"'";
+            commandString += "Insert into INTERESTS " +" Values(" +values +") ";
         }
-        catch (Exception e) {
-            System.out.println(e);
-        }
+        System.out.println(commandString);
+        updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
+
         return result;
     }
 
