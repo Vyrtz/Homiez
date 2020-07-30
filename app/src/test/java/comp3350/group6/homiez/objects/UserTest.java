@@ -42,7 +42,7 @@ public class UserTest extends TestCase {
         System.out.println("Finished testUserNotEquals");
     }
 
-    public void testPostingEqualsNull() {
+    public void testUserEqualsNull() {
         System.out.println("\nStarting testUserEqualsNull");
 
         assertFalse(u.equals(null));

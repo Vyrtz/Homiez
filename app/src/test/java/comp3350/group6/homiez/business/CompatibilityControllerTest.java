@@ -147,6 +147,14 @@ public class CompatibilityControllerTest extends TestCase {
         assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
         assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
 
+        c = new CompatibilityController(-1, -0.5);
+        assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        c = new CompatibilityController(-0.99, 0.98);
+        assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
         System.out.println("Finished testInvalidConstruction");
     }
 }
