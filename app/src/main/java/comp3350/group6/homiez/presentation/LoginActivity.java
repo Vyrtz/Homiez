@@ -99,7 +99,7 @@ public class LoginActivity extends Activity {
         EditText IDField = findViewById(R.id.editUserID);
 
         String userID = IDField.getText().toString();
-
+        IDField.setText("");
         if(accessUser.getUser(userID) != null) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();

@@ -19,6 +19,7 @@ public class AgeCompatibilityTest extends TestCase {
         c = new AgeCompatibility();
         u = new User("test", "test",20, "test", 100, "test");
         p = new Posting("test", "test", new User("test2","test",24, "test", 100, "test"), 2, "test", "test", "test");
+
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);
     }

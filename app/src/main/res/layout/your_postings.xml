@@ -3,51 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/createPosting"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/textTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
+        android:textColor="@color/colorGrey"
         android:text="@string/your_postings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentTop="true"/>
 
     <ListView
         android:id="@+id/postingsList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="top"
         android:layout_weight="1"
         android:choiceMode="none"
-        android:layout_below="@id/textTitle"
-        android:layout_above="@id/button_create_posting">
+        android:layout_below="@+id/textTitle"
+        android:layout_above="@+id/button_create_posting">
     </ListView>
 
     <Button
         android:id="@+id/button_create_posting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
         android:text="Create Posting"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"
+        android:gravity="center"
         android:layout_above="@+id/button_matches"/>
 
     <Button
         android:id="@+id/button_matches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
         android:text="@string/profile_matches"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"
+        android:gravity="center"
         android:layout_above="@+id/button_requests"/>
 
     <Button
         android:id="@+id/button_requests"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/requests"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="false"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:text="@string/requests" />
+        android:layout_marginBottom="65dp"
+        android:gravity="center" />
 
 </RelativeLayout>

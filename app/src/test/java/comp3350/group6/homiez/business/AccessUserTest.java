@@ -43,7 +43,7 @@ public class AccessUserTest extends TestCase {
     }
 
 
-    //test operations with a user that is already in the "database"
+    //postinglist_text operations with a user that is already in the "database"
     public void testAccessUserExistingUser() {
         System.out.println("\nStarting testAccessUserExistingUser");
 
@@ -62,7 +62,7 @@ public class AccessUserTest extends TestCase {
     }
 
 
-    //test operations with a user that is not in the "database"
+    //postinglist_text operations with a user that is not in the "database"
     public void testAccessUserNotExisting() {
         System.out.println("\nStarting testAccessUserNotExisting");
 
