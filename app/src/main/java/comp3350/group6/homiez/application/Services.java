@@ -2,7 +2,6 @@ package comp3350.group6.homiez.application;
 
 import comp3350.group6.homiez.persistence.DataAccess;
 import comp3350.group6.homiez.persistence.DataAccessObject;
-import comp3350.group6.homiez.persistence.DataAccessStub;
 
 public class Services {
     private static DataAccess dataAccessService = null;

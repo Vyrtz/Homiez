@@ -1,12 +1,7 @@
 package comp3350.group6.homiez.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
@@ -20,15 +15,11 @@ public class AgeCompatibility implements Compatibility {
             ArrayList<User> users = posting.getAttachedUsers();
             ArrayList<Double> compatibilities = new ArrayList();
 
-            if (users.size() > 0) {
-                for (User u : users) {
-                    compatibilities.add(calculateCompatibility(user, u));
-                }
-                total = Collections.max(compatibilities);
+            for (User u : users) {
+                compatibilities.add(calculateCompatibility(user, u));
             }
-            else {
-                total =  0;
-            }
+            total = Collections.max(compatibilities);
+
         }
         else {
             total = -1.0;

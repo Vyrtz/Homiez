@@ -5,11 +5,8 @@ import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-import java.io.File;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLWarning;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,7 +120,7 @@ public class DataAccessObject implements DataAccess {
         User userOld = getUser(user);
 
         if(userOld == null)
-            return "User not found";
+            return result;
 
         if(user.getName() == null)
             user.setName(userOld.getName());
@@ -140,19 +137,18 @@ public class DataAccessObject implements DataAccess {
 
         try {
 
-            values = "'" + user.getUserId()
-                    +"', '" + user.getName()
-                    +"', '" + user.getAge()
-                    +"', '" + user.getGender()
-                    +", '" + user.getBudget()
-                    +"', '" + user.getBiography() + "'";
-            where = "WHERE USERID=" + user.getUserId();
+            values = "USERID='" + userOld.getUserId()
+                    +"', NAME='" + user.getName()
+                    +"', AGE='" + user.getAge()
+                    +"', GENDER='" + user.getGender()
+                    +"', BUDGET='" + user.getBudget()
+                    +"', BIOGRAPHY='" + user.getBiography() + "'";
+            where = "WHERE USERID='" + user.getUserId()+"'";
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
-            result = updateInterests( user);
-            if (result != null) {
-                updateCount = statement1.executeUpdate(commandString);
-                result = checkWarnings(statement1, updateCount);
-            }
+            updateInterests( user);
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -237,13 +233,74 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String insertPosting(Posting posting) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + posting.getPostingId()
+                    +"', '" + posting.getUser().getUserId()
+                    +"', '" + posting.getTitle()
+                    +"', '" + posting.getPrice()
+                    +"', '" + posting.getLocation()
+                    +"', '" + posting.getType()
+                    +"', '" + posting.getDescription() + "'";
+
+            commandString = "INSERT INTO POSTINGS VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
     public String deletePosting(Posting posting) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = posting.getPostingId();
+            commandString = "DELETE FROM REQUESTS WHERE POSTINGID='" + values +"'";
+            statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM MATCHES WHERE POSTINGID='" + values +"'";
+            statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM POSTINGS WHERE POSTINGID='" + values +"'";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
+
     public String updatePosting(Posting p) {
-        return null;
+        String values;
+        String where;
+        result = null;
+
+        try {
+            values = "POSTINGID='" + p.getPostingId()
+                    +"', TITLE='" + p.getTitle()
+                    +"', USERID='" + p.getUser().getUserId()
+                    +"', PRICE='" + p.getPrice()
+                    +"', LOCATION='" + p.getLocation()
+                    +"', TYPE='" + p.getType()
+                    +"', DESCRIPTION='" + p.getDescription() + "'";
+
+            where = "WHERE POSTINGID=" + p.getPostingId();
+
+            commandString = "UPDATE POSTINGS " + " SET " + values + " " + where;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     //MATCH STUFF
@@ -276,7 +333,6 @@ public class DataAccessObject implements DataAccess {
         try {
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
-            // ResultSetMetaData md5 = rs5.getMetaData();
             while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 match = new Match(userId, postingId);
@@ -292,10 +348,39 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String insertMatch(Match m) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + m.getUserId()
+                    +"', '" + m.getPostingId() + "'";
+            commandString = "INSERT INTO MATCHES VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
     public String deleteMatch(Match m) {
-        return null;
+        String uId;
+        String pId;
+        result = null;
+
+        try {
+            uId = m.getUserId();
+            pId = m.getPostingId();
+            commandString = "DELETE FROM MATCHES WHERE USERID=" + uId + " AND POSTINGID=" + pId;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     //REQUEST STUFF
@@ -306,7 +391,6 @@ public class DataAccessObject implements DataAccess {
         try {
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
-            // ResultSetMetaData md5 = rs5.getMetaData();
             while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 request = new Request(userId, postingId);
@@ -320,11 +404,42 @@ public class DataAccessObject implements DataAccess {
         }
         return result;
     }
+
     public String insertRequest(Request request) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + request.getUserId()
+                    +"', '" + request.getPostingId() + "'";
+            commandString = "INSERT INTO REQUESTS VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
+
     public String deleteRequest(Request request) {
-        return null;
+        String uId;
+        String pId;
+        result = null;
+
+        try {
+            uId = request.getUserId();
+            pId = request.getPostingId();
+            commandString = "DELETE FROM REQUESTS WHERE USERID='" + uId + "' AND POSTINGID='" + pId +"'";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     private String getInterests( User u ) {
