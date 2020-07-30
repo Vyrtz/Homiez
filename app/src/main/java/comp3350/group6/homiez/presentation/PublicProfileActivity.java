@@ -1,64 +1,55 @@
 package comp3350.group6.homiez.presentation;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.business.AccessPostings;
+import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class PublicProfileActivity extends Activity {
 
-    private AccessUser accessUser;
-    private ArrayList<Posting> postings;
     private AccessPostings accessPostings;
+    private AccessUser accessUser;
 
     final private String HEADER_SUFFIX = "'s Profile";
 
-    public ProfileFragment() {
-        //Required empty constructor
-    }
+    private ArrayList<Posting> postings;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.public_profile);
 
-        //Grab the user
-        Bundle b = this.getArguments();
+        //Initialize DB access
+        accessPostings = new AccessPostings();
         accessUser = new AccessUser();
 
-        View v = inflater.inflate(R.layout.profile, container, false);
+        Bundle bundle = getIntent().getExtras();
 
-        //Set up button listener
-        Button customizeButt = v.findViewById(R.id.submitButt);
-        customizeButt.setOnClickListener(this);
-
-        User user = accessUser.getUser(b.getString("userID"));
-
+        User user = accessUser.getUser(bundle.getString("userID"));
 
         //Initialize UI element variables
-        TextView header = v.findViewById(R.id.header);
-        TextView name = v.findViewById(R.id.name);
-        TextView age = v.findViewById(R.id.age);
-        TextView gender = v.findViewById(R.id.gender);
-        TextView biography = v.findViewById(R.id.bio);
-        TextView interests = v.findViewById(R.id.interests);
+        TextView header = findViewById(R.id.header);
+        TextView name = findViewById(R.id.name);
+        TextView age = findViewById(R.id.age);
+        TextView gender = findViewById(R.id.gender);
+        TextView biography = findViewById(R.id.bio);
+        TextView interests = findViewById(R.id.interests);
 
-        //Filling default values for the profile
+        //Fill in the fields
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());
@@ -87,7 +78,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         accessPostings.getPostingsByUserId(postings, user.getUserId());
 
         // Set up the Visuals for each posting in the list
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -102,18 +93,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             }
         };
 
-        ListView postingsList = v.findViewById(R.id.postingList);
+        ListView postingsList = findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
 
-        return v;
     }
-
-    public void onClick(View view) {
-        Intent startIntent = new Intent(getActivity(), CustomizeProfileActivity.class);
-        Bundle b = this.getArguments();
-        startIntent.putExtras(b);
-        startActivity(startIntent);
-
-    }
-
 }
