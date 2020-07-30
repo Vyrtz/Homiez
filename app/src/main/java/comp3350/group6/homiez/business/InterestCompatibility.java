@@ -18,21 +18,17 @@ public class InterestCompatibility implements Compatibility {
             ArrayList<User> users = posting.getAttachedUsers();
             ArrayList<Double> compatibilities = new ArrayList();
 
-            if (users.size() > 0) {
-                for (User u : users) {
-                    compatibilities.add(calculateCompatibility(user, u));
+            for (User u : users) {
+                compatibilities.add(calculateCompatibility(user, u));
+            }
+            for (Double d : compatibilities) {
+                if (d > 0) { //if it is 0 no need for an extra addition
+                    total += d;
                 }
-                for (Double d : compatibilities) {
-                    if (d > 0) { //if it is 0 no need for an extra addition
-                        total += d;
-                    }
-                }
+            }
 
-                total =  total / compatibilities.size();
-            }
-            else {
-                total =  0;
-            }
+            total =  total / compatibilities.size();
+
         }
         else {
             total = -1.0;

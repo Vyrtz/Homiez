@@ -15,15 +15,11 @@ public class AgeCompatibility implements Compatibility {
             ArrayList<User> users = posting.getAttachedUsers();
             ArrayList<Double> compatibilities = new ArrayList();
 
-            if (users.size() > 0) {
-                for (User u : users) {
-                    compatibilities.add(calculateCompatibility(user, u));
-                }
-                total = Collections.max(compatibilities);
+            for (User u : users) {
+                compatibilities.add(calculateCompatibility(user, u));
             }
-            else {
-                total =  0;
-            }
+            total = Collections.max(compatibilities);
+
         }
         else {
             total = -1.0;

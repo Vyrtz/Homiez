@@ -6,7 +6,7 @@ import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.DataAccessStub;
+import comp3350.group6.homiez.persistence.DataAccessStub;
 
 public class InterestCompatibilityTest extends TestCase {
 

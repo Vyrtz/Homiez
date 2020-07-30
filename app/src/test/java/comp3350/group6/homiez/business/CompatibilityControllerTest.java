@@ -6,7 +6,7 @@ import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.DataAccessStub;
+import comp3350.group6.homiez.persistence.DataAccessStub;
 
 public class CompatibilityControllerTest extends TestCase {
 
@@ -156,5 +156,21 @@ public class CompatibilityControllerTest extends TestCase {
         assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
 
         System.out.println("Finished testInvalidConstruction");
+    }
+    public void testValidConstruction() {
+        System.out.println("\nStarting testValidConstruction");
+        c = new CompatibilityController(0.5, 0.5);
+        assertEquals(0.5, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.5, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        c = new CompatibilityController(0, 1);
+        assertEquals(1.0, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.0, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        c = new CompatibilityController(0, 0.01);
+        assertEquals(0.01, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.0, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        System.out.println("Finished testValidConstruction");
     }
 }

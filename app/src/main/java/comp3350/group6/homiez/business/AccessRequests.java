@@ -14,7 +14,6 @@ public class AccessRequests {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    //provides postings, except the ones made by the user
     public String getRequestsForPosting(List<Request> requests, String postingId) {
         return dataAccess.getRequests(requests, postingId);
     }

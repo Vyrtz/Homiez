@@ -1,4 +1,4 @@
-package comp3350.group6.homiez;
+package comp3350.group6.homiez.persistence;
 
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;

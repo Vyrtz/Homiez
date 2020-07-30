@@ -6,7 +6,7 @@ import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.DataAccessStub;
+import comp3350.group6.homiez.persistence.DataAccessStub;
 
 import junit.framework.TestCase;
 
@@ -177,15 +177,45 @@ public class MatchingTest extends TestCase {
     }
 
     public void testDeclineRequestInvalid() {
-
+        System.out.println("\nStarting testDeclineRequestInvalid");
         Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());
 
         assertEquals("Success", Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), p.getPostingId()));
         //cannot decline again as the request should be deleted
         String result = Matching.DeclineRequest(accessRequests, u.getUserId(), p.getPostingId());
         assertNull(result);
+        System.out.println("Finished testDeclineRequestInvalid");
     }
-
+    public void testContainsMatchAlready() {
+        System.out.println("\nStarting testContainsMatchAlready");
+        Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());
+        Matching.AcceptRequest(accessRequests, accessMatches, u.getUserId(), p.getPostingId());
+        String result = Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());;
+        assertNull(result);
+        System.out.println("Finished testContainsMatchAlready");
+    }
+    public void testInvalidUser() {
+        System.out.println("\nStarting testInvalidUser");
+        String result = Matching.SendRequest(accessRequests, accessPostings, accessMatches, "99", p.getPostingId());
+        ArrayList<Request> reqs = new ArrayList<>();
+        accessRequests.getRequestsForPosting(reqs, p.getPostingId());
+        Request toMatch = new Request("99", p.getPostingId());
+        if (reqs.contains(toMatch)) {
+            fail();
+        }
+        System.out.println("Finished testInvalidUser");
+    }
+    public void testInvalidPosting() {
+        System.out.println("\nStarting testInvalidPosting");
+        String result = Matching.SendRequest(accessRequests, accessPostings, accessMatches, "0", "99");
+        ArrayList<Request> reqs = new ArrayList<>();
+        accessRequests.getRequestsForPosting(reqs, "99");
+        Request toMatch = new Request("0", "99");
+        if (reqs.contains(toMatch)) {
+            fail();
+        }
+        System.out.println("Finished testInvalidPosting");
+    }
     public void tearDown() {
         Main.shutDown();
     }

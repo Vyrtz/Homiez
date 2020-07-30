@@ -3,48 +3,62 @@ package comp3350.group6.homiez.business;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
+import comp3350.group6.homiez.objects.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Matching {
+    private static String result;
+
     public static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId) {
-        if (userId != null && postingId != null && requests != null && matches != null) {
-            boolean success = deleteRequest(requests, userId, postingId);
-            if (success) {
-                Match newMatch = new Match(userId, postingId);
-                return matches.insertMatch(newMatch);
-            }
-        }
-        return null;
-    }
-
-    public static String DeclineRequest(AccessRequests requests, String userId, String postingId) {
-        if (userId != null && postingId != null && requests != null) {
-            boolean success = deleteRequest(requests, userId, postingId);
-            if (success) {
-                return "Success";
-            }
-        }
-        return null;
-    }
-
-    public static String SendRequest(AccessRequests requests, AccessPostings postings,AccessMatches matches, String userId, String postingId) {
-        if (userId != null && postingId != null && requests != null && postings != null && matches != null) {
-            boolean matchAlreadyPresent = checkMatch(matches, userId, postingId);
-            if (matchAlreadyPresent) { return null; }
-            Request newReq = new Request(userId, postingId);
-            List<Posting> posts = new ArrayList<Posting>();
-            String success = postings.getPostings(posts, userId);
-            //this would mean a posting is found and not made by the user
-            if (success != null) {
-                Posting posting = new Posting(postingId);
-                if (posts.contains(posting)) {
-                    return requests.insertRequest(newReq);
+        result = null;
+        if (Validate(userId, postingId)) {
+            if (userId != null && postingId != null && requests != null && matches != null) {
+                boolean success = deleteRequest(requests, userId, postingId);
+                if (success) {
+                    Match newMatch = new Match(userId, postingId);
+                    result = matches.insertMatch(newMatch);
                 }
             }
         }
-        return null;
+        return result;
+    }
+
+    public static String DeclineRequest(AccessRequests requests, String userId, String postingId) {
+        result = null;
+        if (Validate(userId, postingId)) {
+            if (userId != null && postingId != null && requests != null) {
+                boolean success = deleteRequest(requests, userId, postingId);
+                if (success) {
+                    result = "Success";
+                }
+            }
+        }
+        return result;
+    }
+
+    public static String SendRequest(AccessRequests requests, AccessPostings postings, AccessMatches matches, String userId, String postingId) {
+        result = null;
+        if (Validate(userId, postingId)) {
+            if (userId != null && postingId != null && requests != null && postings != null && matches != null) {
+                boolean matchAlreadyPresent = checkMatch(matches, userId, postingId);
+                if (matchAlreadyPresent) {
+                    return null;
+                }
+                Request newReq = new Request(userId, postingId);
+                List<Posting> posts = new ArrayList<Posting>();
+                String success = postings.getPostings(posts, userId);
+                //this would mean a posting is found and not made by the user
+                if (success != null) {
+                    Posting posting = new Posting(postingId);
+                    if (posts.contains(posting)) {
+                        result = requests.insertRequest(newReq);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     private static boolean deleteRequest(AccessRequests requests, String userId, String postingId) {
@@ -67,6 +81,18 @@ public class Matching {
             return matchList.contains(toCompare);
         }
         return false;
+    }
+
+    private static boolean Validate (String userId, String postingId) {
+        AccessUser users = new AccessUser();
+        AccessPostings postings = new AccessPostings();
+        User u = users.getUser(userId);
+        Posting p = postings.getPostingById(postingId);
+
+        if(u == null || p == null) {
+            return false;
+        }
+        return true;
     }
 }
 
