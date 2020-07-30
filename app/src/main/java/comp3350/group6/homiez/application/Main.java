@@ -1,7 +1,5 @@
 package comp3350.group6.homiez.application;
 
-import comp3350.group6.homiez.persistence.DataAccessStub;
-
 public class Main {
 
     public static final String dbName = "Homiez";

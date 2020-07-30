@@ -1,8 +1,10 @@
 package comp3350.group6.homiez.business;
 
 import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.persistence.DataAccessStub;
 
 import junit.framework.TestCase;
 
@@ -23,17 +25,17 @@ public class AccessPostingsTest extends TestCase {
     }
 
     public void setUp() {
-        Main.startUp();
+        Services.createDataAccess(new DataAccessStub("test"));
         u = new User ("3","Vinh", 18, "m",200,"test");
         aPostings = new AccessPostings();
         postings = new ArrayList<Posting>();
         postings.removeAll(postings);
         newPost = new Posting("10", "TEST TITLE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
-        postExists = new Posting("0", "UPDATED", u, 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
+        postExists = new Posting("11", "UPDATED", u, 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
         updatePost = new Posting("10", "TEST UPDATE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
+        aPostings.insertPosting(postExists);
+        aPostings.deletePosting(newPost); //remove old test post from the db if exists
     }
-
-
 
     //Make sure the instance exists
     public void testAccessPostings1() {
@@ -50,20 +52,16 @@ public class AccessPostingsTest extends TestCase {
         System.out.println("\nStarting testAccessPostingsExisting");
 
         //retrieve posting
-        assertEquals(postExists, aPostings.getPostingById("0"));
-
-        //insert Posting
-        assertNull(aPostings.insertPosting(postExists));
+        assertEquals(postExists, aPostings.getPostingById("11"));
 
         //update Posting
         aPostings.updatePosting(postExists);
-        assertTrue("UPDATED".equals(aPostings.getPostingById("0").getTitle()));
+        assertTrue("UPDATED".equals(aPostings.getPostingById("11").getTitle()));
 
         //deletePosting
         aPostings.deletePosting(postExists);
-        assertNull(aPostings.getPostingById("0"));
+        assertNull(aPostings.getPostingById("11"));
 
-        Main.shutDown();
         System.out.println("Finished testAccessPostingsExisting");
     }
 
@@ -84,7 +82,6 @@ public class AccessPostingsTest extends TestCase {
         aPostings.insertPosting(newPost);
         assertNotNull(aPostings.getPostingById("10"));
 
-        Main.shutDown();
         System.out.println("Finished testAccessPostingsExisting");
     }
 
@@ -93,17 +90,17 @@ public class AccessPostingsTest extends TestCase {
     public void testUserPostings() {
         System.out.println("\nStarting testUserPostings");
 
-        aPostings.getPostings(postings, "0");
-        assertEquals(2, postings.size());
+        aPostings.getPostingsByUserId(postings, "0");
+        assertEquals(3, postings.size());
         postings.clear();
 
-        aPostings.getPostings(postings, "1");
-        assertEquals(4, postings.size());
+        aPostings.getPostingsByUserId(postings, "1");
+        assertEquals(1, postings.size());
         postings.clear();
 
         aPostings.insertPosting(newPost);
-        aPostings.getPostings(postings, "5");
-        assertEquals(6, postings.size());
+        aPostings.getPostingsByUserId(postings, "5");
+        assertEquals(0, postings.size());
         postings.clear();
 
 
@@ -116,10 +113,12 @@ public class AccessPostingsTest extends TestCase {
 
         aPostings.insertPosting(newPost);
         aPostings.getPostingsByUserId(postings, "3");
-        assertEquals(1, postings.size());
+        assertEquals(2, postings.size());
 
-        Main.shutDown();
         System.out.println("Finished testUserPostings");
     }
 
+    public void tearDown () {
+        Main.shutDown();
+    }
 }
