@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Fragment public_postings;
     private boolean onSelfPostings = false;
+    private boolean inProfile = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new ProfileFragment();
                     Bundle b2 = getIntent().getExtras();
                     fragment.setArguments(b2);
+                    inProfile = true;
                     break;
             }
             // Display the page
@@ -78,7 +80,14 @@ public class MainActivity extends AppCompatActivity {
             b1.putBoolean("self_posting", true);
             public_postings.setArguments(b1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
-         }
+         } else if (inProfile) {
+            Fragment fragment = new ProfileFragment();
+            Bundle b1 = getIntent().getExtras();
+            fragment.setArguments(b1);
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        }
+
+        inProfile = false;
         onSelfPostings = false;
     }
 }
