@@ -368,15 +368,15 @@ public class DataAccessObject implements DataAccess {
         try
         {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs3 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
+            while (rs3.next())
             {
-                s = rs5.getString("INTEREST");
+                s = rs3.getString("INTEREST");
                 i = new Interest(s);
                 u.addUniqueInterest(i);
             }
-            rs5.close();
+            rs3.close();
             return "Success";
         }
         catch (Exception e) {
