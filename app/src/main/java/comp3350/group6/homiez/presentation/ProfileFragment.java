@@ -33,7 +33,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     final private String HEADER_SUFFIX = "'s Profile";
 
-
     public ProfileFragment(){
         //Required empty constructor
     }

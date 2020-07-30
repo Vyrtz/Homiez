@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.profile:
                     fragment = new ProfileFragment();
                     Bundle b2 = getIntent().getExtras();
+                    b2.putBoolean("selfProfile", true);
                     fragment.setArguments(b2);
                     inProfile = true;
                     break;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
          } else if (inProfile) {
             Fragment fragment = new ProfileFragment();
             Bundle b1 = getIntent().getExtras();
+            b1.putBoolean("selfProfile", true);
             fragment.setArguments(b1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
         }

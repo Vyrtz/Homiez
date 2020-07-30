@@ -130,7 +130,7 @@
             <EditText
                 android:id="@+id/bio"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:gravity="top"
@@ -161,7 +161,7 @@
             <EditText
                 android:id="@+id/interests"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:gravity="top"
@@ -192,7 +192,7 @@
             <ListView
                 android:id="@+id/postingList"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="150dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
