@@ -1,6 +1,7 @@
 package comp3350.group6.homiez.presentation;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -73,7 +74,6 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
 
                 text1.setText(postings.get(position).getTitle());
                 text2.setText(postings.get(position).getLocation() + ", $" + postings.get(position).getPrice());
-
                 return view;
             }
         };
