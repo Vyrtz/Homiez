@@ -10,12 +10,12 @@ public class User {
     private String name;
     private int age;
     private String gender;
-    private int budget;
+    private double budget;
     private String biography;
     private ArrayList<Posting> postingList;
     private ArrayList<Interest> interests;
 
-    public User(String userId,String name,int age, String gender, int budget, String biography) {
+    public User(String userId,String name,int age, String gender, double budget, String biography) {
         this.userId=userId;
         this.name=name;
         this.age=age;
@@ -47,6 +47,7 @@ public class User {
 
     public String getBiography() { return this.biography; }
     public void setBiography(String biography) { this.biography = biography; };
+
 
     @Override
     public boolean equals(Object user) {
@@ -86,5 +87,12 @@ public class User {
             }
         }
         return false;
+    }
+
+
+    public double getBudget() { return budget; }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 }

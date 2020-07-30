@@ -8,7 +8,7 @@ import comp3350.group6.homiez.objects.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataAccessStub {
+public class DataAccessStub implements DataAccess{
     private String dbName;
     private String dbType = "stub";
 
@@ -106,8 +106,12 @@ public class DataAccessStub {
         return "Success";
     }
 
-    public String getAllPostings(List<Posting> postings) {
-        postings.addAll(this.postings);
+    public String getAllDisplayPostings(List<Posting> postings, User user) {
+        for (Posting p : this.postings) {
+            if (!p.getUser().equals(user)) {
+                postings.add(p);
+            }
+        }
         return "Success";
     }
 
