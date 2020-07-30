@@ -19,198 +19,237 @@ android:focusableInTouchMode="true">
         android:textColor="@color/colorYellow"
         android:layout_marginBottom="50dp"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/nameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/namePrompt"
-                android:textColor="@color/colorYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="bottom|left"
-                android:paddingLeft="10dp"
-                android:text="@string/name_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/name"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="bottom|left"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ageLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/agePrompt"
-                android:textColor="@color/colorYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center_horizontal|left"
-                android:paddingLeft="10dp"
-                android:text="@string/age_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/age"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="bottom|left"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:singleLine="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/genderLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/genderPrompt"
-                android:textColor="@color/colorYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="bottom|left"
-                android:paddingLeft="10dp"
-                android:text="@string/gender_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/gender"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="bottom|left"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:singleLine="true" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bioLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/bioPrompt"
-                android:textColor="@color/colorYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_vertical"
-                android:layout_weight="2"
-                android:gravity="bottom|left"
-                android:paddingLeft="10dp"
-                android:text="@string/biography_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/bio"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:gravity="top"
-                android:singleLine="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/interestLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/interestsPrompt"
-                android:textColor="@color/colorYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="clip_vertical"
-                android:layout_weight="2"
-                android:gravity="bottom|left"
-                android:paddingLeft="10dp"
-                android:text="@string/interest_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <TextView
-                android:id="@+id/interests"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_weight="1"
-                android:gravity="top"
-                android:singleLine="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/postingLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="10dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/postingsPrompt"
-
-                android:textColor="@color/colorYellow"
+            <LinearLayout
+                android:id="@+id/nameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="clip_vertical"
-                android:layout_weight="2"
-                android:gravity="bottom|left"
-                android:paddingLeft="10dp"
-                android:text="@string/posting_prompt"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:orientation="horizontal">
 
-            <ListView
-                android:id="@+id/postingList"
+                <TextView
+                    android:id="@+id/namePrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/name_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="bottom|left"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ageLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/agePrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/age_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="bottom|left"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/genderLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/genderPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/gender_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="bottom|left"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/budgetLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/budgetPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/budget_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="bottom|left"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bioLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/bioPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/biography_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="top"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/interestLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/interestsPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/interest_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/interests"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="top"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/postingLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_above="@id/loginButton" />
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/postingsPrompt"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/posting_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <ListView
+                    android:id="@+id/postingList"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_above="@id/loginButton"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

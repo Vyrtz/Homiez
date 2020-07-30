@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -18,54 +19,44 @@ import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
-public class CustomizeProfileActivity extends Activity {
-
-    private ArrayList<Posting> postings;
-
-    private AccessUser accessUser;
+public class PublicProfileActivity extends Activity {
 
     private AccessPostings accessPostings;
-
-    private EditText name;
-    private EditText age;
-    private EditText gender;
-    private EditText biography;
-    private EditText interests;
-    private EditText budget;
-
-    private User user;
+    private AccessUser accessUser;
 
     final private String HEADER_SUFFIX = "'s Profile";
-    final private String ERROR = "Error: Couldn't update profile";
-    final private String SUCCESS_HEADER = "Success!";
-    final private String SUCCESS = "Profile updated";
+
+    private ArrayList<Posting> postings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.public_profile);
 
-        setContentView(R.layout.customize_profile);
-
-        accessUser = new AccessUser();
+        //Initialize DB access
         accessPostings = new AccessPostings();
+        accessUser = new AccessUser();
 
-        Bundle b = getIntent().getExtras();
-        user = accessUser.getUser(b.getString("userID"));
+        Bundle bundle = getIntent().getExtras();
 
+        User user = accessUser.getUser(bundle.getString("profileID"));
+
+        //Initialize UI element variables
         TextView header = findViewById(R.id.header);
-        name = findViewById(R.id.name);
-        age = findViewById(R.id.age);
-        gender = findViewById(R.id.gender);
-        budget = findViewById(R.id.budget);
-        biography = findViewById(R.id.bio);
-        interests = findViewById(R.id.interests);
+        TextView name = findViewById(R.id.name);
+        TextView age = findViewById(R.id.age);
+        TextView gender = findViewById(R.id.gender);
+        TextView biography = findViewById(R.id.bio);
+        TextView interests = findViewById(R.id.interests);
+        TextView budget = findViewById(R.id.budget);
 
+        //Fill in the fields
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());
         gender.setText(user.getGender());
-        budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
+        budget.setText("" + user.getBudget());
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();
@@ -107,44 +98,6 @@ public class CustomizeProfileActivity extends Activity {
 
         ListView postingsList = findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
-
-    }
-
-    public void submitClicked(View v) {
-        //Modify the user object that we have
-        user.setName(name.getText().toString());
-
-        //Modify age if there is another integer in its place
-        if(!age.getText().toString().equals("")) {
-            user.setAge(Integer.parseInt(age.getText().toString()));
-        }
-
-        //Modify the gender
-        user.setGender(gender.getText().toString());
-
-        //Modify the biography
-        user.setBiography(biography.getText().toString());
-
-        //Create a new list of interests to store
-        String interestString = interests.getText().toString();
-        String[] tempList = interestString.split(",");
-
-        ArrayList<Interest> interestList = new ArrayList<>();
-
-        for(String currInterest : tempList) {
-            if(!currInterest.equals("")) {
-                interestList.add(new Interest(currInterest));
-            }
-        }
-
-        user.setInterests(interestList);
-
-        if(accessUser.updateUser(user)==null) {
-            Messages.warning(this, ERROR);
-        }
-        else {
-            Messages.popup(this, SUCCESS, SUCCESS_HEADER);
-        }
 
     }
 }

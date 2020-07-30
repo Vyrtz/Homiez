@@ -38,12 +38,13 @@
 
         <TextView
             android:id="@+id/userInfoText"
-            android:textColor="@color/colorGrey"
-            android:textSize="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:onClick="openProfile"
+            android:textColor="@color/colorGrey"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/postingInfo"

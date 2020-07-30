@@ -29,9 +29,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private AccessUser accessUser;
     private ArrayList<Posting> postings;
     private AccessPostings accessPostings;
-    private User user;
-    private Boolean customize;
-    private Boolean self;
 
     final private String HEADER_SUFFIX = "'s Profile";
 
@@ -41,33 +38,35 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        customize = false;
 
         //Grab the user
         Bundle b = this.getArguments();
         accessUser = new AccessUser();
-        user = accessUser.getUser(b.getString("userID"));
-        self = b.getBoolean("selfProfile");
 
         View v = inflater.inflate(R.layout.profile, container, false);
+
+        //Set up button listener
+        Button customizeButt = v.findViewById(R.id.submitButt);
+        customizeButt.setOnClickListener(this);
+
+        User user = accessUser.getUser(b.getString("userID"));
+
 
         //Initialize UI element variables
         TextView header = v.findViewById(R.id.header);
         TextView name = v.findViewById(R.id.name);
         TextView age = v.findViewById(R.id.age);
         TextView gender = v.findViewById(R.id.gender);
+        TextView budget = v.findViewById(R.id.budget);
         TextView biography = v.findViewById(R.id.bio);
         TextView interests = v.findViewById(R.id.interests);
-
-        //Set up button listener
-        Button customizeButt = v.findViewById(R.id.submitButt);
-        customizeButt.setOnClickListener(this);
 
         //Filling default values for the profile
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());
         gender.setText(user.getGender());
+        budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
 
         //Build the string for the interests
@@ -110,11 +109,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         ListView postingsList = v.findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
-
-        if(self) {
-            customizeButt.setVisibility(View.VISIBLE);
-        }
-
 
         return v;
     }

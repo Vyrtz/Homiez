@@ -21,13 +21,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -47,14 +46,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -79,14 +77,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/age"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -111,14 +108,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -143,14 +139,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/budget"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -176,14 +171,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/bio"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="top"
-                    android:inputType="none"
                     android:singleLine="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -209,14 +203,13 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorYellow" />
 
-                <EditText
+                <TextView
                     android:id="@+id/interests"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="top"
-                    android:inputType="none"
                     android:singleLine="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -257,25 +250,6 @@
     </ScrollView>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/loginButton"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:background="@drawable/login_btn_background"
-            android:text="@string/submit"
-            android:textSize="30dp"
-            android:paddingLeft="20dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:textAllCaps="false"
-            android:gravity="center"
-            android:onClick="submitClicked"
-            android:layout_marginBottom="20dp"/>
-    </LinearLayout>
 
 </LinearLayout>

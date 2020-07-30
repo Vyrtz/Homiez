@@ -41,12 +41,13 @@
 
             <TextView
                 android:id="@+id/userText"
-                android:textColor="@color/colorGrey"
-                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:onClick="openProfile"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/location"

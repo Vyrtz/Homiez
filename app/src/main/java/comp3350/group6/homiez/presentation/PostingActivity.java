@@ -1,6 +1,7 @@
 package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -61,5 +62,13 @@ public class PostingActivity extends Activity {
         String p = b.getString("postingId");
         Matching.SendRequest(accessRequests,accessPostings,accessMatches,u,p);
         Messages.popup(this, "You have sent a match request!", "Match request sent");
+    }
+
+    public void openProfile(View v) {
+        Intent startIntent = new Intent(PostingActivity.this, PublicProfileActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("profileID", accessPostings.getPostingById(bundle.getString("postingId")).getUser().getUserId());
+        startIntent.putExtras(bundle);
+        startActivity(startIntent);
     }
 }
