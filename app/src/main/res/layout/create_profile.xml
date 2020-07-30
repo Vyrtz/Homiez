@@ -240,6 +240,8 @@
             <EditText
                 android:id="@+id/editInterest"
                 android:background="@drawable/login_inputbox"
+                android:textColorHint="@color/colorGrey"
+                android:hint="@string/interest_hint"
                 android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
