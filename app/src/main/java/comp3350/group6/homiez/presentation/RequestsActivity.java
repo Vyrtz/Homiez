@@ -57,14 +57,14 @@ public class RequestsActivity extends Activity {
             Messages.fatalError(this, "Failure while getting requests for user id");
         }
         else {
-            requestArrayAdapter = new ArrayAdapter<Request>(this, android.R.layout.simple_list_item_activated_2, android.R.id.text1, requests)
+            requestArrayAdapter = new ArrayAdapter<Request>(this, R.layout.requestlist_text, R.id.list_content, requests)
             {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
 
-                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+                    TextView text1 = (TextView) view.findViewById(R.id.list_content);
+                    TextView text2 = (TextView) view.findViewById(R.id.list_content2);
 
                     User u = accessUser.getUser(requests.get(position).getUserId());
                     text1.setText(u.getName());

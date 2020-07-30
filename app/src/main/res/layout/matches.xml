@@ -3,20 +3,21 @@
     android:id="@+id/matchLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
         android:gravity="center_horizontal"
+        android:textColor="@color/colorGrey"
         android:text="@string/matches"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentTop="true"/>
 
     <ListView
         android:id="@+id/listMatches"
