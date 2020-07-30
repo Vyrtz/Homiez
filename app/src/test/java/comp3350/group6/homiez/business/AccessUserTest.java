@@ -51,7 +51,7 @@ public class AccessUserTest extends TestCase {
         assertEquals(u, aUser.getUser("0"));
 
         //insert user
-//        assertNull(aUser.insertUser(u));
+        assertNull(aUser.insertUser(u));
 
         //updateUser
         aUser.updateUser(existingUpdated);

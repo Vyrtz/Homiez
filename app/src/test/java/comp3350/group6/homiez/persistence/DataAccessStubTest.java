@@ -17,7 +17,7 @@ public class DataAccessStubTest extends TestCase {
     public void testDataAccessStubExists() {
         System.out.println("\nStarting testDataAccessStubExists");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
+        DataAccess stub = new DataAccessStub("stub1");
         assertNotNull(stub);
 
         System.out.println("Finished testDataAccessStubExists");
