@@ -106,6 +106,10 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
 
+            if (result != null) {
+                insertInterests(user);
+            }
+            
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -145,12 +149,13 @@ public class DataAccessObject implements DataAccess {
                     +"', BIOGRAPHY='" + user.getBiography() + "'";
             where = "WHERE USERID='" + user.getUserId()+"'";
 
-            updateInterests( user);
-
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
 
+            if (result != null) {
+                updateInterests( user);
+            }
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -466,9 +471,8 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
-    private String updateInterests( User u ) throws SQLException{
+    private String updateInterests( User u ) throws SQLException {
         result = null;
-        ArrayList<Interest> newInterests = u.getInterests();
         String values = u.getUserId();
         
         commandString = "Delete from INTERESTS where USERID='" +values +"'";
@@ -477,8 +481,17 @@ public class DataAccessObject implements DataAccess {
 
         result = checkWarnings(statement1, updateCount);
 
+        if (result != null ) {
+            result = insertInterests(u);
+        }
+        return result;
+    }
+
+    private String insertInterests( User u ) throws SQLException {
+        String values;
+        result = null;
         commandString = "";
-        for (Interest i : newInterests) {
+        for (Interest i : u.getInterests()) {
             values = "'" + u.getUserId()
                     +"', '" + i.getInterest()
                     +"'";
@@ -487,7 +500,6 @@ public class DataAccessObject implements DataAccess {
         System.out.println(commandString);
         updateCount = statement3.executeUpdate(commandString);
         result = checkWarnings(statement1, updateCount);
-
         return result;
     }
 
