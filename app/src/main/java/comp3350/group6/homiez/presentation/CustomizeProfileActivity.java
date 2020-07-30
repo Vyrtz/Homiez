@@ -31,6 +31,7 @@ public class CustomizeProfileActivity extends Activity {
     private EditText gender;
     private EditText biography;
     private EditText interests;
+    private EditText budget;
 
     private User user;
 
@@ -55,6 +56,7 @@ public class CustomizeProfileActivity extends Activity {
         name = findViewById(R.id.name);
         age = findViewById(R.id.age);
         gender = findViewById(R.id.gender);
+        budget = findViewById(R.id.budget);
         biography = findViewById(R.id.bio);
         interests = findViewById(R.id.interests);
 
@@ -62,6 +64,7 @@ public class CustomizeProfileActivity extends Activity {
         name.setText(user.getName());
         age.setText("" + user.getAge());
         gender.setText(user.getGender());
+        budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
 
         //Build the string for the interests

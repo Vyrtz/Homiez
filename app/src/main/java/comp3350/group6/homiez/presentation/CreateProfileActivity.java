@@ -26,7 +26,8 @@ public class CreateProfileActivity extends Activity {
     private String interests;
 
     private int age;
-    private int budget;
+
+    private double budget;
 
 
     @Override
@@ -60,7 +61,7 @@ public class CreateProfileActivity extends Activity {
         //Fetch budget
         fields = findViewById(R.id.editBudget);
         if(!fields.getText().toString().equals("")) {
-            budget = Integer.parseInt(fields.getText().toString());
+            budget = Double.parseDouble(fields.getText().toString());
         }
 
         //Fetch biography
