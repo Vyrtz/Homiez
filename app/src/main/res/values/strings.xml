@@ -11,6 +11,8 @@
     <string name="login">Login</string>
     <string name="user_id_prompt">Enter User ID:</string>
     <string name="matches">Your Matches</string>
+    <string name="posting_matches">Posting Matches</string>
+    <string name="profile_matches">Profile Matches</string>
     <string name="postings">Postings</string>
     <string name="your_postings">Your Postings</string>
     <string name="request">Request</string>
@@ -21,4 +23,6 @@
     <string name="warning">Warning</string>
     <string name="Title">Title</string>
     <string name="user">User</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
