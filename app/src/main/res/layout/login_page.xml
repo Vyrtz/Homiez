@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/login_background">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/login"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="36sp"
-        android:textStyle="bold"/>
+    <ImageView
+        android:id="@+id/homiez_logo"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/logo_background"
+        android:src="@drawable/homiez_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="544dp"
-        android:orientation="horizontal"
-        android:paddingTop="250dp">
-
-        <TextView
-            android:id="@+id/userPrompt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="@string/user_id_prompt"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/editUserID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start|top"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:singleLine="true" />
-
-    </LinearLayout>
+    <EditText
+        android:id="@+id/editUserID"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_inputbox"
+        android:hint="User ID"
+        android:textColorHint="@color/colorGrey"
+        android:textColor="@color/colorGrey"
+        android:textSize="30dp"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/loginButton" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="292dp"
-        android:layout_height="104dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/login"
+        android:textSize="30dp"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/accountText"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:gravity="center"
         android:onClick="loginPressed"
-        android:text="@string/login" />
+        android:layout_marginBottom="50dp"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/accountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account yet?"
+        android:textSize="20dp"
+        android:textColor="@color/colorGrey"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/signup"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:textSize="30dp"
+        android:textColor="@color/colorYellow"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>
