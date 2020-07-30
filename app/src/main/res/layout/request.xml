@@ -1,86 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/requestHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:gravity="center"
         android:text="@string/request"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/colorGrey"/>
 
     <LinearLayout
         android:id="@+id/Info"
-        android:layout_width="409dp"
-        android:layout_height="635dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginRight="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clickable="false"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/requestHeader"
+        android:layout_above="@id/loginButton">
+
+        <TextView
+            android:id="@+id/userInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorYellow"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/userInfoText"
+            android:textColor="@color/colorGrey"
+            android:textSize="18dp"
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/postingInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Posting"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorYellow"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
 
         <TextView
             android:id="@+id/PostingInfoText"
+            android:textColor="@color/colorGrey"
+            android:textSize="18dp"
             android:layout_width="match_parent"
-            android:layout_height="52dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/buttonBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentBottom="true"
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/accept"
+        android:textSize="30dp"
+        android:paddingLeft="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal">
+        android:layout_above="@id/denyButton"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:onClick="acceptRequest" />
 
-        <Button
-            android:id="@+id/acceptButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="acceptRequest"
-            android:text="@string/accept" />
-
-        <Button
-            android:id="@+id/denyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="declineRequest"
-            android:text="@string/deny" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/denyButton"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/deny"
+        android:textSize="30dp"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:onClick="declineRequest"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>

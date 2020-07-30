@@ -20,6 +20,7 @@ public class CompatibilityControllerTest extends TestCase {
         c = new CompatibilityController();
         u = new User("test", "test",1, "test", 100, "test");
         p = new Posting("test", "test", new User("test", "test",100, "test", 100, "test"), 2, "test", "test", "test");
+
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);
     }

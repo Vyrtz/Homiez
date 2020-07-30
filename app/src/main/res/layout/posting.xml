@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:textColor="@color/colorGrey"
         android:textSize="36sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="50dp"/>
 
     <ScrollView
         android:id="@+id/infoScroll"
@@ -30,6 +32,7 @@
                 android:id="@+id/user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorYellow"
                 android:text="@string/user"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="24sp"
@@ -38,6 +41,8 @@
 
             <TextView
                 android:id="@+id/userText"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -45,6 +50,7 @@
 
             <TextView
                 android:id="@+id/location"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/location"
@@ -55,6 +61,8 @@
 
             <TextView
                 android:id="@+id/locationText"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -62,6 +70,7 @@
 
             <TextView
                 android:id="@+id/type"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/type"
@@ -72,6 +81,8 @@
 
             <TextView
                 android:id="@+id/typeText"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -79,6 +90,7 @@
 
             <TextView
                 android:id="@+id/price"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
@@ -89,6 +101,8 @@
 
             <TextView
                 android:id="@+id/priceText"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -96,6 +110,7 @@
 
             <TextView
                 android:id="@+id/description"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
@@ -106,6 +121,8 @@
 
             <TextView
                 android:id="@+id/descriptionText"
+                android:textColor="@color/colorGrey"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"/>
@@ -115,9 +132,17 @@
 
     <Button
         android:id="@+id/matchButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="sendMatch"
-        android:text="@string/match" />
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/login_btn_background"
+        android:text="@string/match"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:onClick="sendMatch"/>
 
 </LinearLayout>
