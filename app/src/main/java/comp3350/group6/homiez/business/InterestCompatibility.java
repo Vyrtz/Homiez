@@ -3,7 +3,6 @@ package comp3350.group6.homiez.business;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;

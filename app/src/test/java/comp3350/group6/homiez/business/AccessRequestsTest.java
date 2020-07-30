@@ -1,7 +1,8 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Request;
+import comp3350.group6.homiez.DataAccessStub;
 
 import junit.framework.TestCase;
 
@@ -13,7 +14,7 @@ public class AccessRequestsTest extends TestCase {
         System.out.println("\nStarting testAccessRequests1");
 
 
-        Main.startUp();
+        Services.createDataAccess(new DataAccessStub("test"));
         AccessRequests aRequest = new AccessRequests();
         ArrayList<Request> requests = new ArrayList<Request>();
         Request r = new Request("0", "3");

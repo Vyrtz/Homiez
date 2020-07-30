@@ -1,11 +1,12 @@
 package comp3350.group6.homiez.business;
 
 import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.persistence.DataAccess;
+import comp3350.group6.homiez.DataAccessStub;
 
 import junit.framework.TestCase;
 
@@ -20,13 +21,13 @@ public class MatchingTest extends TestCase {
     private Posting p;
 
     public void setUp() {
-        Main.startUp();
+        Services.createDataAccess(new DataAccessStub("test"));
         u = new User("0", "Abhi", 20, "m", 100, "test");
         accessRequests = new AccessRequests();
         aUser = new AccessUser();
         accessPostings = new AccessPostings();
         accessMatches = new AccessMatches();
-        p = new Posting("test", "test", new User("test"), 2, "test", "test", "test");
+        p = new Posting("test", "test", new User("5"), 2, "test", "test", "test");
         accessPostings.insertPosting(p);
     }
 
@@ -179,9 +180,10 @@ public class MatchingTest extends TestCase {
 
         Matching.SendRequest(accessRequests, accessPostings, accessMatches, u.getUserId(), p.getPostingId());
 
-        assertNotNull("Success", Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), p.getPostingId()));
+        assertEquals("Success", Matching.AcceptRequest(accessRequests,accessMatches, u.getUserId(), p.getPostingId()));
         //cannot decline again as the request should be deleted
-        assertNull(Matching.DeclineRequest(accessRequests, u.getUserId(), p.getPostingId()));
+        String result = Matching.DeclineRequest(accessRequests, u.getUserId(), p.getPostingId());
+        assertNull(result);
     }
 
     public void tearDown() {

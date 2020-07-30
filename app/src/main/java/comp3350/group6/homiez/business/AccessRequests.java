@@ -4,7 +4,6 @@ import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.persistence.DataAccess;
-import comp3350.group6.homiez.persistence.DataAccessStub;
 
 import java.util.List;
 

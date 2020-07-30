@@ -1,7 +1,8 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Match;
+import comp3350.group6.homiez.DataAccessStub;
 
 import junit.framework.TestCase;
 
@@ -12,7 +13,8 @@ public class AccessMatchesTest extends TestCase {
     public void testAccessMatches1() {
         System.out.println("\nStarting testAccessMatches1");
 
-        Main.startUp();
+        Services.createDataAccess(new DataAccessStub("test"));
+
         AccessMatches aMatches = new AccessMatches();
         ArrayList<Match> matches = new ArrayList<Match>();
         Match m = new Match("0", "4");

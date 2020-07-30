@@ -2,9 +2,10 @@ package comp3350.group6.homiez.business;
 
 import junit.framework.TestCase;
 
-import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.DataAccessStub;
 
 public class AgeCompatibilityTest extends TestCase {
 
@@ -14,8 +15,7 @@ public class AgeCompatibilityTest extends TestCase {
     AccessPostings accessPostings;
 
     public void setUp() {
-        Main.startUp();
-
+        Services.createDataAccess(new DataAccessStub("test"));
         c = new AgeCompatibility();
         u = new User("test", "test",20, "test", 100, "test");
         p = new Posting("test", "test", new User("test2","test",24, "test", 100, "test"), 2, "test", "test", "test");

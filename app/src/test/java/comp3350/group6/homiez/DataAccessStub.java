@@ -1,14 +1,15 @@
-package comp3350.group6.homiez.persistence;
+package comp3350.group6.homiez;
 
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
+import comp3350.group6.homiez.persistence.DataAccess;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataAccessStub implements DataAccess{
+public class DataAccessStub implements DataAccess {
     private String dbName;
     private String dbType = "stub";
 

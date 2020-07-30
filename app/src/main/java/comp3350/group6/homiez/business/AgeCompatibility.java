@@ -1,12 +1,7 @@
 package comp3350.group6.homiez.business;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
