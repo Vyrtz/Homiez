@@ -44,6 +44,7 @@
 
             <EditText
                 android:id="@+id/editID"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -75,6 +76,7 @@
 
             <EditText
                 android:id="@+id/editBudget"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,6 +109,7 @@
 
             <EditText
                 android:id="@+id/editName"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -138,6 +141,7 @@
 
             <EditText
                 android:id="@+id/editAge"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -170,6 +174,7 @@
 
             <EditText
                 android:id="@+id/editGender"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -202,6 +207,7 @@
 
             <EditText
                 android:id="@+id/editBiography"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -234,11 +240,13 @@
 
             <EditText
                 android:id="@+id/editInterest"
+                android:background="@drawable/login_inputbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="start|top"
+                android:textColorHint="@color/colorGrey"
                 android:hint="@string/interest_hint"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
