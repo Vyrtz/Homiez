@@ -382,10 +382,37 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String insertMatch(Match m) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + m.getUserId()
+                    +"', '" + m.getPostingId() + "'";
+            commandString = "INSERT INTO MATCHES VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
     public String deleteMatch(Match m) {
-        return null;
+        String uId;
+        String pId;
+        result = null;
+
+        try {
+            uId = m.getUserId();
+            pId = m.getPostingId();
+            commandString = "DELETE FROM MATCHES WHERE USERID=" + uId + " AND POSTINGID=" + pId;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     //REQUEST STUFF
@@ -413,10 +440,37 @@ public class DataAccessObject implements DataAccess {
         return null;
     }
     public String insertRequest(Request request) {
-        return null;
+        String values;
+        result = null;
+
+        try {
+            values = "'" + request.getUserId()
+                    +"', '" + request.getPostingId() + "'";
+            commandString = "INSERT INTO REQUESTS VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
     public String deleteRequest(Request request) {
-        return null;
+        String uId;
+        String pId;
+        result = null;
+
+        try {
+            uId = request.getUserId();
+            pId = request.getPostingId();
+            commandString = "DELETE FROM REQUESTS WHERE USERID=" + uId + " AND POSTINGID=" + pId;
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String checkWarnings(Statement currentStatement, int count) {
