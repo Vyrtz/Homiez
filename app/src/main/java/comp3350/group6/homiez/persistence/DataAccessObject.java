@@ -109,7 +109,7 @@ public class DataAccessObject implements DataAccess {
             if (result != null) {
                 insertInterests(user);
             }
-            
+
         } catch(Exception e) {
             e.printStackTrace();
         }

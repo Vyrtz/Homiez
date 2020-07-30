@@ -29,8 +29,7 @@ public class AccessUser {
         return dataAccess.insertUser(currentUser);
     }
 
-    public String updateUser(User currentUser)
-    {
+    public String updateUser(User currentUser) {
         return dataAccess.updateUser(currentUser);
     }
 }
