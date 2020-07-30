@@ -18,7 +18,7 @@ public class CompatibilityController implements Compatibility {
     public CompatibilityController(double ageCompatibilityWeight, double interestsCompatibilityWeight) {
         age = new AgeCompatibility();
         interests = new InterestCompatibility();
-        if(ageCompatibilityWeight + interestsCompatibilityWeight <= 1) {
+        if(ageCompatibilityWeight + interestsCompatibilityWeight <= 1 && ageCompatibilityWeight + interestsCompatibilityWeight > 0) {
             this.ageCompatibilityWeight = ageCompatibilityWeight;
             this.interestsCompatibilityWeight = interestsCompatibilityWeight;
         }

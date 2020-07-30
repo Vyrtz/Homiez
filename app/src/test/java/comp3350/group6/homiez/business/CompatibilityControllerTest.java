@@ -18,8 +18,8 @@ public class CompatibilityControllerTest extends TestCase {
         Main.startUp();
 
         c = new CompatibilityController();
-        u = new User("test", "test",1, "test");
-        p = new Posting("test", "test", new User("test", "test",100, "test"), 2, "test", "test", "test");
+        u = new User("test", "test",1, "test", 100, "test");
+        p = new Posting("test", "test", new User("test", "test",100, "test", 100, "test"), 2, "test", "test", "test");
         accessPostings = new AccessPostings();
         accessPostings.insertPosting(p);
     }
@@ -52,14 +52,14 @@ public class CompatibilityControllerTest extends TestCase {
     public void testUserWithNoInterest() {
         System.out.println("\nStarting testUserWithNoInterest");
         // attach one more user
-        p.addAttachedUser(new User("test3","test",1, "test"));
+        p.addAttachedUser(new User("test3","test",1, "test", 100, "test"));
         assertEquals(25, Math.round(c.calculateCompatibility(u, p)));
         System.out.println("Finished testUserWithNoInterest");
     }
     public void testUserWithBadValues() {
         System.out.println("\nStarting testUserWithBadValues");
         // posting already has the main user attached
-        User us = new User("test3","test",-1, "test");
+        User us = new User("test3","test",-1, "test", 100, "test");
         us.addUniqueInterest(null);
         p.addAttachedUser(us);
 
@@ -71,7 +71,7 @@ public class CompatibilityControllerTest extends TestCase {
     public void testUserWithMissingInterest() {
         System.out.println("\nStarting testUserWithMissingInterest");
 
-        User us = new User("test3","test",16, "test");
+        User us = new User("test3","test",16, "test", 100, "test");
         us.addUniqueInterest(new Interest(""));
         p.addAttachedUser(us);
 
@@ -83,7 +83,7 @@ public class CompatibilityControllerTest extends TestCase {
     public void testValidInput() {
         System.out.println("\nStarting testValidInput");
         p.getUser().addUniqueInterest(new Interest("Ice skating"));
-        User u2 = new User("test5", "test",100, "test");
+        User u2 = new User("test5", "test",100, "test", 100, "test");
         u2.addUniqueInterest(new Interest("iceskating"));
 
 
@@ -101,7 +101,7 @@ public class CompatibilityControllerTest extends TestCase {
         p.getUser().addUniqueInterest(null);
         p.getUser().addUniqueInterest(new Interest(""));
 
-        User u2 = new User("test5", "test",92, "test");
+        User u2 = new User("test5", "test",92, "test", 100, "test");
         u2.addUniqueInterest(new Interest("iceskating"));
         u2.addUniqueInterest(new Interest("CODING"));
 
@@ -118,11 +118,11 @@ public class CompatibilityControllerTest extends TestCase {
         p.getUser().addUniqueInterest(new Interest("Ice skating"));
         p.getUser().addUniqueInterest(new Interest("Anime"));
 
-        User two = new User("two", "two", 10, "two");
+        User two = new User("two", "two", 10, "two", 100, "test");
         two.addUniqueInterest(new Interest("coding"));
         two.addUniqueInterest(new Interest(""));
 
-        User three = new User("three", "three" , 2, "three");
+        User three = new User("three", "three" , 2, "three", 100, "test");
         three.addUniqueInterest(null);
         three.addUniqueInterest(new Interest("not coding"));
 
@@ -144,6 +144,14 @@ public class CompatibilityControllerTest extends TestCase {
     public void testInvalidConstruction() {
         System.out.println("\nStarting testInvalidConstruction");
         c = new CompatibilityController(1, 0.5);
+        assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        c = new CompatibilityController(-1, -0.5);
+        assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
+        assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
+
+        c = new CompatibilityController(-0.99, 0.98);
         assertEquals(0.75, ((CompatibilityController)c).getInterestsCompatibilityWeight());
         assertEquals(0.25, ((CompatibilityController)c).getAgeCompatibilityWeight());
 

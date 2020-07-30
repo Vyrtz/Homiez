@@ -1,9 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/createPosting"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent" >
 
     <TextView
         android:id="@+id/textTitle"
@@ -14,37 +14,40 @@
         android:text="@string/your_postings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"/>
 
     <ListView
         android:id="@+id/postingsList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_gravity="top"
         android:layout_weight="1"
-        android:choiceMode="none">
-
+        android:choiceMode="none"
+        android:layout_below="@id/textTitle"
+        android:layout_above="@id/button_create_posting">
     </ListView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_create_posting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="createPosting"
-        android:text="Create Posting" />
+        android:text="Create Posting"
+        android:layout_above="@+id/button_matches"/>
 
     <Button
         android:id="@+id/button_matches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="seeMatches"
-        android:text="@string/matches" />
+        android:text="@string/profile_matches"
+        android:layout_above="@+id/button_requests"/>
 
     <Button
         android:id="@+id/button_requests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="seeRequests"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
         android:text="@string/requests" />
 
-</LinearLayout>
+</RelativeLayout>

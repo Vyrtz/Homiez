@@ -13,7 +13,7 @@ import java.util.List;
 public class AccessPostings {
     private DataAccess dataAccess;
 
-    public AccessPostings(){
+    public AccessPostings() {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
@@ -21,14 +21,7 @@ public class AccessPostings {
     public String getPostings(List<Posting> postings, String userId) {
         User user = new User(userId);
         postings.clear();
-        String ret = dataAccess.getAllPostings(postings);
-        Iterator<Posting> it= postings.iterator();
-        while(it.hasNext()) {
-                if(it.next().getUser().equals(user)) {
-                    it.remove();
-                }
-        }
-        return ret;
+        return dataAccess.getAllDisplayPostings(postings, user);
     }
 
     public Posting getPostingById(String postingId) {

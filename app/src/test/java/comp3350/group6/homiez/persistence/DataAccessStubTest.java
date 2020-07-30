@@ -14,7 +14,7 @@ public class DataAccessStubTest extends TestCase {
 
 
     //Check that stub exists
-    public void testDataAccessStubExists(){
+    public void testDataAccessStubExists() {
         System.out.println("\nStarting testDataAccessStubExists");
 
         DataAccessStub stub = new DataAccessStub("stub1");
@@ -30,14 +30,14 @@ public class DataAccessStubTest extends TestCase {
 
         DataAccessStub stub = new DataAccessStub("stub1");
         stub.open("stub1");
-        User u = new User("2", "AAA", 20, "m");
+        User u = new User("2", "AAA", 20, "m", 100, "test");
 
-        assertNotNull(stub.getUser(new User("0", "AAA", 20, "m")));
-        assertNotNull(stub.getUser(new User("1", "AAA", 20, "m")));
-        assertNotNull(stub.getUser(new User("2", "AAA", 20, "m")));
-        assertNotNull(stub.getUser(new User("3", "AAA", 20, "m")));
-        assertNotNull(stub.getUser(new User("4", "AAA", 20, "m")));
-        assertNull(stub.getUser(new User("5", "Abhi", 20, "m")));
+        assertNotNull(stub.getUser(new User("0", "AAA", 20, "m", 100, "test")));
+        assertNotNull(stub.getUser(new User("1", "AAA", 20, "m", 100, "test")));
+        assertNotNull(stub.getUser(new User("2", "AAA", 20, "m", 100, "test")));
+        assertNotNull(stub.getUser(new User("3", "AAA", 20, "m", 100, "test")));
+        assertNotNull(stub.getUser(new User("4", "AAA", 20, "m", 100, "test")));
+        assertNull(stub.getUser(new User("5", "Abhi", 20, "m", 100, "test")));
 
         assertTrue("Matt".equals(stub.getUser(u).getName()));
 
@@ -51,13 +51,13 @@ public class DataAccessStubTest extends TestCase {
 
         DataAccessStub stub = new DataAccessStub("stub1");
         stub.open("stub1");
-        User u = new User("5", "AAA", 24, "m");
-        User uExists = new User("2", "Matt", 20, "m");
-        User uDNE = new User("99", "AAA", 29, "f");
+        User u = new User("5", "AAA", 24, "m", 100, "test");
+        User uExists = new User("2", "Matt", 20, "m", 100, "test");
+        User uDNE = new User("99", "AAA", 29, "f", 100, "test");
 
 
         assertNull(stub.getUser(u));
-        stub.insertUser(new User("5", "John", 18, "m"));
+        stub.insertUser(new User("5", "John", 18, "m", 100, "test"));
         assertNotNull(stub.getUser(u));
         assertNull(stub.insertUser(uExists));
 
@@ -75,14 +75,14 @@ public class DataAccessStubTest extends TestCase {
     //Check contents of postings list
 
     //check posting updates, insertions and deletions
-    public void testPostingChanges(){
+    public void testPostingChanges() {
         System.out.println("\nStarting testPostingChanges");
 
 
         DataAccessStub stub = new DataAccessStub("stub1");
         stub.open("stub1");
         ArrayList<Posting> postings = new ArrayList<Posting>();
-        User u = new User("2", "Matt", 20, "m");
+        User u = new User("2", "Matt", 20, "m", 100, "test");
         Posting pExists = new Posting("2", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         Posting pDNE = new Posting("8", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         Posting pUpdate = new Posting("8", "nameChange", u, 1500, "Pembina", "Apartment", "TestDesc1");
@@ -107,7 +107,7 @@ public class DataAccessStubTest extends TestCase {
 
 
     //check contents of match request list
-    public void testMatchRequestsContents(){
+    public void testMatchRequestsContents() {
         System.out.println("\nStarting testMatchRequestsContents");
 
 
@@ -138,7 +138,7 @@ public class DataAccessStubTest extends TestCase {
 
 
     //check insertions and deletions of match requests
-    public void testMatchRequestChanges(){
+    public void testMatchRequestChanges() {
         System.out.println("\nStarting testMatchRequestsChanges");
 
         DataAccessStub stub = new DataAccessStub("stub1");
@@ -166,7 +166,7 @@ public class DataAccessStubTest extends TestCase {
 
 
     //check contents of matches list
-    public void testMatchesContents(){
+    public void testMatchesContents() {
         System.out.println("\nStarting testMatchesContents");
 
 
@@ -206,7 +206,7 @@ public class DataAccessStubTest extends TestCase {
 
 
     //check match insertions and deletions
-    public void testMatchesChanges(){
+    public void testMatchesChanges() {
         System.out.println("\nStarting testMatchesChanges");
 
         DataAccessStub stub = new DataAccessStub("stub1");
@@ -232,6 +232,5 @@ public class DataAccessStubTest extends TestCase {
 
         System.out.println("\nFinished testMatchesChanges");
     }
-
 
 }

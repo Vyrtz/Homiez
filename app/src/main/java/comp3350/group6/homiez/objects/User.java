@@ -11,41 +11,42 @@ public class User {
     private int age;
     private String gender;
     private double budget;
-    private String description;
+    private String biography;
     private ArrayList<Posting> postingList;
     private ArrayList<Interest> interests;
 
-    public User(String userId,String name,int age, String gender) {
+    public User(String userId,String name,int age, String gender, double budget, String biography) {
         this.userId=userId;
         this.name=name;
         this.age=age;
         this.gender=gender;
+        this.budget=budget;
+        this.biography = biography;
         this.postingList=new ArrayList<Posting>();
         interests = new ArrayList<Interest>();
     }
 
-    public User(String userId){
+    public User(String userId) {
         this.userId=userId;
         this.postingList=new ArrayList<Posting>();
         this.interests = new ArrayList<Interest>();
     }
 
     //once u set up an userid then you cannot change it anymore.
-    public String getUserId(){
+    public String getUserId() {
         return this.userId;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
+    public void setName(String name) { this.name = name; }
 
-    public void setName(String newName) { name = newName; }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
 
-    public int getAge(){
-        return age;
-    }
-
-    public void setAge(int newAge) { age = newAge; }
+    public String getBiography() { return this.biography; }
+    public void setBiography(String biography) { this.biography = biography; };
 
 
     @Override
@@ -55,23 +56,20 @@ public class User {
                 : false;
     }
 
-    public void addPosting(Posting posting){
+    public void addPosting(Posting posting) {
         this.postingList.add(posting);
     }
 
-    public ArrayList<Posting> getPosts(){
+    public ArrayList<Posting> getPosts() {
         return this.postingList;
     }
 
-    public String toString(){
+    public String toString() {
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String newGender) { gender = newGender; }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public void setInterests(ArrayList<Interest> interests) {
         this.interests = interests;
@@ -82,7 +80,7 @@ public class User {
     }
 
     public boolean addUniqueInterest (Interest i) {
-        if (i != null){
+        if (i != null) {
             if (!interests.contains(i)) {
                 interests.add(i);
                 return true;
@@ -91,11 +89,6 @@ public class User {
         return false;
     }
 
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public double getBudget() { return budget; }
 

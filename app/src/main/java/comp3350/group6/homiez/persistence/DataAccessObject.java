@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
@@ -29,11 +30,6 @@ public class DataAccessObject implements DataAccess {
     private Connection connection;
     private ResultSet rs2, rs3, rs4, rs5;
 
-    private ArrayList<User> users;
-    private ArrayList<Posting> postings;
-    private ArrayList<Match> matches;
-    private ArrayList<Request> requests;
-
     public DataAccessObject(String dbName) { this.dbName = dbName; }
 
     public void open(String dbPath) {
@@ -48,7 +44,8 @@ public class DataAccessObject implements DataAccess {
             statement2 = connection.createStatement();
             statement3 = connection.createStatement();
 
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
         }
@@ -59,7 +56,8 @@ public class DataAccessObject implements DataAccess {
         try {
             commandString = "shutdown compact";
             rs2 = statement1.executeQuery(commandString);
-        } catch(Exception e) {
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -70,10 +68,8 @@ public class DataAccessObject implements DataAccess {
         int age;
         String gender;
         double budget;
-        String description;
+        String bio;
         String name;
-
-        result = null;
 
         try {
             commandString = "Select * from USERS where USERID='" + user.getUserId() +"'";
@@ -83,12 +79,10 @@ public class DataAccessObject implements DataAccess {
                 budget = rs2.getDouble("BUDGET");
                 gender = rs2.getString("GENDER");
                 age = rs2.getInt("AGE");
-                description =  rs2.getString("DESCRIPTION");
+                bio =  rs2.getString("BIOGRAPHY");
                 uid = rs2.getString("USERID");
-                u = new User(uid, name, age, gender);
-                u.setBudget(budget);
-                u.setDescription(description);
-
+                u = new User(uid, name, age, gender,budget,bio);
+                getInterests(u);
             }
             rs2.close();
         }
@@ -108,8 +102,8 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getName()
                     +"', '" + user.getAge()
                     +"', '" + user.getGender()
-                    +", '" + user.getBudget()
-                    +"', '" + user.getDescription() + "'";
+                    +"', '" + user.getBudget()
+                    +"', '" + user.getBiography() + "'";
 
             commandString = "INSERT INTO USERS VALUES(" + values + ")";
             updateCount = statement1.executeUpdate(commandString);
@@ -126,7 +120,6 @@ public class DataAccessObject implements DataAccess {
         result = null;
         String values;
         String where;
-
         User userOld = getUser(user);
 
         if(userOld == null)
@@ -140,8 +133,10 @@ public class DataAccessObject implements DataAccess {
             user.setGender(userOld.getGender());
         if(user.getBudget() == 0)
             user.setBudget(userOld.getBudget());
-        if(user.getDescription() == null)
-            user.setDescription(userOld.getDescription());
+        if(user.getBiography() == null)
+            user.setBiography(userOld.getBiography());
+        if(user.getInterests() == null)
+            user.setInterests(userOld.getInterests());
 
         try {
 
@@ -150,11 +145,16 @@ public class DataAccessObject implements DataAccess {
                     +"', '" + user.getAge()
                     +"', '" + user.getGender()
                     +", '" + user.getBudget()
-                    +"', '" + user.getDescription() + "'";
+                    +"', '" + user.getBiography() + "'";
             where = "WHERE USERID=" + user.getUserId();
             commandString = "UPDATE USERS " + " SET " + values + " " + where;
-
-        } catch(Exception e) {
+            result = updateInterests( user);
+            if (result != null) {
+                updateCount = statement1.executeUpdate(commandString);
+                result = checkWarnings(statement1, updateCount);
+            }
+        }
+        catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -163,112 +163,79 @@ public class DataAccessObject implements DataAccess {
 
 
     //POSTING STUFF
-    public String getAllPostings(List<Posting> postingsList) {
-        Posting p = null;
-        User u = null;
-        String pid;
-        String uid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
+    public String getAllDisplayPostings(List<Posting> postingsList, User user) {
+        Posting p;
         result = null;
         try {
-            commandString = "Select * from POSTINGS";
-            rs2 = statement1.executeQuery(commandString);
+            commandString = "Select * from POSTINGS where USERID!='"+user.getUserId()+"'";
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                uid = rs2.getString("USERID");
-                pid = rs2.getString("POSTINGID");
-
-                u = new User(uid);
-                p = new Posting(pid,title,u,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
                 postingsList.add(p);
             }
-            rs2.close();
-            return "Success";
+            rs3.close();
+            result = "Success";
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
 
     public Posting getPosting(Posting posting) {
         Posting p = null;
-        User u = null;
-        String pid;
-        String uid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
-        result = null;
         try {
             commandString = "Select * from POSTINGS where POSTINGID='"+posting.getPostingId()+"'";
-            rs2 = statement1.executeQuery(commandString);
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                pid = rs2.getString("POSTINGID");
-                uid = rs2.getString("USERID");
-                pid = rs2.getString("POSTINGID");
-
-                u = new User(uid);
-                p = new Posting(pid,title,u,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
             }
-            rs2.close();
-            return p;
+            rs3.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return p;
     }
+
     public String getPostingsByUser(List<Posting> postingsList, User user) {
-        Posting p = null;
-        String pid;
-        String uid;
-        String title;
-        double price;
-        String location;
-        String type;
-        String description;
+        Posting p;
         result = null;
         try {
             commandString = "Select * from POSTINGS where USERID='"+user.getUserId()+"'";
-            rs2 = statement1.executeQuery(commandString);
+            rs3 = statement2.executeQuery(commandString);
 
-            while(rs2.next()) {
-                title = rs2.getString("TITLE");
-                price = rs2.getDouble("PRICE");
-                location = rs2.getString("LOCATION");
-                type = rs2.getString("TYPE");
-                description =  rs2.getString("DESCRIPTION");
-                pid = rs2.getString("POSTINGID");
-
-                p = new Posting(pid,title,user,price,location,type,description);
+            while(rs3.next()) {
+                p = constructPosting(rs3);
                 postingsList.add(p);
             }
-            rs2.close();
-            return "Success";
+            rs3.close();
+            result = "Success";
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return result;
     }
+
+    private Posting constructPosting(ResultSet rs) throws SQLException {
+        String title = rs.getString("TITLE");
+        double price = rs.getDouble("PRICE");
+        String location = rs.getString("LOCATION");
+        String type = rs.getString("TYPE");
+        String description = rs.getString("DESCRIPTION");
+        String uid = rs.getString("USERID");
+        String pid = rs.getString("POSTINGID");
+
+        User u = new User(uid);
+        u = getUser(u);
+        Posting p = new Posting(pid,title,u,price,location,type,description);
+
+        return p;
+    }
+
     public String insertPosting(Posting posting) {
         String values;
         result = null;
@@ -337,48 +304,45 @@ public class DataAccessObject implements DataAccess {
     public String getMatchesForUser(List<Match> matchList, String userId) {
         Match match;
         String postingId;
-        try
-        {
+        result = null;
+        try {
             commandString = "Select * from MATCHES where USERID='" +userId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 postingId = rs5.getString("POSTINGID");
                 match = new Match(userId, postingId);
                 matchList.add(match);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
+
     public String getMatchesForPosting(List<Match> matchList, String postingId) {
         Match match;
         String userId;
-        try
-        {
+        result = null;
+        try {
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 match = new Match(userId, postingId);
                 matchList.add(match);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
 
     public String insertMatch(Match m) {
@@ -419,25 +383,23 @@ public class DataAccessObject implements DataAccess {
     public String getRequests(List<Request> requests, String postingId) {
         Request request;
         String userId;
-        try
-        {
+        result = null;
+        try {
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
-            rs5 = statement2.executeQuery(commandString);
+            rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
-            while (rs5.next())
-            {
+            while (rs5.next()) {
                 userId = rs5.getString("USERID");
                 request = new Request(userId, postingId);
                 requests.add(request);
             }
             rs5.close();
-            return "Success";
+            result = "Success";
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e);
         }
-        return null;
+        return result;
     }
     public String insertRequest(Request request) {
         String values;
@@ -473,22 +435,74 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
 
+    private String getInterests( User u ) {
+        Interest i;
+        String s;
+        result = null;
+
+        try {
+            commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
+            rs4 = statement3.executeQuery(commandString);
+            while (rs4.next()) {
+                s = rs4.getString("INTEREST");
+                i = new Interest(s);
+                u.addUniqueInterest(i);
+            }
+            rs4.close();
+            result =  "Success";
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    private String updateInterests( User u ) {
+        result = null;
+        ArrayList<Interest> newInterests = u.getInterests();
+        String values;
+
+        try {
+            values = u.getUserId();
+            commandString = "Delete from INTERESTS where USERID='" +values +"'";
+
+            updateCount = statement3.executeUpdate(commandString);
+
+            result = checkWarnings(statement1, updateCount);
+
+            commandString = "";
+            for (Interest i : newInterests) {
+                values = "'" + i.getInterest()
+                        +"', '" + u.getUserId()
+                        +"'";
+                commandString += "Insert into INTERESTS " +" Values(" +values +")";
+            }
+            System.out.println(commandString);
+            updateCount = statement3.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
     public String checkWarnings(Statement currentStatement, int count) {
-        String res = null;
+        String res = "Success";
         SQLWarning warning;
 
         try {
-
-            if((warning = currentStatement.getWarnings()) != null)
+            if((warning = currentStatement.getWarnings()) != null) {
                 res = warning.getMessage();
-
-        } catch (SQLException e) {
+            }
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
-        if(count != 1)
-            res = "Row inserted incorrectly";
-
+        if(count != 1) {
+            res = null;
+        }
         return res;
     }
 }//CLASS

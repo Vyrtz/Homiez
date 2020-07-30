@@ -17,7 +17,7 @@ public class DataAccessStub implements DataAccess{
     private ArrayList<Match> matches;
     private ArrayList<Request> matchRequests;
 
-    public DataAccessStub(String dbName){
+    public DataAccessStub(String dbName) {
         this.dbName = dbName;
     }
     public void open(String dbName) {
@@ -27,15 +27,15 @@ public class DataAccessStub implements DataAccess{
         Match match;
 
         users = new ArrayList<User>();
-        user = new User ("0","Abhi", 20, "m");
+        user = new User ("0","Abhi", 20, "m", 500, "abhi's bio");
         users.add(user);
-        user = new User ("1","Jordan", 20, "m");
+        user = new User ("1","Jordan", 20, "m", 700, "Jordan's bio");
         users.add(user);
-        user = new User ("2","Matt", 20, "m");
+        user = new User ("2","Matt", 20, "m", 1000, "Matt's bio");
         users.add(user);
-        user = new User ("3","Vinh", 18, "m");
+        user = new User ("3","Vinh", 18, "m", 600, "Vinh's bio");
         users.add(user);
-        user = new User ("4","Ma", 18, "m");
+        user = new User ("4","Ma", 18, "m", 800, "Ma's bio");
         users.add(user);
 
         postings = new ArrayList<Posting>();
@@ -106,8 +106,12 @@ public class DataAccessStub implements DataAccess{
         return "Success";
     }
 
-    public String getAllPostings(List<Posting> postings) {
-        postings.addAll(this.postings);
+    public String getAllDisplayPostings(List<Posting> postings, User user) {
+        for (Posting p : this.postings) {
+            if (!p.getUser().equals(user)) {
+                postings.add(p);
+            }
+        }
         return "Success";
     }
 
