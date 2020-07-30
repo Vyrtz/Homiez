@@ -16,14 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="comp3350.group6.homiez.presentation.StartActivity">
-        </activity>
-        <activity android:name="comp3350.group6.homiez.presentation.ViewPostingsActivity"></activity>
-        <activity android:name="comp3350.group6.homiez.presentation.RequestsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="comp3350.group6.homiez.presentation.ViewPostingsActivity" />
-        </activity>
+        <activity android:name="comp3350.group6.homiez.presentation.RequestsActivity"></activity>
 
         <activity android:name="comp3350.group6.homiez.presentation.AnswerRequestActivity">
             <meta-data
@@ -34,6 +27,7 @@
         <activity android:name="comp3350.group6.homiez.presentation.PostingActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.MatchesActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.CreatePostingActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.MainActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.CreateProfileActivity"></activity>
     </application>
 
