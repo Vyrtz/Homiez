@@ -1,6 +1,7 @@
 package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -46,6 +47,16 @@ public class AnswerRequestActivity extends Activity {
         editID = (TextView) findViewById(R.id.PostingInfoText);
         editID.setText(" Sent a Match Request for:  " + p.getTitle());
     }
+
+    public void openProfile(View view) {
+        Intent startIntent = new Intent(AnswerRequestActivity.this, PublicProfileActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("profileID", bundle.getString("requestUserId"));
+        startIntent.putExtras(bundle);
+        startActivity(startIntent);
+
+    }
+
     public void acceptRequest (View view) {
         String result = Matching.AcceptRequest(accessRequests,accessMatches,requestUserId,postingId);
         if(result == null) {
