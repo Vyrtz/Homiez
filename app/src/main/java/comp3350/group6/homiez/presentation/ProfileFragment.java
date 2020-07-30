@@ -55,6 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         TextView name = v.findViewById(R.id.name);
         TextView age = v.findViewById(R.id.age);
         TextView gender = v.findViewById(R.id.gender);
+        TextView budget = v.findViewById(R.id.budget);
         TextView biography = v.findViewById(R.id.bio);
         TextView interests = v.findViewById(R.id.interests);
 
@@ -63,6 +64,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         name.setText(user.getName());
         age.setText("" + user.getAge());
         gender.setText(user.getGender());
+        budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
 
         //Build the string for the interests
