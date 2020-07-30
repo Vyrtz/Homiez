@@ -479,10 +479,10 @@ public class DataAccessObject implements DataAccess {
 
             commandString = "";
             for (Interest i : newInterests) {
-                values = "'" + i.getInterest()
-                        +"', '" + u.getUserId()
+                values = "'" + u.getUserId()
+                        +"', '" + i.getInterest()
                         +"'";
-                commandString += "Insert into INTERESTS " +" Values(" +values +")";
+                commandString += "Insert into INTERESTS " +" Values(" +values +") ";
             }
             System.out.println(commandString);
             updateCount = statement3.executeUpdate(commandString);

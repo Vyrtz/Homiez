@@ -12,12 +12,15 @@ import java.util.ArrayList;
 public class DataAccessStubTest extends TestCase {
 
 
-
+    private DataAccess stub;
+    public void setUp() {
+        stub = new DataAccessStub("stub1");
+        stub.open("stub1");
+    }
     //Check that stub exists
     public void testDataAccessStubExists() {
         System.out.println("\nStarting testDataAccessStubExists");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
         assertNotNull(stub);
 
         System.out.println("Finished testDataAccessStubExists");
@@ -28,8 +31,6 @@ public class DataAccessStubTest extends TestCase {
     public void testUsersContents() {
         System.out.println("\nStarting testUsersContents");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         User u = new User("2", "AAA", 20, "m", 100, "test");
 
         assertNotNull(stub.getUser(new User("0", "AAA", 20, "m", 100, "test")));
@@ -49,8 +50,6 @@ public class DataAccessStubTest extends TestCase {
     public void testUsersChanges() {
         System.out.println("\nStarting testUsersChanges");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         User u = new User("5", "AAA", 24, "m", 100, "test");
         User uExists = new User("2", "Matt", 20, "m", 100, "test");
         User uDNE = new User("99", "AAA", 29, "f", 100, "test");
@@ -78,9 +77,6 @@ public class DataAccessStubTest extends TestCase {
     public void testPostingChanges() {
         System.out.println("\nStarting testPostingChanges");
 
-
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         ArrayList<Posting> postings = new ArrayList<Posting>();
         User u = new User("2", "Matt", 20, "m", 100, "test");
         Posting pExists = new Posting("2", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
@@ -111,8 +107,6 @@ public class DataAccessStubTest extends TestCase {
         System.out.println("\nStarting testMatchRequestsContents");
 
 
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         ArrayList<Request> requests = new ArrayList<Request>();
 
         stub.getRequests(requests, "0");
@@ -141,8 +135,6 @@ public class DataAccessStubTest extends TestCase {
     public void testMatchRequestChanges() {
         System.out.println("\nStarting testMatchRequestsChanges");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         ArrayList<Request> requests = new ArrayList<Request>();
         Request rExists = new Request("4", "2");
         Request rDNE = new Request("0", "3");
@@ -169,9 +161,6 @@ public class DataAccessStubTest extends TestCase {
     public void testMatchesContents() {
         System.out.println("\nStarting testMatchesContents");
 
-
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         ArrayList<Match> matches = new ArrayList<Match>();
 
         stub.getMatchesForUser(matches, "0");
@@ -209,8 +198,6 @@ public class DataAccessStubTest extends TestCase {
     public void testMatchesChanges() {
         System.out.println("\nStarting testMatchesChanges");
 
-        DataAccessStub stub = new DataAccessStub("stub1");
-        stub.open("stub1");
         ArrayList<Match> matches = new ArrayList<Match>();
         Match mExists = new Match("4", "3");
         Match mDNE = new Match("0", "0");
@@ -218,7 +205,6 @@ public class DataAccessStubTest extends TestCase {
 
         assertNull(stub.deleteMatch(mDNE));
         assertNull(stub.insertMatch(mExists));
-
 
         stub.insertMatch(mDNE);
         stub.getMatchesForUser(matches, "0");
