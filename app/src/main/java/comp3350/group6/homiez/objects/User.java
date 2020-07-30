@@ -39,9 +39,14 @@ public class User {
         return this.name;
     }
 
+    public void setName(String newName) { name = newName; }
+
     public int getAge(){
         return age;
     }
+
+    public void setAge(int newAge) { age = newAge; }
+
 
     @Override
     public boolean equals(Object user) {
@@ -66,6 +71,8 @@ public class User {
         return gender;
     }
 
+    public void setGender(String newGender) { gender = newGender; }
+
     public void setInterests(ArrayList<Interest> interests) {
         this.interests = interests;
     }
@@ -84,9 +91,13 @@ public class User {
         return false;
     }
 
+    public String getDescription() { return description; }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public double getBudget() { return budget; }
 
     public void setBudget(double budget) {
         this.budget = budget;

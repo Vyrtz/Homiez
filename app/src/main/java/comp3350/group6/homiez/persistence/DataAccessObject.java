@@ -99,11 +99,66 @@ public class DataAccessObject implements DataAccess {
     }
 
     public String insertUser(User user) {
-        return null;
+        result = null;
+        String values;
+
+        try {
+
+            values = "'" + user.getUserId()
+                    +"', '" + user.getName()
+                    +"', '" + user.getAge()
+                    +"', '" + user.getGender()
+                    +", '" + user.getBudget()
+                    +"', '" + user.getDescription() + "'";
+
+            commandString = "INSERT INTO USERS VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String updateUser(User user) {
-        return null;
+        result = null;
+        String values;
+        String where;
+
+        User userOld = getUser(user);
+
+        if(userOld == null)
+            return "User not found";
+
+        if(user.getName() == null)
+            user.setName(userOld.getName());
+        if(user.getAge() == 0)
+            user.setAge(userOld.getAge());
+        if(user.getGender() == null)
+            user.setGender(userOld.getGender());
+        if(user.getBudget() == 0)
+            user.setBudget(userOld.getBudget());
+        if(user.getDescription() == null)
+            user.setDescription(userOld.getDescription());
+
+        try {
+
+            values = "'" + user.getUserId()
+                    +"', '" + user.getName()
+                    +"', '" + user.getAge()
+                    +"', '" + user.getGender()
+                    +", '" + user.getBudget()
+                    +"', '" + user.getDescription() + "'";
+            where = "WHERE USERID=" + user.getUserId();
+            commandString = "UPDATE USERS " + " SET " + values + " " + where;
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 
@@ -308,5 +363,24 @@ public class DataAccessObject implements DataAccess {
     }
     public String deleteRequest(Request request) {
         return null;
+    }
+
+    public String checkWarnings(Statement currentStatement, int count) {
+        String res = null;
+        SQLWarning warning;
+
+        try {
+
+            if((warning = currentStatement.getWarnings()) != null)
+                res = warning.getMessage();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(count != 1)
+            res = "Row inserted incorrectly";
+
+        return res;
     }
 }//CLASS
