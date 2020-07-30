@@ -22,8 +22,6 @@ public class CreateProfileActivity extends Activity {
     private String userID;
     private String name;
     private String gender;
-    private String email;
-    private String phoneNum;
     private String biography;
     private String interests;
 

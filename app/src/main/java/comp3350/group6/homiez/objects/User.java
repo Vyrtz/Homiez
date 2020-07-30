@@ -45,6 +45,8 @@ public class User {
         return age;
     }
 
+    public String getBiography() { return this.biography; }
+
     @Override
     public boolean equals(Object user) {
         return (user instanceof User)
