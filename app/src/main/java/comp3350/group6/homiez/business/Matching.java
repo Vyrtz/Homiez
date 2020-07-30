@@ -43,17 +43,16 @@ public class Matching {
         if (Validate(userId, postingId)) {
             if (userId != null && postingId != null && requests != null && postings != null && matches != null) {
                 boolean matchAlreadyPresent = checkMatch(matches, userId, postingId);
-                if (matchAlreadyPresent) {
-                    return null;
-                }
-                Request newReq = new Request(userId, postingId);
-                List<Posting> posts = new ArrayList<Posting>();
-                String success = postings.getPostings(posts, userId);
-                //this would mean a posting is found and not made by the user
-                if (success != null) {
-                    Posting posting = new Posting(postingId);
-                    if (posts.contains(posting)) {
-                        result = requests.insertRequest(newReq);
+                if (!matchAlreadyPresent) {
+                    Request newReq = new Request(userId, postingId);
+                    List<Posting> posts = new ArrayList<Posting>();
+                    String success = postings.getPostings(posts, userId);
+                    //this would mean a posting is found and not made by the user
+                    if (success != null) {
+                        Posting posting = new Posting(postingId);
+                        if (posts.contains(posting)) {
+                            result = requests.insertRequest(newReq);
+                        }
                     }
                 }
             }
@@ -88,7 +87,6 @@ public class Matching {
         AccessPostings postings = new AccessPostings();
         User u = users.getUser(userId);
         Posting p = postings.getPostingById(postingId);
-
         if(u == null || p == null) {
             return false;
         }
