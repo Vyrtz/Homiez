@@ -3,23 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimaryDark"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/textView10"
-        android:textColor="@color/colorYellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/create_profile"
+        android:singleLine="true"
+        android:text="Create Profile"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:textColor="@color/colorYellow"
         android:layout_marginBottom="50dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -31,125 +34,122 @@
 
             <TextView
                 android:id="@+id/idPrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/user_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editID"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:gravity="bottom|left"
+                android:singleLine="true"
+                android:inputType="none"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/budgetPrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/budget_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editBudget"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="numberSigned"
-                android:singleLine="true" />
+                android:gravity="bottom|left"
+                android:singleLine="true"
+                android:inputType="none"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/namePrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/name_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
-
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editName"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:gravity="bottom|left"
+                android:singleLine="true"
+                android:inputType="none"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/agePrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center_horizontal|left"
                 android:paddingLeft="10dp"
                 android:text="@string/age_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editAge"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="numberSigned"
-                android:singleLine="true" />
+                android:gravity="bottom|left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:singleLine="true"
+                android:inputType="none"/>
 
         </LinearLayout>
 
@@ -157,32 +157,31 @@
             android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/genderPrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/gender_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editGender"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:gravity="bottom|left"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:singleLine="true"
+                android:inputType="none"/>
 
         </LinearLayout>
 
@@ -190,32 +189,32 @@
             android:id="@+id/bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/biographyPrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_vertical"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/biography_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editBiography"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:singleLine="false" />
+                android:gravity="top"
+                android:inputType="none"
+                android:singleLine="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
 
@@ -223,52 +222,55 @@
             android:id="@+id/interests"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/interestPrompt"
+                android:textColor="@color/colorYellow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_vertical"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
                 android:paddingLeft="10dp"
                 android:text="@string/interest_prompt"
-                android:textSize="20sp"
-                android:textColor="@color/colorYellow"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <EditText
                 android:id="@+id/editInterest"
                 android:background="@drawable/login_inputbox"
+                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_weight="1"
-                android:ems="10"
-                android:gravity="start|top"
-                android:textColorHint="@color/colorGrey"
-                android:hint="@string/interest_hint"
-                android:importantForAutofill="no"
-                android:inputType="textMultiLine"
-                android:singleLine="false" />
+                android:gravity="top"
+                android:inputType="none"
+                android:singleLine="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:background="@drawable/login_btn_background"
-        android:text="@string/create"
-        android:textSize="30dp"
-        android:paddingLeft="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:textAllCaps="false"
-        android:gravity="center"
-        android:onClick="createPressed"
-        android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:background="@drawable/login_btn_background"
+            android:text="@string/create"
+            android:textSize="30dp"
+            android:paddingLeft="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:onClick="createPressed"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
 
 </LinearLayout>
