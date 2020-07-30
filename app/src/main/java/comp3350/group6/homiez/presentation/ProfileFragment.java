@@ -29,8 +29,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private AccessPostings accessPostings;
     private User user;
     private Boolean customize;
+    private Boolean self;
 
     final private String HEADER_SUFFIX = "'s Profile";
+
 
     public ProfileFragment(){
         //Required empty constructor
@@ -44,6 +46,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Bundle b = this.getArguments();
         accessUser = new AccessUser();
         user = accessUser.getUser(b.getString("userID"));
+        self = b.getBoolean("selfProfile");
 
         View v = inflater.inflate(R.layout.profile, container, false);
 
@@ -106,8 +109,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         ListView postingsList = v.findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
 
-        //TODO: Condition check on the user - otherwise there would be no button
-        customizeButt.setVisibility(View.VISIBLE);
+        if(self) {
+            customizeButt.setVisibility(View.VISIBLE);
+        }
 
 
         return v;
