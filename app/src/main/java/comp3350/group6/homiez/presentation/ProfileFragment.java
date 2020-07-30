@@ -30,8 +30,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private User user;
     private Boolean customize;
 
-    final private String CUSTOMIZE = "Customize";
-    final private String SUBMIT = "Submit Changes";
     final private String HEADER_SUFFIX = "'s Profile";
 
     public ProfileFragment(){
