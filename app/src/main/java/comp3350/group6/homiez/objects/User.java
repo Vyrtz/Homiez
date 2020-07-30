@@ -11,15 +11,17 @@ public class User {
     private int age;
     private String gender;
     private int budget;
-    private String description;
+    private String biography;
     private ArrayList<Posting> postingList;
     private ArrayList<Interest> interests;
 
-    public User(String userId,String name,int age, String gender) {
+    public User(String userId,String name,int age, String gender, int budget, String biography) {
         this.userId=userId;
         this.name=name;
         this.age=age;
         this.gender=gender;
+        this.budget=budget;
+        this.biography = biography;
         this.postingList=new ArrayList<Posting>();
         interests = new ArrayList<Interest>();
     }
@@ -38,10 +40,13 @@ public class User {
     public String getName(){
         return this.name;
     }
+    public void setName(String name) { this.name = name; }
 
-    public int getAge(){
-        return age;
-    }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+
+    public String getBiography() { return this.biography; }
+    public void setBiography(String biography) { this.biography = biography; };
 
     @Override
     public boolean equals(Object user) {
@@ -62,9 +67,8 @@ public class User {
         return "User: "+this.name+" age:"+this.age+" gender:"+this.gender;
     }
 
-    public String getGender() {
-        return gender;
-    }
+    public String getGender() { return gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public void setInterests(ArrayList<Interest> interests) {
         this.interests = interests;
