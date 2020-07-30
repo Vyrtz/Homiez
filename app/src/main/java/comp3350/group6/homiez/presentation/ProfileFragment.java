@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -79,17 +82,31 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
         interests.setText(interestText);
 
-
-        //TODO: Populate the posting list
-
-        //ListView postingsList = v.findViewById(R.id.postingList);
-
         //Initialize DB access and a postings list
-        //postings = new ArrayList<>();
-        //accessPostings = new AccessPostings();
+        postings = new ArrayList<>();
+        accessPostings = new AccessPostings();
 
         //Populate postings
-        //accessPostings.getPostingsByUserId(postings, user.getUserId());
+        accessPostings.getPostingsByUserId(postings, user.getUserId());
+
+        // Set up the Visuals for each posting in the list
+        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), android.R.layout.simple_list_item_2, android.R.id.text1, postings) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                text1.setText(postings.get(position).getTitle());
+                text2.setText(postings.get(position).getLocation() + ", $" + postings.get(position).getPrice());
+
+                return view;
+            }
+        };
+
+        ListView postingsList = v.findViewById(R.id.postingList);
+        postingsList.setAdapter(adapter);
 
         //TODO: Condition check on the user - otherwise there would be no button
         customizeButt.setVisibility(View.VISIBLE);
