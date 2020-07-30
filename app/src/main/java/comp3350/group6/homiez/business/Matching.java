@@ -13,8 +13,8 @@ public class Matching {
 
     public static String AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId) {
         result = null;
-        if (Validate(userId, postingId)) {
-            if (userId != null && postingId != null && requests != null && matches != null) {
+        if (userId != null && postingId != null && requests != null && matches != null) {
+            if (Validate(userId, postingId)) {
                 boolean success = deleteRequest(requests, userId, postingId);
                 if (success) {
                     Match newMatch = new Match(userId, postingId);
@@ -27,8 +27,8 @@ public class Matching {
 
     public static String DeclineRequest(AccessRequests requests, String userId, String postingId) {
         result = null;
-        if (Validate(userId, postingId)) {
-            if (userId != null && postingId != null && requests != null) {
+        if (userId != null && postingId != null && requests != null) {
+            if (Validate(userId, postingId)) {
                 boolean success = deleteRequest(requests, userId, postingId);
                 if (success) {
                     result = "Success";
@@ -40,8 +40,8 @@ public class Matching {
 
     public static String SendRequest(AccessRequests requests, AccessPostings postings, AccessMatches matches, String userId, String postingId) {
         result = null;
-        if (Validate(userId, postingId)) {
-            if (userId != null && postingId != null && requests != null && postings != null && matches != null) {
+        if (userId != null && postingId != null && requests != null && postings != null && matches != null) {
+            if (Validate(userId, postingId)) {
                 boolean matchAlreadyPresent = checkMatch(matches, userId, postingId);
                 if (!matchAlreadyPresent) {
                     Request newReq = new Request(userId, postingId);
