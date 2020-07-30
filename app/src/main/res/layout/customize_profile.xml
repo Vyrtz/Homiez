@@ -36,13 +36,15 @@
                 android:text="@string/name_prompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
+                android:background="@android:color/transparent"
                 android:singleLine="true"
+                android:inputType="none"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
@@ -64,14 +66,16 @@
                 android:text="@string/age_prompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:singleLine="true" />
+                android:background="@android:color/transparent"
+                android:singleLine="true"
+                android:inputType="none"/>
 
         </LinearLayout>
 
@@ -92,14 +96,16 @@
                 android:text="@string/gender_prompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:singleLine="true" />
+                android:background="@android:color/transparent"
+                android:singleLine="true"
+                android:inputType="none"/>
 
         </LinearLayout>
 
@@ -121,12 +127,14 @@
                 android:text="@string/biography_prompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/bio"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:gravity="top"
+                android:inputType="none"
                 android:singleLine="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -150,12 +158,14 @@
                 android:text="@string/interest_prompt"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-            <TextView
+            <EditText
                 android:id="@+id/interests"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_weight="1"
+                android:background="@android:color/transparent"
                 android:gravity="top"
+                android:inputType="none"
                 android:singleLine="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -192,7 +202,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="@string/customize"
             android:visibility="invisible" />
 
     </LinearLayout>
