@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
                     onSelfPostings = true;
                     break;
                 case R.id.profile:
-
+                    fragment = new ProfileFragment();
+                    Bundle b2 = getIntent().getExtras();
+                    fragment.setArguments(b2);
                     break;
             }
             // Display the page
