@@ -2,6 +2,7 @@ package comp3350.group6.homiez.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         TextView budget = v.findViewById(R.id.budget);
         TextView biography = v.findViewById(R.id.bio);
         TextView interests = v.findViewById(R.id.interests);
+
+        biography.setMovementMethod(new ScrollingMovementMethod());
+        interests.setMovementMethod(new ScrollingMovementMethod());
 
         //Filling default values for the profile
         header.setText(user.getName() + HEADER_SUFFIX);

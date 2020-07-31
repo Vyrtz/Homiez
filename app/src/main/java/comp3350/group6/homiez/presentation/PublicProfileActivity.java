@@ -2,6 +2,7 @@ package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -49,6 +50,9 @@ public class PublicProfileActivity extends Activity {
         TextView biography = findViewById(R.id.bio);
         TextView interests = findViewById(R.id.interests);
         TextView budget = findViewById(R.id.budget);
+
+        biography.setMovementMethod(new ScrollingMovementMethod());
+        interests.setMovementMethod(new ScrollingMovementMethod());
 
         //Fill in the fields
         header.setText(user.getName() + HEADER_SUFFIX);
