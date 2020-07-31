@@ -89,7 +89,7 @@ public class MatchesActivity extends AppCompatActivity {
 
         listMatches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            public void onItemClick(AdapterView<?> a, View v, int p, long id){
+            public void onItemClick(AdapterView<?> a, View v, int p, long id) {
                 Intent intent = new Intent(MatchesActivity.this, PublicProfileActivity.class);
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("profileID", matchList.get(p).get("ID"));
