@@ -21,7 +21,6 @@ public class DataAccessObject implements DataAccess {
     private String commandString;
     private int updateCount;
     private String result;
-    private static String EOF = "  ";
 
     private Statement statement1, statement2, statement3;
     private Connection connection;
@@ -105,10 +104,8 @@ public class DataAccessObject implements DataAccess {
             commandString = "INSERT INTO USERS VALUES(" + values + ")";
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
+            insertInterests(user);
 
-            if (result != null) {
-                insertInterests(user);
-            }
             
         } catch(Exception e) {
             e.printStackTrace();
@@ -153,9 +150,8 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
 
-            if (result != null) {
-                updateInterests( user);
-            }
+            updateInterests( user);
+
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -481,9 +477,8 @@ public class DataAccessObject implements DataAccess {
 
         result = checkWarnings(statement1, updateCount);
 
-        if (result != null ) {
-            result = insertInterests(u);
-        }
+        insertInterests(u);
+
         return result;
     }
 
@@ -513,11 +508,11 @@ public class DataAccessObject implements DataAccess {
             }
         }
         catch (SQLException e) {
-            e.printStackTrace();
+           res = e.getMessage();
         }
 
         if(count != 1) {
-            res = null;
+            res = "Tuple not inserted correctly.";
         }
         return res;
     }
