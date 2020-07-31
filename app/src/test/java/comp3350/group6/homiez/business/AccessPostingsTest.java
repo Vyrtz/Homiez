@@ -17,6 +17,7 @@ public class AccessPostingsTest extends TestCase {
     ArrayList<Posting> postings;
     Posting newPost;
     Posting postExists;
+    Posting postDNE;
     Posting updatePost;
 
 
@@ -30,92 +31,89 @@ public class AccessPostingsTest extends TestCase {
         aPostings = new AccessPostings();
         postings = new ArrayList<Posting>();
         postings.removeAll(postings);
-        newPost = new Posting("10", "TEST TITLE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
-        postExists = new Posting("11", "UPDATED", u, 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
-        updatePost = new Posting("10", "TEST UPDATE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
-        aPostings.insertPosting(postExists);
-        aPostings.deletePosting(newPost); //remove old test post from the db if exists
+        postExists = new Posting("0", "Room at Pembina Riverside Condo", u, 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
+        postDNE = new Posting("10", "TEST TITLE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
     }
 
     //Make sure the instance exists
-    public void testAccessPostings1() {
-        System.out.println("\nStarting testAccessPostings1");
+    public void testAccessPostingsExists() {
+        System.out.println("\nStarting testAccessPostingsExists");
 
-        assertNotNull(aPostings);
+        assertNotNull(aPostings.getPostingById("0"));
 
-        System.out.println("Finished testAccessPostings1");
+        System.out.println("Finished testAccessPostingsExists");
     }
 
+    public void testNullValues() {
+        System.out.println("\nStarting testNullValues");
+        Posting p;
 
-    //postinglist_text single-post operations with a post that is in the "database"
-    public void testAccessPostingsExisting() {
-        System.out.println("\nStarting testAccessPostingsExisting");
-
-        //retrieve posting
-        assertEquals(postExists, aPostings.getPostingById("11"));
-
-        //update Posting
-        aPostings.updatePosting(postExists);
-        assertTrue("UPDATED".equals(aPostings.getPostingById("11").getTitle()));
-
-        //deletePosting
-        aPostings.deletePosting(postExists);
-        assertNull(aPostings.getPostingById("11"));
-
-        System.out.println("Finished testAccessPostingsExisting");
-    }
-
-    //postinglist_text single-post operations with a post that is not in the "database"
-    public void testAccessPostingsNotExisting() {
-        System.out.println("\nStarting testAccessPostingsNotExisting");
-
-        //retrieve posting
-        assertNull(aPostings.getPostingById("10"));
-
-        //update posting
-        assertNull(aPostings.updatePosting(newPost));
-
-        //delete Posting
-        assertNull(aPostings.deletePosting(newPost));
-
-        //insert Posting
-        aPostings.insertPosting(newPost);
-        assertNotNull(aPostings.getPostingById("10"));
-
-        System.out.println("Finished testAccessPostingsExisting");
-    }
-
-
-    //postinglist_text operations dependent on user id
-    public void testUserPostings() {
-        System.out.println("\nStarting testUserPostings");
-
-        aPostings.getPostingsByUserId(postings, "0");
-        assertEquals(3, postings.size());
+        aPostings.getPostings(postings, null);
+        assertEquals(5, postings.size());
         postings.clear();
 
-        aPostings.getPostingsByUserId(postings, "1");
-        assertEquals(1, postings.size());
+        assertNull((p = aPostings.getPostingById("1000")));
+
+        assertNull(aPostings.getPostingsByUserId(postings, null));
+
+        assertNull(aPostings.insertPosting(null));
+
+        assertNull(aPostings.deletePosting(null));
+
+        System.out.println("Finished testNullValues");
+    }
+
+    //Test invalid data - ex) inserting an already-existing post, or updating a non-existent one
+    public void testBadValues() {
+        System.out.println("\nStarting testBadValues");
+
+        aPostings.getPostings(postings, "-1");
+        assertEquals(5, postings.size());
         postings.clear();
 
-        aPostings.insertPosting(newPost);
-        aPostings.getPostingsByUserId(postings, "5");
+        assertNull(aPostings.getPostingById("-1"));
+
+        aPostings.getPostingsByUserId(postings, "-1");
         assertEquals(0, postings.size());
         postings.clear();
 
+        assertNull(aPostings.insertPosting(postExists));
 
-        aPostings.getPostingsByUserId(postings, "0");
-        assertEquals(3, postings.size());
-        postings.clear();
+        assertNull(aPostings.updatePosting(postDNE));
 
-        aPostings.getPostingsByUserId(postings, "10");
-        assertEquals(0, postings.size());
+        assertNull(aPostings.deletePosting(postDNE));
 
-        aPostings.insertPosting(newPost);
-        aPostings.getPostingsByUserId(postings, "3");
+        System.out.println("Finished testBadValues");
+    }
+
+    public void testExistingPosts() {
+        System.out.println("\nStarting testExistingPostings");
+        Posting pOld;
+        Posting pNew;
+        String updated = "TEST UPDATE";
+
+        aPostings.getPostings(postings, "0");
         assertEquals(2, postings.size());
+        pOld = postings.get(0);
+        postings.clear();
 
-        System.out.println("Finished testUserPostings");
+        assertNotNull(aPostings.getPostingById("0"));
+
+        aPostings.getPostingsByUserId(postings, "0");
+        assertEquals(3, postings.size());
+
+        assertEquals("Success", aPostings.insertPosting(postDNE));
+        assertNotNull(aPostings.getPostingById(postDNE.getPostingId()));
+
+        pNew = new Posting(pOld.getPostingId(), pOld.getTitle(), pOld.getUser(), pOld.getPrice(), pOld.getLocation(), pOld.getType(), updated);
+        assertEquals("Success", aPostings.updatePosting(pNew));
+        assertEquals(updated, aPostings.getPostingById(pOld.getPostingId()).getDescription());
+        aPostings.updatePosting(pOld);
+
+        assertEquals("Success", aPostings.deletePosting(postDNE));
+        assertNull(aPostings.getPostingById(postDNE.getPostingId()));
+
+        System.out.println("Finished testExistingPostings");
     }
 
     public void tearDown () {
