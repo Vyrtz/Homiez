@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
+                    android:inputType="none|numberSigned"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -150,7 +150,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
+                    android:inputType="none|numberSigned|numberDecimal"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
@@ -220,35 +220,6 @@
                     android:singleLine="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/postingLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
-
-                <TextView
-                    android:id="@+id/postingsPrompt"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="clip_vertical"
-                    android:layout_weight="2"
-                    android:gravity="bottom|left"
-                    android:paddingLeft="10dp"
-                    android:text="@string/posting_prompt"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorYellow" />
-
-                <ListView
-                    android:id="@+id/postingList"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_above="@id/loginButton"
-                    android:layout_weight="1" />
 
             </LinearLayout>
 

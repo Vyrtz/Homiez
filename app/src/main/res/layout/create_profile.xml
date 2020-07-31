@@ -77,15 +77,15 @@
 
             <EditText
                 android:id="@+id/editBudget"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/login_inputbox"
                 android:gravity="bottom|left"
+                android:inputType="none|numberSigned|numberDecimal"
                 android:singleLine="true"
-                android:inputType="none"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorGrey" />
 
         </LinearLayout>
 
@@ -141,15 +141,15 @@
 
             <EditText
                 android:id="@+id/editAge"
-                android:background="@drawable/login_inputbox"
-                android:textColor="@color/colorGrey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/login_inputbox"
                 android:gravity="bottom|left"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:inputType="none|numberSigned"
                 android:singleLine="true"
-                android:inputType="none"/>
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorGrey" />
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package comp3350.group6.homiez.presentation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         TextView biography = v.findViewById(R.id.bio);
         TextView interests = v.findViewById(R.id.interests);
 
+        biography.setMovementMethod(new ScrollingMovementMethod());
+        interests.setMovementMethod(new ScrollingMovementMethod());
+
         //Filling default values for the profile
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
@@ -82,33 +86,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
 
         interests.setText(interestText);
-
-        //Initialize DB access and a postings list
-        postings = new ArrayList<>();
-        accessPostings = new AccessPostings();
-
-        //Populate postings
-        accessPostings.getPostingsByUserId(postings, user.getUserId());
-
-        // Set up the Visuals for each posting in the list
-        final ArrayAdapter<Posting> adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_white, R.id.list_content, postings) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView text1 = (TextView) view.findViewById(R.id.list_content);
-                TextView text2 = (TextView) view.findViewById(R.id.list_content2);
-                TextView text3 = (TextView) view.findViewById(R.id.list_content3);
-
-                text1.setText(postings.get(position).getTitle());
-                text2.setText(postings.get(position).getLocation());
-                text3.setText("$" + postings.get(position).getPrice());
-                return view;
-            }
-        };
-
-        ListView postingsList = v.findViewById(R.id.postingList);
-        postingsList.setAdapter(adapter);
 
         return v;
     }

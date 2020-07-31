@@ -135,15 +135,15 @@
         android:id="@+id/matchButton"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:background="@drawable/login_btn_background"
-        android:text="@string/match"
-        android:textSize="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
+        android:background="@drawable/login_btn_background"
         android:gravity="center"
-        android:onClick="sendMatch"/>
+        android:onClick="sendMatch"
+        android:text="@string/send_request"
+        android:textAllCaps="false"
+        android:textSize="30dp" />
 
 </LinearLayout>

@@ -52,7 +52,13 @@ public class CreateProfileActivity extends Activity {
         fields = findViewById(R.id.editAge);
         if(!fields.getText().toString().equals("")) {
             age = Integer.parseInt(fields.getText().toString());
+            if(age > 150 || age <= 0){
+                Messages.warning(this, "Error: Age value invalid");
+                return;
+            }
         }
+
+        System.out.println("got past incorrect age");
 
         //Fetch gender
         fields = findViewById(R.id.editGender);
