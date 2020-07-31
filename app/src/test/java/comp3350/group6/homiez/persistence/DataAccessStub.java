@@ -138,10 +138,12 @@ public class DataAccessStub implements DataAccess {
         return null;
     }
     public String insertPosting(Posting posting) {
-        boolean exist = postings.contains(posting);
-        if (!exist) {
-            postings.add(posting);
-            return "Success";
+        if(posting != null) {
+            boolean exist = postings.contains(posting);
+            if (!exist) {
+                postings.add(posting);
+                return "Success";
+            }
         }
         return null;
     }
@@ -174,10 +176,12 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String insertRequest(Request req) {
-        boolean exist = matchRequests.contains(req);
-        if (!exist) {
-            matchRequests.add(req);
-            return "Success";
+        if(req != null) {
+            boolean exist = matchRequests.contains(req);
+            if (!exist) {
+                matchRequests.add(req);
+                return "Success";
+            }
         }
         return null;
     }
