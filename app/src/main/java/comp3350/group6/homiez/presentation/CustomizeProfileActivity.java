@@ -89,7 +89,12 @@ public class CustomizeProfileActivity extends Activity {
 
         //Modify age if there is another integer in its place
         if(!age.getText().toString().equals("")) {
-            user.setAge(Integer.parseInt(age.getText().toString()));
+            int tempAge = Integer.parseInt(age.getText().toString());
+            if(tempAge > 150 || tempAge <= 0){
+                Messages.warning(this, "Error: Age value invalid");
+                return;
+            }
+            user.setAge(tempAge);
         }
 
         //Modify the gender

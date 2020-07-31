@@ -150,7 +150,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
-                    android:inputType="none"
+                    android:inputType="none|numberSigned|numberDecimal"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
