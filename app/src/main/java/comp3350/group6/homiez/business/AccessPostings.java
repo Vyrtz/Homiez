@@ -28,8 +28,11 @@ public class AccessPostings {
     }
 
     public String getPostingsByUserId(List<Posting> postings, String userId) {
-        User user = new User(userId);
-        return dataAccess.getPostingsByUser(postings, user);
+        if(userId != null) {
+            User user = new User(userId);
+            return dataAccess.getPostingsByUser(postings, user);
+        }
+        return null;
     }
 
     public String insertPosting(Posting currentPosting) {
