@@ -90,21 +90,26 @@ public class DataAccessStub implements DataAccess {
 
 
     public String insertMatch(Match m) {
-        boolean exist = matches.contains(m);
-        if (!exist) {
-            matches.add(m);
-            return "Success";
+        if (m != null) {
+            boolean exist = matches.contains(m);
+            if (!exist) {
+                matches.add(m);
+                return "Success";
+            }
         }
         return null;
     }
 
     public String deleteMatch(Match m) {
-        boolean exist = matches.contains(m);
-        if (!exist) {
-            return null;
+        if (m != null) {
+            boolean exist = matches.contains(m);
+            if (!exist) {
+                return null;
+            }
+            matches.remove(m);
+            return "Success";
         }
-        matches.remove(m);
-        return "Success";
+        return null;
     }
 
     public String getAllDisplayPostings(List<Posting> postings, User user) {
