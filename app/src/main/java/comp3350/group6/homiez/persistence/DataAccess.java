@@ -19,8 +19,6 @@ public interface DataAccess {
 
     String updateUser(User user);
 
-    //String deleteUser();
-
 
     //POSTING STUFF
     String getAllDisplayPostings(List<Posting> postingList, User loggedin);
