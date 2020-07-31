@@ -43,4 +43,5 @@
     <string name="customize">Customize</string>
     <string name="submit">Submit Changes</string>
     <string name="send_request">Send Request</string>
+    <string name="view_profile">View Profile</string>
 </resources>

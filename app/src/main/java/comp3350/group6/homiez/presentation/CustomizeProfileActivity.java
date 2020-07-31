@@ -103,6 +103,10 @@ public class CustomizeProfileActivity extends Activity {
         //Modify the biography
         user.setBiography(biography.getText().toString());
 
+        if(!budget.getText().toString().equals("")) {
+            user.setBudget(Double.parseDouble(budget.getText().toString()));
+        }
+
         //Create a new list of interests to store
         String interestString = interests.getText().toString();
         String[] tempList = interestString.split(",");
