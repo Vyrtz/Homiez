@@ -73,19 +73,25 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String getMatchesForUser(List<Match> matches, String u) {
-        for (Match m : this.matches) {
-            if(m.getUserId().equals(u))
-                matches.add(m);
+        if (matches != null && u != null) {
+            for (Match m : this.matches) {
+                if (m.getUserId().equals(u))
+                    matches.add(m);
+            }
+            return "Success";
         }
-        return "Success";
+        return null;
     }
 
     public String getMatchesForPosting(List<Match> matches, String p) {
-        for (Match m : this.matches) {
-            if(m.getPostingId().equals(p))
-                matches.add(m);
+        if (matches != null && p != null) {
+            for (Match m : this.matches) {
+                if (m.getPostingId().equals(p))
+                    matches.add(m);
+            }
+            return "Success";
         }
-        return "Success";
+        return null;
     }
 
 
@@ -113,32 +119,38 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String getAllDisplayPostings(List<Posting> postings, User user) {
-        for (Posting p : this.postings) {
-            if (!p.getUser().equals(user)) {
-                postings.add(p);
+        if (postings != null && user != null) {
+            for (Posting p : this.postings) {
+                if (!p.getUser().equals(user)) {
+                    postings.add(p);
+                }
             }
+            return "Success";
         }
-        return "Success";
+        return null;
     }
 
     public Posting getPosting(Posting posting) {
         for(Posting p : postings) {
-            if (posting.equals(p)) {
+            if (p.equals(posting)) {
                 return p;
             }
         }
         return null;
     }
     public String getPostingsByUser(List<Posting> postingsList, User user) {
-        for(Posting p : postings) {
-            if (p.getUser().equals(user)) {
-                postingsList.add(p);
+        if (postingsList != null && user != null) {
+            for (Posting p : postings) {
+                if (p.getUser().equals(user)) {
+                    postingsList.add(p);
+                }
             }
+            return "Success";
         }
         return null;
     }
     public String insertPosting(Posting posting) {
-        if(posting != null) {
+        if (posting != null) {
             boolean exist = postings.contains(posting);
             if (!exist) {
                 postings.add(posting);
@@ -168,15 +180,18 @@ public class DataAccessStub implements DataAccess {
     }
 
     public String getRequests(List<Request> requests, String pId) {
-        for (Request r : this.matchRequests) {
-            if(r.getPostingId().equals(pId))
-                requests.add(r);
+        if (requests != null && pId != null) {
+            for (Request r : this.matchRequests) {
+                if (r.getPostingId().equals(pId))
+                    requests.add(r);
+            }
+            return "Success";
         }
-        return "Success";
+        return null;
     }
 
     public String insertRequest(Request req) {
-        if(req != null) {
+        if (req != null) {
             boolean exist = matchRequests.contains(req);
             if (!exist) {
                 matchRequests.add(req);
@@ -204,10 +219,12 @@ public class DataAccessStub implements DataAccess {
         return found;
     }
     public String insertUser(User insert) {
-        boolean exist = users.contains(insert);
-        if (!exist) {
-            users.add(insert);
-            return "Success";
+        if (insert != null) {
+            boolean exist = users.contains(insert);
+            if (!exist) {
+                users.add(insert);
+                return "Success";
+            }
         }
         return null;
     }
