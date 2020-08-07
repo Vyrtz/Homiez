@@ -11,7 +11,6 @@ import java.sql.SQLWarning;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataAccessObject implements DataAccess {
@@ -312,6 +311,7 @@ public class DataAccessObject implements DataAccess {
         String postingId;
         result = null;
         try {
+            checkNullValues(matchList, userId);
             commandString = "Select * from MATCHES where USERID='" +userId +"'";
             rs5 = statement3.executeQuery(commandString);
             // ResultSetMetaData md5 = rs5.getMetaData();
@@ -334,6 +334,7 @@ public class DataAccessObject implements DataAccess {
         String userId;
         result = null;
         try {
+            checkNullValues(matchList, postingId);
             commandString = "Select * from MATCHES where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
             while (rs5.next()) {
@@ -392,6 +393,7 @@ public class DataAccessObject implements DataAccess {
         String userId;
         result = null;
         try {
+            checkNullValues(requests, postingId);
             commandString = "Select * from REQUESTS where POSTINGID='" +postingId +"'";
             rs5 = statement3.executeQuery(commandString);
             while (rs5.next()) {
@@ -492,7 +494,6 @@ public class DataAccessObject implements DataAccess {
                     +"'";
             commandString += "Insert into INTERESTS " +" Values(" +values +") ";
         }
-        System.out.println(commandString);
         updateCount = statement3.executeUpdate(commandString);
         result = checkWarnings(statement1, updateCount);
         return result;
@@ -512,8 +513,14 @@ public class DataAccessObject implements DataAccess {
         }
 
         if(count != 1) {
-            res = "Tuple not inserted correctly.";
+            res = null; //nul indicates a failure
         }
         return res;
+    }
+
+    private void checkNullValues (List something, String id) throws NullPointerException{
+        if (something == null || id == null ) {
+            throw new NullPointerException();
+        }
     }
 }//CLASS

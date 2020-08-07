@@ -16,7 +16,7 @@ import comp3350.group6.homiez.objects.MatchTest;
 import comp3350.group6.homiez.objects.PostingTest;
 import comp3350.group6.homiez.objects.RequestTest;
 import comp3350.group6.homiez.objects.UserTest;
-import comp3350.group6.homiez.persistence.DataAccessStubTest;
+import comp3350.group6.homiez.persistence.DataAccessTest;
 
 public class AllTests {
     public static TestSuite suite;
@@ -50,7 +50,7 @@ public class AllTests {
     }
     private static void testPersistence()
     {
-        suite.addTestSuite(DataAccessStubTest.class);
+        suite.addTestSuite(DataAccessTest.class);
     }
 
 }
