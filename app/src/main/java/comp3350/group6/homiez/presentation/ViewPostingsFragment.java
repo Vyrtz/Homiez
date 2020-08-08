@@ -29,7 +29,6 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
     // Variables
     private boolean self_posting = false;
     private String userID;
-    private static int currentPosting = 6;
     private AccessUser accessUser;
     private User user;
 
@@ -157,8 +156,6 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
             case R.id.button_create_posting:
                 singleReq.setClass(getActivity(), CreatePostingActivity.class);
                 bundle.putString("userID", userID);
-                bundle.putInt("createPostingId", currentPosting);
-                currentPosting++;
                 break;
         }
         singleReq.putExtras(bundle);
