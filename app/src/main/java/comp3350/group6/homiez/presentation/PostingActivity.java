@@ -19,6 +19,7 @@ public class PostingActivity extends Activity {
     private AccessPostings accessPostings;
     private AccessRequests accessRequests;
     private AccessMatches accessMatches;
+    private Posting post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class PostingActivity extends Activity {
         accessRequests = new AccessRequests();
         accessMatches = new AccessMatches();
 
-        Posting post = accessPostings.getPostingById(postingID);
+        post = accessPostings.getPostingById(postingID);
 
         if(b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
@@ -70,5 +71,15 @@ public class PostingActivity extends Activity {
         bundle.putString("profileID", accessPostings.getPostingById(bundle.getString("postingId")).getUser().getUserId());
         startIntent.putExtras(bundle);
         startActivity(startIntent);
+    }
+
+    public void deletePosting(View v) {
+        String result = accessPostings.deletePosting(post);
+        if(result == null) {
+            Messages.fatalError(this, "Failure while declining requests ");
+        }
+        else {
+            finish();
+        }
     }
 }
