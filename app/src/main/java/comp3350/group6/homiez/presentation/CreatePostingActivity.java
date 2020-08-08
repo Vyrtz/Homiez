@@ -16,7 +16,7 @@ import comp3350.group6.homiez.objects.User;
 public class CreatePostingActivity extends Activity {
     private AccessPostings accessPostings;
     private String userId;
-    private static int currentPostingId;
+    private static String currentPostingId;
     private AccessUser accessUser;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class CreatePostingActivity extends Activity {
         userId = b.getString("userID");
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
-        currentPostingId = b.getInt("createPostingId");
+        currentPostingId = java.util.UUID.randomUUID().toString();
     }
     public void clickCreatePosting(View view) {
         EditText title  = (EditText) findViewById(R.id.editTextTitle);
