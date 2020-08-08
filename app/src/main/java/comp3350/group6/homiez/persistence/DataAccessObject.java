@@ -249,6 +249,7 @@ public class DataAccessObject implements DataAccess {
 
             commandString = "INSERT INTO POSTINGS VALUES(" + values + ")";
             updateCount = statement1.executeUpdate(commandString);
+            insertAttachedUsers(posting);
             result = checkWarnings(statement1, updateCount);
         }
         catch(Exception e) {
@@ -495,6 +496,58 @@ public class DataAccessObject implements DataAccess {
             commandString += "Insert into INTERESTS " +" Values(" +values +") ";
         }
         updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
+        return result;
+    }
+
+    private String insertAttachedUsers( Posting p ) throws SQLException {
+        String values;
+        result = null;
+        commandString = "";
+        for (User u : p.getAttachedUsers()) {
+            values = "'" + p.getPostingId()
+                    +"', '" + u.getUserId()
+                    +"'";
+            commandString += "Insert into ATTACHEDUSERS " +" Values(" +values +") ";
+        }
+        updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
+        return result;
+    }
+
+    private String updateAttachedUsers( Posting p ) throws SQLException {
+        result = null;
+        String values = p.getPostingId();
+
+        commandString = "Delete from ATTACHEDUSERS where POSTINGID='" +values +"'";
+
+        updateCount = statement3.executeUpdate(commandString);
+
+        result = checkWarnings(statement1, updateCount);
+
+        insertAttachedUsers(p);
+
+        return result;
+    }
+    private String getAttachedUsers( Posting p ) throws SQLException {
+        result = null;
+        String uid;
+        commandString = "Select * from ATTACHEDUSERS where POSTINGID='" + p.getPostingId() +"'";
+        rs4 = statement3.executeQuery(commandString);
+        while (rs4.next()) {
+            uid = rs4.getString("USERID");
+            User u = getUser(new User(uid));
+            p.addAttachedUser(u);
+        }
+        rs4.close();
+        result =  "Success";
+
+        return result;
+    }
+
+    private String deleteAttachedUsers(Posting p) throws SQLException{
+        commandString = "DELETE FROM ATTACHEDUSERS WHERE POSTINGID='" + p.getPostingId() + "'";
+        updateCount = statement1.executeUpdate(commandString);
         result = checkWarnings(statement1, updateCount);
         return result;
     }
