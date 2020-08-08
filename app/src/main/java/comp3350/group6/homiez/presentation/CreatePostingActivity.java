@@ -38,7 +38,7 @@ public class CreatePostingActivity extends Activity {
         try {
             double priceD = Double.parseDouble(price.getText().toString());
             User u = accessUser.getUser(userId);
-            Posting p = new Posting(""+currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
+            Posting p = new Posting(currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
             accessPostings.insertPosting(p);
         }
         catch (Exception e) {
