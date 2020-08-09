@@ -22,8 +22,7 @@ public class AccessMatches {
     public String getMatchesForPosting(List<Match> matches, String postingId) {
         return dataAccess.getMatchesForPosting(matches, postingId);
     }
-    public String insertMatch(Match currentMatch)
-    {
+    public String insertMatch(Match currentMatch) {
         return dataAccess.insertMatch(currentMatch);
     }
 
