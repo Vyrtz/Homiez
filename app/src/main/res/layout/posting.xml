@@ -28,16 +28,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:src="@drawable/room_stock"
+                android:layout_gravity="center">
+            </ImageView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView android:layout_height="150dp"
-                    android:layout_width="wrap_content"
-                    android:src="@drawable/room_stock"
-                    android:layout_gravity="center"> </ImageView>
-
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/user"
@@ -55,10 +56,12 @@
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:background="@drawable/login_btn_background"
                     android:onClick="openProfile"
-                    android:text="@string/view_profile" />
+                    android:text="@string/view_profile"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <TextView

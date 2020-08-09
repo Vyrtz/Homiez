@@ -214,7 +214,7 @@ android:focusableInTouchMode="true">
                     android:scrollbars="vertical"
                     android:singleLine="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorGrey" />
 
             </LinearLayout>
 
