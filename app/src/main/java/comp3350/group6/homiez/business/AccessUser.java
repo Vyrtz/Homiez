@@ -8,15 +8,14 @@ import comp3350.group6.homiez.persistence.DataAccess;
 public class AccessUser {
 
     private DataAccess dataAccess;
-    private User loggedInUser;
 
     public AccessUser()
     {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public void login(User u) {
-        loggedInUser = u;
+    public String login(User u, String password) {
+        return dataAccess.authenticateLogin(u, password);
     }
 
     public User getUser (String userId) {
@@ -24,9 +23,9 @@ public class AccessUser {
         return dataAccess.getUser(u);
     }
 
-    public String insertUser(User currentUser)
+    public String insertUser(User currentUser, String password)
     {
-        return dataAccess.insertUser(currentUser);
+        return dataAccess.insertUser(currentUser, password);
     }
 
     public String updateUser(User currentUser)

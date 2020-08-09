@@ -70,7 +70,7 @@ public class AccessUserTest extends TestCase {
         assertNull(aUser.getUser("99"));
 
         //insert user
-        aUser.insertUser(newUser);
+        aUser.insertUser(newUser, "test");
         assertEquals(newUser, aUser.getUser("99"));
 
         //update user

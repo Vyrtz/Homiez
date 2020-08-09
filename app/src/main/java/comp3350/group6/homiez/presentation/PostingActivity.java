@@ -76,7 +76,7 @@ public class PostingActivity extends Activity {
     public void deletePosting(View v) {
         String result = accessPostings.deletePosting(post);
         if(result == null) {
-            Messages.fatalError(this, "Failure while declining requests ");
+            Messages.fatalError(this, "Failure while deleting posting ");
         }
         else {
             finish();

@@ -218,7 +218,7 @@ public class DataAccessStub implements DataAccess {
         }
         return found;
     }
-    public String insertUser(User insert) {
+    public String insertUser(User insert, String password) {
         if (insert != null) {
             boolean exist = users.contains(insert);
             if (!exist) {
@@ -237,5 +237,8 @@ public class DataAccessStub implements DataAccess {
             return "Success";
         }
         return null;
+    }
+    public String authenticateLogin(User u, String password) {
+        return "Success";
     }
 }
