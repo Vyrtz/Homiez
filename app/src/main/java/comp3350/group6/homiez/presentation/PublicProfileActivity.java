@@ -1,6 +1,7 @@
 package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,7 @@ public class PublicProfileActivity extends Activity {
 
     private ArrayList<Posting> postings;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class PublicProfileActivity extends Activity {
         TextView biography = findViewById(R.id.bio);
         TextView interests = findViewById(R.id.interests);
         TextView budget = findViewById(R.id.budget);
+        ListView postingList = findViewById(R.id.postingList);
+        postingList.setNestedScrollingEnabled(true);
 
         biography.setMovementMethod(new ScrollingMovementMethod());
         interests.setMovementMethod(new ScrollingMovementMethod());
