@@ -33,17 +33,18 @@
         android:id="@+id/loginButton"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:background="@drawable/login_btn_background"
-        android:text="@string/login"
-        android:textSize="30dp"
-        android:paddingLeft="20dp"
-        android:layout_centerHorizontal="true"
         android:layout_above="@id/accountText"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:textAllCaps="false"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/login_btn_background"
         android:gravity="center"
         android:onClick="loginPressed"
-        android:layout_marginBottom="50dp"/>
+        android:paddingLeft="20dp"
+        android:text="@string/login"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/accountText"

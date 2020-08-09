@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="accept_decline" type="id"></item>
+    <item name="edit_del" type="id"></item>
+</resources>

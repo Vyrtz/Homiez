@@ -231,17 +231,18 @@ android:focusableInTouchMode="true">
 
         <Button
             android:id="@+id/submitButt"
-            android:layout_width="350dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
-            android:background="@drawable/login_btn_background"
-            android:text="@string/customize"
-            android:textSize="30dp"
-            android:paddingLeft="20dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:textAllCaps="false"
+            android:layout_marginBottom="65dp"
+            android:background="@drawable/login_btn_background"
             android:gravity="center"
             android:onClick="submitClicked"
-            android:layout_marginBottom="65dp"/>
+            android:paddingLeft="20dp"
+            android:text="@string/customize"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
     </LinearLayout>
 </LinearLayout>

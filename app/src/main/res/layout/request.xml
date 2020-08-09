@@ -22,8 +22,7 @@
         android:layout_height="match_parent"
         android:clickable="false"
         android:orientation="vertical"
-        android:layout_below="@+id/requestHeader"
-        android:layout_above="@id/loginButton">
+        android:layout_below="@+id/requestHeader">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,36 +78,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp" />
+
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true">
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:background="@drawable/login_btn_background"
-        android:text="@string/accept"
-        android:textSize="30dp"
-        android:paddingLeft="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/denyButton"
-        android:textAllCaps="false"
-        android:gravity="center"
-        android:onClick="acceptRequest" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:onClick="acceptRequest"
+            android:paddingLeft="20dp"
+            android:text="@string/accept"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
 
-    <Button
-        android:id="@+id/denyButton"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:background="@drawable/login_btn_background"
-        android:text="@string/deny"
-        android:textSize="30dp"
-        android:paddingLeft="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textAllCaps="false"
-        android:gravity="center"
-        android:onClick="declineRequest"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"/>
-
+        <Button
+            android:id="@+id/denyButton"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:onClick="declineRequest"
+            android:paddingLeft="20dp"
+            android:text="@string/deny"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+    </RelativeLayout>
 </RelativeLayout>
