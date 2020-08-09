@@ -15,10 +15,11 @@ public interface DataAccess {
     //USER STUFF
     User getUser(User user);
 
-    String insertUser(User user);
+    String insertUser(User user, String password);
 
     String updateUser(User user);
 
+    String authenticateLogin(User user, String password);
 
     //POSTING STUFF
     String getAllDisplayPostings(List<Posting> postingList, User loggedin);

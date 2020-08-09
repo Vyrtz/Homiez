@@ -7,6 +7,7 @@ import comp3350.group6.homiez.objects.User;
 import comp3350.group6.homiez.persistence.DataAccess;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DataAccessStub implements DataAccess {
@@ -17,6 +18,7 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Posting> postings;
     private ArrayList<Match> matches;
     private ArrayList<Request> matchRequests;
+    private HashMap<User, String> logins;
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
@@ -66,6 +68,11 @@ public class DataAccessStub implements DataAccess {
         matchRequests.add(request);
         request = new Request("4", "2");
         matchRequests.add(request);
+
+        logins = new HashMap<>();
+        for (User u: users) {
+            logins.put(u,"dev");
+        }
     }
     public void close()
     {
@@ -218,11 +225,12 @@ public class DataAccessStub implements DataAccess {
         }
         return found;
     }
-    public String insertUser(User insert) {
+    public String insertUser(User insert, String password) {
         if (insert != null) {
             boolean exist = users.contains(insert);
             if (!exist) {
                 users.add(insert);
+                logins.put(insert,password);
                 return "Success";
             }
         }
@@ -234,6 +242,12 @@ public class DataAccessStub implements DataAccess {
         if (exist) {
             users.remove(update);
             users.add(update); //replace with new posting object
+            return "Success";
+        }
+        return null;
+    }
+    public String authenticateLogin(User u, String password) {
+        if (logins.get(u) == password) {
             return "Success";
         }
         return null;

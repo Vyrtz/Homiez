@@ -5,6 +5,7 @@ import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
@@ -87,7 +88,7 @@ public class DataAccessObject implements DataAccess {
         return u;
     }
 
-    public String insertUser(User user) {
+    private String insertUser(User user) {
         result = null;
         String values;
 
@@ -110,6 +111,43 @@ public class DataAccessObject implements DataAccess {
             e.printStackTrace();
         }
 
+        return result;
+    }
+
+    public String insertUser(User u, String password) {
+        String values;
+        result = null;
+
+        try {
+            values = "'" + u.getUserId()
+                    +"', '" + password + "'";
+            commandString = "INSERT INTO LOGININFO VALUES(" + values + ")";
+            updateCount = statement1.executeUpdate(commandString);
+            result = checkWarnings(statement1, updateCount);
+            if (result == "Success") {
+                result = insertUser(u);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public String authenticateLogin(User u, String password) {
+        result = null;
+
+        try {
+            commandString = "Select * from LOGININFO where USERID='"+ u.getUserId() +"' and PASSWORD ='" + password+ "'";
+            rs3 = statement2.executeQuery(commandString);
+
+            while(rs3.next()) {
+                result = "Success";
+            }
+            rs3.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
@@ -230,7 +268,7 @@ public class DataAccessObject implements DataAccess {
         User u = new User(uid);
         u = getUser(u);
         Posting p = new Posting(pid,title,u,price,location,type,description);
-
+        getAttachedUsers(p);
         return p;
     }
 
@@ -249,6 +287,7 @@ public class DataAccessObject implements DataAccess {
 
             commandString = "INSERT INTO POSTINGS VALUES(" + values + ")";
             updateCount = statement1.executeUpdate(commandString);
+            insertAttachedUsers(posting);
             result = checkWarnings(statement1, updateCount);
         }
         catch(Exception e) {
@@ -267,6 +306,7 @@ public class DataAccessObject implements DataAccess {
             statement1.executeUpdate(commandString);
             commandString = "DELETE FROM MATCHES WHERE POSTINGID='" + values +"'";
             statement1.executeUpdate(commandString);
+            deleteAttachedUsers(posting);
             commandString = "DELETE FROM POSTINGS WHERE POSTINGID='" + values +"'";
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
@@ -297,6 +337,7 @@ public class DataAccessObject implements DataAccess {
             commandString = "UPDATE POSTINGS " + " SET " + values + " " + where;
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
+            updateAttachedUsers(p);
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -495,6 +536,52 @@ public class DataAccessObject implements DataAccess {
             commandString += "Insert into INTERESTS " +" Values(" +values +") ";
         }
         updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
+        return result;
+    }
+
+    private String insertAttachedUsers( Posting p ) throws SQLException {
+        String values;
+        result = null;
+        commandString = "";
+        for (User u : p.getAttachedUsers()) {
+            values = "'" + p.getPostingId()
+                    +"', '" + u.getUserId()
+                    +"'";
+            commandString += "Insert into ATTACHEDUSERS " +" Values(" +values +") ";
+        }
+        updateCount = statement3.executeUpdate(commandString);
+        result = checkWarnings(statement1, updateCount);
+        return result;
+    }
+
+    private String updateAttachedUsers( Posting p ) throws SQLException {
+
+        result = deleteAttachedUsers(p);
+        if (result == "Success") {
+            result = insertAttachedUsers(p);
+        }
+        return result;
+    }
+    private String getAttachedUsers( Posting p ) throws SQLException {
+        result = null;
+        String uid;
+        commandString = "Select * from ATTACHEDUSERS where POSTINGID='" + p.getPostingId() +"' and USERID != '" +p.getUser().getUserId()+"'";
+        rs4 = statement3.executeQuery(commandString);
+        while (rs4.next()) {
+            uid = rs4.getString("USERID");
+            User u = getUser(new User(uid));
+            p.addAttachedUser(u);
+        }
+        rs4.close();
+        result =  "Success";
+
+        return result;
+    }
+
+    private String deleteAttachedUsers(Posting p) throws SQLException{
+        commandString = "DELETE FROM ATTACHEDUSERS WHERE POSTINGID='" + p.getPostingId() + "'";
+        updateCount = statement1.executeUpdate(commandString);
         result = checkWarnings(statement1, updateCount);
         return result;
     }

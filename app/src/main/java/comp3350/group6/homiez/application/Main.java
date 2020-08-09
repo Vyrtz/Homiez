@@ -7,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
         startUp();
-        //test();
         shutDown();
     }
 
@@ -29,8 +28,5 @@ public class Main {
     public static void setDBPathName(String pathName) {
         System.out.println("Setting DB path to: " + pathName);
         dbPathName = pathName;
-    }
-    public static void test() {
-        Services.createDataAccess(dbName);
     }
 }

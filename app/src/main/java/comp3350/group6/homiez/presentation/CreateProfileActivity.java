@@ -91,13 +91,11 @@ public class CreateProfileActivity extends Activity {
         }
 
         //Checks if the user was inserted into the DB correctly
-        if(accessUser.insertUser(newUser) == null) {
+        if(accessUser.insertUser(newUser, "dev") == null) {
             Messages.warning(this, ERROR);
         }else{
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
         }
-
-
 
     }
 
