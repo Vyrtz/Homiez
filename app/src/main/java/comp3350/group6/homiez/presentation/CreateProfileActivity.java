@@ -24,6 +24,7 @@ public class CreateProfileActivity extends Activity {
     private String gender;
     private String biography;
     private String interests;
+    private String password;
 
     private int age;
 
@@ -43,6 +44,10 @@ public class CreateProfileActivity extends Activity {
         //Fetch userID
         EditText fields = findViewById(R.id.editID);
         userID = fields.getText().toString(); //
+
+        //Fetch password
+        fields = findViewById(R.id.editPassword);
+        password = fields.getText().toString();
 
         //Fetch name
         fields = findViewById(R.id.editName);
@@ -91,7 +96,7 @@ public class CreateProfileActivity extends Activity {
         }
 
         //Checks if the user was inserted into the DB correctly
-        if(accessUser.insertUser(newUser, "dev") == null) {
+        if(accessUser.insertUser(newUser, password) == null) {
             Messages.warning(this, ERROR);
         }else{
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
