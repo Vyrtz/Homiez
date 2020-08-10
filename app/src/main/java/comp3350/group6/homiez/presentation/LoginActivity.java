@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.User;
 
 public class LoginActivity extends Activity {
 
@@ -103,9 +104,10 @@ public class LoginActivity extends Activity {
         String userID = IDField.getText().toString();
         String password = passwordField.getText().toString();
 
+        User user = accessUser.getUser(userID);
 
         IDField.setText("");
-        if(accessUser.getUser(userID) != null && accessUser.login(accessUser.getUser(userID), password).equals(SUCCESS)) {
+        if(user != null && accessUser.login(user, password).equals(SUCCESS)) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
