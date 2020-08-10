@@ -106,8 +106,10 @@ public class LoginActivity extends Activity {
 
         User user = accessUser.getUser(userID);
 
+        String loginMessage = accessUser.login(user, password);
+
         IDField.setText("");
-        if(user != null && accessUser.login(user, password).equals(SUCCESS)) {
+        if(user != null && loginMessage != null && loginMessage.equals(SUCCESS)) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
