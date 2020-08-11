@@ -51,27 +51,26 @@ public class EditPostingActivity extends Activity {
 
     public void submitClicked (View v){
         //modify posting title
-        //posting.setTitle(title.getText().toString());
+        posting.setTitle(title.getText().toString());
 
         //modify location
-        //posting.setLocation(location.getText().toString());
+        posting.setLocation(location.getText().toString());
 
         //modify type
-        //posting.setType(type.getText().toString());
+        posting.setType(type.getText().toString());
 
         //modify price
-        /*if(!price.getText().toString.equals("")){
-            posting.setPrice(Double.parseDouble(price.getText().toString()));
-        }*/
+        posting.setPrice(Double.parseDouble(price.getText().toString()));
 
         //modify description
-        /*posting.setDescription(description.getText().toString());
+        posting.setDescription(description.getText().toString());
 
-        if(accessPostings.updatePosting(posting)==null){
-            Message.warning(this, ERROR);
+        String result = accessPostings.updatePosting(posting);
+        if(result == null) {
+            Messages.fatalError(this, "Failure while deleting posting ");
         }
-        else{
-            Message.popup(this, SUCCESS, SUCCESS_HEADER);
-        }*/
+        else {
+            finish();
+        }
     }
 }
