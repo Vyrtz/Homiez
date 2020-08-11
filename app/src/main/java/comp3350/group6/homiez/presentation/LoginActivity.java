@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.User;
 
 public class LoginActivity extends Activity {
 
@@ -100,6 +101,7 @@ public class LoginActivity extends Activity {
 
         String userID = IDField.getText().toString();
         IDField.setText("");
+        accessUser.login(new User(userID), "dev");
         if(accessUser.getUser(userID) != null) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
