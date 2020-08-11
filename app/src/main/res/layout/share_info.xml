@@ -100,7 +100,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/login_btn_background"
             android:gravity="center"
-            android:onClick="submitClicked"
+            android:onClick="viewProfile"
             android:paddingLeft="20dp"
             android:text="@string/view_profile"
             android:textAllCaps="false"
