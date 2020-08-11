@@ -19,16 +19,22 @@ public class ShareInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        accessUser = new AccessUser();
+
         setContentView(R.layout.share_info);
 
         Bundle b = getIntent().getExtras();
 
-        user = accessUser.getUser(b.getString("userID"));
+        System.out.println(b.getString("profileID"));
+        System.out.println(b.getString("userID"));
+        user = accessUser.getUser(b.getString("profileID"));
 
         //Populate the fields
+        TextView header = findViewById(R.id.header);
         TextView phoneNum = findViewById(R.id.phone);
         TextView email = findViewById(R.id.email);
 
+        header.setText(user.getName() + "'s Contact Info");
         //TODO: Database changes for phone and email
         //phoneNum.setText(user.getPhone());
         //email.setText(user.getEmail());
