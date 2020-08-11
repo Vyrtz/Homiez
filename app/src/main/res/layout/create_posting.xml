@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:text="Create Posting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorYellow"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="50dp"/>
+
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="@string/Title"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextType"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="Type"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextLocation"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="Location"
+            android:layout_marginBottom="10dp"/>
+
+
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="top"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="@string/description"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/editTextPrice"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="Price"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/createPosting"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:onClick="clickCreatePosting"
+            android:paddingLeft="20dp"
+            android:text="Create"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

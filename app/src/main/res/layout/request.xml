@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:id="@+id/requestHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/request"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/colorYellow"/>
+
+    <LinearLayout
+        android:id="@+id/Info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:orientation="vertical"
+        android:layout_below="@+id/requestHeader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/userInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"
+                android:text="User"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorYellow"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/login_btn_background"
+                android:onClick="openProfile"
+                android:text="@string/view_profile" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/userInfoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/colorGrey"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/postingInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Posting"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorYellow"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/PostingInfoText"
+            android:textColor="@color/colorGrey"
+            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:onClick="acceptRequest"
+            android:paddingLeft="20dp"
+            android:text="@string/accept"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/denyButton"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/login_btn_background"
+            android:gravity="center"
+            android:onClick="declineRequest"
+            android:paddingLeft="20dp"
+            android:text="@string/deny"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+    </RelativeLayout>
+</RelativeLayout>
