@@ -20,6 +20,7 @@ public class PostingActivity extends Activity {
     private AccessRequests accessRequests;
     private AccessMatches accessMatches;
     private Posting post;
+    private String postingID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class PostingActivity extends Activity {
         setContentView(R.layout.posting);
 
         Bundle b = getIntent().getExtras();
-         final String postingID = b.getString("postingId");
+        postingID = b.getString("postingId");
 
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
@@ -71,6 +72,14 @@ public class PostingActivity extends Activity {
         bundle.putString("profileID", accessPostings.getPostingById(bundle.getString("postingId")).getUser().getUserId());
         startIntent.putExtras(bundle);
         startActivity(startIntent);
+    }
+
+    public void editPosting(View v) {
+        Intent intent = new Intent(PostingActivity.this, EditPostingActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("postingID", postingID);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     public void deletePosting(View v) {
