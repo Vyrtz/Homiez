@@ -119,13 +119,13 @@ public class DataAccessObject implements DataAccess {
         result = null;
 
         try {
-            values = "'" + u.getUserId()
-                    +"', '" + password + "'";
-            commandString = "INSERT INTO LOGININFO VALUES(" + values + ")";
-            updateCount = statement1.executeUpdate(commandString);
-            result = checkWarnings(statement1, updateCount);
+            result = insertUser(u);
             if (result == "Success") {
-                result = insertUser(u);
+                values = "'" + u.getUserId()
+                        + "','" + password + "'";
+                commandString = "INSERT INTO LOGININFO VALUES(" + values + ")";
+                updateCount = statement1.executeUpdate(commandString);
+                result = checkWarnings(statement1, updateCount);
             }
         }
         catch(Exception e) {
