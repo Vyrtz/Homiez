@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.business.Compatibility;
+import comp3350.group6.homiez.business.CompatibilityController;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
@@ -40,10 +42,12 @@ public class PublicProfileActivity extends Activity {
         //Initialize DB access
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
+        Compatibility c = new CompatibilityController();
 
         Bundle bundle = getIntent().getExtras();
 
         User user = accessUser.getUser(bundle.getString("profileID"));
+        User self = accessUser.getUser(bundle.getString("userID"));
 
         //Initialize UI element variables
         TextView header = findViewById(R.id.header);
@@ -53,6 +57,7 @@ public class PublicProfileActivity extends Activity {
         TextView biography = findViewById(R.id.bio);
         TextView interests = findViewById(R.id.interests);
         TextView budget = findViewById(R.id.budget);
+        TextView match = findViewById(R.id.match);
         ListView postingList = findViewById(R.id.postingList);
         postingList.setNestedScrollingEnabled(true);
 
@@ -60,6 +65,7 @@ public class PublicProfileActivity extends Activity {
         interests.setMovementMethod(new ScrollingMovementMethod());
 
         //Fill in the fields
+        match.setText("Match %: " + c.calculateCompatibility(user, self));
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());

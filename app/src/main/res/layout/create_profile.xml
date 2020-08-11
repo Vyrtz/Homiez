@@ -58,6 +58,38 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/passwordPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="bottom|left"
+                android:paddingLeft="10dp"
+                android:text="@string/password_prompt"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorYellow" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/login_inputbox"
+                android:gravity="bottom|left"
+                android:inputType="none"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/budget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
