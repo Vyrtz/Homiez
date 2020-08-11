@@ -529,6 +529,7 @@ public class DataAccessObject implements DataAccess {
         String values;
         result = null;
         commandString = "";
+
         for (Interest i : u.getInterests()) {
             values = "'" + u.getUserId()
                     +"', '" + i.getInterest()
@@ -599,9 +600,6 @@ public class DataAccessObject implements DataAccess {
            res = e.getMessage();
         }
 
-        if(count != 1) {
-            res = null; //nul indicates a failure
-        }
         return res;
     }
 

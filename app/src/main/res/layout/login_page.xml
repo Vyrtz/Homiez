@@ -19,15 +19,31 @@
         android:id="@+id/editUserID"
         android:layout_width="350dp"
         android:layout_height="50dp"
+        android:layout_above="@id/editPassword"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/login_inputbox"
         android:hint="User ID"
-        android:textColorHint="@color/colorGrey"
-        android:textColor="@color/colorGrey"
-        android:textSize="28dp"
         android:paddingLeft="20dp"
-        android:layout_centerHorizontal="true"
+        android:singleLine="true"
+        android:textColor="@color/colorGrey"
+        android:textColorHint="@color/colorGrey"
+        android:textSize="28dp" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
         android:layout_above="@id/loginButton"
-        android:singleLine="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/login_inputbox"
+        android:hint="Password"
+        android:paddingLeft="20dp"
+        android:password="true"
+        android:singleLine="true"
+        android:textColor="@color/colorGrey"
+        android:textColorHint="@color/colorGrey"
+        android:textSize="28dp" />
 
     <Button
         android:id="@+id/loginButton"

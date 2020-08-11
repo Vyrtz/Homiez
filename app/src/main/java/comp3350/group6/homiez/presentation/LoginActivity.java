@@ -21,7 +21,8 @@ import comp3350.group6.homiez.objects.User;
 public class LoginActivity extends Activity {
 
     private AccessUser accessUser;
-    final private String NOT_FOUND = "User not found";
+    final private String NOT_FOUND = "Incorrect username or password";
+    final private String SUCCESS = "Success";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +99,20 @@ public class LoginActivity extends Activity {
     public void loginPressed(View v) {
         //fetch the userID and password from UI fields
         EditText IDField = findViewById(R.id.editUserID);
+        EditText passwordField = findViewById(R.id.editPassword);
 
         String userID = IDField.getText().toString();
+        String password = passwordField.getText().toString();
+
+        User user = accessUser.getUser(userID);
+
+        String loginMessage = accessUser.login(user, password);
+
+        System.out.println("userID:" + userID + " password:" + password);
+        System.out.println(loginMessage);
+
         IDField.setText("");
-        accessUser.login(new User(userID), "dev");
-        if(accessUser.getUser(userID) != null) {
+        if(user != null && loginMessage != null && loginMessage.equals(SUCCESS)) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
