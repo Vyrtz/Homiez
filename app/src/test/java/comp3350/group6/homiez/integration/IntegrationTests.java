@@ -11,7 +11,7 @@ public class IntegrationTests {
         suite = new TestSuite("Integration tests");
 
         //TODO: Modify the addTest suite calls once the tests are written
-        //suite.addTestSuite();
+        suite.addTestSuite(BusinessPersistenceSeamTest.class);
         //suite.addTestSuite();
         return suite;
 
