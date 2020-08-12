@@ -35,6 +35,8 @@ public class PostingActivity extends Activity {
         accessMatches = new AccessMatches();
 
         post = accessPostings.getPostingById(postingID);
+        System.out.println("Test");
+        System.out.println(post);
 
         if(b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
@@ -90,5 +92,21 @@ public class PostingActivity extends Activity {
         else {
             finish();
         }
+    }
+
+    public void onResume() {
+        super.onResume();
+        post = accessPostings.getPostingById(postingID);
+        TextView titleText = findViewById(R.id.titleText);
+        TextView locationText = findViewById(R.id.locationText);
+        TextView typeText = findViewById(R.id.typeText);
+        TextView priceText = findViewById(R.id.priceText);
+        TextView descriptionText = findViewById(R.id.descriptionText);
+
+        titleText.setText(post.getTitle());
+        locationText.setText(post.getLocation());
+        typeText.setText(post.getType());
+        priceText.setText("" +post.getPrice());
+        descriptionText.setText(post.getDescription());
     }
 }

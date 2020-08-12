@@ -25,6 +25,7 @@ public class EditPostingActivity extends Activity {
     final private String HEADER_SUFFIX = "'s Posting";
     final private String ERROR = "Error: Couldn't update posting";
     final private String SUCCESS_HEADER = "Success!";
+    final private String SUCCESS = "Posting updated";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
