@@ -50,9 +50,7 @@ public class EditPostingActivity extends Activity {
     }
 
     public void submitClicked (View v){
-        //modify posting title
-        posting.setTitle(title.getText().toString());
-
+        
         //modify location
         posting.setLocation(location.getText().toString());
 
@@ -67,7 +65,7 @@ public class EditPostingActivity extends Activity {
 
         String result = accessPostings.updatePosting(posting);
         if(result == null) {
-            Messages.fatalError(this, "Failure while deleting posting ");
+            Messages.fatalError(this, "Failure while updating posting ");
         }
         else {
             finish();
