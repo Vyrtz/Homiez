@@ -1,7 +1,10 @@
 package comp3350.group6.homiez.business;
 
+import java.sql.SQLException;
+
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.application.Main;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.User;
 import comp3350.group6.homiez.persistence.DataAccess;
 
@@ -32,4 +35,8 @@ public class AccessUser {
     {
         return dataAccess.updateUser(currentUser);
     }
+
+    public String getContactInfoForUser(User currentUser, Contact info) { return dataAccess.getContactInfo(currentUser, info); }
+
+    public String updateContactInfoForUser(User currentUser, Contact info) { return dataAccess.updateContactInfo(currentUser, info); }
 }

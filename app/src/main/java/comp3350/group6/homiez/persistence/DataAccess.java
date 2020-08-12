@@ -1,7 +1,9 @@
 package comp3350.group6.homiez.persistence;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
@@ -20,6 +22,10 @@ public interface DataAccess {
     String updateUser(User user);
 
     String authenticateLogin(User user, String password);
+
+    String getContactInfo(User user, Contact info);
+
+    String updateContactInfo(User user, Contact info);
 
     //POSTING STUFF
     String getAllDisplayPostings(List<Posting> postingList, User loggedin);

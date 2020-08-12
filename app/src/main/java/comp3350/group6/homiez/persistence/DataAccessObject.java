@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
@@ -608,4 +609,66 @@ public class DataAccessObject implements DataAccess {
             throw new NullPointerException();
         }
     }
+
+    public String getContactInfo( User u, Contact c ) {
+        String s;
+        result = null;
+
+        try {
+            commandString = "Select * from CONTACTS where USERID='" + u.getUserId() +"'";
+            rs4 = statement3.executeQuery(commandString);
+            while (rs4.next()) {
+                s = rs4.getString("INFO");
+                c = new Contact(s);
+            }
+            rs4.close();
+            result =  "Success";
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    public String updateContactInfo( User u, Contact c ) {
+        result = null;
+
+        try {
+            deleteContactInfo(u);
+            result = insertContactInfo(u, c);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return result;
+    }
+
+    private String insertContactInfo( User u, Contact c ) throws SQLException {
+        result = null;
+
+        String values = "'" + u.getUserId() + "', '" + c.getInfo() + "'";
+
+        commandString = "Insert into CONTACTS " + " Values(" + values + ") ";
+
+        updateCount = statement3.executeUpdate(commandString);
+
+        result = checkWarnings(statement3, updateCount);
+
+        return result;
+    }
+
+    private String deleteContactInfo( User u ) throws SQLException {
+        result = null;
+
+        String values = u.getUserId();
+
+        commandString = "Delete from CONTACTS where USERID='" + values +"'";
+
+        updateCount = statement1.executeUpdate(commandString);
+
+        result = checkWarnings(statement1, updateCount);
+
+        return result;
+    }
+
 }//CLASS
