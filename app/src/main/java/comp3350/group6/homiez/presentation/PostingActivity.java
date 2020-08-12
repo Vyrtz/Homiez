@@ -2,9 +2,20 @@ package comp3350.group6.homiez.presentation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import comp3350.group6.homiez.R;
 
@@ -13,6 +24,7 @@ import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
 import comp3350.group6.homiez.business.Matching;
 import comp3350.group6.homiez.objects.Posting;
+import comp3350.group6.homiez.objects.User;
 
 public class PostingActivity extends Activity {
 
@@ -21,6 +33,7 @@ public class PostingActivity extends Activity {
     private AccessMatches accessMatches;
     private Posting post;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +51,29 @@ public class PostingActivity extends Activity {
         if(b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
         }
-        else {
+        else { //Public posting
             setContentView(R.layout.posting);
 
             TextView userText = findViewById(R.id.userText);
             userText.setText(post.getUser().getName());
+
+            ListView viewUsers = findViewById(R.id.userList);
+            viewUsers.setNestedScrollingEnabled(true);
+
+            ArrayList<User> users = post.getAttachedUsers();
+            List<HashMap<String, String>> userList = new ArrayList<>();
+
+            //Loop through every user
+            for(User u : users){
+                HashMap<String, String> map = new HashMap<>();
+                map.put("Top", u.getName());
+                map.put("Bottom", "" + u.getAge());
+                userList.add(map);
+            }
+
+            SimpleAdapter adapter = new SimpleAdapter(this, userList,  android.R.layout.simple_list_item_2, new String[]{"Top", "Bottom"}, new int[]{android.R.id.text1, android.R.id.text2});
+            viewUsers.setAdapter(adapter);
+
         }
 
         TextView titleText = findViewById(R.id.titleText);
