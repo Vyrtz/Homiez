@@ -68,14 +68,7 @@ public class BusinessPersistenceSeamTest extends TestCase {
 
         ar = new AccessRequests();
 
-        //Setup
-
-        postingID = java.util.UUID.randomUUID().toString(); //Get a unique ID for the posting
-        request = new Request("John115", postingID);
-
         //Insert
-        result = ar.insertRequest(request);
-        System.out.println("result");
 
         //Get
 
@@ -99,11 +92,11 @@ public class BusinessPersistenceSeamTest extends TestCase {
         user = new User("John115", "John Smith", 30, "Male", 500.0, "I like long walks on the beach");
 
         //insertUser
-        result = au.insertUser(user, "password123");
+        result = au.insertUser(user, "dev");
         assertEquals(result, SUCCESS);
 
         //login
-        result = au.login(user, "password123");
+        result = au.login(user, "dev");
         assertEquals(result, SUCCESS);
 
         //Update
@@ -114,6 +107,9 @@ public class BusinessPersistenceSeamTest extends TestCase {
         //GetUser
         assertEquals(user, au.getUser("John115"));
 
+        //Delete
+        //result = au.deleteUser(user);
+        //assertEquals(result, SUCCESS);
 
         System.out.println("Finished integration test of AccessUser to persistence");
 

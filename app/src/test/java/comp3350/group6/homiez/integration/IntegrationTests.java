@@ -10,9 +10,8 @@ public class IntegrationTests {
     public static Test suite() {
         suite = new TestSuite("Integration tests");
 
-        //TODO: Modify the addTest suite calls once the tests are written
         suite.addTestSuite(BusinessPersistenceSeamTest.class);
-        //suite.addTestSuite();
+        suite.addTestSuite(DataAccessHSQLDBTest.class);
         return suite;
 
     }
