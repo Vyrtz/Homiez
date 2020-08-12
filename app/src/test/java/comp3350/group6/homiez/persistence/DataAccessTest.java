@@ -75,7 +75,7 @@ public class DataAccessTest extends TestCase {
         User u = new User("6", "AAA", 24, "m", 100, "test");
 
         assertNull(dataAccess.getUser(u));
-        dataAccess.insertUser(new User("6", "John", 18, "m", 100, "test"));
+        dataAccess.insertUser(new User("6", "John", 18, "m", 100, "test"), "dev");
         assertNotNull(dataAccess.getUser(u));
 
         assertEquals("John", dataAccess.getUser(u).getName());
@@ -92,7 +92,7 @@ public class DataAccessTest extends TestCase {
         User u = new User("9", "AAA", 24, "m", 100, "test");
         u.addUniqueInterest(new Interest("testing1"));
         u.addUniqueInterest(new Interest("testing2"));
-        dataAccess.insertUser(u);
+        dataAccess.insertUser(u, "dev");
         assertNotNull(dataAccess.getUser(u));
 
         u = dataAccess.getUser(u);
