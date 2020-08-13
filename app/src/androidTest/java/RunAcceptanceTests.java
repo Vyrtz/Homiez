@@ -1,14 +1,15 @@
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runners.Suite;
+import org.junit.runner.RunWith;
 
-import comp3350.group6.homiez.presentation.AcceptanceTests;
+import comp3350.group6.homiez.presentation.LoginActivityTest;
 
-public class RunAcceptanceTests {
-    public static TestSuite suite;
-
-    public static Test suite() {
-        suite = new TestSuite("Acceptance tests");
-        suite.addTest(AcceptanceTests.suite());
-        return suite;
+@RunWith(Suite.class)
+@Suite.SuiteClasses({LoginActivityTest.class})
+public class RunAcceptanceTests
+{
+    public RunAcceptanceTests()
+    {
+        System.out.println("Sample Acceptance tests");
     }
 }
+
