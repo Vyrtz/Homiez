@@ -10,8 +10,6 @@ import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
-import junit.framework.TestCase;
-
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -41,70 +39,105 @@ public class LoginActivityTest {
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void loginActivityTest() {
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.editUserID),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+    public void validLoginTest() {
+        ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText.perform(replaceText("0"), closeSoftKeyboard());
 
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.editUserID), withText("0"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText2.check(matches(withText("0")));
 
-        ViewInteraction editText3 = onView(
-                allOf(withId(R.id.editUserID), withText("0"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+        ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText3.perform(pressImeActionButton());
 
-        ViewInteraction editText4 = onView(
-                allOf(withId(R.id.editPassword),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
+        ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         editText4.perform(replaceText("dev"), closeSoftKeyboard());
 
-        ViewInteraction editText5 = onView(
-                allOf(withId(R.id.editPassword),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
+        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         editText5.check(matches(withText("dev")));
 
-        ViewInteraction button = onView(
-                allOf(withId(R.id.loginButton), withText("Login"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
+        ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         button.perform(click());
 
-        ViewInteraction frameLayout = onView(
-                allOf(withId(R.id.postingsList), isDisplayed()));
-        frameLayout.check(matches(isDisplayed()));
+        ViewInteraction postinglist = onView(allOf(withId(R.id.postingsList), isDisplayed()));
+        postinglist.check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void invalidPasswordLoginTest() {
+        ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText.perform(replaceText("0"), closeSoftKeyboard());
+
+        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText2.check(matches(withText("0")));
+
+        ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText3.perform(pressImeActionButton());
+
+        ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
+        editText4.perform(replaceText("INVALID_PASSWORD"), closeSoftKeyboard());
+
+        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
+        editText5.check(matches(withText("INVALID_PASSWORD")));
+
+        ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
+        button.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(android.R.id.message), withText("Incorrect username or password"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("Incorrect username or password")));
+    }
+
+    @Test
+    public void invalidIdLoginTest() {
+        ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText.perform(replaceText("INVALID_USER_ID"), closeSoftKeyboard());
+
+        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("INVALID_USER_ID"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText2.check(matches(withText("INVALID_USER_ID")));
+
+        ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("INVALID_USER_ID"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
+        editText3.perform(pressImeActionButton());
+
+        ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
+        editText4.perform(replaceText("dev"), closeSoftKeyboard());
+
+        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
+        editText5.check(matches(withText("dev")));
+
+        ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
+        button.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(android.R.id.message), withText("Incorrect username or password"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("Incorrect username or password")));
+    }
+
+    @Test
+    public void noInputLoginTest() {
+        ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
+        button.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(android.R.id.message), withText("Incorrect username or password"),
+                        childAtPosition(
+                                childAtPosition(
+                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
+                                        0),
+                                0),
+                        isDisplayed()));
+        textView.check(matches(withText("Incorrect username or password")));
     }
 
     private static Matcher<View> childAtPosition(
