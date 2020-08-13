@@ -58,6 +58,26 @@ public class Posting {
         return this.description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String toString() {
         return "Post: "+this.title+" price"+this.price
                 +" location"+this.location+" type"+this.type;
