@@ -117,6 +117,25 @@
                     android:textColor="@color/colorGrey"
                     android:textSize="18dp" />
 
+                <TextView
+                    android:id="@+id/tenantsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/tenants"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/tenants"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="18dp" />
+
             </LinearLayout>
         </ScrollView>
 
