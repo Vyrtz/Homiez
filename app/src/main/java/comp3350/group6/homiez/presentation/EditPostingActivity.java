@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
+import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Posting;
+import comp3350.group6.homiez.objects.User;
 
 public class EditPostingActivity extends Activity {
 
@@ -19,9 +24,11 @@ public class EditPostingActivity extends Activity {
     private EditText type;
     private EditText price;
     private EditText description;
+    private EditText tenants;
 
     private Posting posting;
     private String postingId;
+    private AccessUser accessUser;
 
     final private String HEADER_SUFFIX = "'s Posting";
     final private String ERROR = "Error: Couldn't update posting";
@@ -34,6 +41,7 @@ public class EditPostingActivity extends Activity {
         setContentView(R.layout.edit_posting);
 
         accessPostings = new AccessPostings();
+        accessUser = new AccessUser();
         Bundle b = getIntent().getExtras();
         postingId = b.getString("postingID");
         posting = accessPostings.getPostingById(postingId);
@@ -43,12 +51,22 @@ public class EditPostingActivity extends Activity {
         type = findViewById(R.id.type);
         price = findViewById(R.id.price);
         description = findViewById(R.id.description);
+        tenants = findViewById(R.id.tenants);
 
         title.setText(posting.getTitle() + HEADER_SUFFIX);
         location.setText(posting.getLocation());
         type.setText(posting.getType());
         price.setText(String.valueOf(posting.getPrice()));
         description.setText(posting.getDescription());
+
+        String tenantText = "";
+        for (User u :posting.getAttachedUsers()) {
+            if (!u.equals(posting.getUser())) {
+                tenantText += u.getUserId() + ",";
+            }
+        }
+        tenantText.substring(0, tenantText.length() - 1);
+        tenants.setText(tenantText);
     }
 
     public void submitClicked (View v){
@@ -65,12 +83,32 @@ public class EditPostingActivity extends Activity {
         //modify description
         posting.setDescription(description.getText().toString());
 
-        QueryResult result = accessPostings.updatePosting(posting);
-        if(result == QueryResult.FAILURE) {
-            Messages.fatalError(this, "Failure while updating posting ");
+        String individualTenants[] = tenants.getText().toString().split(",");
+
+        boolean failed = false;
+
+        ArrayList<User> users = new ArrayList<>();
+        for (String s: tenants.getText().toString().split(",")) {
+            User t = accessUser.getUser(s.trim());
+            if (t!= null) {
+                users.add(t);
+            }
+            else {
+                failed = true;
+            }
+        }
+        if (failed) {
+            Messages.fatalError(this, "failed to create the posting, tenants do not exist");
         }
         else {
-            finish();
+            posting.setAttachedUsers(users);
+            QueryResult result = accessPostings.updatePosting(posting);
+            if(result == QueryResult.FAILURE) {
+                Messages.fatalError(this, "Failure while updating posting ");
+            }
+            else {
+                finish();
+            }
         }
     }
 }

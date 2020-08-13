@@ -58,37 +58,36 @@ public class PostingActivity extends Activity {
 
             TextView userText = findViewById(R.id.userText);
             userText.setText(post.getUser().getName());
-
-            ListView viewUsers = findViewById(R.id.userList);
-            viewUsers.setNestedScrollingEnabled(true);
-
-            ArrayList<User> users = post.getAttachedUsers();
-            List<HashMap<String, String>> userList = new ArrayList<>();
-
-            //Loop through every user
-            for(User u : users){
-                HashMap<String, String> map = new HashMap<>();
-                map.put("Top", u.getName());
-                map.put("Bottom", "" + u.getAge());
-                userList.add(map);
-            }
-
-            SimpleAdapter adapter = new SimpleAdapter(this, userList,  android.R.layout.simple_list_item_2, new String[]{"Top", "Bottom"}, new int[]{android.R.id.text1, android.R.id.text2});
-            viewUsers.setAdapter(adapter);
-
         }
+
+        ListView viewUsers = findViewById(R.id.userList);
+        viewUsers.setNestedScrollingEnabled(true);
+
+        ArrayList<User> users = post.getAttachedUsers();
+        List<HashMap<String, String>> userList = new ArrayList<>();
+
+        //Loop through every user
+        for(User u : users){
+            HashMap<String, String> map = new HashMap<>();
+            map.put("Top", u.getName());
+            map.put("Bottom", "" + u.getAge());
+            userList.add(map);
+        }
+
+        SimpleAdapter adapter = new SimpleAdapter(this, userList,  android.R.layout.simple_list_item_2, new String[]{"Top", "Bottom"}, new int[]{android.R.id.text1, android.R.id.text2});
+        viewUsers.setAdapter(adapter);
 
         TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
         TextView typeText = findViewById(R.id.typeText);
         TextView priceText = findViewById(R.id.priceText);
         TextView descriptionText = findViewById(R.id.descriptionText);
-
         titleText.setText(post.getTitle());
         locationText.setText(post.getLocation());
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
+
     }
     public void sendMatch(View v) {
         Bundle b =getIntent().getExtras();

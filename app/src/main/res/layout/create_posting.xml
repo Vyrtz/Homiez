@@ -97,6 +97,19 @@
             android:inputType="numberDecimal"
             android:layout_marginBottom="10dp"/>
 
+        <EditText
+            android:id="@+id/editTextTenants"
+            android:background="@drawable/login_inputbox"
+            android:textColorHint="@color/colorGrey"
+            android:textColor="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:hint="Add Other Tenants (User ids seperated by comma)"
+            android:layout_marginBottom="10dp"/>
+
         <Button
             android:id="@+id/createPosting"
             android:layout_width="180dp"
