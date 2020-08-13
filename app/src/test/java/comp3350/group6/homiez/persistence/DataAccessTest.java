@@ -3,6 +3,7 @@ package comp3350.group6.homiez.persistence;
 import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
@@ -435,8 +436,6 @@ public class DataAccessTest extends TestCase {
     public void testDeleteUserEntireDb() {
         System.out.println("\nStarting testDeleteUserEntireDb");
 
-        System.out.println("\nStarting testDeletePostingEntireDb");
-
         ArrayList<Posting> postings = new ArrayList<Posting>();
         User u = new User("test", "test", 20, "m", 100, "test");
 
@@ -462,7 +461,69 @@ public class DataAccessTest extends TestCase {
         assertEquals( QueryResult.SUCCESS, dataAccess.getRequests(requests, "3"));
         assertEquals(0, requests.size());
 
-        System.out.println("Finished testDeletePostingEntireDb");
+        System.out.println("Finished testDeleteUserEntireDb");
+    }
+
+    public void testGetValidContacts() {
+        System.out.println("\nStarting testGetValidContacts");
+
+        ArrayList<Posting> postings = new ArrayList<Posting>();
+        User u = new User("test", "test", 20, "m", 100, "test");
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertUser(u, "test"));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.updateContactInfo(u, new Contact("test contact")));
+
+        User dbU = dataAccess.getUser(u);
+        Contact c = dataAccess.getContactInfo(dbU);
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.deleteUser(dbU));
+
+        assertEquals("test contact", c.getInfo());
+
+        c = dataAccess.getContactInfo(dbU);
+
+        assertNull(c);
+
+        System.out.println("Finished testGetValidContacts");
+    }
+
+    public void testGetInValidContacts() {
+
+        System.out.println("\nStarting testGetValidContacts");
+
+        ArrayList<Posting> postings = new ArrayList<Posting>();
+        User u = new User("test", "test", 20, "m", 100, "test");
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertUser(u, "test"));
+
+        User dbU = dataAccess.getUser(u);
+        Contact c = dataAccess.getContactInfo(dbU);
+
+        assertNull(c);
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.deleteUser(dbU));
+
+        System.out.println("Finished testGetValidContacts");
+    }
+
+    public void testGetLoginUpdates() {
+        System.out.println("\nStarting testGetLoginUpdates");
+
+        ArrayList<Posting> postings = new ArrayList<Posting>();
+        User u = new User("test", "test", 20, "m", 100, "test");
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertUser(u, "test"));
+
+        User dbU = dataAccess.getUser(u);
+        assertEquals(QueryResult.SUCCESS, dataAccess.authenticateLogin(dbU, "test"));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.deleteUser(dbU));
+
+        assertEquals(QueryResult.FAILURE, dataAccess.authenticateLogin(dbU, "test"));
+
+
+        System.out.println("Finished testGetLoginUpdates");
     }
 
     public void testDeletePostingEntireDb() {
@@ -472,7 +533,6 @@ public class DataAccessTest extends TestCase {
         User u = new User("2", "Matt", 20, "m", 100, "test");
         Posting pExists = new Posting("5", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         pExists.addAttachedUser(new User("1"));
-        pExists.addAttachedUser(new User("2"));
 
         assertEquals(QueryResult.SUCCESS, dataAccess.insertPosting(pExists));
 
