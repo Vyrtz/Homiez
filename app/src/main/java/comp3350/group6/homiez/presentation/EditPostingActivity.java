@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.objects.Posting;
 
@@ -64,8 +65,8 @@ public class EditPostingActivity extends Activity {
         //modify description
         posting.setDescription(description.getText().toString());
 
-        String result = accessPostings.updatePosting(posting);
-        if(result == null) {
+        QueryResult result = accessPostings.updatePosting(posting);
+        if(result == QueryResult.FAILURE) {
             Messages.fatalError(this, "Failure while updating posting ");
         }
         else {

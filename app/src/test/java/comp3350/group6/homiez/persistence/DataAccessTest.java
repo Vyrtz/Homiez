@@ -27,7 +27,7 @@ public class DataAccessTest extends TestCase {
     }
 
     public static void dataAccessTest(DataAccess dataAccess) {
-        DataAccessTest dataAccessTest = new DataAccessTest("");
+        DataAccessTest dataAccessTest = new DataAccessTest();
         dataAccessTest.dataAccess = dataAccess;
 
         //Code to reset the DB
