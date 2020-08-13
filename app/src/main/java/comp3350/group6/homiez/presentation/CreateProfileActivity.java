@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.User;
@@ -96,7 +97,7 @@ public class CreateProfileActivity extends Activity {
         }
 
         //Checks if the user was inserted into the DB correctly
-        if(accessUser.insertUser(newUser, password) == null) {
+        if(accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
         }else{
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);

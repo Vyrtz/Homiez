@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import java.util.List;
 
 import comp3350.group6.homiez.R;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
@@ -32,6 +31,7 @@ public class PostingActivity extends Activity {
     private AccessRequests accessRequests;
     private AccessMatches accessMatches;
     private Posting post;
+    private String postingID;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -40,13 +40,15 @@ public class PostingActivity extends Activity {
         setContentView(R.layout.posting);
 
         Bundle b = getIntent().getExtras();
-         final String postingID = b.getString("postingId");
+        postingID = b.getString("postingId");
 
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
         accessMatches = new AccessMatches();
 
         post = accessPostings.getPostingById(postingID);
+        System.out.println("Test");
+        System.out.println(post);
 
         if(b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
@@ -104,13 +106,37 @@ public class PostingActivity extends Activity {
         startActivity(startIntent);
     }
 
+    public void editPosting(View v) {
+        Intent intent = new Intent(PostingActivity.this, EditPostingActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        bundle.putString("postingID", postingID);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
     public void deletePosting(View v) {
-        String result = accessPostings.deletePosting(post);
-        if(result == null) {
+        QueryResult result = accessPostings.deletePosting(post);
+        if(result == QueryResult.FAILURE) {
             Messages.fatalError(this, "Failure while deleting posting ");
         }
         else {
             finish();
         }
+    }
+
+    public void onResume() {
+        super.onResume();
+        post = accessPostings.getPostingById(postingID);
+        TextView titleText = findViewById(R.id.titleText);
+        TextView locationText = findViewById(R.id.locationText);
+        TextView typeText = findViewById(R.id.typeText);
+        TextView priceText = findViewById(R.id.priceText);
+        TextView descriptionText = findViewById(R.id.descriptionText);
+
+        titleText.setText(post.getTitle());
+        locationText.setText(post.getLocation());
+        typeText.setText(post.getType());
+        priceText.setText("" +post.getPrice());
+        descriptionText.setText(post.getDescription());
     }
 }

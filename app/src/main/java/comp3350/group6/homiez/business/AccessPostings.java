@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.business;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.objects.Posting;
@@ -16,7 +17,7 @@ public class AccessPostings {
     }
 
     //provides postings, except the ones made by the user
-    public String getPostings(List<Posting> postings, String userId) {
+    public QueryResult getPostings(List<Posting> postings, String userId) {
         User user = new User(userId);
         postings.clear();
         return dataAccess.getAllDisplayPostings(postings, user);
@@ -27,7 +28,7 @@ public class AccessPostings {
         return dataAccess.getPosting(posting);
     }
 
-    public String getPostingsByUserId(List<Posting> postings, String userId) {
+    public QueryResult getPostingsByUserId(List<Posting> postings, String userId) {
         if(userId != null) {
             User user = new User(userId);
             return dataAccess.getPostingsByUser(postings, user);
@@ -35,15 +36,15 @@ public class AccessPostings {
         return null;
     }
 
-    public String insertPosting(Posting currentPosting) {
+    public QueryResult insertPosting(Posting currentPosting) {
         return dataAccess.insertPosting(currentPosting);
     }
 
-    public String updatePosting(Posting currentPosting) {
+    public QueryResult updatePosting(Posting currentPosting) {
         return dataAccess.updatePosting(currentPosting);
     }
 
-    public String deletePosting(Posting currentPosting) {
+    public QueryResult deletePosting(Posting currentPosting) {
         return dataAccess.deletePosting(currentPosting);
     }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
 import comp3350.group6.homiez.business.AccessUser;
@@ -45,8 +46,8 @@ public class RequestsActivity extends Activity {
         requests = new ArrayList<>();
         for (Posting post: allposts) {
             ArrayList<Request> req = new ArrayList<>();
-            String result = accessRequests.getRequestsForPosting(req, post.getPostingId());
-            if(result == null) {
+            QueryResult result = accessRequests.getRequestsForPosting(req, post.getPostingId());
+            if(result == QueryResult.FAILURE) {
                 Messages.fatalError(this, "Failure while getting requests for user id");
             }
             else {

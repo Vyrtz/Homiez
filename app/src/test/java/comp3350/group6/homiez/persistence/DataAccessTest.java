@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Interest;
@@ -10,13 +11,10 @@ import comp3350.group6.homiez.objects.User;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 
 public class DataAccessTest extends TestCase {
 
-    public DataAccessTest(String arg0) { super(arg0); }
 
     private DataAccess dataAccess;
 
@@ -86,7 +84,7 @@ public class DataAccessTest extends TestCase {
         User u = new User("6", "AAA", 24, "m", 100, "test");
 
         assertNull(dataAccess.getUser(u));
-        dataAccess.insertUser(new User("6", "John", 18, "m", 100, "test"), "dev");
+        dataAccess.insertUser(new User("6", "John", 18, "m", 100, "test"), "test");
         assertNotNull(dataAccess.getUser(u));
 
         assertEquals("John", dataAccess.getUser(u).getName());
@@ -103,7 +101,7 @@ public class DataAccessTest extends TestCase {
         User u = new User("9", "AAA", 24, "m", 100, "test");
         u.addUniqueInterest(new Interest("testing1"));
         u.addUniqueInterest(new Interest("testing2"));
-        dataAccess.insertUser(u, "dev");
+        dataAccess.insertUser(u, "test");
         assertNotNull(dataAccess.getUser(u));
 
         u = dataAccess.getUser(u);
@@ -126,7 +124,7 @@ public class DataAccessTest extends TestCase {
 
         User uDNE = new User("99", "AAA", 29, "f", 100, "test");
 
-        assertNull(dataAccess.updateUser(uDNE));
+        assertEquals(QueryResult.FAILURE, dataAccess.updateUser(uDNE));
         assertNull(dataAccess.getUser(uDNE));
 
 
@@ -201,8 +199,8 @@ public class DataAccessTest extends TestCase {
         Posting pDNE = new Posting("8", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         Posting pUpdate = new Posting("8", "nameChange", u, 1500, "Pembina", "Apartment", "TestDesc1");
 
-        assertNull(dataAccess.insertPosting(pExists));
-        assertNull(dataAccess.deletePosting(pDNE));
+        assertEquals( QueryResult.FAILURE, dataAccess.insertPosting(pExists));
+        assertEquals(QueryResult.FAILURE, dataAccess.deletePosting(pDNE));
 
         assertNull(dataAccess.getPosting(pDNE));
 
@@ -215,8 +213,8 @@ public class DataAccessTest extends TestCase {
     public void testInsertDeleteNullPostings() {
         System.out.println("\nStarting testInsertDeleteNullPostings");
 
-        assertNull(dataAccess.insertPosting(null));
-        assertNull(dataAccess.deletePosting(null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertPosting(null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.deletePosting(null));
 
         System.out.println("Finished testInsertDeleteNullPostings");
 
@@ -232,9 +230,9 @@ public class DataAccessTest extends TestCase {
         Posting pDNE = new Posting("8", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
         Posting pUpdate = new Posting("8", "nameChange", u, 1500, "Pembina", "Apartment", "TestDesc1");
 
-        assertNull(dataAccess.insertPosting(pExists));
-        assertNull(dataAccess.deletePosting(pDNE));
-        assertNull(dataAccess.updatePosting(pDNE));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertPosting(pExists));
+        assertEquals(QueryResult.FAILURE,  dataAccess.deletePosting(pDNE));
+        assertEquals(QueryResult.FAILURE,  dataAccess.updatePosting(pDNE));
 
         assertNull(dataAccess.getPosting(pDNE));
         dataAccess.insertPosting(pDNE);
@@ -291,11 +289,11 @@ public class DataAccessTest extends TestCase {
         ArrayList<Request> requests = new ArrayList<Request>();
 
 
-        assertNull(dataAccess.getRequests(requests, null));
-        assertNull(dataAccess.getRequests(null, null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getRequests(requests, null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getRequests(null, null));
 
-        assertNull(dataAccess.insertRequest( null));
-        assertNull(dataAccess.deleteRequest( null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertRequest( null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.deleteRequest( null));
 
 
         System.out.println("Finished testMatchRequestsContents");
@@ -311,7 +309,7 @@ public class DataAccessTest extends TestCase {
         Request rDNE = new Request("0", "3");
 
 
-        assertNull(dataAccess.insertRequest(rExists));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertRequest(rExists));
 
         dataAccess.insertRequest(rDNE);
         dataAccess.getRequests(requests, "3");
@@ -383,14 +381,14 @@ public class DataAccessTest extends TestCase {
         ArrayList<Match> matches = new ArrayList<Match>();
 
 
-        assertNull(dataAccess.getMatchesForPosting(matches, null));
-        assertNull(dataAccess.getMatchesForPosting(null, "1"));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getMatchesForPosting(matches, null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getMatchesForPosting(null, "1"));
 
-        assertNull(dataAccess.getMatchesForUser(matches, null));
-        assertNull(dataAccess.getMatchesForUser(null, "1"));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getMatchesForUser(matches, null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.getMatchesForUser(null, "1"));
 
-        assertNull(dataAccess.insertMatch( null));
-        assertNull(dataAccess.deleteMatch( null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertMatch( null));
+        assertEquals(QueryResult.FAILURE,  dataAccess.deleteMatch( null));
 
 
         System.out.println("Finished testMatchesNullValues");
@@ -406,8 +404,8 @@ public class DataAccessTest extends TestCase {
         Match rDNE = new Match("3", "5");
 
 
-        assertNull(dataAccess.insertMatch(rExists));
-        assertNull(dataAccess.deleteMatch(rDNE));
+        assertEquals(QueryResult.FAILURE,  dataAccess.insertMatch(rExists));
+        assertEquals(QueryResult.FAILURE,  dataAccess.deleteMatch(rDNE));
 
         dataAccess.insertMatch(rDNE);
         dataAccess.getMatchesForPosting(matches, "5");

@@ -1,5 +1,7 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
@@ -19,6 +21,7 @@ public class DataAccessStub implements DataAccess {
     private ArrayList<Match> matches;
     private ArrayList<Request> matchRequests;
     private HashMap<User, String> logins;
+    private HashMap<User, Contact> contacts;
 
     public DataAccessStub(String dbName) {
         this.dbName = dbName;
@@ -73,68 +76,72 @@ public class DataAccessStub implements DataAccess {
         for (User u: users) {
             logins.put(u,"dev");
         }
+        contacts = new HashMap<>();
+        for (User u: users) {
+            contacts.put(u,new Contact("contact"));
+        }
     }
     public void close()
     {
         System.out.println("Closed " +dbType +" database " +dbName);
     }
 
-    public String getMatchesForUser(List<Match> matches, String u) {
+    public QueryResult getMatchesForUser(List<Match> matches, String u) {
         if (matches != null && u != null) {
             for (Match m : this.matches) {
                 if (m.getUserId().equals(u))
                     matches.add(m);
             }
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String getMatchesForPosting(List<Match> matches, String p) {
+    public QueryResult getMatchesForPosting(List<Match> matches, String p) {
         if (matches != null && p != null) {
             for (Match m : this.matches) {
                 if (m.getPostingId().equals(p))
                     matches.add(m);
             }
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
 
-    public String insertMatch(Match m) {
+    public QueryResult insertMatch(Match m) {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
                 matches.add(m);
-                return "Success";
+                return QueryResult.SUCCESS;
             }
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String deleteMatch(Match m) {
+    public QueryResult deleteMatch(Match m) {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
-                return null;
+                return QueryResult.FAILURE;
             }
             matches.remove(m);
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String getAllDisplayPostings(List<Posting> postings, User user) {
+    public QueryResult getAllDisplayPostings(List<Posting> postings, User user) {
         if (postings != null && user != null) {
             for (Posting p : this.postings) {
                 if (!p.getUser().equals(user)) {
                     postings.add(p);
                 }
             }
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
     public Posting getPosting(Posting posting) {
@@ -145,75 +152,75 @@ public class DataAccessStub implements DataAccess {
         }
         return null;
     }
-    public String getPostingsByUser(List<Posting> postingsList, User user) {
+    public QueryResult getPostingsByUser(List<Posting> postingsList, User user) {
         if (postingsList != null && user != null) {
             for (Posting p : postings) {
                 if (p.getUser().equals(user)) {
                     postingsList.add(p);
                 }
             }
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
-    public String insertPosting(Posting posting) {
+    public QueryResult insertPosting(Posting posting) {
         if (posting != null) {
             boolean exist = postings.contains(posting);
             if (!exist) {
                 postings.add(posting);
-                return "Success";
+                return QueryResult.SUCCESS;
             }
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String deletePosting(Posting posting) {
+    public QueryResult deletePosting(Posting posting) {
         boolean exist = postings.contains(posting);
         if (!exist) {
-            return null;
+            return QueryResult.FAILURE;
         }
         postings.remove(posting);
-        return "Success";
+        return QueryResult.SUCCESS;
     }
 
-    public String updatePosting(Posting posting) {
+    public QueryResult updatePosting(Posting posting) {
         boolean exist = postings.contains(posting);
         if (exist) {
             postings.remove(posting);
             postings.add(posting); //replace with new posting object
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String getRequests(List<Request> requests, String pId) {
+    public QueryResult getRequests(List<Request> requests, String pId) {
         if (requests != null && pId != null) {
             for (Request r : this.matchRequests) {
                 if (r.getPostingId().equals(pId))
                     requests.add(r);
             }
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String insertRequest(Request req) {
+    public QueryResult insertRequest(Request req) {
         if (req != null) {
             boolean exist = matchRequests.contains(req);
             if (!exist) {
                 matchRequests.add(req);
-                return "Success";
+                return QueryResult.SUCCESS;
             }
         }
-        return null;
+        return QueryResult.FAILURE;
     }
-    public String deleteRequest(Request req) {
+    public QueryResult deleteRequest(Request req) {
         boolean exist = matchRequests.contains(req);
         if (!exist) {
-            return null;
+            return QueryResult.FAILURE;
         }
         matchRequests.remove(req);
-        return "Success";
+        return QueryResult.SUCCESS;
     }
 
     public User getUser(User toFind) {
@@ -225,31 +232,44 @@ public class DataAccessStub implements DataAccess {
         }
         return found;
     }
-    public String insertUser(User insert, String password) {
+    public QueryResult insertUser(User insert, String password) {
         if (insert != null) {
             boolean exist = users.contains(insert);
             if (!exist) {
                 users.add(insert);
                 logins.put(insert,password);
-                return "Success";
+                return QueryResult.SUCCESS;
             }
         }
-        return null;
+        return QueryResult.FAILURE;
     }
 
-    public String updateUser(User update) {
+    public QueryResult updateUser(User update) {
         boolean exist = users.contains(update);
         if (exist) {
             users.remove(update);
             users.add(update); //replace with new posting object
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
     }
-    public String authenticateLogin(User u, String password) {
+    public QueryResult authenticateLogin(User u, String password) {
         if (logins.get(u) == password) {
-            return "Success";
+            return QueryResult.SUCCESS;
         }
-        return null;
+        return QueryResult.FAILURE;
+    }
+    public Contact getContactInfo(User user) {
+       return contacts.get(user);
+    }
+
+    public QueryResult updateContactInfo(User user, Contact info) {
+        try {
+            contacts.replace(user,info);
+            return QueryResult.SUCCESS;
+        }
+        catch (Exception e) {
+            return QueryResult.FAILURE;
+        }
     }
 }
