@@ -49,7 +49,7 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
         final ArrayList<Posting> postings = new ArrayList<>();
         AccessPostings accessPostings = new AccessPostings();
 
-        View v = null;
+        View v ;
 
         // Check which page we want to display
         // Inflate the layout for this fragment

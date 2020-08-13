@@ -63,7 +63,9 @@ public class AnswerRequestActivity extends Activity {
         if(result == QueryResult.FAILURE) {
            Messages.fatalError(this, "Failure while accepting requests " );
         }
-        finish();
+        else {
+            finish();
+        }
     }
     public void declineRequest (View view) {
         QueryResult result = Matching.DeclineRequest(accessRequests,requestUserId,postingId);
