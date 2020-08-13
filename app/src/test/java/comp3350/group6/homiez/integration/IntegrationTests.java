@@ -12,7 +12,7 @@ public class IntegrationTests {
 
         suite.addTestSuite(AccessUserSeamTest.class);
         suite.addTestSuite(AccessRequestsSeamTest.class);
-        //suite.addTestSuite(DataAccessHSQLDBTest.class);
+        suite.addTestSuite(DataAccessHSQLDBTest.class);
         return suite;
 
     }
