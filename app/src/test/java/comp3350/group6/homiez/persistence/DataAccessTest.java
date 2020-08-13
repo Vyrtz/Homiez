@@ -25,6 +25,14 @@ public class DataAccessTest extends TestCase {
 //        dataAccess.open(Main.getDBPathName());
 
     }
+
+    public static void dataAccessTest(DataAccess dataAccess) {
+        DataAccessTest dataAccessTest = new DataAccessTest();
+        dataAccessTest.dataAccess = dataAccess;
+
+        //Code to reset the DB
+    }
+
     //Check that dataAccess exists
     public void testDataAccessdataAccessExists() {
         System.out.println("\nStarting testDataAccessdataAccessExists");

@@ -96,4 +96,11 @@ public class Posting {
     public void addAttachedUser(User u) {
         this.attachedUsers.add(u) ;
     }
+
+    public void setAttachedUsers(ArrayList<User> users) {
+        attachedUsers = users;
+        if (! attachedUsers.contains(user)) {
+            attachedUsers.add(user);
+        }
+    }
 }

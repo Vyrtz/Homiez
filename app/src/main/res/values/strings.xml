@@ -44,6 +44,7 @@
     <string name="submit">Submit Changes</string>
     <string name="send_request">Send Request</string>
     <string name="view_profile">View Profile</string>
-    <string name="tenants">Tenants</string>
+    <string name="tenants">Other Tenants</string>
     <string name="password_prompt">Password:</string>
+    <string name="contact_prompt">Contact Info:</string>
 </resources>

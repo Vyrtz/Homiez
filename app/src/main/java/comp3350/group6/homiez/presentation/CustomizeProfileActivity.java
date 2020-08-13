@@ -12,6 +12,7 @@ import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
@@ -30,6 +31,7 @@ public class CustomizeProfileActivity extends Activity {
     private EditText biography;
     private EditText interests;
     private EditText budget;
+    private EditText contact;
 
     private User user;
 
@@ -57,6 +59,7 @@ public class CustomizeProfileActivity extends Activity {
         budget = findViewById(R.id.budget);
         biography = findViewById(R.id.bio);
         interests = findViewById(R.id.interests);
+        contact = findViewById(R.id.contact);
 
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
@@ -64,6 +67,11 @@ public class CustomizeProfileActivity extends Activity {
         gender.setText(user.getGender());
         budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
+
+        Contact contactObj = accessUser.getContactInfoForUser(user);
+        if(contactObj != null){
+            contact.setText(contactObj.getInfo());
+        }
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();
@@ -82,6 +90,7 @@ public class CustomizeProfileActivity extends Activity {
     }
 
     public void submitClicked(View v) {
+
         //Modify the user object that we have
         user.setName(name.getText().toString());
 
@@ -97,6 +106,9 @@ public class CustomizeProfileActivity extends Activity {
 
         //Modify the gender
         user.setGender(gender.getText().toString());
+
+        //Modify the contact information
+        accessUser.updateContactInfoForUser(user, new Contact(contact.getText().toString()));
 
         //Modify the biography
         user.setBiography(biography.getText().toString());

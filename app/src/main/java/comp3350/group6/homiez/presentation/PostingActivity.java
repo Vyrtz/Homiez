@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class PostingActivity extends Activity {
     private Posting post;
     private String postingID;
 
+    private List<HashMap<String, String>> userList;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,37 +61,53 @@ public class PostingActivity extends Activity {
 
             TextView userText = findViewById(R.id.userText);
             userText.setText(post.getUser().getName());
+        }
 
-            ListView viewUsers = findViewById(R.id.userList);
-            viewUsers.setNestedScrollingEnabled(true);
+        ListView viewUsers = findViewById(R.id.userList);
+        viewUsers.setNestedScrollingEnabled(true);
 
-            ArrayList<User> users = post.getAttachedUsers();
-            List<HashMap<String, String>> userList = new ArrayList<>();
+        ArrayList<User> users = post.getAttachedUsers();
+        userList = new ArrayList<>();
 
-            //Loop through every user
-            for(User u : users){
+        //Loop through every user
+        for(User u : users){
+            if(!u.equals(post.getUser())) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("Top", u.getName());
                 map.put("Bottom", "" + u.getAge());
+                map.put("ID", u.getUserId());
                 userList.add(map);
             }
-
-            SimpleAdapter adapter = new SimpleAdapter(this, userList,  android.R.layout.simple_list_item_2, new String[]{"Top", "Bottom"}, new int[]{android.R.id.text1, android.R.id.text2});
-            viewUsers.setAdapter(adapter);
-
         }
+
+        SimpleAdapter adapter = new SimpleAdapter(this, userList,  android.R.layout.simple_list_item_2, new String[]{"Top", "Bottom"}, new int[]{android.R.id.text1, android.R.id.text2});
+        viewUsers.setAdapter(adapter);
 
         TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
         TextView typeText = findViewById(R.id.typeText);
         TextView priceText = findViewById(R.id.priceText);
         TextView descriptionText = findViewById(R.id.descriptionText);
-
         titleText.setText(post.getTitle());
         locationText.setText(post.getLocation());
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
+
+        viewUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            // Go to the posting based on which posting was clicked
+            public void onItemClick(AdapterView<?> a, View v, int p, long id) {
+                Intent intent = new Intent(PostingActivity.this, PublicProfileActivity.class);
+                Bundle bundle = getIntent().getExtras();
+                bundle.putString("profileID", userList.get(p).get("ID"));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
     public void sendMatch(View v) {
         Bundle b =getIntent().getExtras();

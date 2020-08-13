@@ -27,6 +27,8 @@ public interface DataAccess {
 
     QueryResult updateContactInfo(User user, Contact info);
 
+    QueryResult deleteUser(User user);
+
     //POSTING STUFF
     QueryResult getAllDisplayPostings(List<Posting> postingList, User loggedin);
 

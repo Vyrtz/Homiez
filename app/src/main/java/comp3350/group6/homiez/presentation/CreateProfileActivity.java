@@ -8,6 +8,7 @@ import android.widget.EditText;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.User;
 
@@ -26,6 +27,7 @@ public class CreateProfileActivity extends Activity {
     private String biography;
     private String interests;
     private String password;
+    private String contact;
 
     private int age;
 
@@ -70,6 +72,10 @@ public class CreateProfileActivity extends Activity {
         fields = findViewById(R.id.editGender);
         gender = fields.getText().toString();
 
+        //Fetch contact info
+        fields = findViewById(R.id.editContact);
+        contact = fields.getText().toString();
+
         //Fetch budget
         fields = findViewById(R.id.editBudget);
         if(checkFieldNotEmpty(fields)) {
@@ -102,6 +108,7 @@ public class CreateProfileActivity extends Activity {
             Messages.warning(this, ERROR);
         }
         else{
+            accessUser.updateContactInfoForUser(newUser, new Contact(contact));
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
         }
 

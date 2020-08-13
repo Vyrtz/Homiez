@@ -257,6 +257,16 @@ public class DataAccessStub implements DataAccess {
         }
         return QueryResult.FAILURE;
     }
+
+    public QueryResult deleteUser(User user) {
+        boolean exist = users.contains(user);
+        if (!exist) {
+            return QueryResult.FAILURE;
+        }
+        users.remove(user);
+        return QueryResult.SUCCESS;
+    }
+
     public QueryResult authenticateLogin(User u, String password) {
         if (logins.get(u) == password) {
             return QueryResult.SUCCESS;

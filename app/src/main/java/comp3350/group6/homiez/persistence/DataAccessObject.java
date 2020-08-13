@@ -25,7 +25,7 @@ public class DataAccessObject implements DataAccess {
     private int updateCount;
     private QueryResult result;
 
-    private Statement statement1, statement2, statement3;
+    private Statement statement1, statement2, statement3, statement4;
     private Connection connection;
     private ResultSet rs2, rs3, rs4, rs5;
 
@@ -42,7 +42,7 @@ public class DataAccessObject implements DataAccess {
             statement1 = connection.createStatement();
             statement2 = connection.createStatement();
             statement3 = connection.createStatement();
-
+            statement4 = connection.createStatement();
         }
         catch(Exception e) {
             System.out.println("Connection failed");
@@ -332,6 +332,8 @@ public class DataAccessObject implements DataAccess {
             deleteContactInfo(u);
             commandString = "DELETE FROM INTERESTS WHERE USERID='" + values +"'";
             statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM LOGININFO WHERE USERID='" + values +"'";
+            statement1.executeUpdate(commandString);
             List<Posting> ps = new ArrayList<>();
             getPostingsByUser(ps, u);
             for (Posting p : ps) {
@@ -362,7 +364,7 @@ public class DataAccessObject implements DataAccess {
                     +"', TYPE='" + p.getType()
                     +"', DESCRIPTION='" + p.getDescription() + "'";
 
-            where = "WHERE POSTINGID=" + p.getPostingId();
+            where = "WHERE POSTINGID='" + p.getPostingId() + "'";
 
             commandString = "UPDATE POSTINGS " + " SET " + values + " " + where;
             updateCount = statement1.executeUpdate(commandString);
@@ -447,7 +449,7 @@ public class DataAccessObject implements DataAccess {
         try {
             uId = m.getUserId();
             pId = m.getPostingId();
-            commandString = "DELETE FROM MATCHES WHERE USERID=" + uId + " AND POSTINGID=" + pId;
+            commandString = "DELETE FROM MATCHES WHERE USERID='" + uId + "' AND POSTINGID='" + pId +"'";
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
@@ -521,7 +523,7 @@ public class DataAccessObject implements DataAccess {
     private QueryResult getInterests(User u ) {
         Interest i;
         String s;
-        result = QueryResult.FAILURE;
+        QueryResult result = QueryResult.FAILURE;
 
         try {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
@@ -541,14 +543,14 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult updateInterests(User u ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
         String values = u.getUserId();
         
         commandString = "Delete from INTERESTS where USERID='" +values +"'";
 
         updateCount = statement3.executeUpdate(commandString);
 
-        result = checkWarnings(statement1, updateCount);
+        result = checkWarnings(statement3, updateCount);
 
         insertInterests(u);
 
@@ -557,54 +559,54 @@ public class DataAccessObject implements DataAccess {
 
     private QueryResult insertInterests(User u ) throws SQLException {
         String values;
-        result = QueryResult.FAILURE;
+        QueryResult result;
         commandString = "";
 
         for (Interest i : u.getInterests()) {
             values = "'" + u.getUserId()
                     +"', '" + i.getInterest()
                     +"'";
-            commandString += "Insert into INTERESTS " +" Values(" +values +") ";
+            commandString += "Insert into INTERESTS " +"Values(" +values +") ";
         }
         updateCount = statement3.executeUpdate(commandString);
-        result = checkWarnings(statement1, updateCount);
+        result = checkWarnings(statement3, updateCount);
         return result;
     }
 
     private QueryResult insertAttachedUsers(Posting p ) throws SQLException {
+        QueryResult result;
         String values;
-        result = QueryResult.FAILURE;
         commandString = "";
         for (User u : p.getAttachedUsers()) {
             values = "'" + p.getPostingId()
                     +"', '" + u.getUserId()
                     +"'";
-            commandString += "Insert into ATTACHEDUSERS " +" Values(" +values +") ";
+            commandString = "Insert into ATTACHEDUSERS " +"Values(" +values +") ";
+            updateCount = statement4.executeUpdate(commandString);
         }
-        updateCount = statement3.executeUpdate(commandString);
-        result = checkWarnings(statement1, updateCount);
+        result = checkWarnings(statement4, updateCount);
         return result;
     }
 
     private QueryResult updateAttachedUsers(Posting p ) throws SQLException {
-
+        QueryResult result;
         result = deleteAttachedUsers(p);
-        if (result == QueryResult.SUCCESS) {
+        if (result != QueryResult.FAILURE) {
             result = insertAttachedUsers(p);
         }
         return result;
     }
     private QueryResult getAttachedUsers(Posting p ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;;
         String uid;
         commandString = "Select * from ATTACHEDUSERS where POSTINGID='" + p.getPostingId() +"' and USERID != '" +p.getUser().getUserId()+"'";
-        rs4 = statement3.executeQuery(commandString);
-        while (rs4.next()) {
-            uid = rs4.getString("USERID");
+        rs5 = statement4.executeQuery(commandString);
+        while (rs5.next()) {
+            uid = rs5.getString("USERID");
             User u = getUser(new User(uid));
             p.addAttachedUser(u);
         }
-        rs4.close();
+        rs5.close();
         result =  QueryResult.SUCCESS;
 
         return result;
@@ -612,8 +614,8 @@ public class DataAccessObject implements DataAccess {
 
     private QueryResult deleteAttachedUsers(Posting p) throws SQLException{
         commandString = "DELETE FROM ATTACHEDUSERS WHERE POSTINGID='" + p.getPostingId() + "'";
-        updateCount = statement1.executeUpdate(commandString);
-        result = checkWarnings(statement1, updateCount);
+        updateCount = statement3.executeUpdate(commandString);
+        QueryResult result = checkWarnings(statement3, updateCount);
         return result;
     }
 
@@ -630,6 +632,10 @@ public class DataAccessObject implements DataAccess {
         catch (SQLException e) {
             System.out.println(e.getMessage());
             res = QueryResult.FAILURE;
+        }
+
+        if(count == 0) {
+            res = QueryResult.WARNING;
         }
 
         return res;
@@ -661,7 +667,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public QueryResult updateContactInfo(User u, Contact c ) {
-        result = QueryResult.FAILURE;
+        QueryResult result = QueryResult.FAILURE;
 
         try {
             deleteContactInfo(u);
@@ -674,11 +680,11 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult insertContactInfo(User u, Contact c ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
 
         String values = "'" + u.getUserId() + "', '" + c.getInfo() + "'";
 
-        commandString = "Insert into CONTACTS " + " Values(" + values + ") ";
+        commandString = "Insert into CONTACTS " + "Values(" + values + ") ";
 
         updateCount = statement3.executeUpdate(commandString);
 
@@ -688,7 +694,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult deleteContactInfo(User u ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
 
         String values = u.getUserId();
 
