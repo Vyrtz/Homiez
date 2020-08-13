@@ -51,7 +51,7 @@ public class AccessUserSeamTest extends TestCase {
     public void testValidGet() {
         System.out.println("Starting testValidGet");
         //Existing User
-        assertEquals(au.getUser("5"), existingUser);
+        assertEquals(existingUser, au.getUser("5"));
 
         //New User
         au.insertUser(newUser, password);
@@ -89,7 +89,8 @@ public class AccessUserSeamTest extends TestCase {
     public void testValidUpdate() {
         System.out.println("Starting testValidUpdate");
         //Existing
-        assertEquals(QueryResult.SUCCESS, au.updateUser(existingUser));
+        User temp = au.getUser("5");
+        assertEquals(QueryResult.SUCCESS, au.updateUser(temp));
 
         //New User
         au.insertUser(newUser, password);

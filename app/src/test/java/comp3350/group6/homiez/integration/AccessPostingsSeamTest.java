@@ -98,7 +98,7 @@ public class AccessPostingsSeamTest extends TestCase {
     public void testInvalidUpdatePosting() {
         System.out.println("Starting testInvalidUpdatePosting");
         Posting post = createNewPost("DNE", "0");
-        assertEquals(QueryResult.FAILURE, accessPostings.updatePosting(post)); //Attempt to update a nonexistent post
+        assertEquals(QueryResult.WARNING, accessPostings.updatePosting(post)); //Attempt to update a nonexistent post
         System.out.println("Finished testInvalidUpdatePosting");
     }
 
