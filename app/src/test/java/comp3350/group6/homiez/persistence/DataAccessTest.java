@@ -10,10 +10,13 @@ import comp3350.group6.homiez.objects.User;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 
 public class DataAccessTest extends TestCase {
 
+    public DataAccessTest(String arg0) { super(arg0); }
 
     private DataAccess dataAccess;
 
@@ -24,6 +27,14 @@ public class DataAccessTest extends TestCase {
 //        dataAccess.open(Main.getDBPathName());
 
     }
+
+    public static void dataAccessTest(DataAccess dataAccess) {
+        DataAccessTest dataAccessTest = new DataAccessTest("");
+        dataAccessTest.dataAccess = dataAccess;
+
+        //Code to reset the DB
+    }
+
     //Check that dataAccess exists
     public void testDataAccessdataAccessExists() {
         System.out.println("\nStarting testDataAccessdataAccessExists");

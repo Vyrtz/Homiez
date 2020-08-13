@@ -10,7 +10,7 @@ public class IntegrationTests {
     public static Test suite() {
         suite = new TestSuite("Integration tests");
 
-        suite.addTestSuite(BusinessPersistenceSeamTest.class);
+        suite.addTestSuite(AccessUserSeamTest.class);
         suite.addTestSuite(DataAccessHSQLDBTest.class);
         return suite;
 
