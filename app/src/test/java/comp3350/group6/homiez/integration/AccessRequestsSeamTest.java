@@ -48,7 +48,7 @@ public class AccessRequestsSeamTest extends TestCase {
         accessRequests.getRequestsForPosting(requests, "0");
         Request request = requests.get(0);
 
-        assertEquals(QueryResult.SUCCESS, accessRequests.deleteRequest(request);
+        assertEquals(QueryResult.SUCCESS, accessRequests.deleteRequest(request));
         accessRequests.insertRequest(request); //Insert it back to preserve the database
 
         //New Request

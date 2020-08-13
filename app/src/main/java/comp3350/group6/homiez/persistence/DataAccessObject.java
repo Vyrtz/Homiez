@@ -332,6 +332,8 @@ public class DataAccessObject implements DataAccess {
             deleteContactInfo(u);
             commandString = "DELETE FROM INTERESTS WHERE USERID='" + values +"'";
             statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM LOGININFO WHERE USERID='" + values +"'";
+            statement1.executeUpdate(commandString);
             List<Posting> ps = new ArrayList<>();
             getPostingsByUser(ps, u);
             for (Posting p : ps) {
@@ -630,6 +632,10 @@ public class DataAccessObject implements DataAccess {
         catch (SQLException e) {
             System.out.println(e.getMessage());
             res = QueryResult.FAILURE;
+        }
+
+        if(count == 0) {
+            res = QueryResult.WARNING;
         }
 
         return res;
