@@ -104,9 +104,9 @@ public class AccessPostingsSeamTest extends TestCase {
 
     public void testValidDeletePosting() {
         System.out.println("Starting testValidDeletePosting");
-        Posting post = accessPostings.getPostingById("0");
+        Posting post = accessPostings.getPostingById("2");
         assertEquals(QueryResult.SUCCESS, accessPostings.deletePosting(post));
-        assertNull(accessPostings.getPostingById("0")); //Confirm that its gone
+        assertNull(accessPostings.getPostingById("2")); //Confirm that its gone
         accessPostings.insertPosting(post); //Cleanup
         System.out.println("Finished testValidDeletePosting");
     }
