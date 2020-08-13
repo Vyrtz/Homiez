@@ -37,7 +37,8 @@ public class AccessPostingsSeamTest extends TestCase {
     public void testInvalidGetPostings() {
         System.out.println("Starting testInvalidGetPostings");
         ArrayList<Posting> postings = new ArrayList<>();
-        assertEquals(QueryResult.FAILURE, accessPostings.getPostings(postings, "DNE"));
+        accessPostings.getPostings(postings, "DNE");
+        assertTrue(postings.size() == 0);
 
         System.out.println("Finished testInvalidGetPostings");
     }

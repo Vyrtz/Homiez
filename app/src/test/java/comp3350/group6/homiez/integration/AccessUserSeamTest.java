@@ -40,10 +40,10 @@ public class AccessUserSeamTest extends TestCase {
     public void testInvalidLogin() {
         System.out.println("Starting testInvalidLogin");
         //User that doesn't exist
-        assertEquals(au.login(newUser, password), QueryResult.FAILURE);
+        assertEquals(QueryResult.FAILURE, au.login(newUser, password));
 
         //Wrong password
-        assertEquals(au.login(existingUser, "wrong password"), QueryResult.FAILURE);
+        assertEquals(QueryResult.FAILURE, au.login(existingUser, "wrong password"));
 
         System.out.println("Finished testInvalidLogin");
     }
@@ -71,8 +71,11 @@ public class AccessUserSeamTest extends TestCase {
         System.out.println("Starting testValidInsert");
 
         assertEquals(QueryResult.SUCCESS, au.insertUser(newUser, password));
-        //au.insertUser(newUser, password);
+        User user1 = au.getUser("John115");
+        assertNotNull(user1);
+
         au.deleteUser(newUser);
+        assertNull(au.getUser("John115"));
 
         System.out.println("Finished testValidInsert");
     }
@@ -89,9 +92,9 @@ public class AccessUserSeamTest extends TestCase {
         assertEquals(QueryResult.SUCCESS, au.updateUser(existingUser));
 
         //New User
-        //au.insertUser(newUser, password);
-        //assertEquals(QueryResult.SUCCESS, au.updateUser(newUser));
-        //au.deleteUser(newUser);
+        au.insertUser(newUser, password);
+        assertEquals(QueryResult.SUCCESS, au.updateUser(newUser));
+        au.deleteUser(newUser);
 
         System.out.println("Finished testValidUpdate");
     }
@@ -106,14 +109,12 @@ public class AccessUserSeamTest extends TestCase {
         System.out.println("Starting testValidDelete");
         //Existing user
         User temp = au.getUser("5");
-        //assertEquals(QueryResult.SUCCESS, au.deleteUser(existingUser));
-
-        au.deleteUser(existingUser);
-        au.insertUser(newUser, password);
+        assertEquals(QueryResult.SUCCESS, au.deleteUser(existingUser));
+        au.insertUser(temp, password);
 
         //New User
-        //au.insertUser(newUser, password);
-        //assertEquals(QueryResult.SUCCESS, au.deleteUser(newUser));
+        au.insertUser(newUser, password);
+        assertEquals(QueryResult.SUCCESS, au.deleteUser(newUser));
 
         System.out.println("Finished testValidDelete");
     }
