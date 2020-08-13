@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import java.util.List;
 
 import comp3350.group6.homiez.R;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
@@ -116,8 +115,8 @@ public class PostingActivity extends Activity {
     }
 
     public void deletePosting(View v) {
-        String result = accessPostings.deletePosting(post);
-        if(result == null) {
+        QueryResult result = accessPostings.deletePosting(post);
+        if(result == QueryResult.FAILURE) {
             Messages.fatalError(this, "Failure while deleting posting ");
         }
         else {

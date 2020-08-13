@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.business;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Posting;
@@ -52,13 +53,13 @@ public class AccessPostingsTest extends TestCase {
         assertEquals(5, postings.size());
         postings.clear();
 
-        assertNull((p = aPostings.getPostingById("1000")));
+        assertNull(aPostings.getPostingById("1000"));
 
         assertNull(aPostings.getPostingsByUserId(postings, null));
 
-        assertNull(aPostings.insertPosting(null));
+        assertEquals(QueryResult.FAILURE, aPostings.insertPosting(null));
 
-        assertNull(aPostings.deletePosting(null));
+        assertEquals(QueryResult.FAILURE, aPostings.deletePosting(null));
 
         System.out.println("Finished testNullValues");
     }
@@ -77,11 +78,11 @@ public class AccessPostingsTest extends TestCase {
         assertEquals(0, postings.size());
         postings.clear();
 
-        assertNull(aPostings.insertPosting(postExists));
+        assertEquals(QueryResult.FAILURE, aPostings.insertPosting(postExists));
 
-        assertNull(aPostings.updatePosting(postDNE));
+        assertEquals(QueryResult.FAILURE, aPostings.updatePosting(postDNE));
 
-        assertNull(aPostings.deletePosting(postDNE));
+        assertEquals(QueryResult.FAILURE, aPostings.deletePosting(postDNE));
 
         System.out.println("Finished testBadValues");
     }
@@ -102,16 +103,16 @@ public class AccessPostingsTest extends TestCase {
         aPostings.getPostingsByUserId(postings, "0");
         assertEquals(3, postings.size());
 
-        assertEquals("Success", aPostings.insertPosting(postDNE));
+        assertEquals(QueryResult.SUCCESS , aPostings.insertPosting(postDNE));
         assertNotNull(aPostings.getPostingById(postDNE.getPostingId()));
 
         pNew = new Posting(pOld.getPostingId(), pOld.getTitle(), pOld.getUser(), pOld.getPrice(), pOld.getLocation(), pOld.getType(), updated);
-        assertEquals("Success", aPostings.updatePosting(pNew));
+        assertEquals(QueryResult.SUCCESS , aPostings.updatePosting(pNew));
         assertEquals(updated, aPostings.getPostingById(pOld.getPostingId()).getDescription());
         aPostings.updatePosting(pOld);
 
-        assertEquals("Success", aPostings.deletePosting(postDNE));
-        assertNull(aPostings.getPostingById(postDNE.getPostingId()));
+        assertEquals(QueryResult.SUCCESS , aPostings.deletePosting(postDNE));
+        assertNull( aPostings.getPostingById(postDNE.getPostingId()));
 
         System.out.println("Finished testExistingPostings");
     }

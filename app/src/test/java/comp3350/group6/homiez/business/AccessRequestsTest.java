@@ -1,7 +1,7 @@
 package comp3350.group6.homiez.business;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Services;
-import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 
@@ -40,8 +40,8 @@ public class AccessRequestsTest extends TestCase {
         assertEquals(0, requests.size());
         requests.clear();
 
-        assertNull(accessRequests.insertRequest( null));
-        assertNull(accessRequests.deleteRequest( null));
+        assertEquals(QueryResult.FAILURE, accessRequests.insertRequest( null));
+        assertEquals(QueryResult.FAILURE, accessRequests.deleteRequest( null));
 
         System.out.println("Finished testNullValues");
     }
@@ -58,7 +58,7 @@ public class AccessRequestsTest extends TestCase {
         assertEquals(0, requests.size());
         requests.clear();
 
-        assertNull(accessRequests.deleteRequest( new Request("111", "999")));
+        assertEquals(QueryResult.FAILURE, accessRequests.deleteRequest( new Request("111", "999")));
 
         System.out.println("Finished testBadValues");
     }
@@ -70,7 +70,7 @@ public class AccessRequestsTest extends TestCase {
         accessRequests.getRequestsForPosting(requests, "3");
         assertEquals(0, requests.size());
 
-        assertNull(accessRequests.deleteRequest( new Request("100", "100")));
+        assertEquals(QueryResult.FAILURE, accessRequests.deleteRequest( new Request("100", "100")));
 
         accessRequests.insertRequest(r);
         accessRequests.getRequestsForPosting(requests, "3");

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.User;
@@ -106,13 +107,13 @@ public class LoginActivity extends Activity {
 
         User user = accessUser.getUser(userID);
 
-        String loginMessage = accessUser.login(user, password);
+        QueryResult loginMessage = accessUser.login(user, password);
 
         System.out.println("userID:" + userID + " password:" + password);
         System.out.println(loginMessage);
 
         IDField.setText("");
-        if(user != null && loginMessage != null && loginMessage.equals(SUCCESS)) {
+        if(user != null && loginMessage == QueryResult.SUCCESS) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);

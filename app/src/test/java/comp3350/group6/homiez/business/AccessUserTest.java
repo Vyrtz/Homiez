@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.business;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.User;
@@ -25,7 +26,7 @@ public class AccessUserTest extends TestCase {
     public void setUp() {
         Services.createDataAccess(new DataAccessStub("test"));
         aUser = new AccessUser();
-        aUser.login(u);
+        aUser.login(u, "test");
         u = new User("0", "Abhi", 20, "m", 100, "test");
         existingUpdated = new User("0", "John", 20, "m", 100, "test");
         newUser = new User("99", "testU1", 30, "f", 100, "test");
@@ -74,7 +75,7 @@ public class AccessUserTest extends TestCase {
         assertEquals(newUser, aUser.getUser("99"));
 
         //update user
-        assertNull(aUser.updateUser(uDNE));
+        assertEquals(QueryResult.FAILURE, aUser.updateUser(uDNE));
 
         System.out.println("Finished testAccessUserNotExisting");
     }
