@@ -19,10 +19,10 @@ public class DataAccessTest extends TestCase {
     private DataAccess dataAccess;
 
     public void setUp() {
-        dataAccess = new DataAccessStub("dataAccess1");
-        dataAccess.open("dataAccess1");
-        // dataAccess = new DataAccessObject(Main.dbName);
-        // dataAccess.open(Main.getDBPathName());
+        //dataAccess = new DataAccessStub("dataAccess1");
+        //dataAccess.open("dataAccess1");
+         dataAccess = new DataAccessObject(Main.dbName);
+         dataAccess.open(Main.getDBPathName());
 
     }
 
@@ -430,6 +430,69 @@ public class DataAccessTest extends TestCase {
         assertEquals(QueryResult.SUCCESS, dataAccess.insertMatch(rExists));
 
         System.out.println("Finished testMatchesChanges");
+    }
+
+    public void testDeleteUserEntireDb() {
+        System.out.println("\nStarting testDeleteUserEntireDb");
+
+        System.out.println("\nStarting testDeletePostingEntireDb");
+
+        ArrayList<Posting> postings = new ArrayList<Posting>();
+        User u = new User("test", "test", 20, "m", 100, "test");
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertUser(u, "test"));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertRequest(new Request("test", "3")));
+        assertEquals(QueryResult.SUCCESS,  dataAccess.insertRequest(new Request("test", "2")));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertMatch(new Match("test", "4")));
+
+        User dbU = dataAccess.getUser(u);
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.deleteUser(dbU));
+        ArrayList<Match> matches = new ArrayList();
+        assertEquals( QueryResult.SUCCESS, dataAccess.getMatchesForUser(matches, dbU.getUserId()));
+        assertEquals(0, matches.size());
+
+        ArrayList<Request> requests = new ArrayList();
+        assertEquals( QueryResult.SUCCESS, dataAccess.getRequests(requests, "2"));
+        assertEquals(1, requests.size());
+        requests.clear();
+
+        assertEquals( QueryResult.SUCCESS, dataAccess.getRequests(requests, "3"));
+        assertEquals(0, requests.size());
+
+        System.out.println("Finished testDeletePostingEntireDb");
+    }
+
+    public void testDeletePostingEntireDb() {
+        System.out.println("\nStarting testDeletePostingEntireDb");
+
+        ArrayList<Posting> postings = new ArrayList<Posting>();
+        User u = new User("2", "Matt", 20, "m", 100, "test");
+        Posting pExists = new Posting("5", "AAA", u, 1500, "Pembina", "Apartment", "TestDesc1");
+        pExists.addAttachedUser(new User("1"));
+        pExists.addAttachedUser(new User("2"));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertPosting(pExists));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertRequest(new Request("0", "5")));
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertRequest(new Request("3", "5")));
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.insertMatch(new Match("4", "5")));
+
+        Posting dbP = dataAccess.getPosting(pExists);
+
+        assertEquals(QueryResult.SUCCESS, dataAccess.deletePosting(pExists));
+        ArrayList<Match> matches = new ArrayList();
+        assertEquals( QueryResult.SUCCESS, dataAccess.getMatchesForPosting(matches, pExists.getPostingId()));
+        assertEquals(0, matches.size());
+
+        ArrayList<Request> requests = new ArrayList();
+        assertEquals( QueryResult.SUCCESS, dataAccess.getRequests(requests, pExists.getPostingId()));
+        assertEquals(0, requests.size());
+
+        System.out.println("Finished testDeletePostingEntireDb");
     }
 
     public void tearDown() {

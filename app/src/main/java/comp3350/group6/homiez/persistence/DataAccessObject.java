@@ -334,6 +334,12 @@ public class DataAccessObject implements DataAccess {
             statement1.executeUpdate(commandString);
             commandString = "DELETE FROM LOGININFO WHERE USERID='" + values +"'";
             statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM REQUESTS WHERE USERID='" + values +"'";
+            statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM MATCHES WHERE USERID='" + values +"'";
+            statement1.executeUpdate(commandString);
+            commandString = "DELETE FROM CONTACTS WHERE USERID='" + values +"'";
+            statement1.executeUpdate(commandString);
             List<Posting> ps = new ArrayList<>();
             getPostingsByUser(ps, u);
             for (Posting p : ps) {
