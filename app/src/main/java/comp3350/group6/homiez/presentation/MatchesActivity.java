@@ -1,6 +1,5 @@
 package comp3350.group6.homiez.presentation;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessMatches;

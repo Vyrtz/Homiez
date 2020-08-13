@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
@@ -58,15 +59,17 @@ public class AnswerRequestActivity extends Activity {
     }
 
     public void acceptRequest (View view) {
-        String result = Matching.AcceptRequest(accessRequests,accessMatches,requestUserId,postingId);
-        if(result == null) {
+        QueryResult result = Matching.AcceptRequest(accessRequests,accessMatches,requestUserId,postingId);
+        if(result == QueryResult.FAILURE) {
            Messages.fatalError(this, "Failure while accepting requests " );
         }
-        finish();
+        else {
+            finish();
+        }
     }
     public void declineRequest (View view) {
-        String result = Matching.DeclineRequest(accessRequests,requestUserId,postingId);
-        if(result == null) {
+        QueryResult result = Matching.DeclineRequest(accessRequests,requestUserId,postingId);
+        if(result == QueryResult.FAILURE) {
             Messages.fatalError(this, "Failure while declining requests ");
         }
         else {

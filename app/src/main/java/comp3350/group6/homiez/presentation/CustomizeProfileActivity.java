@@ -3,15 +3,13 @@ package comp3350.group6.homiez.presentation;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Interest;
@@ -130,7 +128,7 @@ public class CustomizeProfileActivity extends Activity {
 
         user.setInterests(interestList);
 
-        if(accessUser.updateUser(user)==null) {
+        if(accessUser.updateUser(user)== QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
         }
         else {

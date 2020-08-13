@@ -32,6 +32,7 @@
         <activity android:name="comp3350.group6.homiez.presentation.CustomizeProfileActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.PublicProfileActivity"></activity>
         <activity android:name="comp3350.group6.homiez.presentation.ShareInfoActivity"></activity>
+        <activity android:name="comp3350.group6.homiez.presentation.EditPostingActivity"></activity>
     </application>
 
 </manifest>
