@@ -17,7 +17,7 @@ public class Contact {
         String first = ((Contact) o).getInfo().toLowerCase().trim().replaceAll("\\s+","");
         String second = this.info.toLowerCase().trim().replaceAll("\\s+","");
 
-        return (o instanceof Interest)
+        return (o instanceof Contact)
                 ? first.equals(second)
                 : false;
     }

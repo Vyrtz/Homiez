@@ -55,9 +55,11 @@ public class AccessUserTest extends TestCase {
 //        assertNull(aUser.insertUser(u));
 
         //updateUser
+        User uOrg = aUser.getUser("0");
         aUser.updateUser(existingUpdated);
         u = aUser.getUser("0");
         assertEquals("John",u.getName());
+        aUser.updateUser(uOrg);
 
         System.out.println("Finished testAccessUserExistingUser");
     }
@@ -78,5 +80,41 @@ public class AccessUserTest extends TestCase {
         assertEquals(QueryResult.FAILURE, aUser.updateUser(uDNE));
 
         System.out.println("Finished testAccessUserNotExisting");
+    }
+
+    public void testAccessUserExistingContactInfo() {
+        System.out.println("\nStarting testAccessUserExistingContactInfo");
+
+        User uOrg = aUser.getUser("0");
+
+        //get info
+        Contact c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Abhi contact", c.getInfo());
+
+        //update info
+        c = new Contact("Abhi contact updated");
+        aUser.updateContactInfoForUser(uOrg, c);
+        c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Abhi contact updated", c.getInfo());
+
+        System.out.println("Finished testAccessUserExistingContactInfo");
+    }
+
+    public void testAcessUserNotExistingContactInfo() {
+        System.out.println("\nStarting testAccessUserNotExistingContactInfo");
+
+        User uOrg = aUser.getUser("4");
+
+        //get info
+        Contact c = aUser.getContactInfoForUser(uOrg);
+        assertNull(c);
+
+        //update info
+        c = new Contact("Ma info");
+        aUser.updateContactInfoForUser(uOrg, c);
+        c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Ma info", c.getInfo());
+
+        System.out.println("Finished testAccessUserNotExistingContactInfo");
     }
 }
