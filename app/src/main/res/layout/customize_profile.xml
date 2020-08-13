@@ -126,70 +126,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/emailLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
-
-                <TextView
-                    android:id="@+id/emailPrompt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="bottom|left"
-                    android:paddingLeft="10dp"
-                    android:text="@string/email_prompt"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorYellow" />
-
-                <EditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/login_inputbox"
-                    android:gravity="bottom|left"
-                    android:inputType="none"
-                    android:singleLine="true"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorGrey" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/phoneLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
-
-                <TextView
-                    android:id="@+id/phonePrompt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:gravity="bottom|left"
-                    android:paddingLeft="10dp"
-                    android:text="@string/phone_prompt"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorYellow" />
-
-                <EditText
-                    android:id="@+id/phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/login_inputbox"
-                    android:gravity="bottom|left"
-                    android:inputType="none"
-                    android:singleLine="true"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/colorGrey" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/budgetLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -215,6 +151,38 @@
                     android:background="@drawable/login_inputbox"
                     android:gravity="bottom|left"
                     android:inputType="none|numberSigned|numberDecimal"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/contactLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/contactPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_weight="2"
+                    android:paddingLeft="10dp"
+                    android:text="@string/contact_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <EditText
+                    android:id="@+id/contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="top"
+                    android:inputType="none"
                     android:singleLine="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />

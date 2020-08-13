@@ -8,6 +8,7 @@ import android.widget.EditText;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.User;
 
@@ -91,8 +92,6 @@ public class CreateProfileActivity extends Activity {
 
         User newUser = new User(userID, name, age, gender, budget, biography);
 
-        //TODO: Do something with the contact information
-
         //split up the different interests into separate strings
         String[] interestList = interests.split(",");
 
@@ -109,6 +108,7 @@ public class CreateProfileActivity extends Activity {
             Messages.warning(this, ERROR);
         }
         else{
+            accessUser.updateContactInfoForUser(newUser, new Contact(contact));
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
         }
 
