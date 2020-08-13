@@ -78,7 +78,8 @@ public class AccessRequestsSeamTest extends TestCase {
     public void testInvalidGet() {
         System.out.println("Starting testInvalidGet");
         ArrayList<Request> requests = new ArrayList<>();
-        assertNull(accessRequests.getRequestsForPosting(requests, "DNE"));
+        accessRequests.getRequestsForPosting(requests, "DNE"); //Posting that doesn't exist
+        assertTrue(requests.size() == 0);
         System.out.println("Finished testInvalidGet");
     }
 }
