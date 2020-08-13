@@ -35,16 +35,36 @@ public class CreatePostingActivity extends Activity {
         EditText location  = (EditText) findViewById(R.id.editTextLocation);
         EditText description  = (EditText) findViewById(R.id.editTextDescription);
         EditText price  = (EditText) findViewById(R.id.editTextPrice);
+        EditText tenants  = (EditText) findViewById(R.id.editTextTenants);
         double priceD = Double.parseDouble(price.getText().toString());
         User u = accessUser.getUser(userId);
         Posting p = new Posting(currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
 
-        if(accessPostings.insertPosting(p) == QueryResult.FAILURE) {
+        String individualTenants[] = tenants.getText().toString().split(",");
 
-            Messages.fatalError(this, "failed to create the posting, check the values Note: price should be a double " + title.toString() + type.toString() + price.toString());
+        boolean failed = false;
+
+        for (String s: individualTenants) {
+            User t = accessUser.getUser(s.trim());
+            if (t!= null) {
+                p.addAttachedUser(t);
+            }
+            else {
+                failed = true;
+            }
+        }
+        if (!failed) {
+            if(accessPostings.insertPosting(p) == QueryResult.FAILURE) {
+
+                Messages.fatalError(this, "failed to create the posting, check the values Note: price should be a double " + title.toString() + type.toString() + price.toString());
+            }
+            else {
+                finish();
+            }
         }
         else {
-            finish();
+            Messages.fatalError(this, "failed to create the posting, tenants do not exist");
         }
+
     }
 }
