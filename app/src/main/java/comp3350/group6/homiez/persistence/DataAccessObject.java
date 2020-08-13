@@ -324,8 +324,7 @@ public class DataAccessObject implements DataAccess {
         result = null;
 
         try {
-            values = "POSTINGID='" + p.getPostingId()
-                    +"', TITLE='" + p.getTitle()
+            values = "TITLE='" + p.getTitle()
                     +"', USERID='" + p.getUser().getUserId()
                     +"', PRICE='" + p.getPrice()
                     +"', LOCATION='" + p.getLocation()
