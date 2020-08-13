@@ -27,7 +27,7 @@ public class AccessPostingsSeamTest extends TestCase {
         //Fetch existing posts
         ArrayList<Posting> postings = new ArrayList<>();
         assertEquals(QueryResult.SUCCESS, accessPostings.getPostings(postings, "0"));
-        assertTrue(postings.size() == 2); //Default 2 postings that aren't owned by user 0
+        assertTrue(postings.size() == 3); //Default 2 postings that aren't owned by user 0
 
 
         System.out.println("Finished testValidGetPostings");
@@ -37,7 +37,7 @@ public class AccessPostingsSeamTest extends TestCase {
         System.out.println("Starting testInvalidGetPostings");
         ArrayList<Posting> postings = new ArrayList<>();
         accessPostings.getPostings(postings, "DNE");
-        assertTrue(postings.size() == 5); //5 default postings - passed user is no one so all posts are returned
+        assertTrue(postings.size() == 6); //5 default postings - passed user is no one so all posts are returned
 
         System.out.println("Finished testInvalidGetPostings");
     }
@@ -104,9 +104,9 @@ public class AccessPostingsSeamTest extends TestCase {
 
     public void testValidDeletePosting() {
         System.out.println("Starting testValidDeletePosting");
-        Posting post = accessPostings.getPostingById("2");
+        Posting post = accessPostings.getPostingById("5");
         assertEquals(QueryResult.SUCCESS, accessPostings.deletePosting(post));
-        assertNull(accessPostings.getPostingById("2")); //Confirm that its gone
+        assertNull(accessPostings.getPostingById("5")); //Confirm that its gone
         accessPostings.insertPosting(post); //Cleanup
         System.out.println("Finished testValidDeletePosting");
     }
