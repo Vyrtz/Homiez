@@ -40,48 +40,44 @@ public class LoginActivityTest {
 
     @Test
     public void validLoginTest() {
+        // Enter 0 as userid
         ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText.perform(replaceText("0"), closeSoftKeyboard());
-
-        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
-        editText2.check(matches(withText("0")));
 
         ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText3.perform(pressImeActionButton());
 
+        // Enter dev as password
         ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         editText4.perform(replaceText("dev"), closeSoftKeyboard());
 
-        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
-        editText5.check(matches(withText("dev")));
-
+        // Click login button
         ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         button.perform(click());
 
+        // Check if brought passed login to next page
         ViewInteraction postinglist = onView(allOf(withId(R.id.postingsList), isDisplayed()));
         postinglist.check(matches(isDisplayed()));
     }
 
     @Test
     public void invalidPasswordLoginTest() {
+        // Enter 0 as userid
         ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText.perform(replaceText("0"), closeSoftKeyboard());
-
-        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
-        editText2.check(matches(withText("0")));
 
         ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("0"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText3.perform(pressImeActionButton());
 
+        //Enter invalid password
         ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         editText4.perform(replaceText("INVALID_PASSWORD"), closeSoftKeyboard());
 
-        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
-        editText5.check(matches(withText("INVALID_PASSWORD")));
-
+        // Click login
         ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         button.perform(click());
 
+        // Check that it doesn't login you in
         ViewInteraction textView = onView(
                 allOf(withId(android.R.id.message), withText("Incorrect username or password"),
                         childAtPosition(
@@ -95,24 +91,22 @@ public class LoginActivityTest {
 
     @Test
     public void invalidIdLoginTest() {
+        // Enter invalid id
         ViewInteraction editText = onView(allOf(withId(R.id.editUserID), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText.perform(replaceText("INVALID_USER_ID"), closeSoftKeyboard());
-
-        ViewInteraction editText2 = onView(allOf(withId(R.id.editUserID), withText("INVALID_USER_ID"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
-        editText2.check(matches(withText("INVALID_USER_ID")));
 
         ViewInteraction editText3 = onView(allOf(withId(R.id.editUserID), withText("INVALID_USER_ID"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 1), isDisplayed()));
         editText3.perform(pressImeActionButton());
 
+        // Enter dev as password
         ViewInteraction editText4 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
         editText4.perform(replaceText("dev"), closeSoftKeyboard());
 
-        ViewInteraction editText5 = onView(allOf(withId(R.id.editPassword), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 2), isDisplayed()));
-        editText5.check(matches(withText("dev")));
-
+        // Click login button
         ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         button.perform(click());
 
+        // Check that it doesn't login you in
         ViewInteraction textView = onView(
                 allOf(withId(android.R.id.message), withText("Incorrect username or password"),
                         childAtPosition(
@@ -126,9 +120,11 @@ public class LoginActivityTest {
 
     @Test
     public void noInputLoginTest() {
+        // Click the login button
         ViewInteraction button = onView(allOf(withId(R.id.loginButton), withText("Login"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 3), isDisplayed()));
         button.perform(click());
 
+        // Check that it doesn't login you in
         ViewInteraction textView = onView(
                 allOf(withId(android.R.id.message), withText("Incorrect username or password"),
                         childAtPosition(
