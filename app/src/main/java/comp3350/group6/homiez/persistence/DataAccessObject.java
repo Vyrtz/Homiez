@@ -523,7 +523,7 @@ public class DataAccessObject implements DataAccess {
     private QueryResult getInterests(User u ) {
         Interest i;
         String s;
-        result = QueryResult.FAILURE;
+        QueryResult result = QueryResult.FAILURE;
 
         try {
             commandString = "Select * from INTERESTS where USERID='" + u.getUserId() +"'";
@@ -543,7 +543,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult updateInterests(User u ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
         String values = u.getUserId();
         
         commandString = "Delete from INTERESTS where USERID='" +values +"'";
@@ -559,7 +559,7 @@ public class DataAccessObject implements DataAccess {
 
     private QueryResult insertInterests(User u ) throws SQLException {
         String values;
-        result = QueryResult.FAILURE;
+        QueryResult result;
         commandString = "";
 
         for (Interest i : u.getInterests()) {
@@ -574,8 +574,8 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult insertAttachedUsers(Posting p ) throws SQLException {
+        QueryResult result;
         String values;
-        result = QueryResult.FAILURE;
         commandString = "";
         for (User u : p.getAttachedUsers()) {
             values = "'" + p.getPostingId()
@@ -589,7 +589,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult updateAttachedUsers(Posting p ) throws SQLException {
-
+        QueryResult result;
         result = deleteAttachedUsers(p);
         if (result == QueryResult.SUCCESS) {
             result = insertAttachedUsers(p);
@@ -597,7 +597,7 @@ public class DataAccessObject implements DataAccess {
         return result;
     }
     private QueryResult getAttachedUsers(Posting p ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;;
         String uid;
         commandString = "Select * from ATTACHEDUSERS where POSTINGID='" + p.getPostingId() +"' and USERID != '" +p.getUser().getUserId()+"'";
         rs4 = statement3.executeQuery(commandString);
@@ -615,7 +615,7 @@ public class DataAccessObject implements DataAccess {
     private QueryResult deleteAttachedUsers(Posting p) throws SQLException{
         commandString = "DELETE FROM ATTACHEDUSERS WHERE POSTINGID='" + p.getPostingId() + "'";
         updateCount = statement1.executeUpdate(commandString);
-        result = checkWarnings(statement1, updateCount);
+        QueryResult result = checkWarnings(statement1, updateCount);
         return result;
     }
 
@@ -667,7 +667,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     public QueryResult updateContactInfo(User u, Contact c ) {
-        result = QueryResult.FAILURE;
+        QueryResult result = QueryResult.FAILURE;
 
         try {
             deleteContactInfo(u);
@@ -680,7 +680,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult insertContactInfo(User u, Contact c ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
 
         String values = "'" + u.getUserId() + "', '" + c.getInfo() + "'";
 
@@ -694,7 +694,7 @@ public class DataAccessObject implements DataAccess {
     }
 
     private QueryResult deleteContactInfo(User u ) throws SQLException {
-        result = QueryResult.FAILURE;
+        QueryResult result;
 
         String values = u.getUserId();
 
