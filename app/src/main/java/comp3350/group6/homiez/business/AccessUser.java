@@ -1,7 +1,7 @@
 package comp3350.group6.homiez.business;
 
-import java.sql.SQLException;
 
+import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.objects.Contact;
@@ -17,7 +17,7 @@ public class AccessUser {
         dataAccess = Services.getDataAccess(Main.dbName);
     }
 
-    public String login(User u, String password) {
+    public QueryResult login(User u, String password) {
         return dataAccess.authenticateLogin(u, password);
     }
 
@@ -26,16 +26,16 @@ public class AccessUser {
         return dataAccess.getUser(u);
     }
 
-    public String insertUser(User currentUser, String password)
+    public QueryResult insertUser(User currentUser, String password)
     {
         return dataAccess.insertUser(currentUser, password);
     }
 
-    public String updateUser(User currentUser)
+    public QueryResult updateUser(User currentUser)
     {
         return dataAccess.updateUser(currentUser);
     }
-    public String getContactInfoForUser(User currentUser, Contact info) { return dataAccess.getContactInfo(currentUser, info); }
+    public Contact getContactInfoForUser(User currentUser) { return dataAccess.getContactInfo(currentUser); }
 
-    public String updateContactInfoForUser(User currentUser, Contact info) { return dataAccess.updateContactInfo(currentUser, info); }
+    public QueryResult updateContactInfoForUser(User currentUser, Contact info) { return dataAccess.updateContactInfo(currentUser, info); }
 }
