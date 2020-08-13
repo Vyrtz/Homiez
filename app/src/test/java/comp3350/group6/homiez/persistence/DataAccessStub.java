@@ -1,12 +1,11 @@
 package comp3350.group6.homiez.persistence;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.persistence.DataAccess;
 
 import java.util.ArrayList;
 import java.util.HashMap;

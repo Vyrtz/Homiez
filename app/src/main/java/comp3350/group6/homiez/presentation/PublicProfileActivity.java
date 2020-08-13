@@ -82,7 +82,7 @@ public class PublicProfileActivity extends Activity {
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1) {
+            if (i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -115,6 +115,5 @@ public class PublicProfileActivity extends Activity {
 
         ListView postingsList = findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
-
     }
 }

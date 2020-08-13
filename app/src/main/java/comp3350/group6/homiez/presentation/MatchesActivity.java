@@ -51,10 +51,10 @@ public class MatchesActivity extends AppCompatActivity {
         matchList = new ArrayList<>();
 
 
-        if(direction.equals("user")) {//posting on top, user on bottom
+        if (direction.equals("user")) {//posting on top, user on bottom
             u = accessUser.getUser(id);
             accessMatches.getMatchesForUser(matches, id);
-            for(Match m : matches) {
+            for (Match m : matches) {
                 HashMap<String, String> map = new HashMap<>();
                 Posting post = accessPostings.getPostingById(m.getPostingId());
                 map.put("Top", post.getTitle());

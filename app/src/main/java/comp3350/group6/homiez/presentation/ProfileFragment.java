@@ -70,7 +70,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         biography.setText(user.getBiography());
 
         Contact contactInfo =  accessUser.getContactInfoForUser(user);
-        if(contactInfo != null){
+        if (contactInfo != null) {
             contact.setText(contactInfo.getInfo());
         }
 
@@ -81,7 +81,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1) {
+            if (i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -96,7 +96,5 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         Bundle b = this.getArguments();
         startIntent.putExtras(b);
         startActivity(startIntent);
-
     }
-
 }

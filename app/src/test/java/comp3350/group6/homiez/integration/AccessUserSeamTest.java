@@ -2,7 +2,7 @@ package comp3350.group6.homiez.integration;
 
 import junit.framework.TestCase;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.business.AccessUser;

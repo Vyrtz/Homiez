@@ -1,6 +1,6 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.User;

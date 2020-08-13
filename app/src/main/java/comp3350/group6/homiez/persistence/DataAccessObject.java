@@ -1,6 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Match;
@@ -44,7 +44,7 @@ public class DataAccessObject implements DataAccess {
             statement3 = connection.createStatement();
             statement4 = connection.createStatement();
         }
-        catch(Exception e) {
+        catch (Exception e) {
             System.out.println("Connection failed");
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class DataAccessObject implements DataAccess {
             commandString = "shutdown compact";
             rs2 = statement1.executeQuery(commandString);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -111,7 +111,7 @@ public class DataAccessObject implements DataAccess {
 
             
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -132,7 +132,7 @@ public class DataAccessObject implements DataAccess {
                 result = checkWarnings(statement1, updateCount);
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
         return result;
@@ -150,7 +150,7 @@ public class DataAccessObject implements DataAccess {
             }
             rs3.close();
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
         return result;
@@ -195,7 +195,7 @@ public class DataAccessObject implements DataAccess {
             updateInterests( user);
 
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -295,7 +295,7 @@ public class DataAccessObject implements DataAccess {
             insertAttachedUsers(posting);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -316,7 +316,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -349,7 +349,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
             result = QueryResult.FAILURE;
         }
@@ -377,7 +377,7 @@ public class DataAccessObject implements DataAccess {
             result = checkWarnings(statement1, updateCount);
             updateAttachedUsers(p);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -441,7 +441,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -459,7 +459,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -500,7 +500,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -519,7 +519,7 @@ public class DataAccessObject implements DataAccess {
             updateCount = statement1.executeUpdate(commandString);
             result = checkWarnings(statement1, updateCount);
         }
-        catch(Exception e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -640,7 +640,7 @@ public class DataAccessObject implements DataAccess {
             res = QueryResult.FAILURE;
         }
 
-        if(count == 0) {
+        if (count == 0) {
             res = QueryResult.WARNING;
         }
 
@@ -678,7 +678,8 @@ public class DataAccessObject implements DataAccess {
         try {
             deleteContactInfo(u);
             result = insertContactInfo(u, c);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e);
         }
 
@@ -712,5 +713,4 @@ public class DataAccessObject implements DataAccess {
 
         return result;
     }
-
-}//CLASS
+}

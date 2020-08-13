@@ -88,7 +88,8 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
                     return view;
                 }
             };
-        } else {
+        }
+        else {
             adapter = new ArrayAdapter<Posting>(getActivity(), R.layout.postinglist_matches, R.id.list_content, postings) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
