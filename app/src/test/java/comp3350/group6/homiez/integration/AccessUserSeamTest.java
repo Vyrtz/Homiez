@@ -106,7 +106,7 @@ public class AccessUserSeamTest extends TestCase {
         System.out.println("Starting testValidDelete");
         //Existing user
         assertEquals(QueryResult.SUCCESS, au.deleteUser(existingUser));
-
+        assertNull( au.getUser("0"));
         //New User
         //au.insertUser(newUser, password);
         //assertEquals(QueryResult.SUCCESS, au.deleteUser(newUser));
