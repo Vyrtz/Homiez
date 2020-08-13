@@ -183,7 +183,7 @@
                     android:background="@drawable/login_inputbox"
                     android:gravity="top"
                     android:inputType="none"
-                    android:singleLine="true"
+                    android:singleLine="false"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="@color/colorGrey" />
 

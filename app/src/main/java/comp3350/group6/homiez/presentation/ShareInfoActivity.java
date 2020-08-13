@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.User;
 
 public class ShareInfoActivity extends Activity {
@@ -31,13 +32,13 @@ public class ShareInfoActivity extends Activity {
 
         //Populate the fields
         TextView header = findViewById(R.id.header);
-        TextView phoneNum = findViewById(R.id.phone);
-        TextView email = findViewById(R.id.email);
+        TextView contact = findViewById(R.id.contact);
 
         header.setText(user.getName() + "'s Contact Info");
-        //TODO: Database changes for phone and email
-        //phoneNum.setText(user.getPhone());
-        //email.setText(user.getEmail());
+        Contact contactInfo = accessUser.getContactInfoForUser(user);
+        if(contactInfo != null) {
+            contact.setText(contactInfo.getInfo());
+        }
 
     }
 
