@@ -17,7 +17,7 @@ public class AccessMatches {
 
     //provides postings, except the ones made by the user
     public QueryResult getMatchesForUser(List<Match> matches, String userId) {
-        if (userId == null || userId.isEmpty()) {
+        if (userId == null || userId == "") {
             return QueryResult.FAILURE;
         }
         return dataAccess.getMatchesForUser(matches, userId);

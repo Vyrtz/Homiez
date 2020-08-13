@@ -19,5 +19,5 @@
         app:menu="@menu/menu"
         app:itemTextColor="@drawable/navbar_text"
         app:itemIconTint="@drawable/navbar_text"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:backgroundTint="@color/colorPrimaryApp"/>
 </RelativeLayout>
