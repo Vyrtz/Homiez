@@ -6,6 +6,7 @@ import comp3350.group6.homiez.application.Constants.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.User;
 
 public class AccessUserSeamTest extends TestCase {
@@ -124,5 +125,40 @@ public class AccessUserSeamTest extends TestCase {
         System.out.println("Starting testInvalidDelete");
         assertEquals(QueryResult.WARNING ,au.deleteUser(newUser)); //Deleting a nonexistant user
         System.out.println("Finished testInvalidDelete");
+    }
+
+    public void testValidGetContactInfoForUser() {
+        System.out.println("Starting testValidGetContactInfoForUser");
+        Contact contactInfo = au.getContactInfoForUser(existingUser);
+        assertNotNull(contactInfo);
+        assertEquals("Phone:555-5555", contactInfo.getInfo());
+        System.out.println("Finished testValidGetContactInfoForUser");
+    }
+
+    public void testInvalidGetContactInfoForUser() {
+        System.out.println("Starting testInvalidGetContactInfoForUser");
+        assertNull(au.getContactInfoForUser(newUser));
+        System.out.println("Finished testInvalidGetContactInfoForUser");
+    }
+
+    public void testValidUpdateContactInfoForUser() {
+        System.out.println("Starting testValidUpdateContactInfoForUser");
+        Contact contactInfo = new Contact("Phone:111-1111");
+        assertEquals(QueryResult.SUCCESS, au.updateContactInfoForUser(existingUser, contactInfo));
+        contactInfo = au.getContactInfoForUser(existingUser);
+        assertEquals("Phone:111-1111", contactInfo.getInfo());
+
+        //Cleanup
+        contactInfo = new Contact("Phone:555-5555");
+        au.updateContactInfoForUser(existingUser, contactInfo);
+
+        System.out.println("Finished testValidUpdateContactInfoForUser");
+    }
+
+    public void testInvalidUpdateContactInfoForUser() {
+        System.out.println("Starting testInvalidUpdateContactInfoForUser");
+        Contact contactInfo = new Contact("Phone:111-1111");
+        assertEquals(QueryResult.FAILURE, au.updateContactInfoForUser(newUser, contactInfo));
+        System.out.println("Finished testInvalidUpdateContactInfoForUser");
     }
 }
