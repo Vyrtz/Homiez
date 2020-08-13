@@ -113,6 +113,11 @@ public class DataAccessStub implements DataAccess {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
+                exist = users.contains(new User(m.getUserId())) &&
+                        postings.contains(new Posting(m.getPostingId()));
+                if(!exist) {
+                    return QueryResult.FAILURE;
+                }
                 matches.add(m);
                 return QueryResult.SUCCESS;
             }
@@ -124,7 +129,7 @@ public class DataAccessStub implements DataAccess {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
-                return QueryResult.FAILURE;
+                return QueryResult.WARNING;
             }
             matches.remove(m);
             return QueryResult.SUCCESS;
@@ -175,12 +180,15 @@ public class DataAccessStub implements DataAccess {
     }
 
     public QueryResult deletePosting(Posting posting) {
-        boolean exist = postings.contains(posting);
-        if (!exist) {
-            return QueryResult.FAILURE;
+        if (posting != null) {
+            boolean exist = postings.contains(posting);
+            if (!exist) {
+                return QueryResult.WARNING;
+            }
+            postings.remove(posting);
+            return QueryResult.SUCCESS;
         }
-        postings.remove(posting);
-        return QueryResult.SUCCESS;
+        return  QueryResult.FAILURE;
     }
 
     public QueryResult updatePosting(Posting posting) {
@@ -190,7 +198,7 @@ public class DataAccessStub implements DataAccess {
             postings.add(posting); //replace with new posting object
             return QueryResult.SUCCESS;
         }
-        return QueryResult.FAILURE;
+        return QueryResult.WARNING;
     }
 
     public QueryResult getRequests(List<Request> requests, String pId) {

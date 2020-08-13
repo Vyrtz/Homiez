@@ -19,10 +19,10 @@ public class DataAccessTest extends TestCase {
     private DataAccess dataAccess;
 
     public void setUp() {
-      //  dataAccess = new DataAccessStub("dataAccess1");
-       // dataAccess.open("dataAccess1");
-        dataAccess = new DataAccessObject(Main.dbName);
-        dataAccess.open(Main.getDBPathName());
+        dataAccess = new DataAccessStub("dataAccess1");
+        dataAccess.open("dataAccess1");
+        // dataAccess = new DataAccessObject(Main.dbName);
+        // dataAccess.open(Main.getDBPathName());
 
     }
 
