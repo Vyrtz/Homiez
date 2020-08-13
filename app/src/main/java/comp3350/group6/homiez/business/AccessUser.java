@@ -35,6 +35,12 @@ public class AccessUser {
     {
         return dataAccess.updateUser(currentUser);
     }
+
+    public QueryResult deleteUser(User currentUser)
+    {
+        return dataAccess.deleteUser(currentUser);
+    }
+
     public Contact getContactInfoForUser(User currentUser) { return dataAccess.getContactInfo(currentUser); }
 
     public QueryResult updateContactInfoForUser(User currentUser, Contact info) { return dataAccess.updateContactInfo(currentUser, info); }

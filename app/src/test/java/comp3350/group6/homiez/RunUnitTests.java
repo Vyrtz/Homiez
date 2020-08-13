@@ -18,7 +18,7 @@ import comp3350.group6.homiez.objects.RequestTest;
 import comp3350.group6.homiez.objects.UserTest;
 import comp3350.group6.homiez.persistence.DataAccessTest;
 
-public class AllTests {
+public class RunUnitTests {
     public static TestSuite suite;
 
     public static Test suite() {
