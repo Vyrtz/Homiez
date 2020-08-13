@@ -629,7 +629,7 @@ public class DataAccessObject implements DataAccess {
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
-           res = QueryResult.FAILURE;
+            res = QueryResult.FAILURE;
         }
 
         return res;
