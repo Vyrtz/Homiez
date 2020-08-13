@@ -185,6 +185,17 @@ public class DataAccessStub implements DataAccess {
             if (!exist) {
                 return QueryResult.WARNING;
             }
+            for (int i = matches.size() - 1; i >= 0 ; i-- ) {
+                if (matches.get(i).getPostingId().equals(posting.getPostingId())) {
+                    deleteMatch(matches.get(i));
+                }
+            }
+
+            for (int i = matchRequests.size() - 1; i >= 0 ; i-- ) {
+                if (matchRequests.get(i).getPostingId().equals(posting.getPostingId())) {
+                    deleteRequest(matchRequests.get(i));
+                }
+            }
             postings.remove(posting);
             return QueryResult.SUCCESS;
         }
@@ -267,6 +278,19 @@ public class DataAccessStub implements DataAccess {
         if (!exist) {
             return QueryResult.FAILURE;
         }
+        for (int i = matches.size() - 1; i >= 0 ; i-- ) {
+            if (matches.get(i).getUserId().equals(user.getUserId())) {
+                deleteMatch(matches.get(i));
+            }
+        }
+
+        for (int i = matchRequests.size() - 1; i >= 0 ; i-- ) {
+            if (matchRequests.get(i).getUserId().equals(user.getUserId())) {
+                deleteRequest(matchRequests.get(i));
+            }
+        }
+        logins.remove(user);
+        contacts.remove(user);
         users.remove(user);
         return QueryResult.SUCCESS;
     }
@@ -277,13 +301,19 @@ public class DataAccessStub implements DataAccess {
         }
         return QueryResult.FAILURE;
     }
+
     public Contact getContactInfo(User user) {
        return contacts.get(user);
     }
 
     public QueryResult updateContactInfo(User user, Contact info) {
         try {
-            contacts.replace(user,info);
+            if (contacts.containsKey(user)) {
+                contacts.replace(user,info);
+            }
+            else {
+                contacts.put(user,info);
+            }
             return QueryResult.SUCCESS;
         }
         catch (Exception e) {
