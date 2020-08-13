@@ -26,8 +26,7 @@ public class CreateProfileActivity extends Activity {
     private String biography;
     private String interests;
     private String password;
-    private String email;
-    private String phone;
+    private String contact;
 
     private int age;
 
@@ -72,13 +71,9 @@ public class CreateProfileActivity extends Activity {
         fields = findViewById(R.id.editGender);
         gender = fields.getText().toString();
 
-        //Fetch email
-        fields = findViewById(R.id.editEmail);
-        email = fields.getText().toString();
-
-        //Fetch phone
-        fields = findViewById(R.id.editPhone);
-        phone = fields.getText().toString();
+        //Fetch contact info
+        fields = findViewById(R.id.editContact);
+        contact = fields.getText().toString();
 
         //Fetch budget
         fields = findViewById(R.id.editBudget);
@@ -96,7 +91,7 @@ public class CreateProfileActivity extends Activity {
 
         User newUser = new User(userID, name, age, gender, budget, biography);
 
-        //TODO: Add the phone and emial once it's implemented into the DB
+        //TODO: Do something with the contact information
 
         //split up the different interests into separate strings
         String[] interestList = interests.split(",");
