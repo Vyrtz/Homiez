@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
@@ -64,7 +66,8 @@ public class PublicProfileActivity extends Activity {
         interests.setMovementMethod(new ScrollingMovementMethod());
 
         //Fill in the fields
-        match.setText("Match %: " + c.calculateCompatibility(user, self));
+        BigDecimal matchPercent = new BigDecimal(c.calculateCompatibility(user, self)).setScale(2, RoundingMode.HALF_UP);
+        match.setText("Match %: " + matchPercent);
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());

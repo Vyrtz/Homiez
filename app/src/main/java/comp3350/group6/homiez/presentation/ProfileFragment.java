@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import comp3350.group6.homiez.R;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.business.AccessPostings;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
@@ -54,7 +55,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         TextView budget = v.findViewById(R.id.budget);
         TextView biography = v.findViewById(R.id.bio);
         TextView interests = v.findViewById(R.id.interests);
+        TextView contact = v.findViewById(R.id.contact);
 
+        contact.setMovementMethod(new ScrollingMovementMethod());
         biography.setMovementMethod(new ScrollingMovementMethod());
         interests.setMovementMethod(new ScrollingMovementMethod());
 
@@ -65,6 +68,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         gender.setText(user.getGender());
         budget.setText("" + user.getBudget());
         biography.setText(user.getBiography());
+
+        Contact contactInfo =  accessUser.getContactInfoForUser(user);
+        if(contactInfo != null){
+            contact.setText(contactInfo.getInfo());
+        }
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();

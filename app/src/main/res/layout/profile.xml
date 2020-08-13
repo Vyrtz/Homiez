@@ -153,6 +153,39 @@ android:focusableInTouchMode="true">
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/contactLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:id="@+id/contactPrompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="clip_vertical"
+                    android:layout_weight="2"
+                    android:gravity="bottom|left"
+                    android:paddingLeft="10dp"
+                    android:text="@string/contact_prompt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorYellow" />
+
+                <TextView
+                    android:id="@+id/contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_inputbox"
+                    android:gravity="top"
+                    android:scrollbars="vertical"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/colorGrey" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/bioLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
