@@ -77,9 +77,13 @@ public class DataAccessStub implements DataAccess {
             logins.put(u,"dev");
         }
         contacts = new HashMap<>();
-        for (User u: users) {
-            contacts.put(u,new Contact("contact"));
-        }
+//        for (User u: users) {
+//            contacts.put(u,new Contact("contact"));
+//        }
+
+        contacts.put(users.get(0), new Contact("Abhi contact"));
+        contacts.put(users.get(1), new Contact("Jordan contact"));
+        contacts.put(users.get(2), new Contact("Matt contact"));
     }
     public void close()
     {
@@ -265,7 +269,8 @@ public class DataAccessStub implements DataAccess {
 
     public QueryResult updateContactInfo(User user, Contact info) {
         try {
-            contacts.replace(user,info);
+            contacts.remove(user);
+            contacts.put(user, info);
             return QueryResult.SUCCESS;
         }
         catch (Exception e) {
