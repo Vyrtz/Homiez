@@ -35,7 +35,6 @@ public class AccessUser {
     {
         return dataAccess.updateUser(currentUser);
     }
-
     public String getContactInfoForUser(User currentUser, Contact info) { return dataAccess.getContactInfo(currentUser, info); }
 
     public String updateContactInfoForUser(User currentUser, Contact info) { return dataAccess.updateContactInfo(currentUser, info); }
