@@ -56,7 +56,7 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch the age - check if there was anything entered into the field
         fields = findViewById(R.id.editAge);
-        if(!fields.getText().toString().equals("")) {
+        if(checkFieldNotEmpty(fields)) {
             age = Integer.parseInt(fields.getText().toString());
             if(age > 150 || age <= 0) {
                 Messages.warning(this, "Error: Age value invalid");
@@ -72,7 +72,7 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch budget
         fields = findViewById(R.id.editBudget);
-        if(!fields.getText().toString().equals("")) {
+        if(checkFieldNotEmpty(fields)) {
             budget = Double.parseDouble(fields.getText().toString());
         }
 
@@ -91,7 +91,8 @@ public class CreateProfileActivity extends Activity {
 
         //Store the strings of interests into the arrayList
         for(String interest: interestList) {
-            if(!interest.equals("")) { //Check that the string we're storing isn't empty
+            interest = interest.trim();
+            if(!interest.trim().equals("")) { //Check that the string we're storing isn't empty
                 newUser.addUniqueInterest(new Interest(interest));
             }
         }
@@ -99,10 +100,15 @@ public class CreateProfileActivity extends Activity {
         //Checks if the user was inserted into the DB correctly
         if(accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
-        }else{
+        }
+        else{
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
         }
 
+    }
+
+    private boolean checkFieldNotEmpty (EditText t) {
+        return t.getText().toString().equals("") ? false : true;
     }
 
 }

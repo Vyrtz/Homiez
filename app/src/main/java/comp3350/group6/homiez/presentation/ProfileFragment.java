@@ -23,8 +23,6 @@ import comp3350.group6.homiez.objects.User;
 public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     private AccessUser accessUser;
-    private ArrayList<Posting> postings;
-    private AccessPostings accessPostings;
 
     final private String HEADER_SUFFIX = "'s Profile";
 
