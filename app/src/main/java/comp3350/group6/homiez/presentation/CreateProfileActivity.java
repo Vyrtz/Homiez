@@ -113,7 +113,9 @@ public class CreateProfileActivity extends Activity {
                 Messages.popup(this, SUCCESS, SUCCESS_TITLE);
             }
         }
-        Messages.fatalError(this, ERROR+" userid, password and name are required");
+        else {
+            Messages.fatalError(this, ERROR+" userid, password and name are required");
+        }
     }
 
     private boolean checkFieldNotEmpty (EditText t) {
