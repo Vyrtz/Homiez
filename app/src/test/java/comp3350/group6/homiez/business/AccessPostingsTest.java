@@ -114,6 +114,24 @@ public class AccessPostingsTest extends TestCase {
         System.out.println("Finished testExistingPostings");
     }
 
+    public void testAccessPostingsAttachedUsers() {
+        System.out.println("\nStarting testAccessPostingsAttachedUsers");
+
+        Posting p = aPostings.getPostingById("0");
+        ArrayList<User> aUsers = p.getAttachedUsers();
+        assertEquals(1, aUsers.size());
+        assertEquals("Abhi", aUsers.get(0).getName());
+
+        User newU = new User("100", "Test attach", 69, "m", 1000.00, "Test bio");
+        p.addAttachedUser(newU);
+        aPostings.updatePosting(p);
+        p = aPostings.getPostingById("0");
+        aUsers = p.getAttachedUsers();
+        assertEquals(2, aUsers.size());
+
+        System.out.println("Finished testAccessPostingsAttachedUsers");
+    }
+
     public void tearDown () {
         Main.shutDown();
     }
