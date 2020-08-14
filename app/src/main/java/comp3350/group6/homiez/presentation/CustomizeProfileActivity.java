@@ -16,6 +16,8 @@ import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.User;
 
+import static comp3350.group6.homiez.application.Shared.isNotNullOrBlank;
+
 public class CustomizeProfileActivity extends Activity {
     private AccessUser accessUser;
 
@@ -84,49 +86,50 @@ public class CustomizeProfileActivity extends Activity {
 
         //Modify the user object that we have
         user.setName(name.getText().toString());
-
-        //Modify age if there is another integer in its place
-        if (!age.getText().toString().equals("")) {
-            int tempAge = Integer.parseInt(age.getText().toString());
-            if (tempAge > 150 || tempAge <= 0) {
-                Messages.warning(this, "Error: Age value invalid");
-                return;
+        if (isNotNullOrBlank(name.getText().toString().trim())) {
+            //Modify age if there is another integer in its place
+            if (!age.getText().toString().equals("")) {
+                int tempAge = Integer.parseInt(age.getText().toString());
+                if (tempAge > 150 || tempAge <= 0) {
+                    Messages.warning(this, "Error: Age value invalid");
+                    return;
+                }
+                user.setAge(tempAge);
             }
-            user.setAge(tempAge);
-        }
 
-        //Modify the gender
-        user.setGender(gender.getText().toString());
+            //Modify the gender
+            user.setGender(gender.getText().toString());
 
-        //Modify the contact information
-        accessUser.updateContactInfoForUser(user, new Contact(contact.getText().toString()));
+            //Modify the contact information
+            accessUser.updateContactInfoForUser(user, new Contact(contact.getText().toString()));
 
-        //Modify the biography
-        user.setBiography(biography.getText().toString());
+            //Modify the biography
+            user.setBiography(biography.getText().toString());
 
-        if (!budget.getText().toString().equals("")) {
-            user.setBudget(Double.parseDouble(budget.getText().toString()));
-        }
+            if (!budget.getText().toString().equals("")) {
+                user.setBudget(Double.parseDouble(budget.getText().toString()));
+            }
 
-        //Create a new list of interests to store
-        String interestString = interests.getText().toString();
-        String[] tempList = interestString.split(",");
+            //Create a new list of interests to store
+            String interestString = interests.getText().toString();
+            String[] tempList = interestString.split(",");
 
-        ArrayList<Interest> interestList = new ArrayList<>();
+            ArrayList<Interest> interestList = new ArrayList<>();
 
-        for(String currInterest : tempList) {
-            if(!currInterest.equals("")) {
-                interestList.add(new Interest(currInterest.trim()));
+            for (String currInterest : tempList) {
+                if (!currInterest.equals("")) {
+                    interestList.add(new Interest(currInterest.trim()));
+                }
+            }
+
+            user.setInterests(interestList);
+
+            if (accessUser.updateUser(user) == QueryResult.FAILURE) {
+                Messages.warning(this, ERROR);
+            } else {
+                Messages.popup(this, SUCCESS, SUCCESS_HEADER);
             }
         }
-
-        user.setInterests(interestList);
-
-        if (accessUser.updateUser(user)== QueryResult.FAILURE) {
-            Messages.warning(this, ERROR);
-        }
-        else {
-            Messages.popup(this, SUCCESS, SUCCESS_HEADER);
-        }
+        Messages.warning(this, ERROR+" Name should not be empty");
     }
 }

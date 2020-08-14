@@ -14,11 +14,21 @@ import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
+import static comp3350.group6.homiez.application.Shared.isNotNullOrBlank;
+
 public class CreatePostingActivity extends Activity {
     private AccessPostings accessPostings;
     private String userId;
     private static String currentPostingId;
     private AccessUser accessUser;
+
+    private String title;
+    private String description;
+    private String name;
+    private String type;
+    private String location;
+    private String price;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,37 +40,45 @@ public class CreatePostingActivity extends Activity {
         currentPostingId = java.util.UUID.randomUUID().toString();
     }
     public void clickCreatePosting(View view) {
-        EditText title  = (EditText) findViewById(R.id.editTextTitle);
-        EditText type  = (EditText) findViewById(R.id.editTextType);
-        EditText location  = (EditText) findViewById(R.id.editTextLocation);
-        EditText description  = (EditText) findViewById(R.id.editTextDescription);
-        EditText price  = (EditText) findViewById(R.id.editTextPrice);
-        EditText tenants  = (EditText) findViewById(R.id.editTextTenants);
-        double priceD = Double.parseDouble(price.getText().toString());
+        EditText titleE  = (EditText) findViewById(R.id.editTextTitle);
+        EditText typeE  = (EditText) findViewById(R.id.editTextType);
+        EditText locationE  = (EditText) findViewById(R.id.editTextLocation);
+        EditText descriptionE  = (EditText) findViewById(R.id.editTextDescription);
+        EditText priceE  = (EditText) findViewById(R.id.editTextPrice);
+        EditText tenantsE  = (EditText) findViewById(R.id.editTextTenants);
 
-        User u = accessUser.getUser(userId);
-        Posting p = new Posting(currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
-        String individualTenants[] = tenants.getText().toString().split(",");
+        title = titleE.getText().toString();
+        type = typeE.getText().toString();
+        location = locationE.getText().toString();
+        description = descriptionE.getText().toString();
+        price = priceE.getText().toString();
 
-        boolean failed = false;
+        if (isNotNullOrBlank(price) && isNotNullOrBlank(title) && isNotNullOrBlank(location)) {
 
-        if(!tenants.getText().toString().trim().isEmpty()) {
-            failed = addTenants(individualTenants, p);
-        }
+            double priceD = Double.parseDouble(price);
 
-        if (!failed) {
-            if(accessPostings.insertPosting(p) == QueryResult.FAILURE) {
+            User u = accessUser.getUser(userId);
+            Posting p = new Posting(currentPostingId, title, u, priceD, location, type, description);
+            String individualTenants[] = tenantsE.getText().toString().split(",");
 
-                Messages.fatalError(this, "failed to create the posting, check the values Note: price should be a double " + title.toString() + type.toString() + price.toString());
+            boolean failed = false;
+
+            if (!tenantsE.getText().toString().trim().isEmpty()) {
+                failed = addTenants(individualTenants, p);
             }
-            else {
-                finish();
+
+            if (!failed) {
+                if (accessPostings.insertPosting(p) == QueryResult.FAILURE) {
+
+                    Messages.fatalError(this, "failed to create the posting, check the values Note: price should be a double " + title.toString() + type.toString() + price.toString());
+                } else {
+                    finish();
+                }
+            } else {
+                Messages.fatalError(this, "failed to create the posting, tenants do not exist");
             }
         }
-        else {
-            Messages.fatalError(this, "failed to create the posting, tenants do not exist");
-        }
-
+        Messages.fatalError(this, "failed to create the posting, price, title and type are required ");
     }
 
     private boolean addTenants(String[] tenants, Posting p) {

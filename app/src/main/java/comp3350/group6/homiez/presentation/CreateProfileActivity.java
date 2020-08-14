@@ -12,6 +12,8 @@ import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
 import comp3350.group6.homiez.objects.User;
 
+import static comp3350.group6.homiez.application.Shared.isNotNullOrBlank;
+
 
 public class CreateProfileActivity extends Activity {
 
@@ -49,7 +51,7 @@ public class CreateProfileActivity extends Activity {
         userID = fields.getText().toString(); //
 
         //Fetch password
-        fields = findViewById(R.id.editPassword);
+        EditText pass = findViewById(R.id.editPassword);
         password = fields.getText().toString();
 
         //Fetch name
@@ -66,52 +68,52 @@ public class CreateProfileActivity extends Activity {
             }
         }
 
-        System.out.println("got past incorrect age");
+        if (isNotNullOrBlank(userID) && isNotNullOrBlank(password) && isNotNullOrBlank(name)) {
 
-        //Fetch gender
-        fields = findViewById(R.id.editGender);
-        gender = fields.getText().toString();
+            //Fetch gender
+            fields = findViewById(R.id.editGender);
+            gender = fields.getText().toString();
 
-        //Fetch contact info
-        fields = findViewById(R.id.editContact);
-        contact = fields.getText().toString();
+            //Fetch contact info
+            fields = findViewById(R.id.editContact);
+            contact = fields.getText().toString();
 
-        //Fetch budget
-        fields = findViewById(R.id.editBudget);
-        if (checkFieldNotEmpty(fields)) {
-            budget = Double.parseDouble(fields.getText().toString());
-        }
+            //Fetch budget
+            fields = findViewById(R.id.editBudget);
+            if (checkFieldNotEmpty(fields)) {
+                budget = Double.parseDouble(fields.getText().toString());
+            }
 
-        //Fetch biography
-        fields = findViewById(R.id.editBiography);
-        biography = fields.getText().toString();
+            //Fetch biography
+            fields = findViewById(R.id.editBiography);
+            biography = fields.getText().toString();
 
-        //Fetch interests
-        fields = findViewById(R.id.editInterest);
-        interests = fields.getText().toString();
+            //Fetch interests
+            fields = findViewById(R.id.editInterest);
+            interests = fields.getText().toString();
 
-        User newUser = new User(userID, name, age, gender, budget, biography);
+            User newUser = new User(userID, name, age, gender, budget, biography);
 
-        //split up the different interests into separate strings
-        String[] interestList = interests.split(",");
+            //split up the different interests into separate strings
+            String[] interestList = interests.split(",");
 
-        //Store the strings of interests into the arrayList
-        for (String interest: interestList) {
-            interest = interest.trim();
-            if (!interest.trim().equals("")) { //Check that the string we're storing isn't empty
-                newUser.addUniqueInterest(new Interest(interest));
+            //Store the strings of interests into the arrayList
+            for (String interest : interestList) {
+                interest = interest.trim();
+                if (!interest.trim().equals("")) { //Check that the string we're storing isn't empty
+                    newUser.addUniqueInterest(new Interest(interest));
+                }
+            }
+
+            //Checks if the user was inserted into the DB correctly
+            if (accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
+                Messages.fatalError(this, ERROR);
+            } else {
+                accessUser.updateContactInfoForUser(newUser, new Contact(contact));
+                Messages.popup(this, SUCCESS, SUCCESS_TITLE);
             }
         }
-
-        //Checks if the user was inserted into the DB correctly
-        if (accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
-            Messages.warning(this, ERROR);
-        }
-        else {
-            accessUser.updateContactInfoForUser(newUser, new Contact(contact));
-            Messages.popup(this, SUCCESS, SUCCESS_TITLE);
-        }
-
+        Messages.fatalError(this, ERROR+" userid, password and name are required");
     }
 
     private boolean checkFieldNotEmpty (EditText t) {
