@@ -15,6 +15,8 @@ import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
+import static comp3350.group6.homiez.application.Shared.isNotNullOrBlank;
+
 public class EditPostingActivity extends Activity {
 
     private AccessPostings accessPostings;
@@ -72,42 +74,46 @@ public class EditPostingActivity extends Activity {
     }
 
     public void submitClicked (View v){
-        
-        //modify location
-        posting.setLocation(location.getText().toString());
 
-        //modify type
-        posting.setType(type.getText().toString());
+        String locStr = location.getText().toString();
+        String priceStr = price.getText().toString();
+        String typeStr = type.getText().toString();
+        if (isNotNullOrBlank(priceStr) && isNotNullOrBlank(typeStr)) {
+            //modify location
+            posting.setLocation(locStr);
 
-        //modify price
-        posting.setPrice(Double.parseDouble(price.getText().toString()));
+            //modify type
+            posting.setType(typeStr);
 
-        //modify description
-        posting.setDescription(description.getText().toString());
+            //modify price
+            posting.setPrice(Double.parseDouble(priceStr));
 
-        String individualTenants[] = tenants.getText().toString().split(",");
+            //modify description
+            posting.setDescription(description.getText().toString());
 
-        boolean failed = false;
+            String individualTenants[] = tenants.getText().toString().split(",");
 
-        if(!tenants.getText().toString().trim().isEmpty()) {
-            failed = addTenants(individualTenants, posting);
-        }else{
-            posting.setAttachedUsers(new ArrayList<User>());
-        }
+            boolean failed = false;
 
-
-        if (failed) {
-            Messages.fatalError(this, "failed to create the posting, tenants do not exist");
-        }
-        else {
-            QueryResult result = accessPostings.updatePosting(posting);
-            if(result == QueryResult.FAILURE) {
-                Messages.fatalError(this, "Failure while updating posting ");
+            if (!tenants.getText().toString().trim().isEmpty()) {
+                failed = addTenants(individualTenants, posting);
+            } else {
+                posting.setAttachedUsers(new ArrayList<User>());
             }
-            else {
-                finish();
+
+
+            if (failed) {
+                Messages.fatalError(this, "failed to create the posting, tenants do not exist");
+            } else {
+                QueryResult result = accessPostings.updatePosting(posting);
+                if (result == QueryResult.FAILURE) {
+                    Messages.fatalError(this, "Failure while updating posting ");
+                } else {
+                    finish();
+                }
             }
         }
+        Messages.fatalError(this, "failed to edit the posting, price and type are required ");
     }
 
     private boolean addTenants(String[] tenants, Posting p) {
