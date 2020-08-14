@@ -125,7 +125,7 @@ public class CustomizeProfileActivity extends Activity {
 
         for(String currInterest : tempList) {
             if(!currInterest.equals("")) {
-                interestList.add(new Interest(currInterest));
+                interestList.add(new Interest(currInterest.trim()));
             }
         }
 
