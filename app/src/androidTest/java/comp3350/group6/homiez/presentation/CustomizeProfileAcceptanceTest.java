@@ -14,7 +14,7 @@ import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
 
-public class CustomizeProfileTest {
+public class CustomizeProfileAcceptanceTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> LoginActivity = new ActivityTestRule<>(LoginActivity.class);

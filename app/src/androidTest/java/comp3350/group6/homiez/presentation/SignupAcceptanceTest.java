@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SignupTest {
+public class SignupAcceptanceTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
@@ -124,14 +124,14 @@ public class SignupTest {
 
         // Check that profile was created
         ViewInteraction textView3 = onView(
-                allOf(withId(android.R.id.message), withText("Error: Could not create a new profile"),
+                allOf(withId(android.R.id.message), withText("Error: Could not create a new profile userid, password and name are required"),
                         childAtPosition(
                                 childAtPosition(
                                         IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
                                         0),
                                 0),
                         isDisplayed()));
-        textView3.check(matches(withText("Error: Could not create a new profile")));
+        textView3.check(matches(withText("Error: Could not create a new profile userid, password and name are required")));
 
         // Clean up after
         AccessUser accessUser = new AccessUser();
@@ -189,15 +189,7 @@ public class SignupTest {
         button.perform(click());
 
         // Check that profile was not created
-        ViewInteraction textView3 = onView(
-                allOf(withId(android.R.id.message), withText("Error: Could not create a new profile"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView3.check(matches(withText("Error: Could not create a new profile")));
+        onView(withText("Error: Could not create a new profile")).check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
