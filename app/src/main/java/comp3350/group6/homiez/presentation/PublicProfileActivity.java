@@ -67,7 +67,7 @@ public class PublicProfileActivity extends Activity {
 
         //Fill in the fields
         BigDecimal matchPercent = new BigDecimal(c.calculateCompatibility(user, self)).setScale(2, RoundingMode.HALF_UP);
-        match.setText("Match %: " + matchPercent);
+        match.setText("Match : " + matchPercent +"%");
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());

@@ -72,7 +72,7 @@ public class MatchesActivity extends AppCompatActivity {
                 allMacthes.addAll(matches);
                 matches.clear();
             }
-            for(Match m : allMacthes) {
+            for (Match m : allMacthes) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("Top", accessUser.getUser(m.getUserId()).getName());
                 map.put("Bottom",accessPostings.getPostingById(m.getPostingId()).getTitle());

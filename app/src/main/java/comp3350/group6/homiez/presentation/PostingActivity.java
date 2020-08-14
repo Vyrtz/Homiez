@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,8 @@ import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessMatches;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
+import comp3350.group6.homiez.business.AccessUser;
+import comp3350.group6.homiez.business.CompatibilityController;
 import comp3350.group6.homiez.business.Matching;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
@@ -31,11 +35,15 @@ public class PostingActivity extends Activity {
     private AccessPostings accessPostings;
     private AccessRequests accessRequests;
     private AccessMatches accessMatches;
+    private AccessUser accessUser;
     private Posting post;
     private String postingID;
+    private User currentUser;
+
 
     private List<HashMap<String, String>> userList;
 
+    private CompatibilityController compatibilityController;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +56,10 @@ public class PostingActivity extends Activity {
         accessPostings = new AccessPostings();
         accessRequests = new AccessRequests();
         accessMatches = new AccessMatches();
+        accessUser = new AccessUser();
+        compatibilityController = new CompatibilityController();
 
         post = accessPostings.getPostingById(postingID);
-        System.out.println("Test");
-        System.out.println(post);
 
         if (b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
@@ -64,7 +72,9 @@ public class PostingActivity extends Activity {
         }
 
         userList = new ArrayList<>();
-        setUserList(post);
+        String uid = b.getString("userID");
+        currentUser = accessUser.getUser(uid);
+        setUserList( post, currentUser);
 
         TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
@@ -81,9 +91,7 @@ public class PostingActivity extends Activity {
     }
     public void sendMatch(View v) {
         Bundle b =getIntent().getExtras();
-        String u = b.getString("userID");
-        String p = b.getString("postingId");
-        Matching.SendRequest(accessRequests,accessPostings,accessMatches,u,p);
+        Matching.SendRequest(accessRequests,accessPostings,accessMatches,currentUser.getUserId(),postingID);
         Messages.popup(this, "You have sent a match request!", "Match request sent");
     }
 
@@ -129,11 +137,11 @@ public class PostingActivity extends Activity {
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
 
-        setUserList(post);
+        setUserList(post, currentUser);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setUserList(Posting post) {
+    private void setUserList(Posting post, User currentUser) {
         userList.clear();
         ListView viewUsers = findViewById(R.id.userList);
         viewUsers.setNestedScrollingEnabled(true);
@@ -142,7 +150,8 @@ public class PostingActivity extends Activity {
             if (!u.equals(post.getUser())) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("Top", u.getName());
-                map.put("Bottom", "" + u.getAge());
+                BigDecimal matchPercent = new BigDecimal(compatibilityController.calculateCompatibility(currentUser,u)).setScale(2, RoundingMode.HALF_UP);
+                map.put("Bottom", "Match : " + matchPercent+"%");
                 map.put("ID", u.getUserId());
                 userList.add(map);
             }
