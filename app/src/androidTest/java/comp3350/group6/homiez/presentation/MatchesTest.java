@@ -42,7 +42,7 @@ import static org.hamcrest.Matchers.allOf;
 public class MatchesTest {
 
     @Rule
-    public ActivityTestRule<MatchesActivity> mActivityTestRule = new ActivityTestRule<>(MatchesActivity.class);
+    public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
     public void sendRequestTest() {
