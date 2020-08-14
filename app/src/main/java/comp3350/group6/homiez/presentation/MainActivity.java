@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
             b1.putBoolean("self_posting", true);
             public_postings.setArguments(b1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
-         } else if (inProfile) {
+        }
+        else if (inProfile) {
             Fragment fragment = new ProfileFragment();
             Bundle b1 = getIntent().getExtras();
             b1.putBoolean("selfProfile", true);

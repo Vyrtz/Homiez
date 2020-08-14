@@ -2,7 +2,7 @@ package comp3350.group6.homiez.persistence;
 
 import java.util.List;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;

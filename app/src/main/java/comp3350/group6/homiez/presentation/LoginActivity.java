@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.User;
@@ -65,7 +65,8 @@ public class LoginActivity extends Activity {
 
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.dbName);
 
-        } catch (IOException ioe) {
+        }
+        catch (IOException ioe) {
             Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
         }
     }
@@ -113,7 +114,7 @@ public class LoginActivity extends Activity {
         System.out.println(loginMessage);
 
         IDField.setText("");
-        if(user != null && loginMessage == QueryResult.SUCCESS) {
+        if (user != null && loginMessage == QueryResult.SUCCESS) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
@@ -131,7 +132,5 @@ public class LoginActivity extends Activity {
     public void signupPressed(View v) {
         Intent startIntent = new Intent(LoginActivity.this, CreateProfileActivity.class);
         LoginActivity.this.startActivity(startIntent);
-
     }
-
 }

@@ -1,12 +1,11 @@
 package comp3350.group6.homiez.persistence;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.Request;
 import comp3350.group6.homiez.objects.User;
-import comp3350.group6.homiez.persistence.DataAccess;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,6 +116,11 @@ public class DataAccessStub implements DataAccess {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
+                exist = users.contains(new User(m.getUserId())) &&
+                        postings.contains(new Posting(m.getPostingId()));
+                if(!exist) {
+                    return QueryResult.FAILURE;
+                }
                 matches.add(m);
                 return QueryResult.SUCCESS;
             }
@@ -128,7 +132,7 @@ public class DataAccessStub implements DataAccess {
         if (m != null) {
             boolean exist = matches.contains(m);
             if (!exist) {
-                return QueryResult.FAILURE;
+                return QueryResult.WARNING;
             }
             matches.remove(m);
             return QueryResult.SUCCESS;
@@ -179,12 +183,26 @@ public class DataAccessStub implements DataAccess {
     }
 
     public QueryResult deletePosting(Posting posting) {
-        boolean exist = postings.contains(posting);
-        if (!exist) {
-            return QueryResult.FAILURE;
+        if (posting != null) {
+            boolean exist = postings.contains(posting);
+            if (!exist) {
+                return QueryResult.WARNING;
+            }
+            for (int i = matches.size() - 1; i >= 0 ; i-- ) {
+                if (matches.get(i).getPostingId().equals(posting.getPostingId())) {
+                    deleteMatch(matches.get(i));
+                }
+            }
+
+            for (int i = matchRequests.size() - 1; i >= 0 ; i-- ) {
+                if (matchRequests.get(i).getPostingId().equals(posting.getPostingId())) {
+                    deleteRequest(matchRequests.get(i));
+                }
+            }
+            postings.remove(posting);
+            return QueryResult.SUCCESS;
         }
-        postings.remove(posting);
-        return QueryResult.SUCCESS;
+        return  QueryResult.FAILURE;
     }
 
     public QueryResult updatePosting(Posting posting) {
@@ -194,7 +212,7 @@ public class DataAccessStub implements DataAccess {
             postings.add(posting); //replace with new posting object
             return QueryResult.SUCCESS;
         }
-        return QueryResult.FAILURE;
+        return QueryResult.WARNING;
     }
 
     public QueryResult getRequests(List<Request> requests, String pId) {
@@ -263,6 +281,19 @@ public class DataAccessStub implements DataAccess {
         if (!exist) {
             return QueryResult.FAILURE;
         }
+        for (int i = matches.size() - 1; i >= 0 ; i-- ) {
+            if (matches.get(i).getUserId().equals(user.getUserId())) {
+                deleteMatch(matches.get(i));
+            }
+        }
+
+        for (int i = matchRequests.size() - 1; i >= 0 ; i-- ) {
+            if (matchRequests.get(i).getUserId().equals(user.getUserId())) {
+                deleteRequest(matchRequests.get(i));
+            }
+        }
+        logins.remove(user);
+        contacts.remove(user);
         users.remove(user);
         return QueryResult.SUCCESS;
     }
@@ -273,14 +304,19 @@ public class DataAccessStub implements DataAccess {
         }
         return QueryResult.FAILURE;
     }
+
     public Contact getContactInfo(User user) {
        return contacts.get(user);
     }
 
     public QueryResult updateContactInfo(User user, Contact info) {
         try {
-            contacts.remove(user);
-            contacts.put(user, info);
+            if (contacts.containsKey(user)) {
+                contacts.replace(user,info);
+            }
+            else {
+                contacts.put(user,info);
+            }
             return QueryResult.SUCCESS;
         }
         catch (Exception e) {
