@@ -45,7 +45,7 @@ public class MatchesTest {
     public ActivityTestRule<MatchesActivity> mActivityTestRule = new ActivityTestRule<>(MatchesActivity.class);
 
     @Test
-    public void sendRequestTest() throws InterruptedException {
+    public void sendRequestTest() {
 
 
         //Login
