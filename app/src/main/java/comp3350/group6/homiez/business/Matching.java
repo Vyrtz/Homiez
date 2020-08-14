@@ -18,6 +18,7 @@ public class Matching {
 
     public static QueryResult AcceptRequest(AccessRequests requests, AccessMatches matches, String userId, String postingId) {
         result = QueryResult.FAILURE;
+
         if (isNotNullOrBlank(userId) && isNotNullOrBlank(postingId) && isNotNull(requests) && isNotNull(matches)) {
             if (Validate(userId, postingId)) {
                 boolean success = deleteRequest(requests, userId, postingId);
@@ -32,6 +33,7 @@ public class Matching {
 
     public static QueryResult DeclineRequest(AccessRequests requests, String userId, String postingId) {
         result = QueryResult.FAILURE;
+
         if (isNotNullOrBlank(userId) && isNotNullOrBlank(postingId) && isNotNull(requests)) {
             if (Validate(userId, postingId)) {
                 boolean success = deleteRequest(requests, userId, postingId);
@@ -45,6 +47,7 @@ public class Matching {
 
     public static QueryResult SendRequest(AccessRequests requests, AccessPostings postings, AccessMatches matches, String userId, String postingId) {
         result = QueryResult.FAILURE;
+
         if (isNotNullOrBlank(userId) && isNotNullOrBlank(postingId) && isNotNull(requests) && isNotNull(postings) && isNotNull(matches)) {
             if (Validate(userId, postingId)) {
                 boolean matchAlreadyPresent = checkMatch(matches, userId, postingId);
@@ -68,6 +71,7 @@ public class Matching {
     private static boolean deleteRequest(AccessRequests requests, String userId, String postingId) {
         List<Request> reqs = new ArrayList<Request>();
         QueryResult success = requests.getRequestsForPosting(reqs, postingId);
+
         if (success != QueryResult.FAILURE) {
             Request toMatch = new Request(userId, postingId);
             if (reqs.contains(toMatch)) {
@@ -81,6 +85,7 @@ public class Matching {
         Match toCompare = new Match(userId, postingId);
         List<Match> matchList = new ArrayList<>();
         QueryResult success = matches.getMatchesForUser(matchList, userId);
+
         if (success != QueryResult.FAILURE) {
             return matchList.contains(toCompare);
         }
@@ -92,6 +97,7 @@ public class Matching {
         AccessPostings postings = new AccessPostings();
         User u = users.getUser(userId);
         Posting p = postings.getPostingById(postingId);
+
         if(isNotNull(u) && isNotNull(p)) {
             return true;
         }

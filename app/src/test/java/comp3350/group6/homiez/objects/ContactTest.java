@@ -36,7 +36,7 @@ public class ContactTest extends TestCase {
         System.out.println("Finished testContactNotEquals");
     }
 
-    public void testInterestEqualsNull() {
+    public void testContactEqualsNull() {
         System.out.println("\nStarting testContactEqualsNull");
 
         assertFalse(c.equals(null));

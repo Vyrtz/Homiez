@@ -14,16 +14,10 @@ import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
-import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
 public class CustomizeProfileActivity extends Activity {
-
-    private ArrayList<Posting> postings;
-
     private AccessUser accessUser;
-
-    private AccessPostings accessPostings;
 
     private EditText name;
     private EditText age;
@@ -47,8 +41,6 @@ public class CustomizeProfileActivity extends Activity {
         setContentView(R.layout.customize_profile);
 
         accessUser = new AccessUser();
-        accessPostings = new AccessPostings();
-
         Bundle b = getIntent().getExtras();
         user = accessUser.getUser(b.getString("userID"));
 
@@ -75,7 +67,6 @@ public class CustomizeProfileActivity extends Activity {
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();
-
         String interestText = "";
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);

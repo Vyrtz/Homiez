@@ -212,7 +212,7 @@ public class DataAccessStub implements DataAccess {
             postings.add(posting); //replace with new posting object
             return QueryResult.SUCCESS;
         }
-        return QueryResult.WARNING;
+        return QueryResult.FAILURE;
     }
 
     public QueryResult getRequests(List<Request> requests, String pId) {
@@ -279,7 +279,7 @@ public class DataAccessStub implements DataAccess {
     public QueryResult deleteUser(User user) {
         boolean exist = users.contains(user);
         if (!exist) {
-            return QueryResult.FAILURE;
+            return QueryResult.WARNING;
         }
         for (int i = matches.size() - 1; i >= 0 ; i-- ) {
             if (matches.get(i).getUserId().equals(user.getUserId())) {

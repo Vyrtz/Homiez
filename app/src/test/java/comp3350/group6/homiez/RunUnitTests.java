@@ -11,6 +11,7 @@ import comp3350.group6.homiez.business.AgeCompatibilityTest;
 import comp3350.group6.homiez.business.CompatibilityControllerTest;
 import comp3350.group6.homiez.business.InterestCompatibilityTest;
 import comp3350.group6.homiez.business.MatchingTest;
+import comp3350.group6.homiez.objects.ContactTest;
 import comp3350.group6.homiez.objects.InterestTest;
 import comp3350.group6.homiez.objects.MatchTest;
 import comp3350.group6.homiez.objects.PostingTest;
@@ -35,6 +36,7 @@ public class RunUnitTests {
         suite.addTestSuite(RequestTest.class);
         suite.addTestSuite(PostingTest.class);
         suite.addTestSuite(InterestTest.class);
+        suite.addTestSuite(ContactTest.class);
     }
 
     private static void testBusiness() {

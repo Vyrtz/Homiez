@@ -101,7 +101,7 @@ public class AccessUserTest extends TestCase {
         System.out.println("Finished testAccessUserExistingContactInfo");
     }
 
-    public void testAcessUserNotExistingContactInfo() {
+    public void testAccessUserNotExistingContactInfo() {
         System.out.println("\nStarting testAccessUserNotExistingContactInfo");
 
         User uOrg = aUser.getUser("4");
@@ -117,5 +117,23 @@ public class AccessUserTest extends TestCase {
         assertEquals("Ma info", c.getInfo());
 
         System.out.println("Finished testAccessUserNotExistingContactInfo");
+    }
+
+    public void testValidDelete() {
+        System.out.println("\nStarting testValidDelete");
+        aUser.insertUser(uDNE, "test");
+        assertEquals(QueryResult.SUCCESS, aUser.deleteUser(uDNE));
+        // warning because the user id might be correct but the delete was unsuccessful , as it does not exist in db
+        assertNull(aUser.getUser(uDNE.getUserId()));
+        System.out.println("Finished testValidDelete");
+
+    }
+    public void testInvalidDelete() {
+        System.out.println("\nStarting testInValidDelete");
+        assertEquals(QueryResult.FAILURE, aUser.deleteUser(null));
+        // warning because the user id might be correct but the delete was unsuccessful , as it does not exist in db
+        assertEquals(QueryResult.WARNING, aUser.deleteUser(new User("-1")));
+        System.out.println("Finished testInValidDelete");
+
     }
 }

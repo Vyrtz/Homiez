@@ -25,10 +25,4 @@ public class Contact {
     public String getInfo() {
         return info;
     }
-
-    @Override
-    public int hashCode() {
-        String info = this.info.toLowerCase().trim().replaceAll("\\s+", "");
-        return info.hashCode();
-    }
 }

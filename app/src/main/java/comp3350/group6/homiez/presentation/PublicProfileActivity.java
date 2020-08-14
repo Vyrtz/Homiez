@@ -59,6 +59,7 @@ public class PublicProfileActivity extends Activity {
         TextView interests = findViewById(R.id.interests);
         TextView budget = findViewById(R.id.budget);
         TextView match = findViewById(R.id.match);
+
         ListView postingList = findViewById(R.id.postingList);
         postingList.setNestedScrollingEnabled(true);
 

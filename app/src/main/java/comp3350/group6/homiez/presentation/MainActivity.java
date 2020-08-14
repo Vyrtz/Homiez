@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         public_postings = new ViewPostingsFragment();
         Bundle b = getIntent().getExtras();
         b.putBoolean("self_posting", false);
+
         public_postings.setArguments(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
     }
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment.setArguments(b);
                     onSelfPostings = false;
                     break;
+
                 case R.id.your_rooms:
                     fragment = new ViewPostingsFragment();
                     Bundle b1 = getIntent().getExtras();
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment.setArguments(b1);
                     onSelfPostings = true;
                     break;
+
                 case R.id.profile:
                     fragment = new ProfileFragment();
                     Bundle b2 = getIntent().getExtras();
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public_postings = new ViewPostingsFragment();
             Bundle b1 = getIntent().getExtras();
             b1.putBoolean("self_posting", true);
+
             public_postings.setArguments(b1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, public_postings).commit();
         }
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment = new ProfileFragment();
             Bundle b1 = getIntent().getExtras();
             b1.putBoolean("selfProfile", true);
+
             fragment.setArguments(b1);
             getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
         }

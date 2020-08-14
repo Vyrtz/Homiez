@@ -110,14 +110,12 @@ public class LoginActivity extends Activity {
 
         QueryResult loginMessage = accessUser.login(user, password);
 
-        System.out.println("userID:" + userID + " password:" + password);
-        System.out.println(loginMessage);
-
         IDField.setText("");
         if (user != null && loginMessage == QueryResult.SUCCESS) {
             Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
             Bundle b = new Bundle();
             b.putString("userID", userID);
+
             startIntent.putExtras(b);
             LoginActivity.this.startActivity(startIntent);
 
@@ -125,7 +123,6 @@ public class LoginActivity extends Activity {
         else {
             Messages.warning(this, NOT_FOUND);
         }
-
     }
 
     //Called when signup is called
