@@ -37,7 +37,7 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SignupActivityTest {
+public class SignupTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> mActivityTestRule = new ActivityTestRule<>(LoginActivity.class);
@@ -140,9 +140,6 @@ public class SignupActivityTest {
 
     @Test
     public void idExistsSignupTest() {
-        // Create a user
-        validSignupTest();
-
         // Click on sign up
         ViewInteraction textView = onView(allOf(withId(R.id.signup), withText("Sign up"), childAtPosition(childAtPosition(withId(android.R.id.content), 0), 5), isDisplayed()));
         textView.perform(click());
@@ -153,7 +150,7 @@ public class SignupActivityTest {
 
         // Enter id
         ViewInteraction editText = onView(allOf(withId(R.id.editID), childAtPosition(allOf(withId(R.id.header), childAtPosition(withClassName(is("android.widget.LinearLayout")), 0)), 1)));
-        editText.perform(scrollTo(), replaceText("TESTID12345"), closeSoftKeyboard());
+        editText.perform(scrollTo(), replaceText("0"), closeSoftKeyboard());
 
         // Enter password
         ViewInteraction editText2 = onView(allOf(withId(R.id.editPassword), childAtPosition(allOf(withId(R.id.password), childAtPosition(withClassName(is("android.widget.LinearLayout")), 1)), 1)));
@@ -201,11 +198,6 @@ public class SignupActivityTest {
                                 0),
                         isDisplayed()));
         textView3.check(matches(withText("Error: Could not create a new profile")));
-
-        // Clean up after
-        AccessUser accessUser = new AccessUser();
-        accessUser.deleteUser(accessUser.getUser("TESTID12345"));
-
     }
 
     private static Matcher<View> childAtPosition(

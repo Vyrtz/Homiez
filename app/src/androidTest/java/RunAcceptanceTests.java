@@ -1,11 +1,11 @@
 import org.junit.runners.Suite;
 import org.junit.runner.RunWith;
 
-import comp3350.group6.homiez.presentation.LoginActivityTest;
-import comp3350.group6.homiez.presentation.SignupActivityTest;
+import comp3350.group6.homiez.presentation.LoginTest;
+import comp3350.group6.homiez.presentation.SignupTest;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({LoginActivityTest.class, SignupActivityTest.class})
+@Suite.SuiteClasses({LoginTest.class, SignupTest.class})
 public class RunAcceptanceTests
 {
     public RunAcceptanceTests()
