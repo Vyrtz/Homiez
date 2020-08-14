@@ -59,6 +59,7 @@ public class PublicProfileActivity extends Activity {
         TextView interests = findViewById(R.id.interests);
         TextView budget = findViewById(R.id.budget);
         TextView match = findViewById(R.id.match);
+
         ListView postingList = findViewById(R.id.postingList);
         postingList.setNestedScrollingEnabled(true);
 
@@ -67,7 +68,7 @@ public class PublicProfileActivity extends Activity {
 
         //Fill in the fields
         BigDecimal matchPercent = new BigDecimal(c.calculateCompatibility(user, self)).setScale(2, RoundingMode.HALF_UP);
-        match.setText("Match %: " + matchPercent);
+        match.setText("Match : " + matchPercent +"%");
         header.setText(user.getName() + HEADER_SUFFIX);
         name.setText(user.getName());
         age.setText("" + user.getAge());
@@ -82,7 +83,7 @@ public class PublicProfileActivity extends Activity {
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1) {
+            if (i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -115,6 +116,5 @@ public class PublicProfileActivity extends Activity {
 
         ListView postingsList = findViewById(R.id.postingList);
         postingsList.setAdapter(adapter);
-
     }
 }

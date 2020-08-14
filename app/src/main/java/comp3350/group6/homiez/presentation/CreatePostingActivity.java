@@ -8,7 +8,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Posting;
@@ -37,9 +37,9 @@ public class CreatePostingActivity extends Activity {
         EditText price  = (EditText) findViewById(R.id.editTextPrice);
         EditText tenants  = (EditText) findViewById(R.id.editTextTenants);
         double priceD = Double.parseDouble(price.getText().toString());
+
         User u = accessUser.getUser(userId);
         Posting p = new Posting(currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
-
         String individualTenants[] = tenants.getText().toString().split(",");
 
         boolean failed = false;

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
@@ -58,9 +58,9 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch the age - check if there was anything entered into the field
         fields = findViewById(R.id.editAge);
-        if(checkFieldNotEmpty(fields)) {
+        if (checkFieldNotEmpty(fields)) {
             age = Integer.parseInt(fields.getText().toString());
-            if(age > 150 || age <= 0) {
+            if (age > 150 || age <= 0) {
                 Messages.warning(this, "Error: Age value invalid");
                 return;
             }
@@ -78,7 +78,7 @@ public class CreateProfileActivity extends Activity {
 
         //Fetch budget
         fields = findViewById(R.id.editBudget);
-        if(checkFieldNotEmpty(fields)) {
+        if (checkFieldNotEmpty(fields)) {
             budget = Double.parseDouble(fields.getText().toString());
         }
 
@@ -96,18 +96,18 @@ public class CreateProfileActivity extends Activity {
         String[] interestList = interests.split(",");
 
         //Store the strings of interests into the arrayList
-        for(String interest: interestList) {
+        for (String interest: interestList) {
             interest = interest.trim();
-            if(!interest.trim().equals("")) { //Check that the string we're storing isn't empty
+            if (!interest.trim().equals("")) { //Check that the string we're storing isn't empty
                 newUser.addUniqueInterest(new Interest(interest));
             }
         }
 
         //Checks if the user was inserted into the DB correctly
-        if(accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
+        if (accessUser.insertUser(newUser, password) == QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
         }
-        else{
+        else {
             accessUser.updateContactInfoForUser(newUser, new Contact(contact));
             Messages.popup(this, SUCCESS, SUCCESS_TITLE);
         }
@@ -117,5 +117,4 @@ public class CreateProfileActivity extends Activity {
     private boolean checkFieldNotEmpty (EditText t) {
         return t.getText().toString().equals("") ? false : true;
     }
-
 }

@@ -36,7 +36,7 @@ public class ShareInfoActivity extends Activity {
 
         header.setText(user.getName() + "'s Contact Info");
         Contact contactInfo = accessUser.getContactInfoForUser(user);
-        if(contactInfo != null) {
+        if (contactInfo != null) {
             contact.setText(contactInfo.getInfo());
         }
 
@@ -49,7 +49,4 @@ public class ShareInfoActivity extends Activity {
         startIntent.putExtras(bundle);
         startActivity(startIntent);
     }
-
-
-
 }

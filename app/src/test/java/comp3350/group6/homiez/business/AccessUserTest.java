@@ -1,6 +1,7 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
+import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.persistence.DataAccessStub;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.User;
@@ -55,9 +56,11 @@ public class AccessUserTest extends TestCase {
 //        assertNull(aUser.insertUser(u));
 
         //updateUser
+        User uOrg = aUser.getUser("0");
         aUser.updateUser(existingUpdated);
         u = aUser.getUser("0");
         assertEquals("John",u.getName());
+        aUser.updateUser(uOrg);
 
         System.out.println("Finished testAccessUserExistingUser");
     }
@@ -78,5 +81,59 @@ public class AccessUserTest extends TestCase {
         assertEquals(QueryResult.FAILURE, aUser.updateUser(uDNE));
 
         System.out.println("Finished testAccessUserNotExisting");
+    }
+
+    public void testAccessUserExistingContactInfo() {
+        System.out.println("\nStarting testAccessUserExistingContactInfo");
+
+        User uOrg = aUser.getUser("0");
+
+        //get info
+        Contact c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Abhi contact", c.getInfo());
+
+        //update info
+        c = new Contact("Abhi contact updated");
+        aUser.updateContactInfoForUser(uOrg, c);
+        c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Abhi contact updated", c.getInfo());
+
+        System.out.println("Finished testAccessUserExistingContactInfo");
+    }
+
+    public void testAccessUserNotExistingContactInfo() {
+        System.out.println("\nStarting testAccessUserNotExistingContactInfo");
+
+        User uOrg = aUser.getUser("4");
+
+        //get info
+        Contact c = aUser.getContactInfoForUser(uOrg);
+        assertNull(c);
+
+        //update info
+        c = new Contact("Ma info");
+        aUser.updateContactInfoForUser(uOrg, c);
+        c = aUser.getContactInfoForUser(uOrg);
+        assertEquals("Ma info", c.getInfo());
+
+        System.out.println("Finished testAccessUserNotExistingContactInfo");
+    }
+
+    public void testValidDelete() {
+        System.out.println("\nStarting testValidDelete");
+        aUser.insertUser(uDNE, "test");
+        assertEquals(QueryResult.SUCCESS, aUser.deleteUser(uDNE));
+        // warning because the user id might be correct but the delete was unsuccessful , as it does not exist in db
+        assertNull(aUser.getUser(uDNE.getUserId()));
+        System.out.println("Finished testValidDelete");
+
+    }
+    public void testInvalidDelete() {
+        System.out.println("\nStarting testInValidDelete");
+        assertEquals(QueryResult.FAILURE, aUser.deleteUser(null));
+        // warning because the user id might be correct but the delete was unsuccessful , as it does not exist in db
+        assertEquals(QueryResult.WARNING, aUser.deleteUser(new User("-1")));
+        System.out.println("Finished testInValidDelete");
+
     }
 }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessRequests;
 import comp3350.group6.homiez.business.AccessUser;
@@ -39,22 +39,25 @@ public class RequestsActivity extends Activity {
         accessRequests = new AccessRequests();
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
+
         Bundle b = getIntent().getExtras();
         String tempUser = b.getString("userID");
         ArrayList<Posting> allposts = new ArrayList<>();
+
         accessPostings.getPostingsByUserId(allposts, tempUser);
         requests = new ArrayList<>();
+
         for (Posting post: allposts) {
             ArrayList<Request> req = new ArrayList<>();
             QueryResult result = accessRequests.getRequestsForPosting(req, post.getPostingId());
-            if(result == QueryResult.FAILURE) {
+            if (result == QueryResult.FAILURE) {
                 Messages.fatalError(this, "Failure while getting requests for user id");
             }
             else {
                 requests.addAll(req);
             }
         }
-        if(requests == null) {
+        if (requests == null) {
             Messages.fatalError(this, "Failure while getting requests for user id");
         }
         else {
@@ -86,10 +89,12 @@ public class RequestsActivity extends Activity {
                     Request selected = requestArrayAdapter.getItem(position);
                     Bundle prev = getIntent().getExtras();
                     String tempUser = prev.getString("userID");
+
                     Bundle b = new Bundle();
                     b.putString("userID",tempUser);
                     b.putString("requestUserId", selected.getUserId());
                     b.putString("postingId", selected.getPostingId());
+
                     singleReq.putExtras(b);
                     RequestsActivity.this.startActivity(singleReq);
                 }

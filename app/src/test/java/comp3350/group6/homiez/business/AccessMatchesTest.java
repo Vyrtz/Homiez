@@ -1,6 +1,6 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Match;
 import comp3350.group6.homiez.persistence.DataAccessStub;
@@ -55,7 +55,7 @@ public class AccessMatchesTest extends TestCase {
         assertEquals(0, matches.size(), 0.01);
         matches.clear();
 
-        assertEquals(QueryResult.FAILURE, aMatches.deleteMatch( new Match("09", "100")));
+        assertEquals(QueryResult.WARNING, aMatches.deleteMatch( new Match("09", "100")));
         System.out.println("Finished testBadValues");
     }
 
@@ -66,7 +66,7 @@ public class AccessMatchesTest extends TestCase {
         aMatches.getMatchesForPosting(matches, "4");
         assertEquals(0, matches.size(), 0.01);
 
-        assertEquals(QueryResult.FAILURE, aMatches.deleteMatch( new Match("09", "100")));
+        assertEquals(QueryResult.WARNING, aMatches.deleteMatch( new Match("09", "100")));
 
         aMatches.getMatchesForUser(matches, "0");
         assertEquals(0, matches.size(), 0.01);

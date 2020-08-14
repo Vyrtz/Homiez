@@ -9,21 +9,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
-import comp3350.group6.homiez.objects.Posting;
 import comp3350.group6.homiez.objects.User;
 
 public class CustomizeProfileActivity extends Activity {
-
-    private ArrayList<Posting> postings;
-
     private AccessUser accessUser;
-
-    private AccessPostings accessPostings;
 
     private EditText name;
     private EditText age;
@@ -47,8 +41,6 @@ public class CustomizeProfileActivity extends Activity {
         setContentView(R.layout.customize_profile);
 
         accessUser = new AccessUser();
-        accessPostings = new AccessPostings();
-
         Bundle b = getIntent().getExtras();
         user = accessUser.getUser(b.getString("userID"));
 
@@ -69,18 +61,17 @@ public class CustomizeProfileActivity extends Activity {
         biography.setText(user.getBiography());
 
         Contact contactObj = accessUser.getContactInfoForUser(user);
-        if(contactObj != null){
+        if (contactObj != null) {
             contact.setText(contactObj.getInfo());
         }
 
         //Build the string for the interests
         ArrayList<Interest> interestList = user.getInterests();
-
         String interestText = "";
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1) {
+            if (i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -95,9 +86,9 @@ public class CustomizeProfileActivity extends Activity {
         user.setName(name.getText().toString());
 
         //Modify age if there is another integer in its place
-        if(!age.getText().toString().equals("")) {
+        if (!age.getText().toString().equals("")) {
             int tempAge = Integer.parseInt(age.getText().toString());
-            if(tempAge > 150 || tempAge <= 0) {
+            if (tempAge > 150 || tempAge <= 0) {
                 Messages.warning(this, "Error: Age value invalid");
                 return;
             }
@@ -113,7 +104,7 @@ public class CustomizeProfileActivity extends Activity {
         //Modify the biography
         user.setBiography(biography.getText().toString());
 
-        if(!budget.getText().toString().equals("")) {
+        if (!budget.getText().toString().equals("")) {
             user.setBudget(Double.parseDouble(budget.getText().toString()));
         }
 
@@ -131,12 +122,11 @@ public class CustomizeProfileActivity extends Activity {
 
         user.setInterests(interestList);
 
-        if(accessUser.updateUser(user)== QueryResult.FAILURE) {
+        if (accessUser.updateUser(user)== QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
         }
         else {
             Messages.popup(this, SUCCESS, SUCCESS_HEADER);
         }
-
     }
 }
