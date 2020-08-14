@@ -1,5 +1,6 @@
 package comp3350.group6.homiez.persistence;
 
+import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.objects.Contact;
 import comp3350.group6.homiez.objects.Interest;
@@ -18,10 +19,10 @@ public class DataAccessTest extends TestCase {
     private DataAccess dataAccess;
 
     public void setUp() {
-         dataAccess = new DataAccessStub("dataAccess1");
-         dataAccess.open("dataAccess1");
-         // dataAccess = new DataAccessObject(Main.dbName);
-         // dataAccess.open(Main.getDBPathName());
+          dataAccess = new DataAccessStub("dataAccess1");
+          dataAccess.open("dataAccess1");
+          // dataAccess = new DataAccessObject(Main.dbName);
+          // dataAccess.open(Main.getDBPathName());
 
     }
 
@@ -240,7 +241,7 @@ public class DataAccessTest extends TestCase {
 
         assertEquals(QueryResult.FAILURE,  dataAccess.insertPosting(pExists));
         assertEquals(QueryResult.WARNING,  dataAccess.deletePosting(pDNE));
-        assertEquals(QueryResult.WARNING,  dataAccess.updatePosting(pDNE));
+        assertEquals(QueryResult.FAILURE,  dataAccess.updatePosting(pDNE));
 
         assertNull(dataAccess.getPosting(pDNE));
         assertEquals(QueryResult.SUCCESS, dataAccess.insertPosting(pDNE));
@@ -459,6 +460,7 @@ public class DataAccessTest extends TestCase {
         assertEquals( QueryResult.SUCCESS, dataAccess.getRequests(requests, "3"));
         assertEquals(0, requests.size());
 
+        assertEquals( QueryResult.WARNING, dataAccess.deleteUser(new User("99")));
         System.out.println("Finished testDeleteUserEntireDb");
     }
 

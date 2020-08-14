@@ -60,6 +60,10 @@ public class PostingActivity extends Activity {
         compatibilityController = new CompatibilityController();
 
         post = accessPostings.getPostingById(postingID);
+        userList = new ArrayList<>();
+
+        String uid = b.getString("userID");
+        currentUser = accessUser.getUser(uid);
 
         if (b.getBoolean("self_posting")) {
             setContentView(R.layout.self_posting);
@@ -71,22 +75,20 @@ public class PostingActivity extends Activity {
             userText.setText(post.getUser().getName());
         }
 
-        userList = new ArrayList<>();
-        String uid = b.getString("userID");
-        currentUser = accessUser.getUser(uid);
-        setUserList( post, currentUser);
 
         TextView titleText = findViewById(R.id.titleText);
         TextView locationText = findViewById(R.id.locationText);
         TextView typeText = findViewById(R.id.typeText);
         TextView priceText = findViewById(R.id.priceText);
         TextView descriptionText = findViewById(R.id.descriptionText);
+
         titleText.setText(post.getTitle());
         locationText.setText(post.getLocation());
         typeText.setText(post.getType());
         priceText.setText("" +post.getPrice());
         descriptionText.setText(post.getDescription());
 
+        setUserList( post, currentUser);
 
     }
     public void sendMatch(View v) {
@@ -99,6 +101,7 @@ public class PostingActivity extends Activity {
         Intent startIntent = new Intent(PostingActivity.this, PublicProfileActivity.class);
         Bundle bundle = getIntent().getExtras();
         bundle.putString("profileID", accessPostings.getPostingById(bundle.getString("postingId")).getUser().getUserId());
+
         startIntent.putExtras(bundle);
         startActivity(startIntent);
     }
@@ -107,6 +110,7 @@ public class PostingActivity extends Activity {
         Intent intent = new Intent(PostingActivity.this, EditPostingActivity.class);
         Bundle bundle = getIntent().getExtras();
         bundle.putString("postingID", postingID);
+
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -167,6 +171,7 @@ public class PostingActivity extends Activity {
                 Intent intent = new Intent(PostingActivity.this, PublicProfileActivity.class);
                 Bundle bundle = getIntent().getExtras();
                 bundle.putString("profileID", userList.get(p).get("ID"));
+
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

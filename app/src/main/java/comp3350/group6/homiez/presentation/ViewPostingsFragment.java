@@ -62,7 +62,8 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
             button1.setOnClickListener(this);
             Button button3 = (Button) v.findViewById(R.id.button_create_posting);
             button3.setOnClickListener(this);
-        } else {
+        }
+        else {
             accessPostings.getPostings(postings, userID);
             v = inflater.inflate(R.layout.public_postings, container, false);
         }
@@ -121,10 +122,12 @@ public class ViewPostingsFragment extends Fragment implements View.OnClickListen
             public void onItemClick(AdapterView<?> a, View v, int p, long id) {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), PostingActivity.class);
+
                 Bundle bundle = getActivity().getIntent().getExtras();
                 bundle.putString("userID", userID);
                 bundle.putString("postingId", postings.get(p).getPostingId());
                 bundle.putBoolean("self_posting", self_posting);
+
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
             }

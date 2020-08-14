@@ -37,9 +37,9 @@ public class CreatePostingActivity extends Activity {
         EditText price  = (EditText) findViewById(R.id.editTextPrice);
         EditText tenants  = (EditText) findViewById(R.id.editTextTenants);
         double priceD = Double.parseDouble(price.getText().toString());
+
         User u = accessUser.getUser(userId);
         Posting p = new Posting(currentPostingId,title.getText().toString(),u,priceD, location.getText().toString(), type.getText().toString(), description.getText().toString());
-
         String individualTenants[] = tenants.getText().toString().split(",");
 
         boolean failed = false;

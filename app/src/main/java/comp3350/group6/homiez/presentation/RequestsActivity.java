@@ -39,11 +39,14 @@ public class RequestsActivity extends Activity {
         accessRequests = new AccessRequests();
         accessPostings = new AccessPostings();
         accessUser = new AccessUser();
+
         Bundle b = getIntent().getExtras();
         String tempUser = b.getString("userID");
         ArrayList<Posting> allposts = new ArrayList<>();
+
         accessPostings.getPostingsByUserId(allposts, tempUser);
         requests = new ArrayList<>();
+
         for (Posting post: allposts) {
             ArrayList<Request> req = new ArrayList<>();
             QueryResult result = accessRequests.getRequestsForPosting(req, post.getPostingId());
@@ -86,10 +89,12 @@ public class RequestsActivity extends Activity {
                     Request selected = requestArrayAdapter.getItem(position);
                     Bundle prev = getIntent().getExtras();
                     String tempUser = prev.getString("userID");
+
                     Bundle b = new Bundle();
                     b.putString("userID",tempUser);
                     b.putString("requestUserId", selected.getUserId());
                     b.putString("postingId", selected.getPostingId());
+
                     singleReq.putExtras(b);
                     RequestsActivity.this.startActivity(singleReq);
                 }

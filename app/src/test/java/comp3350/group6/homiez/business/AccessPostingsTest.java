@@ -77,7 +77,7 @@ public class AccessPostingsTest extends TestCase {
 
         assertEquals(QueryResult.FAILURE, aPostings.insertPosting(postExists));
 
-        assertEquals(QueryResult.WARNING, aPostings.updatePosting(postDNE));
+        assertEquals(QueryResult.FAILURE, aPostings.updatePosting(postDNE));
 
         assertEquals(QueryResult.WARNING, aPostings.deletePosting(postDNE));
 

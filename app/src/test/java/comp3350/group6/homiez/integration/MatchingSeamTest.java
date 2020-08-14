@@ -1,12 +1,10 @@
 package comp3350.group6.homiez.integration;
 
-import android.app.DownloadManager;
-
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.business.AccessMatches;
