@@ -114,9 +114,9 @@ public class CustomizeProfileActivity extends Activity {
 
         ArrayList<Interest> interestList = new ArrayList<>();
 
-        for (String currInterest : tempList) {
-            if (!currInterest.equals("")) {
-                interestList.add(new Interest(currInterest));
+        for(String currInterest : tempList) {
+            if(!currInterest.equals("")) {
+                interestList.add(new Interest(currInterest.trim()));
             }
         }
 

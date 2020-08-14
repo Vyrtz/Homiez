@@ -44,15 +44,10 @@ public class CreatePostingActivity extends Activity {
 
         boolean failed = false;
 
-        for (String s: individualTenants) {
-            User t = accessUser.getUser(s.trim());
-            if (t!= null) {
-                p.addAttachedUser(t);
-            }
-            else {
-                failed = true;
-            }
+        if(!tenants.getText().toString().trim().isEmpty()) {
+            failed = addTenants(individualTenants, p);
         }
+
         if (!failed) {
             if(accessPostings.insertPosting(p) == QueryResult.FAILURE) {
 
@@ -66,5 +61,21 @@ public class CreatePostingActivity extends Activity {
             Messages.fatalError(this, "failed to create the posting, tenants do not exist");
         }
 
+    }
+
+    private boolean addTenants(String[] tenants, Posting p) {
+        boolean failed = false;
+
+        for (String s: tenants) {
+            User t = accessUser.getUser(s.trim());
+            if (t!= null) {
+                p.addAttachedUser(t);
+            }
+            else {
+                failed = true;
+            }
+        }
+
+        return failed;
     }
 }

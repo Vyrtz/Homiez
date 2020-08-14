@@ -65,8 +65,10 @@ public class EditPostingActivity extends Activity {
                 tenantText += u.getUserId() + ",";
             }
         }
-        tenantText.substring(0, tenantText.length() - 1);
-        tenants.setText(tenantText);
+        if(!tenantText.isEmpty()) {
+            tenantText.substring(0, tenantText.length() - 1);
+            tenants.setText(tenantText);
+        }
     }
 
     public void submitClicked (View v){
@@ -87,21 +89,17 @@ public class EditPostingActivity extends Activity {
 
         boolean failed = false;
 
-        ArrayList<User> users = new ArrayList<>();
-        for (String s: tenants.getText().toString().split(",")) {
-            User t = accessUser.getUser(s.trim());
-            if (t!= null) {
-                users.add(t);
-            }
-            else {
-                failed = true;
-            }
+        if(!tenants.getText().toString().trim().isEmpty()) {
+            failed = addTenants(individualTenants, posting);
+        }else{
+            posting.setAttachedUsers(new ArrayList<User>());
         }
+
+
         if (failed) {
             Messages.fatalError(this, "failed to create the posting, tenants do not exist");
         }
         else {
-            posting.setAttachedUsers(users);
             QueryResult result = accessPostings.updatePosting(posting);
             if(result == QueryResult.FAILURE) {
                 Messages.fatalError(this, "Failure while updating posting ");
@@ -110,5 +108,21 @@ public class EditPostingActivity extends Activity {
                 finish();
             }
         }
+    }
+
+    private boolean addTenants(String[] tenants, Posting p) {
+        boolean failed = false;
+
+        for (String s: tenants) {
+            User t = accessUser.getUser(s.trim());
+            if (t!= null) {
+                p.addAttachedUser(t);
+            }
+            else {
+                failed = true;
+            }
+        }
+
+        return failed;
     }
 }
