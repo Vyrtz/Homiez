@@ -13,9 +13,8 @@ import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 
-public class CustomizeProfileActivityTest {
+public class CustomizeProfileTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> LoginActivity = new ActivityTestRule<>(LoginActivity.class);
