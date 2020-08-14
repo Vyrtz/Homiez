@@ -130,6 +130,8 @@ public class CustomizeProfileActivity extends Activity {
                 Messages.popup(this, SUCCESS, SUCCESS_HEADER);
             }
         }
-        Messages.warning(this, ERROR+" Name should not be empty");
+        else {
+            Messages.warning(this, ERROR+" Name should not be empty");
+        }
     }
 }

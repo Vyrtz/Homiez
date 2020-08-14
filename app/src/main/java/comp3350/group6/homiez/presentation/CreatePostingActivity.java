@@ -78,7 +78,9 @@ public class CreatePostingActivity extends Activity {
                 Messages.fatalError(this, "failed to create the posting, tenants do not exist");
             }
         }
-        Messages.fatalError(this, "failed to create the posting, price, title and type are required ");
+        else {
+            Messages.fatalError(this, "failed to create the posting, price, title and type are required ");
+        }
     }
 
     private boolean addTenants(String[] tenants, Posting p) {
