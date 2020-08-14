@@ -23,8 +23,7 @@ public class DataAccessHSQLDBTest extends TestCase {
         Services.createDataAccess(dbName);
         dataAccess = Services.getDataAccess(dbName);
 
-        //TODO: Pass the new data access to DataAccessTest - test on real DB instead of stub
-        //DataAccessTest.dataAccessTest(dataAccess);
+        DataAccessTest.dataAccessTest(dataAccess);
 
         Services.closeDataAccess();
 

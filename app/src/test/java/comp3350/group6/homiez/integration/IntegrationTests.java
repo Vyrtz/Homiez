@@ -15,7 +15,7 @@ public class IntegrationTests {
         suite.addTestSuite(AccessPostingsSeamTest.class);
         suite.addTestSuite(AccessMatchesSeamTest.class);
         suite.addTestSuite(MatchingSeamTest.class);
-        //suite.addTestSuite(DataAccessHSQLDBTest.class);
+        suite.addTestSuite(DataAccessHSQLDBTest.class);
         return suite;
 
     }

@@ -6,7 +6,7 @@ public class Posting {
     private String postingId;
     private String title;  //post id.
     private User user;
-    private double price;  //we could set a price, and the budget is around that price, for instamce around 500$
+    private double price;  //we could set a price, and the budget is around that price, for instance around 500$
     private String location;
     private String type;
     private String description;

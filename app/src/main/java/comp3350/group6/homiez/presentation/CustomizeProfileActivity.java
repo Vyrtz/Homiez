@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import comp3350.group6.homiez.R;
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.business.AccessPostings;
 import comp3350.group6.homiez.business.AccessUser;
 import comp3350.group6.homiez.objects.Contact;
@@ -69,7 +69,7 @@ public class CustomizeProfileActivity extends Activity {
         biography.setText(user.getBiography());
 
         Contact contactObj = accessUser.getContactInfoForUser(user);
-        if(contactObj != null){
+        if (contactObj != null) {
             contact.setText(contactObj.getInfo());
         }
 
@@ -80,7 +80,7 @@ public class CustomizeProfileActivity extends Activity {
         for (int i = 0; i < interestList.size(); i++) {
             Interest temp = interestList.get(i);
             interestText += temp.getInterest();
-            if(i != interestList.size()-1) {
+            if (i != interestList.size()-1) {
                 interestText += ", ";
             }
         }
@@ -95,9 +95,9 @@ public class CustomizeProfileActivity extends Activity {
         user.setName(name.getText().toString());
 
         //Modify age if there is another integer in its place
-        if(!age.getText().toString().equals("")) {
+        if (!age.getText().toString().equals("")) {
             int tempAge = Integer.parseInt(age.getText().toString());
-            if(tempAge > 150 || tempAge <= 0) {
+            if (tempAge > 150 || tempAge <= 0) {
                 Messages.warning(this, "Error: Age value invalid");
                 return;
             }
@@ -113,7 +113,7 @@ public class CustomizeProfileActivity extends Activity {
         //Modify the biography
         user.setBiography(biography.getText().toString());
 
-        if(!budget.getText().toString().equals("")) {
+        if (!budget.getText().toString().equals("")) {
             user.setBudget(Double.parseDouble(budget.getText().toString()));
         }
 
@@ -123,20 +123,19 @@ public class CustomizeProfileActivity extends Activity {
 
         ArrayList<Interest> interestList = new ArrayList<>();
 
-        for(String currInterest : tempList) {
-            if(!currInterest.equals("")) {
+        for (String currInterest : tempList) {
+            if (!currInterest.equals("")) {
                 interestList.add(new Interest(currInterest));
             }
         }
 
         user.setInterests(interestList);
 
-        if(accessUser.updateUser(user)== QueryResult.FAILURE) {
+        if (accessUser.updateUser(user)== QueryResult.FAILURE) {
             Messages.warning(this, ERROR);
         }
         else {
             Messages.popup(this, SUCCESS, SUCCESS_HEADER);
         }
-
     }
 }

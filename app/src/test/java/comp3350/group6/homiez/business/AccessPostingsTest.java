@@ -1,6 +1,6 @@
 package comp3350.group6.homiez.business;
 
-import comp3350.group6.homiez.application.Constants.QueryResult;
+import comp3350.group6.homiez.application.Shared.QueryResult;
 import comp3350.group6.homiez.application.Main;
 import comp3350.group6.homiez.application.Services;
 import comp3350.group6.homiez.objects.Posting;
@@ -16,10 +16,8 @@ public class AccessPostingsTest extends TestCase {
     User u;
     AccessPostings aPostings;
     ArrayList<Posting> postings;
-    Posting newPost;
     Posting postExists;
     Posting postDNE;
-    Posting updatePost;
 
 
     public AccessPostingsTest(String arg0) {
@@ -31,7 +29,6 @@ public class AccessPostingsTest extends TestCase {
         u = new User ("3","Vinh", 18, "m",200,"test");
         aPostings = new AccessPostings();
         postings = new ArrayList<Posting>();
-        postings.removeAll(postings);
         postExists = new Posting("0", "Room at Pembina Riverside Condo", u, 1000,  "Pembina", "Condo", "A beautiful riverside condo in the heart of Pembina. Great view of the surrounding area.");
         postDNE = new Posting("10", "TEST TITLE", u, 2500, "TEST LOC", "TEST TYPE", "TEST DESC");
     }
@@ -50,12 +47,12 @@ public class AccessPostingsTest extends TestCase {
         Posting p;
 
         aPostings.getPostings(postings, null);
-        assertEquals(5, postings.size());
+        assertEquals(0, postings.size());
         postings.clear();
 
         assertNull(aPostings.getPostingById("1000"));
 
-        assertNull(aPostings.getPostingsByUserId(postings, null));
+        assertEquals(QueryResult.FAILURE , aPostings.getPostingsByUserId(postings, null));
 
         assertEquals(QueryResult.FAILURE, aPostings.insertPosting(null));
 
@@ -80,9 +77,9 @@ public class AccessPostingsTest extends TestCase {
 
         assertEquals(QueryResult.FAILURE, aPostings.insertPosting(postExists));
 
-        assertEquals(QueryResult.FAILURE, aPostings.updatePosting(postDNE));
+        assertEquals(QueryResult.WARNING, aPostings.updatePosting(postDNE));
 
-        assertEquals(QueryResult.FAILURE, aPostings.deletePosting(postDNE));
+        assertEquals(QueryResult.WARNING, aPostings.deletePosting(postDNE));
 
         System.out.println("Finished testBadValues");
     }
@@ -115,6 +112,24 @@ public class AccessPostingsTest extends TestCase {
         assertNull( aPostings.getPostingById(postDNE.getPostingId()));
 
         System.out.println("Finished testExistingPostings");
+    }
+
+    public void testAccessPostingsAttachedUsers() {
+        System.out.println("\nStarting testAccessPostingsAttachedUsers");
+
+        Posting p = aPostings.getPostingById("0");
+        ArrayList<User> aUsers = p.getAttachedUsers();
+        assertEquals(1, aUsers.size());
+        assertEquals("Abhi", aUsers.get(0).getName());
+
+        User newU = new User("100", "Test attach", 69, "m", 1000.00, "Test bio");
+        p.addAttachedUser(newU);
+        aPostings.updatePosting(p);
+        p = aPostings.getPostingById("0");
+        aUsers = p.getAttachedUsers();
+        assertEquals(2, aUsers.size());
+
+        System.out.println("Finished testAccessPostingsAttachedUsers");
     }
 
     public void tearDown () {
