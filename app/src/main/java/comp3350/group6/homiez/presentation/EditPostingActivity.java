@@ -113,7 +113,9 @@ public class EditPostingActivity extends Activity {
                 }
             }
         }
-        Messages.fatalError(this, "failed to edit the posting, price and type are required ");
+        else {
+            Messages.fatalError(this, "failed to edit the posting, price and type are required ");
+        }
     }
 
     private boolean addTenants(String[] tenants, Posting p) {
