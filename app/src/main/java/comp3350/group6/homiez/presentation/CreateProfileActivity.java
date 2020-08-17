@@ -51,7 +51,7 @@ public class CreateProfileActivity extends Activity {
         userID = fields.getText().toString(); //
 
         //Fetch password
-        EditText pass = findViewById(R.id.editPassword);
+        fields = findViewById(R.id.editPassword);
         password = fields.getText().toString();
 
         //Fetch name
