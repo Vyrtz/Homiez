@@ -16,3 +16,8 @@ Homiez will provide users with the capability of sorting postings based on locat
 
 Nowadays people are forced to search for postings that are scattered all around the internet, making the hunt long and arduous. Besides, even after finding a potential match, they still must find out if the roommates are a good fit for them and their lifestyle. Homiez aims to solve all of these problems by providing everything in one place. Additionally, the matching system will ensure privacy by only displaying users’ contact information after they are matched.
 The system will be considered a success based on the following criteria. First, how satisfied the users are with the experience. We will obtain this information by ensuring that the app has at least a 4-star rating on the Google Play Store and by surveying the people connected by the app who have lived together for at least 6 months. Second, at least 60% of room vacancies filled within a month after being posted. Third, time reduction in filling a room, there should be at least a 20% time reduction to find a roommate using Homiez compared to other systems.
+
+### MVP
+
+![sample] (/samples/sample1.png)
+![sample] (/samples/sample2.png)
