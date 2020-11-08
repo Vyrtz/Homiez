@@ -19,5 +19,6 @@ The system will be considered a success based on the following criteria. First, 
 
 ### MVP
 
-![sample] (/samples/sample1.png)
-![sample] (/samples/sample2.png)
+![sample1](/samples/sample1.png)
+
+![sample2](/samples/sample2.png)
